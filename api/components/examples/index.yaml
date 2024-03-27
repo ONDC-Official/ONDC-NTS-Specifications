@@ -1,0 +1,6 @@
+score:
+ summary: Rating API Implementation
+ description: Rating Example
+ example_set:
+   $ref: "./score/index.yaml"
+ 

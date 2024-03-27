@@ -1,0 +1,21 @@
+summary: Revise - Credit Entry
+details: 
+  - description: Detailed process of Market Place revising the entry
+    mermaid: >-
+      sequenceDiagram
+        participant PROVIDER
+        participant PUBLISHER
+        participant CONFIDEX
+
+        PROVIDER ->> PUBLISHER: /revise
+        note over PROVIDER, PUBLISHER: Sign and send the revised Entry
+        PUBLISHER ->> PROVIDER: Ack
+        PUBLISHER ->> PUBLISHER:  Verify and transform entry
+        PUBLISHER ->> CONFIDEX: Revoke the previous entry
+        CONFIDEX ->> PUBLISHER: Identifier
+        PUBLISHER ->> CONFIDEX: Use the Identifier and publish the revised rating to chain
+
+        CONFIDEX->>PUBLISHER: Rating Identifier
+        PUBLISHER->>PROVIDER: Status (/on_revise) 
+        PROVIDER ->> PUBLISHER: Ack
+

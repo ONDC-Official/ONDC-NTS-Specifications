@@ -1,0 +1,21 @@
+context:
+  domain: "ONDC:NTS12"
+  action: "revise"
+  version: "1.0.0"
+  provider_id: "All in One - Market Place"
+  provider_uri: "https://api.example.com/api/rating/v1"
+  publisher_id: "Rating Publisher on Ledger"
+  publisher_uri: "https://api.publisher-example.com/api/rating/v1"
+  transaction_id: "226c67bd-9aa7-4aef-8d62-c69e3a669ce0"
+  message_id: "226c67bd-9aa7-4aef-8d62-c69e3a669c11"
+  timestamp: "2021-06-29T10:52:01.620Z"
+  ttl: "PT30S"
+  location:
+    country:
+      code: "IND"
+message:
+  rating:
+    - entity_id: "a250a6db99213211f333db7f328085ae277c680d2c7178c4bc65cab9cdab78aa"
+      rating_type: "Overall"
+      count_of_txn: 80
+      total_rating: 280

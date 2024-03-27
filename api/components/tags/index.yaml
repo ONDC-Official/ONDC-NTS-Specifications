@@ -1,0 +1,11 @@
+publish:
+  message:
+    rating:
+      tags: 
+        - code: GENERAL_INFO              
+          description : Describes the general information of the rating like rating, count, entity name
+          reference: <PR/Issue/Discussion Links md format text>
+          list:
+            - code: RATING_COUNT
+              description : Number of ratings received for an entity
+              reference: <PR/Issue/Discussion Links md format text>

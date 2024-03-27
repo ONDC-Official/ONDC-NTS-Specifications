@@ -1,0 +1,19 @@
+summary: Query
+details: 
+  - description: Detailed process of Market Place querying the entry
+    mermaid: >-
+      sequenceDiagram
+        participant PROVIDER
+        participant PUBLISHER
+        participant CONFIDEX
+
+        PROVIDER ->> PUBLISHER: /query
+        note over PROVIDER, PUBLISHER: Sign and send the query
+        PUBLISHER ->> PROVIDER: Ack
+        PUBLISHER ->> PUBLISHER:  Verify the signature
+        PUBLISHER ->> CONFIDEX: Query the chain 
+        CONFIDEX ->> PUBLISHER: Encoded Score
+        PUBLISHER->>PUBLISHER: Decode the encoded score
+
+        PUBLISHER->>PROVIDER: (/on_query) Decoded Score
+        PROVIDER ->> PUBLISHER: Ack

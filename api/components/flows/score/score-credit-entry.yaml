@@ -1,0 +1,17 @@
+summary: Publish - (Genesis) Credit Entry
+details: 
+  - description: Detailed process of publishing the entry
+    mermaid: >-
+      sequenceDiagram
+        participant PROVIDER
+        participant PUBLISHER
+        participant CONFIDEX
+
+        PROVIDER ->> PUBLISHER: /publish
+        note over PROVIDER, PUBLISHER: Sign and send the rating entry
+        PUBLISHER ->> PROVIDER: Ack
+        PUBLISHER ->> PUBLISHER:  Verify and transform entry
+        PUBLISHER->>CONFIDEX: Anchors the entry to the chain
+        CONFIDEX->>PUBLISHER: Rating Identifier
+        PUBLISHER->>PROVIDER: Status (/on_publish)
+        PROVIDER ->> PUBLISHER: Ack
