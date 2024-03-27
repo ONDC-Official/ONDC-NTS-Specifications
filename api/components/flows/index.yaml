@@ -1,1 +1,2 @@
 - $ref: "./igm-flow/index.yaml"
+- $ref: "./igm-flow-fis/index.yaml"
