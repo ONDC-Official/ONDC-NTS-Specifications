@@ -16,6 +16,5 @@ context:
   timestamp: "2023-01-15T10:00:00.469Z"
   ttl: PT30S
 message:
-  issue:
     issue_id: I1
    

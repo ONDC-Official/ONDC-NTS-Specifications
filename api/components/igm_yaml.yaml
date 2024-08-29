@@ -152,17 +152,24 @@ paths:
                 context:
                   $ref: "#/components/schemas/Context"
                 message:
+                  # type: object
+                  # properties:
+                  #   issue:
+                  #     $ref: "#/components/schemas/Issue"
+                  # required:
+                  #   - issue
                   type: object
                   properties:
-                    issue:
-                      $ref: "#/components/schemas/Issue"
+                    issue_id:
+                      description: Network issue identifier is a unique number assigned to a complaint by the interfacing application
+                      type: string
                   required:
-                    - issue
-                error:
-                  $ref: "#/components/schemas/Error"
+                    - issue_id
               required:
-                - context
-                - message
+                    - context
+                    - message
+             
+            
       responses:
         "200":
           description: Acknowledgement of message received
