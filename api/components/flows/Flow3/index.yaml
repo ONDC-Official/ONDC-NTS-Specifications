@@ -2,14 +2,61 @@ summary: Flow3 - Buyer raises a complaint for fulfilment category
 details:
  - description: This flow provides an illustrative example workflow for the IGM framework where an end consumer (complainant) raises a complaint with regards to their fulfilment experience for their retail order. The seller app (on-network logistics buyer) analyses the complaint and feels the logistics seller app needs to be consulted for this complaint. The retail seller app creates a complaint to the logistics seller app with relevant information. Example illustrated here creates a new complaint (new issue_id) for the logistics transaction with an independent flow for the new complaint itself. In this case the seller app is expected to maintain the mapping of the complaint flows and ensure that in case disputes are raised for a complaint, they are able source/ provide the complete trail of the complaint. The seller app may choose to cascade the same "issue_id" or the same complaint as well and build the actions array inclusive of all actions in which case all actions taken by the logistics seller app are communicated as-is to the retail buyer app as well as status updates. The logistics seller app analyses the complaint and requires more images of the packaging received. The seller app cascades the same request to the buyer app and then the buyer provides the images required which is cascaded back to the logistics provider. The logistics provider then processes it and proposes a resolution. The cascaded resolution is accepted by the buyer after which the logistics provider resolves the complaint and the buyer closes the complaint
    mermaid: >-
-   references: if any
+    sequenceDiagram
+        participant BuyerApp as Buyer App
+        participant SellerApp as Seller App
+        participant LSP as LSP (Logistics Service Provider)
+
+        BuyerApp->>SellerApp: Raise complaint for fulfillment category (/issue)
+        BuyerApp->>SellerApp: Create issue call (/issue)
+        SellerApp->>BuyerApp: Respond with processing action (on_issue)
+        SellerApp->>LSP: Create issue call (issue)
+        LSP->>SellerApp: Respond with processing action (on_issue)
+        LSP->>SellerApp: Needs more information to analyze (on_issue)
+        SellerApp->>BuyerApp: Cascades request for more information (on_issue)
+        BuyerApp->>SellerApp: Provides relevant information (issue)
+        SellerApp->>LSP: Cascades with relevant information (issue)
+        LSP->>SellerApp: Responds with processing action (on_issue)
+        SellerApp->>BuyerApp: Cascades above processing action (on_issue)
+        LSP->>SellerApp: Responds with proposed resolution (on_issue)
+        SellerApp->>BuyerApp: Analyzes and cascades proposed response (on_issue)
+        BuyerApp->>SellerApp: Accepts resolution provided by Seller App (issue)
+        SellerApp->>LSP: Accepts resolution provided by LSP (issue)
+        LSP->>SellerApp: Provides resolution object (on_issue)
+        SellerApp->>BuyerApp: Provides resolution object (on_issue)
+        BuyerApp->>SellerApp: Closes the complaint (issue)
+        SellerApp->>BuyerApp: Closes the issue
+
 steps:
   - summary: Buyer raises a complaint for fulfilment category; buyer app creates issue call
     api: issue
     details:
       - description: Buyer raises a complaint for fulfilment category; buyer app creates issue call
         mermaid: >-
-        reference: if any
+          sequenceDiagram
+            participant BuyerApp as Buyer App
+            participant SellerApp as Seller App
+            participant LSP as LSP (Logistics Service Provider)
+
+            BuyerApp->>SellerApp: Raise complaint for fulfillment category (/issue)
+            BuyerApp->>SellerApp: Create issue call (/issue)
+            SellerApp->>BuyerApp: Respond with processing action (on_issue)
+            SellerApp->>LSP: Create issue call (issue)
+            LSP->>SellerApp: Respond with processing action (on_issue)
+            LSP->>SellerApp: Needs more information to analyze (on_issue)
+            SellerApp->>BuyerApp: Cascades request for more information (on_issue)
+            BuyerApp->>SellerApp: Provides relevant information (issue)
+            SellerApp->>LSP: Cascades with relevant information (issue)
+            LSP->>SellerApp: Responds with processing action (on_issue)
+            SellerApp->>BuyerApp: Cascades above processing action (on_issue)
+            LSP->>SellerApp: Responds with proposed resolution (on_issue)
+            SellerApp->>BuyerApp: Analyzes and cascades proposed response (on_issue)
+            BuyerApp->>SellerApp: Accepts resolution provided by Seller App (issue)
+            SellerApp->>LSP: Accepts resolution provided by LSP (issue)
+            LSP->>SellerApp: Provides resolution object (on_issue)
+            SellerApp->>BuyerApp: Provides resolution object (on_issue)
+            BuyerApp->>SellerApp: Closes the complaint (issue)
+            SellerApp->>BuyerApp: Closes the issue
     example:
       value:
         $ref: "../../examples/Flow3/issue/issue1.yaml"
@@ -18,7 +65,30 @@ steps:
     details:
       - description: Seller app responds with processing action
         mermaid: >-
-        reference: if any
+          sequenceDiagram
+            participant BuyerApp as Buyer App
+            participant SellerApp as Seller App
+            participant LSP as LSP (Logistics Service Provider)
+
+            BuyerApp->>SellerApp: Raise complaint for fulfillment category (/issue)
+            BuyerApp->>SellerApp: Create issue call (/issue)
+            SellerApp->>BuyerApp: Respond with processing action (on_issue)
+            SellerApp->>LSP: Create issue call (issue)
+            LSP->>SellerApp: Respond with processing action (on_issue)
+            LSP->>SellerApp: Needs more information to analyze (on_issue)
+            SellerApp->>BuyerApp: Cascades request for more information (on_issue)
+            BuyerApp->>SellerApp: Provides relevant information (issue)
+            SellerApp->>LSP: Cascades with relevant information (issue)
+            LSP->>SellerApp: Responds with processing action (on_issue)
+            SellerApp->>BuyerApp: Cascades above processing action (on_issue)
+            LSP->>SellerApp: Responds with proposed resolution (on_issue)
+            SellerApp->>BuyerApp: Analyzes and cascades proposed response (on_issue)
+            BuyerApp->>SellerApp: Accepts resolution provided by Seller App (issue)
+            SellerApp->>LSP: Accepts resolution provided by LSP (issue)
+            LSP->>SellerApp: Provides resolution object (on_issue)
+            SellerApp->>BuyerApp: Provides resolution object (on_issue)
+            BuyerApp->>SellerApp: Closes the complaint (issue)
+            SellerApp->>BuyerApp: Closes the issue
     example:
       value:
         $ref: "../../examples/Flow3/on_issue/on_issue2.yaml"
