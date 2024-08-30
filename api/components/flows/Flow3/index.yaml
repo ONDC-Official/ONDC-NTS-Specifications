@@ -31,7 +31,7 @@ steps:
   - summary: Buyer raises a complaint for fulfilment category; buyer app creates issue call
     api: issue
     details:
-      - description: issue -Buyer raises a complaint for fulfilment category; buyer app creates issue call
+      - description: issue
         mermaid: >-
           
     example:
@@ -40,7 +40,7 @@ steps:
   - summary:  Seller app responds with processing action
     api: on_issue
     details:
-      - description: Seller app responds with processing action
+      - description: on_issue
         mermaid: >-
             
     example:
@@ -49,14 +49,14 @@ steps:
   - summary: Seller app creates a issue call to the on-network lsp
     api: issue
     details:
-      - description: Seller app creates a issue call to the on-network lsp
+      - description: issue
         mermaid: >-
         reference: if any
     example:
       value:
         $ref: "../../examples/Flow3/issue/issue3.yaml"
   - summary: Lsp responds with processing action
-    api: on_issueissue
+    api: on_issue
     details:
       - description: on_issue
         mermaid: >-
@@ -67,7 +67,7 @@ steps:
   - summary: Seller app responds with processing action
     api: on_issue
     details:
-      - description: Seller app responds with processing action
+      - description: on_issue
         mermaid: >-
         reference: if any
     example:
@@ -76,7 +76,7 @@ steps:
   - summary: Seller app responds with need more info tagging the previous missing info
     api: on_issue
     details:
-      - description: on_Issue -Seller app responds with need more info tagging the previous missing info
+      - description: on_issue
         mermaid: >-
         reference: if any
     example:
@@ -85,7 +85,7 @@ steps:
   - summary:  Buyer app provides relevant information
     api: issue
     details:
-      - description: Buyer app provides relevant information
+      - description: issue
         mermaid: >-
         reference: if any
     example:
@@ -95,7 +95,7 @@ steps:
 
     api: issue
     details:
-      - description: issue -Seller app cascades with the relevant information
+      - description: issue 
         mermaid: >-
         reference: if any
     example:
@@ -104,7 +104,7 @@ steps:
   - summary: Lsp responds with processing action
     api: on_issue
     details:
-      - description: Lsp responds with processing action
+      - description: on_issue
         mermaid: >-
         reference: if any
     example:
@@ -113,7 +113,7 @@ steps:
   - summary:  Seller app cascades above processing action
     api: on_issue
     details:
-      - description: on_issue - Seller app cascades above processing action
+      - description: on_issue 
         mermaid: >-
         reference: if any
     example:
@@ -122,7 +122,7 @@ steps:
   - summary: Lsp responds with a proposed resolution
     api: on_issue
     details:
-      - description:  Lsp responds with a proposed resolution
+      - description:  on_issue
         mermaid: >-
         reference: if any
     example:
@@ -131,7 +131,7 @@ steps:
   - summary:  Seller app analyses the same and proposes a resolution
     api: on_issue
     details:
-      - description:  Seller app analyses the same and proposes a resolution
+      - description:  on_issue
         mermaid: >-
         reference: if any
     example:
@@ -140,7 +140,7 @@ steps:
   - summary:  Buyer accepts the resolution provided by the seller app
     api: issue
     details:
-      - description:  Buyer accepts the resolution provided by the seller app
+      - description:  issue
         mermaid: >-
         reference: if any
     example:
@@ -149,7 +149,7 @@ steps:
   - summary:  Seller app accepts the resolution provided by the lsp
     api: issue
     details:
-      - description:  Seller app accepts the resolution provided by the lsp
+      - description:  issue
         mermaid: >-
         reference: if any
     example:
@@ -158,7 +158,7 @@ steps:
   - summary:  Lsp provides the resolution
     api: on_issue
     details:
-      - description:  Lsp provides the resolution
+      - description:  on_issue
         mermaid: >-
         reference: if any
     example:
@@ -167,7 +167,7 @@ steps:
   - summary:  Seller app provides the resolution
     api: on_issue
     details:
-      - description: Seller app provides the resolution
+      - description: on_issue
         mermaid: >-
         reference: if any
     example:
@@ -176,7 +176,7 @@ steps:
   - summary: Buyer app closes the complaint (issue)
     api: issue
     details:
-      - description: issue - Buyer app closes the complaint (issue)
+      - description: issue 
         mermaid: >-
         reference: if any
     example:
@@ -185,7 +185,7 @@ steps:
   - summary:  Seller app closes the complaint
     api: issue
     details:
-      - description:
+      - description: issue
         mermaid: >-
         reference: if any
     example:

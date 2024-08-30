@@ -67,7 +67,7 @@ steps:
   - summary: Buyer app provides the resolution
     api: on_issue
     details:
-      - description: Buyer app provides the resolution
+      - description: on_issue
         mermaid: >-
            
     reference: if any
@@ -77,7 +77,7 @@ steps:
   - summary:  Seller app escalates the complaint
     api: issue
     details:
-      - description: Seller app escalates the complaint
+      - description: issue
         mermaid: >-
          
     reference: if any
@@ -85,9 +85,9 @@ steps:
       value:
         $ref: "../../examples/Flow2/issue/issue6.yaml"              
   - summary: Buyer app responds with processing action
-    api: issue
+    api: on_issue
     details:
-      - description: Buyer app responds with processing action
+      - description: on_issue
 
           
           
@@ -98,7 +98,7 @@ steps:
   - summary: Buyer app responds with a proposed resolution
     api: on_issue
     details:
-      - description: Buyer app responds with a proposed resolution
+      - description: on_issue
         mermaid: >-
          
     reference: if any
@@ -108,7 +108,7 @@ steps:
   - summary: Seller app accepts the resolution
     api: issue
     details:
-      - description: Seller app accepts the resolution
+      - description: issue
         mermaid: >-
         
     reference: if any
@@ -116,9 +116,9 @@ steps:
       value:
         $ref: "../../examples/Flow2/issue/issue9.yaml" 
   - summary:  Buyer app provides the resolution
-    api: issue
+    api: on_issue
     details:
-      - description: Buyer app provides the resolution
+      - description: on_issue
         mermaid: >-
            
            
@@ -129,7 +129,7 @@ steps:
   - summary:  Seller app closes the complaint
     api: issue
     details:
-      - description: 
+      - description: issue
         mermaid: >-
          
     reference: if any

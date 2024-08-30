@@ -3743,7 +3743,7 @@ x-flows:
       - summary: Buyer app provides the resolution
         api: on_issue
         details:
-          - description: Buyer app provides the resolution
+          - description: on_issue
             mermaid: ''
         reference: if any
         example:
@@ -3885,7 +3885,7 @@ x-flows:
       - summary: Seller app escalates the complaint
         api: issue
         details:
-          - description: Seller app escalates the complaint
+          - description: issue
             mermaid: ''
         reference: if any
         example:
@@ -4033,9 +4033,9 @@ x-flows:
                     updated_at: 2024-08-14T09:57:58.841Z
                     proposed_by: NP2
       - summary: Buyer app responds with processing action
-        api: issue
+        api: on_issue
         details:
-          - description: Buyer app responds with processing action
+          - description: on_issue
         reference: if any
         example:
           value:
@@ -4190,7 +4190,7 @@ x-flows:
       - summary: Buyer app responds with a proposed resolution
         api: on_issue
         details:
-          - description: Buyer app responds with a proposed resolution
+          - description: on_issue
             mermaid: ''
         reference: if any
         example:
@@ -4360,7 +4360,7 @@ x-flows:
       - summary: Seller app accepts the resolution
         api: issue
         details:
-          - description: Seller app accepts the resolution
+          - description: issue
             mermaid: ''
         reference: if any
         example:
@@ -4536,9 +4536,9 @@ x-flows:
                     updated_at: 2024-08-14T09:57:58.841Z
                     proposed_by: NP2
       - summary: Buyer app provides the resolution
-        api: issue
+        api: on_issue
         details:
-          - description: Buyer app provides the resolution
+          - description: on_issue
             mermaid: ''
         reference: if any
         example:
@@ -4724,7 +4724,7 @@ x-flows:
       - summary: Seller app closes the complaint
         api: issue
         details:
-          - description: null
+          - description: issue
             mermaid: ''
         reference: if any
         example:
@@ -4977,9 +4977,7 @@ x-flows:
           issue call
         api: issue
         details:
-          - description: >-
-              issue -Buyer raises a complaint for fulfilment category; buyer app
-              creates issue call
+          - description: issue
             mermaid: ''
         example:
           value:
@@ -5059,7 +5057,7 @@ x-flows:
       - summary: Seller app responds with processing action
         api: on_issue
         details:
-          - description: Seller app responds with processing action
+          - description: on_issue
             mermaid: ''
         example:
           value:
@@ -5161,7 +5159,7 @@ x-flows:
       - summary: Seller app creates a issue call to the on-network lsp
         api: issue
         details:
-          - description: Seller app creates a issue call to the on-network lsp
+          - description: issue
             mermaid: ''
             reference: if any
         example:
@@ -5242,7 +5240,7 @@ x-flows:
                     actor_details:
                       name: Mark Anthony
       - summary: Lsp responds with processing action
-        api: on_issueissue
+        api: on_issue
         details:
           - description: on_issue
             mermaid: ''
@@ -5345,7 +5343,7 @@ x-flows:
       - summary: Seller app responds with processing action
         api: on_issue
         details:
-          - description: Seller app responds with processing action
+          - description: on_issue
             mermaid: ''
             reference: if any
         example:
@@ -5462,9 +5460,7 @@ x-flows:
           info
         api: on_issue
         details:
-          - description: >-
-              on_Issue -Seller app responds with need more info tagging the
-              previous missing info
+          - description: on_issue
             mermaid: ''
             reference: if any
         example:
@@ -5581,7 +5577,7 @@ x-flows:
       - summary: Buyer app provides relevant information
         api: issue
         details:
-          - description: Buyer app provides relevant information
+          - description: issue
             mermaid: ''
             reference: if any
         example:
@@ -5716,7 +5712,7 @@ x-flows:
       - summary: Seller app cascades with the relevant information
         api: issue
         details:
-          - description: issue -Seller app cascades with the relevant information
+          - description: issue
             mermaid: ''
             reference: if any
         example:
@@ -5853,7 +5849,7 @@ x-flows:
       - summary: Lsp responds with processing action
         api: on_issue
         details:
-          - description: Lsp responds with processing action
+          - description: on_issue
             mermaid: ''
             reference: if any
         example:
@@ -5996,7 +5992,7 @@ x-flows:
       - summary: Seller app cascades above processing action
         api: on_issue
         details:
-          - description: on_issue - Seller app cascades above processing action
+          - description: on_issue
             mermaid: ''
             reference: if any
         example:
@@ -6137,7 +6133,7 @@ x-flows:
       - summary: Lsp responds with a proposed resolution
         api: on_issue
         details:
-          - description: Lsp responds with a proposed resolution
+          - description: on_issue
             mermaid: ''
             reference: if any
         example:
@@ -6304,7 +6300,7 @@ x-flows:
       - summary: Seller app analyses the same and proposes a resolution
         api: on_issue
         details:
-          - description: Seller app analyses the same and proposes a resolution
+          - description: on_issue
             mermaid: ''
             reference: if any
         example:
@@ -6471,7 +6467,7 @@ x-flows:
       - summary: Buyer accepts the resolution provided by the seller app
         api: issue
         details:
-          - description: Buyer accepts the resolution provided by the seller app
+          - description: issue
             mermaid: ''
             reference: if any
         example:
@@ -6646,7 +6642,7 @@ x-flows:
       - summary: Seller app accepts the resolution provided by the lsp
         api: issue
         details:
-          - description: Seller app accepts the resolution provided by the lsp
+          - description: issue
             mermaid: ''
             reference: if any
         example:
@@ -6820,7 +6816,7 @@ x-flows:
       - summary: Lsp provides the resolution
         api: on_issue
         details:
-          - description: Lsp provides the resolution
+          - description: on_issue
             mermaid: ''
             reference: if any
         example:
@@ -7002,7 +6998,7 @@ x-flows:
       - summary: Seller app provides the resolution
         api: on_issue
         details:
-          - description: Seller app provides the resolution
+          - description: on_issue
             mermaid: ''
             reference: if any
         example:
@@ -7184,7 +7180,7 @@ x-flows:
       - summary: Buyer app closes the complaint (issue)
         api: issue
         details:
-          - description: issue - Buyer app closes the complaint (issue)
+          - description: issue
             mermaid: ''
             reference: if any
         example:
@@ -7372,7 +7368,7 @@ x-flows:
       - summary: Seller app closes the complaint
         api: issue
         details:
-          - description: null
+          - description: issue
             mermaid: ''
             reference: if any
         example:
