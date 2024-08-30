@@ -31,32 +31,9 @@ steps:
   - summary: Buyer raises a complaint for fulfilment category; buyer app creates issue call
     api: issue
     details:
-      - description: Buyer raises a complaint for fulfilment category; buyer app creates issue call
+      - description: issue -Buyer raises a complaint for fulfilment category; buyer app creates issue call
         mermaid: >-
-          sequenceDiagram
-            participant BuyerApp as Buyer App
-            participant SellerApp as Seller App
-            participant LSP as LSP (Logistics Service Provider)
-
-            BuyerApp->>SellerApp: Raise complaint for fulfillment category (/issue)
-            BuyerApp->>SellerApp: Create issue call (/issue)
-            SellerApp->>BuyerApp: Respond with processing action (on_issue)
-            SellerApp->>LSP: Create issue call (issue)
-            LSP->>SellerApp: Respond with processing action (on_issue)
-            LSP->>SellerApp: Needs more information to analyze (on_issue)
-            SellerApp->>BuyerApp: Cascades request for more information (on_issue)
-            BuyerApp->>SellerApp: Provides relevant information (issue)
-            SellerApp->>LSP: Cascades with relevant information (issue)
-            LSP->>SellerApp: Responds with processing action (on_issue)
-            SellerApp->>BuyerApp: Cascades above processing action (on_issue)
-            LSP->>SellerApp: Responds with proposed resolution (on_issue)
-            SellerApp->>BuyerApp: Analyzes and cascades proposed response (on_issue)
-            BuyerApp->>SellerApp: Accepts resolution provided by Seller App (issue)
-            SellerApp->>LSP: Accepts resolution provided by LSP (issue)
-            LSP->>SellerApp: Provides resolution object (on_issue)
-            SellerApp->>BuyerApp: Provides resolution object (on_issue)
-            BuyerApp->>SellerApp: Closes the complaint (issue)
-            SellerApp->>BuyerApp: Closes the issue
+          
     example:
       value:
         $ref: "../../examples/Flow3/issue/issue1.yaml"
@@ -65,30 +42,7 @@ steps:
     details:
       - description: Seller app responds with processing action
         mermaid: >-
-          sequenceDiagram
-            participant BuyerApp as Buyer App
-            participant SellerApp as Seller App
-            participant LSP as LSP (Logistics Service Provider)
-
-            BuyerApp->>SellerApp: Raise complaint for fulfillment category (/issue)
-            BuyerApp->>SellerApp: Create issue call (/issue)
-            SellerApp->>BuyerApp: Respond with processing action (on_issue)
-            SellerApp->>LSP: Create issue call (issue)
-            LSP->>SellerApp: Respond with processing action (on_issue)
-            LSP->>SellerApp: Needs more information to analyze (on_issue)
-            SellerApp->>BuyerApp: Cascades request for more information (on_issue)
-            BuyerApp->>SellerApp: Provides relevant information (issue)
-            SellerApp->>LSP: Cascades with relevant information (issue)
-            LSP->>SellerApp: Responds with processing action (on_issue)
-            SellerApp->>BuyerApp: Cascades above processing action (on_issue)
-            LSP->>SellerApp: Responds with proposed resolution (on_issue)
-            SellerApp->>BuyerApp: Analyzes and cascades proposed response (on_issue)
-            BuyerApp->>SellerApp: Accepts resolution provided by Seller App (issue)
-            SellerApp->>LSP: Accepts resolution provided by LSP (issue)
-            LSP->>SellerApp: Provides resolution object (on_issue)
-            SellerApp->>BuyerApp: Provides resolution object (on_issue)
-            BuyerApp->>SellerApp: Closes the complaint (issue)
-            SellerApp->>BuyerApp: Closes the issue
+            
     example:
       value:
         $ref: "../../examples/Flow3/on_issue/on_issue2.yaml"
@@ -102,9 +56,9 @@ steps:
       value:
         $ref: "../../examples/Flow3/issue/issue3.yaml"
   - summary: Lsp responds with processing action
-    api: issue
+    api: on_issueissue
     details:
-      - description: issue
+      - description: on_issue
         mermaid: >-
         reference: if any
     example:
@@ -122,7 +76,7 @@ steps:
   - summary: Seller app responds with need more info tagging the previous missing info
     api: on_issue
     details:
-      - description: Seller app responds with need more info tagging the previous missing info
+      - description: on_Issue -Seller app responds with need more info tagging the previous missing info
         mermaid: >-
         reference: if any
     example:
@@ -139,9 +93,9 @@ steps:
         $ref: "../../examples/Flow3/issue/issue7.yaml"
   - summary: Seller app cascades with the relevant information
 
-    api: on_issue
+    api: issue
     details:
-      - description: Seller app cascades with the relevant information
+      - description: issue -Seller app cascades with the relevant information
         mermaid: >-
         reference: if any
     example:
@@ -157,9 +111,9 @@ steps:
       value:
         $ref: "../../examples/Flow3/on_issue/on_issue9.yaml"
   - summary:  Seller app cascades above processing action
-    api: issue
+    api: on_issue
     details:
-      - description:  Seller app cascades above processing action
+      - description: on_issue - Seller app cascades above processing action
         mermaid: >-
         reference: if any
     example:
@@ -222,7 +176,7 @@ steps:
   - summary: Buyer app closes the complaint (issue)
     api: issue
     details:
-      - description: Buyer app closes the complaint (issue)
+      - description: issue - Buyer app closes the complaint (issue)
         mermaid: >-
         reference: if any
     example:

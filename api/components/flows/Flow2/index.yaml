@@ -9,12 +9,15 @@ details:
         SellerApp->>BuyerApp: Raise complaint for policy category (issue)
         BuyerApp->>SellerApp: Respond with processing action (on_issue)
         BuyerApp->>SellerApp: Respond with proposed resolution (on_issue)
-        SellerApp->>BuyerApp: Reject resolution and escalate complaint (issue)
+        SellerApp->>BuyerApp: Accepts proposed resolution (issue)
+        BuyerApp->>SellerApp: Provides resolution (on_issue)
+        SellerApp->>BuyerApp: Rejects resolution and escalates complaint (issue)
         BuyerApp->>SellerApp: Respond with processing action (on_issue)
         BuyerApp->>SellerApp: Respond with proposed resolution (on_issue)
-        SellerApp->>BuyerApp: Accept resolution (issue)
-        BuyerApp->>SellerApp: Provide resolution (on_issue)
-        SellerApp->>BuyerApp: Close complaint
+        SellerApp->>BuyerApp: Accepts resolution (issue)
+        BuyerApp->>SellerApp: Provides resolution (on_issue)
+        SellerApp->>BuyerApp: Closes the complaint (issue)
+
 
 references: if any
 steps:
@@ -72,7 +75,7 @@ steps:
       value:
         $ref: "../../examples/Flow2/on_issue/on_issue5.yaml"              
   - summary:  Seller app escalates the complaint
-    api: on_issue
+    api: issue
     details:
       - description: Seller app escalates the complaint
         mermaid: >-
@@ -103,7 +106,7 @@ steps:
       value:
         $ref: "../../examples/Flow2/on_issue/on_issue8.yaml"              
   - summary: Seller app accepts the resolution
-    api: on_issue
+    api: issue
     details:
       - description: Seller app accepts the resolution
         mermaid: >-
