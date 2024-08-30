@@ -69,7 +69,7 @@ steps:
   - summary: Seller app responds with processing action
     api: on_issue
     details:
-      - description: Seller app responds with processing action
+      - description: on_issue
         mermaid: >-
            
     reference: if any
@@ -79,7 +79,7 @@ steps:
   - summary: Seller app responds with need more info tagging the previous missing info
     api: on_issue
     details:
-      - description: Seller app responds with need more info tagging the previous missing info
+      - description: on_issue
         mermaid: >-
         
     reference: if any
@@ -89,37 +89,37 @@ steps:
   - summary: Buyer app provides relevant information (responds to the request
     api: issue
     details:
-      - description: Buyer app provides relevant information (responds to the request
+      - description: issue
         mermaid: >-
           
     reference: if any
     example:
       value:
         $ref: "../../examples/Flow1/issue/issue7.yaml"  
-  - summary: Seller app responds with need more info tagging the previous missing info
+  - summary: Seller app responds with processing action
     api: on_issue
     details:
-      - description: Seller app responds with need more info tagging the previous missing info
+      - description: on_issue
         mermaid: >-
           
     reference: if any
     example:
       value:
         $ref: "../../examples/Flow1/on_issue/on_issue8.yaml"              
-  - summary: Seller app responds with need more info tagging the previous missing info
+  - summary: Seller app provides potential resolution options 
     api: on_issue
     details:
-      - description: Seller app responds with need more info tagging the previous missing info
+      - description: on_issue
         mermaid: >-
         
     reference: if any
     example:
       value:
         $ref: "../../examples/Flow1/on_issue/on_issue9.yaml" 
-  - summary: Seller app responds with need more info tagging the previous missing info
+  - summary:  Buyer responds with an accepted resolution
     api: issue
     details:
-      - description: Seller app responds with need more info tagging the previous missing info
+      - description: issue
         mermaid: >-
            
            
@@ -127,20 +127,20 @@ steps:
     example:
       value:
         $ref: "../../examples/Flow1/issue/issue10.yaml"  
-  - summary: Seller app responds with need more info tagging the previous missing info
+  - summary:  Seller app responds with the resolution
     api: on_issue
     details:
-      - description: Seller app responds with need more info tagging the previous missing info
+      - description: on_issue
         mermaid: >-
         
     reference: if any
     example:
       value:
         $ref: "../../examples/Flow1/on_issue/on_issue11.yaml"              
-  - summary: Seller app responds with need more info tagging the previous missing info
+  - summary:  Buyer closes the complaint
     api: issue
     details:
-      - description: Seller app responds with need more info tagging the previous missing info
+      - description: issue
         mermaid: >-
           
     reference: if any
