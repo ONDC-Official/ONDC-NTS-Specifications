@@ -1571,7 +1571,7 @@ x-flows:
       - summary: Seller app responds with processing action
         api: on_issue
         details:
-          - description: Seller app responds with processing action
+          - description: on_issue
             mermaid: ''
         reference: if any
         example:
@@ -1729,9 +1729,7 @@ x-flows:
           info
         api: on_issue
         details:
-          - description: >-
-              Seller app responds with need more info tagging the previous
-              missing info
+          - description: on_issue
             mermaid: ''
         reference: if any
         example:
@@ -1899,7 +1897,7 @@ x-flows:
       - summary: Buyer app provides relevant information (responds to the request
         api: issue
         details:
-          - description: Buyer app provides relevant information (responds to the request
+          - description: issue
             mermaid: ''
         reference: if any
         example:
@@ -2075,14 +2073,10 @@ x-flows:
                     action_by: NP1
                     actor_details:
                       name: Sam Manuel
-      - summary: >-
-          Seller app responds with need more info tagging the previous missing
-          info
+      - summary: Seller app responds with processing action
         api: on_issue
         details:
-          - description: >-
-              Seller app responds with need more info tagging the previous
-              missing info
+          - description: on_issue
             mermaid: ''
         reference: if any
         example:
@@ -2266,14 +2260,10 @@ x-flows:
                     action_by: NP2
                     actor_details:
                       name: Sam Manuel
-      - summary: >-
-          Seller app responds with need more info tagging the previous missing
-          info
+      - summary: Seller app provides potential resolution options
         api: on_issue
         details:
-          - description: >-
-              Seller app responds with need more info tagging the previous
-              missing info
+          - description: on_issue
             mermaid: ''
         reference: if any
         example:
@@ -2506,14 +2496,10 @@ x-flows:
                           - descriptor:
                               code: ITEM
                             value: I1
-      - summary: >-
-          Seller app responds with need more info tagging the previous missing
-          info
+      - summary: Buyer responds with an accepted resolution
         api: issue
         details:
-          - description: >-
-              Seller app responds with need more info tagging the previous
-              missing info
+          - description: issue
             mermaid: ''
         reference: if any
         example:
@@ -2755,14 +2741,10 @@ x-flows:
                           - descriptor:
                               code: ITEM
                             value: I1
-      - summary: >-
-          Seller app responds with need more info tagging the previous missing
-          info
+      - summary: Seller app responds with the resolution
         api: on_issue
         details:
-          - description: >-
-              Seller app responds with need more info tagging the previous
-              missing info
+          - description: on_issue
             mermaid: ''
         reference: if any
         example:
@@ -3017,14 +2999,10 @@ x-flows:
                           - descriptor:
                               code: ITEM
                             value: I1
-      - summary: >-
-          Seller app responds with need more info tagging the previous missing
-          info
+      - summary: Buyer closes the complaint
         api: issue
         details:
-          - description: >-
-              Seller app responds with need more info tagging the previous
-              missing info
+          - description: issue
             mermaid: ''
         reference: if any
         example:
@@ -3318,12 +3296,14 @@ x-flows:
             SellerApp->>BuyerApp: Raise complaint for policy category (issue)
             BuyerApp->>SellerApp: Respond with processing action (on_issue)
             BuyerApp->>SellerApp: Respond with proposed resolution (on_issue)
-            SellerApp->>BuyerApp: Reject resolution and escalate complaint (issue)
+            SellerApp->>BuyerApp: Accepts proposed resolution (issue)
+            BuyerApp->>SellerApp: Provides resolution (on_issue)
+            SellerApp->>BuyerApp: Rejects resolution and escalates complaint (issue)
             BuyerApp->>SellerApp: Respond with processing action (on_issue)
             BuyerApp->>SellerApp: Respond with proposed resolution (on_issue)
-            SellerApp->>BuyerApp: Accept resolution (issue)
-            BuyerApp->>SellerApp: Provide resolution (on_issue)
-            SellerApp->>BuyerApp: Close complaint
+            SellerApp->>BuyerApp: Accepts resolution (issue)
+            BuyerApp->>SellerApp: Provides resolution (on_issue)
+            SellerApp->>BuyerApp: Closes the complaint (issue)
     references: if any
     steps:
       - summary: Seller app raises a complaint for policy category
@@ -3903,7 +3883,7 @@ x-flows:
                     updated_at: 2024-08-14T09:57:58.841Z
                     proposed_by: NP2
       - summary: Seller app escalates the complaint
-        api: on_issue
+        api: issue
         details:
           - description: Seller app escalates the complaint
             mermaid: ''
@@ -4378,7 +4358,7 @@ x-flows:
                     updated_at: 2024-08-14T09:57:58.841Z
                     proposed_by: NP2
       - summary: Seller app accepts the resolution
-        api: on_issue
+        api: issue
         details:
           - description: Seller app accepts the resolution
             mermaid: ''
@@ -4998,33 +4978,9 @@ x-flows:
         api: issue
         details:
           - description: >-
-              Buyer raises a complaint for fulfilment category; buyer app
+              issue -Buyer raises a complaint for fulfilment category; buyer app
               creates issue call
-            mermaid: |-
-              sequenceDiagram
-                participant BuyerApp as Buyer App
-                participant SellerApp as Seller App
-                participant LSP as LSP (Logistics Service Provider)
-
-                BuyerApp->>SellerApp: Raise complaint for fulfillment category (/issue)
-                BuyerApp->>SellerApp: Create issue call (/issue)
-                SellerApp->>BuyerApp: Respond with processing action (on_issue)
-                SellerApp->>LSP: Create issue call (issue)
-                LSP->>SellerApp: Respond with processing action (on_issue)
-                LSP->>SellerApp: Needs more information to analyze (on_issue)
-                SellerApp->>BuyerApp: Cascades request for more information (on_issue)
-                BuyerApp->>SellerApp: Provides relevant information (issue)
-                SellerApp->>LSP: Cascades with relevant information (issue)
-                LSP->>SellerApp: Responds with processing action (on_issue)
-                SellerApp->>BuyerApp: Cascades above processing action (on_issue)
-                LSP->>SellerApp: Responds with proposed resolution (on_issue)
-                SellerApp->>BuyerApp: Analyzes and cascades proposed response (on_issue)
-                BuyerApp->>SellerApp: Accepts resolution provided by Seller App (issue)
-                SellerApp->>LSP: Accepts resolution provided by LSP (issue)
-                LSP->>SellerApp: Provides resolution object (on_issue)
-                SellerApp->>BuyerApp: Provides resolution object (on_issue)
-                BuyerApp->>SellerApp: Closes the complaint (issue)
-                SellerApp->>BuyerApp: Closes the issue
+            mermaid: ''
         example:
           value:
             context:
@@ -5104,31 +5060,7 @@ x-flows:
         api: on_issue
         details:
           - description: Seller app responds with processing action
-            mermaid: |-
-              sequenceDiagram
-                participant BuyerApp as Buyer App
-                participant SellerApp as Seller App
-                participant LSP as LSP (Logistics Service Provider)
-
-                BuyerApp->>SellerApp: Raise complaint for fulfillment category (/issue)
-                BuyerApp->>SellerApp: Create issue call (/issue)
-                SellerApp->>BuyerApp: Respond with processing action (on_issue)
-                SellerApp->>LSP: Create issue call (issue)
-                LSP->>SellerApp: Respond with processing action (on_issue)
-                LSP->>SellerApp: Needs more information to analyze (on_issue)
-                SellerApp->>BuyerApp: Cascades request for more information (on_issue)
-                BuyerApp->>SellerApp: Provides relevant information (issue)
-                SellerApp->>LSP: Cascades with relevant information (issue)
-                LSP->>SellerApp: Responds with processing action (on_issue)
-                SellerApp->>BuyerApp: Cascades above processing action (on_issue)
-                LSP->>SellerApp: Responds with proposed resolution (on_issue)
-                SellerApp->>BuyerApp: Analyzes and cascades proposed response (on_issue)
-                BuyerApp->>SellerApp: Accepts resolution provided by Seller App (issue)
-                SellerApp->>LSP: Accepts resolution provided by LSP (issue)
-                LSP->>SellerApp: Provides resolution object (on_issue)
-                SellerApp->>BuyerApp: Provides resolution object (on_issue)
-                BuyerApp->>SellerApp: Closes the complaint (issue)
-                SellerApp->>BuyerApp: Closes the issue
+            mermaid: ''
         example:
           value:
             context:
@@ -5310,9 +5242,9 @@ x-flows:
                     actor_details:
                       name: Mark Anthony
       - summary: Lsp responds with processing action
-        api: issue
+        api: on_issueissue
         details:
-          - description: issue
+          - description: on_issue
             mermaid: ''
             reference: if any
         example:
@@ -5531,8 +5463,8 @@ x-flows:
         api: on_issue
         details:
           - description: >-
-              Seller app responds with need more info tagging the previous
-              missing info
+              on_Issue -Seller app responds with need more info tagging the
+              previous missing info
             mermaid: ''
             reference: if any
         example:
@@ -5661,7 +5593,7 @@ x-flows:
                   code: IND
                 city:
                   code: '*'
-              action: on_issue
+              action: issue
               core_version: 2.0.0
               bap_id: buyerapp.com
               bap_uri: https://buyerapp.com/ondc
@@ -5782,9 +5714,9 @@ x-flows:
                     updated_at: 2023-01-15T10:00:00.469Z
                     action_by: NP1
       - summary: Seller app cascades with the relevant information
-        api: on_issue
+        api: issue
         details:
-          - description: Seller app cascades with the relevant information
+          - description: issue -Seller app cascades with the relevant information
             mermaid: ''
             reference: if any
         example:
@@ -6062,9 +5994,9 @@ x-flows:
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
       - summary: Seller app cascades above processing action
-        api: issue
+        api: on_issue
         details:
-          - description: Seller app cascades above processing action
+          - description: on_issue - Seller app cascades above processing action
             mermaid: ''
             reference: if any
         example:
@@ -7252,7 +7184,7 @@ x-flows:
       - summary: Buyer app closes the complaint (issue)
         api: issue
         details:
-          - description: Buyer app closes the complaint (issue)
+          - description: issue - Buyer app closes the complaint (issue)
             mermaid: ''
             reference: if any
         example:
@@ -7452,7 +7384,7 @@ x-flows:
                   code: IND
                 city:
                   code: '*'
-              action: on_issue
+              action: issue
               core_version: 2.0.0
               bap_id: sellerapp.com
               bap_uri: https://sellerapp.com/ondc
