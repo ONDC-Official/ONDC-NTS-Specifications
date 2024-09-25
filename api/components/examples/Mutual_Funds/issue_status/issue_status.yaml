@@ -1,0 +1,19 @@
+context:
+  domain: ONDC:FIS14
+  location:
+   country: 
+    code: IND
+   city:
+    code: "*"
+  action: issue_status
+  core_version: 2.0.0
+  bap_id: buyerapp.com
+  bap_uri: https://buyerapp.com/ondc
+  bpp_id: sellerapp.com
+  bpp_uri: https://sellerapp.com/ondc
+  transaction_id: T1
+  message_id: M2
+  timestamp: "2023-01-15T10:30:00.469Z"
+  ttl: PT30S
+message:
+  issue_id: "1"

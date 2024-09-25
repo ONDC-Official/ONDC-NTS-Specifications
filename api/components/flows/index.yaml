@@ -1,3 +1,4 @@
 - $ref: "./Retail/index.yaml"
 - $ref: "./Credit/index.yaml"
 - $ref: "./Insurance/index.yaml"
+- $ref: "./Mutual_funds/index.yaml"

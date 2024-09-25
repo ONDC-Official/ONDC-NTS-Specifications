@@ -1,0 +1,153 @@
+summary: Mutual_funds
+details:
+ - description: detailed flow 
+   mermaid: >-
+     sequenceDiagram
+        title  A buyer raises an issue on the buyer app 
+        participant Buyer 
+        participant Buyer App
+        participant Seller App
+        Buyer ->>+ Buyer App: Raise an issue on issue ticket portal on buyer app
+        Buyer App  ->>+ Seller App: ISSUE 
+        Seller App ->>+ Buyer App : ON_ISSUE (Seller App started processing the issue)
+        # Seller App ->>-Buyer App: Seller App started processing the issue
+        Buyer App  ->>+ Seller App: ISSUE STATUS(Buyer app requesting status update on the complaint)
+        # Buyer App ->>+ Seller App: Buyer app requesting status update on the complaint
+        Seller App ->>+ Buyer App : On_ISSUE _STATUS (Seller app providing status update on the complaint  )
+        # Seller App ->>+ Buyer App :Seller app providing status update on the complaint  
+         Seller App ->>+ Buyer App:  ISSUE Resolution provided 
+           Buyer App ->>+ Buyer:  ISSUE CLOSED
+references: if any
+steps:
+  - summary: ISSUE
+    api: issue
+    details:
+      - description: issue request creating a complaint
+        mermaid: >-
+         sequenceDiagram
+           title  A buyer raises an issue on the buyer app 
+           participant Buyer 
+           participant Buyer App
+           participant Seller App
+           rect rgb(0,195,255)
+           Buyer ->>+ Buyer App: Raise an issue on issue ticket portal on buyer app
+           Buyer App  ->>+ Seller App: ISSUE 
+           end
+            Seller App ->>+ Buyer App : ON_ISSUE (Seller App started processing the issue)
+          #  Seller App ->>-Buyer App: Seller App started processing the issue
+           Buyer App  ->>+ Seller App: ISSUE STATUS
+           Buyer App ->>+ Seller App: Buyer app requesting status update on the complaint
+           Seller App ->>+ Buyer App : On_ISSUE _STATUS
+           Seller App ->>+ Buyer App :Seller app providing status update on the complaint  
+            Seller App ->>+ Buyer App:  ISSUE Resolution provided 
+           Buyer App ->>+ Buyer:  ISSUE CLOSED
+    reference: if any
+    example:
+      value:
+        $ref: "../../examples/Mutual_funds/issue/issue.yaml"
+  - summary: ON_ISSUE
+    api: on_issue
+    details:
+      - description: on_issue response marking the complaint as processing
+        mermaid: >-
+         sequenceDiagram
+           title  A buyer raises an issue on the buyer app 
+           participant Buyer 
+           participant Buyer App
+           participant Seller App
+           Buyer ->>+ Buyer App: Raise an issue on issue ticket portal on buyer app
+           Buyer App  ->>+ Seller App: ISSUE 
+           rect rgb(0,195,255)
+           Seller App ->>+ Buyer App : ON_ISSUE
+           Seller App ->>-Buyer App: Seller App started processing the issue
+           end
+           Buyer App  ->>+ Seller App: ISSUE STATUS
+           Buyer App ->>+ Seller App: Buyer app requesting status update on the complaint
+           Seller App ->>+ Buyer App : On_ISSUE _STATUS
+           Seller App ->>+ Buyer App :Seller app providing status update on the complaint  
+            Seller App ->>+ Buyer App:  ISSUE Resolution provided 
+           Buyer App ->>+ Buyer:  ISSUE CLOSED
+        
+    reference: if any
+    example:
+      value:
+        $ref: "../../examples/Mutual_funds/on_issue/on_issue.yaml"  
+  - summary: ISSUE_STATUS
+    api: issue_status
+    details:
+      - description: issue_status request seeking updates on the complaint
+        mermaid: >-
+         sequenceDiagram
+           title  A buyer raises an issue on the buyer app 
+           participant Buyer 
+           participant Buyer App
+           participant Seller App
+           Buyer ->>+ Buyer App: Raise an issue on issue ticket portal on buyer app
+           Buyer App  ->>+ Seller App: ISSUE 
+           Seller App ->>+ Buyer App : ON_ISSUE
+           Seller App ->>-Buyer App: Seller App started processing the issue
+           rect rgb(0,195,255)
+           Buyer App  ->>+ Seller App: ISSUE STATUS
+           Buyer App ->>+ Seller App: Buyer app requesting status update on the complaint
+           end
+           Seller App ->>+ Buyer App : On_ISSUE _STATUS
+           Seller App ->>+ Buyer App :Seller app providing status update on the complaint  
+           Seller App ->>+ Buyer App:  ISSUE Resolution provided 
+           Buyer App ->>+ Buyer:  ISSUE CLOSED
+    reference: if any
+    example:
+      value:
+        $ref: "../../examples/Mutual_funds/issue_status/issue_status.yaml" 
+  - summary: ON_ISSUE_STATUS
+    api: on_issue_status
+    details:
+      - description: on_issue_status response providing update (resolution) on the complaint
+        mermaid: >-
+         sequenceDiagram
+           title  A buyer raises an issue on the buyer app 
+           participant Buyer 
+           participant Buyer App
+           participant Seller App
+           Buyer ->>+ Buyer App: Raise an issue on issue ticket portal on buyer app
+           Buyer App  ->>+ Seller App: ISSUE 
+           Seller App ->>+ Buyer App : ON_ISSUE
+           Seller App ->>-Buyer App: Seller App started processing the issue
+           Buyer App  ->>+ Seller App: ISSUE STATUS
+           Buyer App ->>+ Seller App: Buyer app requesting status update on the complaint
+           rect rgb(0,195,255)
+           Seller App ->>+ Buyer App : On_ISSUE _STATUS
+           Seller App ->>+ Buyer App :Seller app providing status update on the complaint  
+           end
+           Seller App ->>+ Buyer App:  ISSUE Resolution provided 
+           Buyer App ->>+ Buyer:  ISSUE CLOSED
+    reference: if any
+    example:
+      value:
+        $ref: "../../examples/Mutual_funds/on_issue_status/on_issue_status.yaml"  
+  - summary: ISSUE_CLOSE
+    api: issue
+    details:
+      - description: issue close request to marking the complaint as closed
+        mermaid: >-
+         sequenceDiagram
+           title  A buyer raises an issue on the buyer app 
+           participant Buyer 
+           participant Buyer App
+           participant Seller App
+           rect rgb(0,195,255)
+           Buyer ->>+ Buyer App: Raise an issue on issue ticket portal on buyer app
+           Buyer App  ->>+ Seller App: ISSUE 
+           end
+            Seller App ->>+ Buyer App : ON_ISSUE (Seller App started processing the issue)
+          #  Seller App ->>-Buyer App: Seller App started processing the issue
+           Buyer App  ->>+ Seller App: ISSUE STATUS
+           Buyer App ->>+ Seller App: Buyer app requesting status update on the complaint
+           Seller App ->>+ Buyer App : On_ISSUE _STATUS
+           Seller App ->>+ Buyer App :Seller app providing status update on the complaint  
+            Seller App ->>+ Buyer App:  ISSUE Resolution provided 
+           Buyer App ->>+ Buyer:  ISSUE CLOSED
+    reference: if any
+    example:
+      value:
+        $ref: "../../examples/Mutual_funds/issue/issue_closed.yaml"                  
+  

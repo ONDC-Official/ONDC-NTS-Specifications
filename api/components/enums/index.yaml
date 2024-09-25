@@ -65,6 +65,20 @@ issue:
         - code: ORD04
           description: Errors in loan agreements or contracts
           reference: <PR/Issue/Discussion Links md format text
+        - code: N/A
+          description: Dashboard data is incorrect
+          reference: <PR/Issue/Discussion Links md format text 
+        - code: ORD230
+          description: My Portfolio data is incorrect
+          reference: <PR/Issue/Discussion Links md format text
+        - code: ORD231
+          description: Unit allotment pending
+          reference: <PR/Issue/Discussion Links md format text   
+
+
+
+
+
 
         
         - code: PMT202
@@ -91,6 +105,16 @@ issue:
         - code: PMT209
           description:  Issuance - EMI Calculation
           reference: <PR/Issue/Discussion Links md format text  
+
+
+
+
+
+
+
+
+
+          
         - code: ORD210
           description: Issuance -policy benefits & features
           reference: <PR/Issue/Discussion Links md format text 
@@ -180,8 +204,16 @@ issue:
         - code: FLM212
           description: delete/forget existing data against my profile
           reference: <PR/Issue/Discussion Links md format text  
-
-
+        - code: FLM230
+          description: Extra charges have been deducted
+          reference: <PR/Issue/Discussion Links md format text    
+        - code: FLM231
+          description: Issues in redemption
+          reference: <PR/Issue/Discussion Links md format text\
+        - code: FLM232
+          description: Refund has not been credited
+          reference: <PR/Issue/Discussion Links md format text
+       
 
 
 

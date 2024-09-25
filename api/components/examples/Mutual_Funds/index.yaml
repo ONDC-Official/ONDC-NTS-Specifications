@@ -1,0 +1,24 @@
+issue:
+  examples:
+    - summary: issue
+      # description: TBD
+      value:
+        $ref: "./issue/issue.yaml"
+on_issue:
+   examples:
+    - summary: on_issue
+      # description: TBD
+      value:
+        $ref: "./on_issue/on_issue.yaml"
+issue_status:
+   examples:
+    - summary: issue_status
+      # description: TBD
+      value:
+        $ref: "./issue_status/issue_status.yaml"
+on_issue_status:
+   examples:
+    - summary: on_issue_status
+      # description: TBD
+      value:
+        $ref: "./on_issue_status/on_issue_status.yaml"        

@@ -16,6 +16,13 @@ Insurance:
   example_set:
    $ref: "./Insurance/index.yaml"
 
+Mutual Funds:
+  summary: IGM implementation for  Mutual Funds
+  description: IGM examples for Mutual Funds
+  example_set:
+   $ref: "./Mutual_Funds/index.yaml"
+
+
 # Marine_igm:
 #   summary: IGM implementation for fis 
 #   description: IGM examples for fis
