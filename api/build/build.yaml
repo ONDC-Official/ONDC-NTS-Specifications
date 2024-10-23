@@ -3721,3 +3721,11 @@ x-errorcodes:
       Description: Internal server error
       From: Any
       code: 503
+    - Event: on_report
+      Description: Invalid transaction_id
+      From: Any
+      code: 70028
+    - Event: on_report
+      Description: Invalid message_id
+      From: Any
+      code: 70029
