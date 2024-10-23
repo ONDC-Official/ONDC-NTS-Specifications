@@ -111,10 +111,6 @@ code:
     Description: Collector bank NDC breach 
     From: Any
     code: 70027
-  - Event:  https error
-    Description: Internal server error
-    From: Any
-    code: 503
   - Event:  on_report
     Description: Invalid transaction_id
     From: Any
@@ -123,3 +119,7 @@ code:
     Description: Invalid message_id
     From: Any
     code: 70029
+  - Event:  https error
+    Description: Internal server error
+    From: Any
+    code: 503
