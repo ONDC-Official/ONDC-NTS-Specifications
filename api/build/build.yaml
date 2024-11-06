@@ -3729,3 +3729,7 @@ x-errorcodes:
       Description: Internal server error
       From: Any
       code: 503
+x-sandboxui:
+  dropdown:
+    - environment-name: staging
+      link: https://rsf-mock-service.ondc.org/mock_ui

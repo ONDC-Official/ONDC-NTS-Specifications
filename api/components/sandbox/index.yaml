@@ -1,0 +1,3 @@
+dropdown:
+  - environment-name: "staging"
+    link: "https://rsf-mock-service.ondc.org/mock_ui"
