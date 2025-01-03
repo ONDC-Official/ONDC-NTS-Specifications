@@ -1226,23 +1226,12 @@ x-flows:
                       amount:
                         currency: INR
                         value: '50.00'
-                    provider:
-                      id: provider-id-789
-                      amount:
-                        currency: INR
-                        value: '800.00'
-                      status: NOT-SETTLED
-                      error:
-                        code: '01'
-                        message: Account Inactive
                     self:
                       amount:
                         currency: INR
-                        value: '200.00'
-                      status: NOT-SETTLED
-                      error:
-                        code: '01'
-                        message: Account Inactive
+                        value: '50.00'
+                      status: SETTLED
+                      reference_no: '1238683618634'
   - summary: RECON
     details:
       - description: >-
@@ -1275,7 +1264,9 @@ x-flows:
       - summary: RECON
         api: recon
         details:
-          - description: /recon
+          - description: >-
+              Reconciliation call to understand the discrepancy in the
+              settlement instructions
             mermaid: |-
               sequenceDiagram
                participant Collector
@@ -1286,7 +1277,7 @@ x-flows:
                Receiver ->> Collector: /on_recon API
         reference: if any
         example:
-          value:
+          value: &ref_17
             context:
               domain: ONDC:NTS10
               location:
@@ -1372,7 +1363,9 @@ x-flows:
       - summary: ON_RECON
         api: on_recon
         details:
-          - description: /on_recon
+          - description: >-
+              Response to the reconciliation call, expressing disagreement with
+              the information provided in /recon
             mermaid: |-
               sequenceDiagram
                participant Collector
@@ -1383,7 +1376,7 @@ x-flows:
                Receiver ->> Collector: /on_recon API
         reference: if any
         example:
-          value:
+          value: &ref_18
             context:
               domain: ONDC:NTS10
               location:
@@ -1480,7 +1473,9 @@ x-flows:
       - summary: RECON
         api: recon
         details:
-          - description: /recon
+          - description: >-
+              Reconciliation call with the updated information, agreeing to the
+              information provided by the counterparty in /on_recon
             mermaid: |-
               sequenceDiagram
                participant Collector
@@ -1577,7 +1572,9 @@ x-flows:
       - summary: ON_RECON
         api: on_recon
         details:
-          - description: /on_recon
+          - description: >-
+              Response to the reconciliation call,  agreeing with the
+              information provided in /recon
             mermaid: |-
               sequenceDiagram
                participant Collector
@@ -1828,6 +1825,64 @@ x-examples:
     example_set:
       on_report:
         examples:
+          - summary: on_report (with provider)
+            description: Response from settlement agency including provider details
+            value:
+              context:
+                domain: ONDC:NTS10
+                location:
+                  country:
+                    code: IND
+                  city:
+                    code: '*'
+                version: 2.0.0
+                action: on_report
+                bap_id: collectorapp.com
+                bap_uri: https://collectorapp.com/ondc/1.0/
+                bpp_id: sa_nocs.nbbl.com
+                bpp_uri: https://sa_nocs.nbbl.com/nocs_test
+                transaction_id: cd73a366-aebb-4144-9314-808dda82c7e6
+                message_id: 841ef6d7-d74d-4411-ac06-a05469c0f9ac
+                timestamp: '2024-05-07T06:36:51.900Z'
+                ttl: P1D
+              message:
+                collector_app_id: collectorapp.com
+                receiver_app_id: receiverapp.com
+                settlement:
+                  type: NP-NP
+                  id: settlement-id-123
+                  orders:
+                    - id: order-id-456
+                      inter_participant:
+                        settled_amount:
+                          currency: INR
+                          value: '1000.00'
+                        amount:
+                          currency: INR
+                          value: '1000.27'
+                        status: SETTLED
+                        reference_no: '3718683618631'
+                      collector:
+                        amount:
+                          currency: INR
+                          value: '50.00'
+                      provider:
+                        id: provider-id-789
+                        amount:
+                          currency: INR
+                          value: '800.00'
+                        status: NOT-SETTLED
+                        error:
+                          code: '01'
+                          message: Account Inactive
+                      self:
+                        amount:
+                          currency: INR
+                          value: '200.00'
+                        status: NOT-SETTLED
+                        error:
+                          code: '01'
+                          message: Account Inactive
           - summary: on_report
             description: Response from settlement agency
             value: *ref_7
@@ -1937,6 +1992,25 @@ x-examples:
                           value: '200.00'
           - summary: settle nil
             value: *ref_16
+      recon:
+        examples:
+          - summary: recon
+            description: >-
+              reconciliation call to understand the discrepancy in the
+              settlement instructions
+            value: *ref_17
+      on_recon:
+        examples:
+          - summary: on_recon (recon_accord = false)
+            description: >-
+              response to the reconciliation call, expressing disagreement with
+              the information provided in /recon
+            value: *ref_18
+          - summary: on_recon (recon_accord = true)
+            description: >-
+              response to the reconciliation call,  agreeing with the
+              information provided in /recon
+            value: *ref_18
 x-attributes:
   RSF:
     attribute_set:

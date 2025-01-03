@@ -16,7 +16,7 @@ steps:
   - summary: RECON
     api: recon
     details:
-      - description: /recon
+      - description: Reconciliation call to understand the discrepancy in the settlement instructions
         mermaid: >-
           sequenceDiagram
            participant Collector
@@ -32,7 +32,7 @@ steps:
   - summary: ON_RECON
     api: on_recon
     details:
-      - description: /on_recon
+      - description: Response to the reconciliation call, expressing disagreement with the information provided in /recon
         mermaid: >-
           sequenceDiagram
            participant Collector
@@ -49,7 +49,7 @@ steps:
   - summary: RECON
     api: recon
     details:
-      - description: /recon
+      - description: Reconciliation call with the updated information, agreeing to the information provided by the counterparty in /on_recon
         mermaid: >-
           sequenceDiagram
            participant Collector
@@ -65,7 +65,7 @@ steps:
   - summary: ON_RECON
     api: on_recon
     details:
-      - description: /on_recon
+      - description: Response to the reconciliation call,  agreeing with the information provided in /recon
         mermaid: >-
           sequenceDiagram
            participant Collector

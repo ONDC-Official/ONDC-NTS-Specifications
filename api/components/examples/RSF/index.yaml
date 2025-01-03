@@ -1,5 +1,9 @@
 on_report:
   examples:
+    - summary: on_report (with provider)
+      description: Response from settlement agency including provider details
+      value:
+        $ref: ./on_report/on_report (with provider).yaml
     - summary: on_report
       description: Response from settlement agency
       value:
@@ -49,3 +53,21 @@ settle:
     - summary: settle nil
       value:
         $ref: ./settle/settle nil.yaml
+
+recon:
+  examples:
+    - summary: recon
+      description: reconciliation call to understand the discrepancy in the settlement instructions
+      value:
+        $ref: ./recon/recon.yaml
+
+on_recon:
+  examples:
+    - summary: on_recon (recon_accord = false)
+      description: response to the reconciliation call, expressing disagreement with the information provided in /recon
+      value:
+        $ref: ./on_recon/on_recon.yaml
+    - summary: on_recon (recon_accord = true)
+      description: response to the reconciliation call,  agreeing with the information provided in /recon
+      value:
+        $ref: ./on_recon/on_recon.yaml

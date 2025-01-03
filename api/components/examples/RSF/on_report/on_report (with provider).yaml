@@ -36,9 +36,22 @@ message:
           amount:
             currency: INR
             value: "50.00"
+        provider:
+          id: provider-id-789
+          amount:
+            currency: INR
+            value: "800.00"
+          status: NOT-SETTLED
+          error:
+            code: "01"
+            message: Account Inactive
+          # reference_no: "3718683618634"
         self:
           amount:
             currency: INR
-            value: "50.00"
-          status: SETTLED
-          reference_no: "1238683618634"
+            value: "200.00"
+          status: NOT-SETTLED
+          # reference_no: "3718683618634"
+          error:
+            code: "01"
+            message: Account Inactive
