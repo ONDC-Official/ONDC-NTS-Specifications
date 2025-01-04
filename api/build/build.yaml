@@ -697,7 +697,7 @@ x-flows:
         reference: if any
         api: settle
         example:
-          value: &ref_14
+          value: &ref_15
             context:
               domain: ONDC:NTS10
               location:
@@ -761,7 +761,7 @@ x-flows:
         reference: if any
         api: settle
         example:
-          value: &ref_13
+          value: &ref_14
             context:
               domain: ONDC:NTS10
               location:
@@ -816,7 +816,7 @@ x-flows:
         reference: if any
         api: on_settle
         example:
-          value: &ref_9
+          value: &ref_10
             context:
               domain: ONDC:NTS10
               location:
@@ -891,7 +891,7 @@ x-flows:
         reference: if any
         api: on_settle
         example:
-          value: &ref_8
+          value: &ref_9
             context:
               domain: ONDC:NTS10
               location:
@@ -978,7 +978,7 @@ x-flows:
                Settlement_Agency ->> NP : on_settle API
         reference: if any
         example:
-          value: &ref_15
+          value: &ref_16
             context:
               domain: ONDC:NTS10
               location:
@@ -1016,7 +1016,7 @@ x-flows:
                Settlement_Agency ->> NP : on_settle API
         reference: if any
         example:
-          value: &ref_10
+          value: &ref_11
             context:
               domain: ONDC:NTS10
               location:
@@ -1070,7 +1070,7 @@ x-flows:
                 Settlement_Agency ->> NP(Collector/Receiver) : on_settle API
         reference: if any
         example:
-          value: &ref_16
+          value: &ref_17
             context:
               domain: ONDC:NTS10
               location:
@@ -1102,7 +1102,7 @@ x-flows:
                Settlement_Agency ->> NP : on_settle API
         reference: if any
         example:
-          value: &ref_11
+          value: &ref_12
             context:
               domain: ONDC:NTS10
               location:
@@ -1152,7 +1152,7 @@ x-flows:
                NP ->> Settlement_Agency : Ack
         reference: if any
         example:
-          value: &ref_12
+          value: &ref_13
             context:
               domain: ONDC:NTS10
               location:
@@ -1173,10 +1173,10 @@ x-flows:
             message:
               ref_transaction_id: bd73a366-aebb-4144-9314-808dda82c7e6
               ref_message_id: 941ef6d7-d74d-4411-ac06-469c0f9ac
-      - summary: ON_REPORT
+      - summary: ON_REPORT (with provider)
         api: on_report
         details:
-          - description: on_report
+          - description: Response from settlement agency (including provider details)
             mermaid: |-
               sequenceDiagram
                participant NP
@@ -1188,6 +1188,76 @@ x-flows:
         reference: if any
         example:
           value: &ref_7
+            context:
+              domain: ONDC:NTS10
+              location:
+                country:
+                  code: IND
+                city:
+                  code: '*'
+              version: 2.0.0
+              action: on_report
+              bap_id: collectorapp.com
+              bap_uri: https://collectorapp.com/ondc/1.0/
+              bpp_id: sa_nocs.nbbl.com
+              bpp_uri: https://sa_nocs.nbbl.com/nocs_test
+              transaction_id: cd73a366-aebb-4144-9314-808dda82c7e6
+              message_id: 841ef6d7-d74d-4411-ac06-a05469c0f9ac
+              timestamp: '2024-05-07T06:36:51.900Z'
+              ttl: P1D
+            message:
+              collector_app_id: collectorapp.com
+              receiver_app_id: receiverapp.com
+              settlement:
+                type: NP-NP
+                id: settlement-id-123
+                orders:
+                  - id: order-id-456
+                    inter_participant:
+                      settled_amount:
+                        currency: INR
+                        value: '1000.00'
+                      amount:
+                        currency: INR
+                        value: '1000.27'
+                      status: SETTLED
+                      reference_no: '3718683618631'
+                    collector:
+                      amount:
+                        currency: INR
+                        value: '50.00'
+                    provider:
+                      id: provider-id-789
+                      amount:
+                        currency: INR
+                        value: '800.00'
+                      status: NOT-SETTLED
+                      error:
+                        code: '01'
+                        message: Account Inactive
+                    self:
+                      amount:
+                        currency: INR
+                        value: '200.00'
+                      status: NOT-SETTLED
+                      error:
+                        code: '01'
+                        message: Account Inactive
+      - summary: ON_REPORT
+        api: on_report
+        details:
+          - description: Response from settlement agency (if no provider is specified)
+            mermaid: |-
+              sequenceDiagram
+               participant NP
+               participant Settlement_Agency
+               NP ->> Settlement_Agency: report API  
+               Settlement_Agency ->> NP : Ack
+               Settlement_Agency ->> NP : on_ report API
+               NP ->> Settlement_Agency : Ack
+        reference: if any
+        example:
+          value: &ref_8
             context:
               domain: ONDC:NTS10
               location:
@@ -1277,7 +1347,7 @@ x-flows:
                Receiver ->> Collector: /on_recon API
         reference: if any
         example:
-          value: &ref_17
+          value: &ref_18
             context:
               domain: ONDC:NTS10
               location:
@@ -1376,7 +1446,7 @@ x-flows:
                Receiver ->> Collector: /on_recon API
         reference: if any
         example:
-          value: &ref_18
+          value: &ref_19
             context:
               domain: ONDC:NTS10
               location:
@@ -1827,75 +1897,20 @@ x-examples:
         examples:
           - summary: on_report (with provider)
             description: Response from settlement agency including provider details
-            value:
-              context:
-                domain: ONDC:NTS10
-                location:
-                  country:
-                    code: IND
-                  city:
-                    code: '*'
-                version: 2.0.0
-                action: on_report
-                bap_id: collectorapp.com
-                bap_uri: https://collectorapp.com/ondc/1.0/
-                bpp_id: sa_nocs.nbbl.com
-                bpp_uri: https://sa_nocs.nbbl.com/nocs_test
-                transaction_id: cd73a366-aebb-4144-9314-808dda82c7e6
-                message_id: 841ef6d7-d74d-4411-ac06-a05469c0f9ac
-                timestamp: '2024-05-07T06:36:51.900Z'
-                ttl: P1D
-              message:
-                collector_app_id: collectorapp.com
-                receiver_app_id: receiverapp.com
-                settlement:
-                  type: NP-NP
-                  id: settlement-id-123
-                  orders:
-                    - id: order-id-456
-                      inter_participant:
-                        settled_amount:
-                          currency: INR
-                          value: '1000.00'
-                        amount:
-                          currency: INR
-                          value: '1000.27'
-                        status: SETTLED
-                        reference_no: '3718683618631'
-                      collector:
-                        amount:
-                          currency: INR
-                          value: '50.00'
-                      provider:
-                        id: provider-id-789
-                        amount:
-                          currency: INR
-                          value: '800.00'
-                        status: NOT-SETTLED
-                        error:
-                          code: '01'
-                          message: Account Inactive
-                      self:
-                        amount:
-                          currency: INR
-                          value: '200.00'
-                        status: NOT-SETTLED
-                        error:
-                          code: '01'
-                          message: Account Inactive
+            value: *ref_7
           - summary: on_report
             description: Response from settlement agency
-            value: *ref_7
+            value: *ref_8
       on_settle:
         examples:
           - summary: on_settle np_np
             description: callback response for NP-NP settlement instruction
-            value: *ref_8
-          - summary: on_settle np-np (with provider)
             value: *ref_9
+          - summary: on_settle np-np (with provider)
+            value: *ref_10
           - summary: on_settle misc
             description: callback response for Misc / self settlement instruction
-            value: *ref_10
+            value: *ref_11
           - summary: on_settle misc (with provider)
             value:
               context:
@@ -1937,21 +1952,21 @@ x-examples:
                         status: SETTLED
                         reference_no: '3718683618631'
           - summary: on_settle nil
-            value: *ref_11
+            value: *ref_12
       report:
         examples:
           - summary: report
-            value: *ref_12
+            value: *ref_13
       settle:
         examples:
           - summary: settle np_np
             description: settlement instructions from NP to Settlement Agency
-            value: *ref_13
-          - summary: settle np-np (with provider)
             value: *ref_14
+          - summary: settle np-np (with provider)
+            value: *ref_15
           - summary: settle misc
             description: Miscellaneous / self settlement instruction
-            value: *ref_15
+            value: *ref_16
           - summary: settle misc (with provider)
             description: Miscellaneous / self settlement instruction
             value:
@@ -1991,26 +2006,26 @@ x-examples:
                           currency: INR
                           value: '200.00'
           - summary: settle nil
-            value: *ref_16
+            value: *ref_17
       recon:
         examples:
           - summary: recon
             description: >-
               reconciliation call to understand the discrepancy in the
               settlement instructions
-            value: *ref_17
+            value: *ref_18
       on_recon:
         examples:
           - summary: on_recon (recon_accord = false)
             description: >-
               response to the reconciliation call, expressing disagreement with
               the information provided in /recon
-            value: *ref_18
+            value: *ref_19
           - summary: on_recon (recon_accord = true)
             description: >-
               response to the reconciliation call,  agreeing with the
               information provided in /recon
-            value: *ref_18
+            value: *ref_19
 x-attributes:
   RSF:
     attribute_set:

@@ -26,10 +26,28 @@ steps:
     example:
       value:
         $ref: "../../examples/RSF/report/report.yaml"
+  - summary: ON_REPORT (with provider)
+    api: on_report
+    details:
+      - description: Response from settlement agency (including provider details)
+        mermaid: >-
+          sequenceDiagram
+           participant NP
+           participant Settlement_Agency
+           NP ->> Settlement_Agency: report API  
+           Settlement_Agency ->> NP : Ack
+           Settlement_Agency ->> NP : on_ report API
+           NP ->> Settlement_Agency : Ack
+
+    reference: if any
+    example:
+      value:
+        $ref: "../../examples/RSF/on_report/on_report (with provider).yaml"
+
   - summary: ON_REPORT
     api: on_report
     details:
-      - description: on_report
+      - description: Response from settlement agency (if no provider is specified)
         mermaid: >-
           sequenceDiagram
            participant NP
