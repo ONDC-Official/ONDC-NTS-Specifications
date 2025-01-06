@@ -1,42 +1,49 @@
-async function fetchMarkdown(branchName) {
-  try {
-    const container = document.getElementById("markdown-container").innerHTML;
-    const response = await fetch(
-      `https://api.github.com/repos/ondc-official/ONDC-NTS-Specifications/contents/api/components/docs?ref=${branchName}`
-    );
-    const data = await response.json();
-    if (data?.length == 0) container.innerHTML = "No files present";
-    else {
-      const filteredData = data?.filter((item) => item?.name.endsWith(".md"));
-      if (filteredData.length == 0)
-        container.innerHTML = "Markdown files not found";
-      else {
-    var setsDropDown = document.getElementById("feature-sets-dropdown");
+
+function renderDropdownMarkdown(branchname,filteredData){
+
+      var setsDropDown = document.getElementById("feature-sets-dropdown");
         setsDropDown.innerHTML = "";
         filteredData?.forEach(function (item) {
+          if( item === "log-verification.md") return 
           var option = document.createElement("option");
-          const fileName = item?.name?.split('.md')[0];
+          const fileName = item?.split('.md')[0];
           option.text = fileName;
           setsDropDown.add(option);
         });
-        renderMarkdown(branchName,filteredData[0]?.name?.split('.md')[0]);
-      }
-    }
-  } catch (error) {
-    console.log("Error fetching contract", error?.message || error);
-    document.getElementById("markdown-container").innerHTML = `Error while fetching files for branch ${branchName}`;
+        renderMarkdown(branchname,filteredData[0]?.split('.md')[0]);
   }
-}
 
 function renderMarkdown(branchName,file) {
   fetch(
     `https://raw.githubusercontent.com/ONDC-Official/ONDC-NTS-Specifications/${branchName}/api/components/docs/${file}.md`
   )
     .then((response) => response.text())
-    .then((text) => {
-      const textWithBranchName = text.replace("branchName", branchName);
-      const html = marked.parse(textWithBranchName);
-      document.getElementById("markdown-container").innerHTML = html;
+    .then(async (text) => {
+      const result =  await extractTextBetweenBackticks(text)
+      //if mermaid diagram exist
+      // if(result?.length){
+      //   for (const [index, item] of result.entries()) {
+      //     console.log("item> ", item)
+      //     const mermaidDiagram = await mermaid.render(`marimaid-summary-${index}`, item)
+      //     const mermaidPattern = /```mermaid[\s\S]*?```/;
+      //     console.log("meramidD", mermaidDiagram?.svg)
+      //     text = text.replace(mermaidPattern, mermaidDiagram?.svg.replace(/\"/g, '"'))
+      //   }
+      // }
+
+      const textWithBranchName = text.replace(/branchName/g, branchName);
+      let textData = marked.parse(textWithBranchName);
+
+      if(result?.length){
+        for (const [index, item] of result.entries()) {
+          const mermaidDiagram = await mermaid.render(`marimaid-summary-${index}`, item)
+          const mermaidPattern = /<code class="language-mermaid">[\s\S]*?code>/;
+          textData = textData.replace(mermaidPattern, mermaidDiagram?.svg.replace(/\"/g, '"'))
+        }
+      }
+
+      document.getElementById("markdown-container").innerHTML = textData 
+
     });
 }
 
@@ -44,4 +51,16 @@ function updateFeature() {
   var example_set = document.getElementById("feature-sets-dropdown");
   const selectedOption = document.getElementById("contract-dropdown")?.value;
   renderMarkdown(selectedOption,example_set.value);
+}
+
+function extractTextBetweenBackticks(inputString) {
+  const mermaidRegex = /```mermaid([\s\S]*?)```/g;
+  let matches;
+  const diagrams = [];
+
+  while ((matches = mermaidRegex.exec(inputString)) !== null) {
+    diagrams.push(matches[1].trim());
+  }
+
+  return diagrams;
 }

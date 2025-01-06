@@ -1,5 +1,4 @@
 function loadSandbox(data){
-    console.log(data,"Data")
     const dropdown = data.dropdown
     const sandboxDropdown = document.getElementById("sandbox-dropdown");
     sandboxDropdown.innerHTML = "";
