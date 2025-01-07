@@ -126,7 +126,7 @@ function populateEnums(url) {
   // Example usage: fetch YAML data from a URL
   fetchData(url).then(data => {
     initSchema(data["x-enum"])
-    initTag(data["x-tags"])
+    // initTag(data["x-tags"])
   })
     .catch(error => {
       console.error('Error fetching or parsing YAML:', error);

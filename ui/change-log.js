@@ -16,31 +16,16 @@ function updateChangeLog() {
   renderMDFile(selectedOption, example_set.value);
 }
 
-function extractTextBetweenBackticks(inputString) {
-  const mermaidRegex = /```mermaid([\s\S]*?)```/g;
-  let matches;
-  const diagrams = [];
-
-  while ((matches = mermaidRegex.exec(inputString)) !== null) {
-    diagrams.push(matches[1].trim());
-  }
-
-  return diagrams;
-}
-
 function renderMDFile(branchName, file) {
   fetch(
-    `https://raw.githubusercontent.com/ondc-official/ONDC-NTS-Specifications/${branchName}/api/components/docs/changeLog/${file}.md`
+    `https://raw.githubusercontent.com/ONDC-Official/ONDC-NTS-Specifications/${branchName}/api/components/docs/changeLog/${file}.md`
   )
     .then((response) => response.text())
     .then(async (text) => {
-      console.log('text', text)
       const result = await extractTextBetweenBackticks(text);
-      console.log('result', result)
       //if mermaid diagram exist
       let createMermaid;
       if (result?.length) {
-        console.log('result', result)
         //const modifiedText = result[0].replace(/mermaid/g, '');
         createMermaid = await mermaid.render(`main-summary1`, result[1]);
       }
@@ -50,7 +35,7 @@ function renderMDFile(branchName, file) {
         branchName
       );
       const textData = marked.parse(textWithBranchName);
-      console.log('textData', textData)
+
       document.getElementById("change-log-container").innerHTML =
         textData + (createMermaid?.svg ? createMermaid?.svg : "");
     });
