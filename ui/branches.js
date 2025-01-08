@@ -5,12 +5,12 @@ const BRANCHES = [
     short_desc: "Issue and Grievance Management Framework v2.0.0",
     status: "DRAFT",
   },
-  {
-    code: "draft-NTS12-Score",
-    name: "Network Score",
-    short_desc: "Network score enablement through Confidex ledger",
-    status: "RELEASED",
-  },
+  // {
+  //   code: "draft-NTS12-Score",
+  //   name: "Network Score",
+  //   short_desc: "Network score enablement through Confidex ledger",
+  //   status: "RELEASED",
+  // },
   {
     code: "draft-RSF-2.0.0",
     name: "RSF 2.0",
