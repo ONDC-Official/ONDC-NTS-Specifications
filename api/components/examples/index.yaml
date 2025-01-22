@@ -1,6 +1,7 @@
 Flow1:
   summary: IGM implementation
   description: Issue and Grievance Management (IGM) framework enables NPs to handle complaints over the network. This developer guide provides the details of the IGM v2.0 specifications and model implementations covering enhanced use cases over and above the IGM MVP v1.0.0.
+  
   example_set:
    $ref: "./Flow1/index.yaml"
 
