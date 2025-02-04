@@ -7560,7 +7560,27 @@ x-examples:
       Issue and Grievance Management (IGM) framework enables NPs to handle
       complaints over the network. This developer guide provides the details of
       the IGM v2.0 specifications and model implementations covering enhanced
-      use cases over and above the IGM MVP v1.0.0.
+      use cases over and above the IGM MVP v1.0.0. Use cases / Features
+      available here. Technical specifications available here. Mock server steps
+      for testing and log submission test case scenarios available here.
+      Explainer & BRD is documented <a href =
+      "https://docs.google.com/document/d/1IXZuqTCfEzBxdHJKzHVZ9kPm_lYk5DxjdaQ25--YH8M/edit#heading=h.7edkggo8m4oc">here</a>
+
+      Functional flows and use cases are documented <a href =
+      "https://docs.google.com/document/d/1Pj7e1MuObQeLczx_palbcliUPTkMRYA76esjrfAMT14/edit?usp=sharing">here</a>
+
+      For development of funds settlement flow for integration with settlement
+      agency, refer settle/on_settle and report/on_report API specs below
+
+      For development of reconciliation flow amongst network participants, refer
+      recon/on_recon API specs below
+
+      The instructions to leverage the mock server along with logs requirements
+      are available <a href =
+      "https://docs.google.com/document/d/1rHmQ8joTsT2HDmZdXhPlUKy5QSrJiQuEkTAjLDcNVoA/edit?usp=sharing">here</a>
+
+      Frequently asked questions are available <a href =
+      "https://docs.google.com/document/d/1fA9WkPjzldvJ_3qfltywzfBnadKsPWwbPF6C7ULfZk4/edit?usp=sharing">here</a>
     example_set:
       issue:
         examples:
