@@ -77,7 +77,7 @@ message:
       images:
         - http://buyerapp.com/addtional-details/img1.png
         - http://buyerapp.com/addtional-details/img2.png
-    last_action_id: AL2
+    last_action_id: AL9
     actions:
       - id: AL1
         description:

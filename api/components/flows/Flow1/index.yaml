@@ -55,6 +55,34 @@ steps:
     example:
       value:
         $ref: "../../examples/Flow1/on_issue/on_issue3.yaml" 
+
+  - summary: Buyer app requesting status 
+    api: issue_status
+    details:
+      - description: issue_status
+        mermaid: >-
+         
+    reference: if any
+    example:
+      value:
+        $ref: "../../examples/Flow1/issue_status/issue_status.yaml"   
+
+
+  - summary: Seller app providing status 
+    api: on_issue_status
+    details:
+      - description: on_issue_status
+        mermaid: >-
+         
+    reference: if any
+    example:
+      value:
+        $ref: "../../examples/Flow1/on_issue_status/on_issue_status.yaml"               
+
+
+
+
+
   - summary: Buyer app provides relevant information (responds to one of the requests)
     api: issue
     details:

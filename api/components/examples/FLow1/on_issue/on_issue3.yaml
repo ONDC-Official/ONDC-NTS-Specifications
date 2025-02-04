@@ -90,7 +90,7 @@ message:
       images:
         - http://buyerapp.com/addtional-details/img1.png
         - http://buyerapp.com/addtional-details/img2.png
-    last_action_id: A4
+    last_action_id: A3_2
     actions:
       - id: A1
         description:

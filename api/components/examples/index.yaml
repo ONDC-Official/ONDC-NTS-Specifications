@@ -1,17 +1,11 @@
 Flow1:
   summary: IGM implementation
   description: 
-    Issue and Grievance Management (IGM) framework enables NPs to handle complaints over the network. This developer guide provides the details of the IGM v2.0 specifications and model implementations covering enhanced use cases over and above the IGM MVP v1.0.0.
-    Use cases / Features available here.
-    Technical specifications available here.
-    Mock server steps for testing and log submission test case scenarios available here.
-    Explainer & BRD is documented <a href = "https://docs.google.com/document/d/1IXZuqTCfEzBxdHJKzHVZ9kPm_lYk5DxjdaQ25--YH8M/edit#heading=h.7edkggo8m4oc">here</a>
-
-    Functional flows and use cases are documented <a href = "https://docs.google.com/document/d/1Pj7e1MuObQeLczx_palbcliUPTkMRYA76esjrfAMT14/edit?usp=sharing">here</a>
-
-    The instructions to leverage the mock server along with logs requirements are available <a href = "https://docs.google.com/document/d/1rHmQ8joTsT2HDmZdXhPlUKy5QSrJiQuEkTAjLDcNVoA/edit?usp=sharing">here</a>
-
-    Frequently asked ques are available <a href = "https://docs.google.com/document/d/1fA9WkPjzldvJ_3qfltywzfBnadKsPWwbPF6C7ULfZk4/edit?usp=sharing">here</a>
+    Issue and Grievance Management (IGM) framework enables NPs to handle complaints over the network. This developer guide provides the details of the IGM v2.0 specifications and model implementations covering enhanced use cases over and above the IGM MVP v1.0.0. <br>
+    Use cases /Features available <a href = "https://docs.google.com/document/d/1CBTOuFP4o6KqwYVPlN6H9ArUvygMjFiII-gSv4WXk4s/edit?usp=sharing">here</a>. <br>
+    Mock server steps for testing and log submission test case scenarios available <a href = "https://docs.google.com/document/d/1SGTCSzxNPtBvBpvtYf0I-MUxQCrYT_I-/edit?usp=sharing&ouid=100595989766867836454&rtpof=true&sd=true">here</a>
+     
+    
   example_set:
    $ref: "./Flow1/index.yaml"
 

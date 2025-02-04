@@ -27,7 +27,7 @@ message:
     expected_resolution_time:
       duration: P1D
     refs:
-      - ref_id: T1
+      - ref_id: T10
         ref_type: TRANSACTION
       - ref_id: P1
         ref_type: PROVIDER

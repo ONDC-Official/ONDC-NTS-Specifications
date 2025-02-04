@@ -354,7 +354,7 @@ components:
       type: object
       properties:
         id:
-          description: Describes id of the actors that are thier
+          description: Describes id of the actors that are their
           type: string 
         type:  
            description: Describes the type of actor
