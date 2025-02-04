@@ -9,10 +9,6 @@ Flow1:
 
     Functional flows and use cases are documented <a href = "https://docs.google.com/document/d/1Pj7e1MuObQeLczx_palbcliUPTkMRYA76esjrfAMT14/edit?usp=sharing">here</a>
 
-    For development of funds settlement flow for integration with settlement agency, refer settle/on_settle and report/on_report API specs below
-
-    For development of reconciliation flow amongst network participants, refer recon/on_recon API specs below
-
     The instructions to leverage the mock server along with logs requirements are available <a href = "https://docs.google.com/document/d/1rHmQ8joTsT2HDmZdXhPlUKy5QSrJiQuEkTAjLDcNVoA/edit?usp=sharing">here</a>
 
     Frequently asked questions are available <a href = "https://docs.google.com/document/d/1fA9WkPjzldvJ_3qfltywzfBnadKsPWwbPF6C7ULfZk4/edit?usp=sharing">here</a>
