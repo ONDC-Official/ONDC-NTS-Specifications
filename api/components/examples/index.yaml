@@ -11,7 +11,7 @@ Flow1:
 
     The instructions to leverage the mock server along with logs requirements are available <a href = "https://docs.google.com/document/d/1rHmQ8joTsT2HDmZdXhPlUKy5QSrJiQuEkTAjLDcNVoA/edit?usp=sharing">here</a>
 
-    Frequently asked questions are available <a href = "https://docs.google.com/document/d/1fA9WkPjzldvJ_3qfltywzfBnadKsPWwbPF6C7ULfZk4/edit?usp=sharing">here</a>
+    Frequently asked ques are available <a href = "https://docs.google.com/document/d/1fA9WkPjzldvJ_3qfltywzfBnadKsPWwbPF6C7ULfZk4/edit?usp=sharing">here</a>
   example_set:
    $ref: "./Flow1/index.yaml"
 
