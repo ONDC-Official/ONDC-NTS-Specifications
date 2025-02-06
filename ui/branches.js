@@ -12,10 +12,10 @@ const BRANCHES = [
   //   status: "RELEASED",
   // },
   {
-    code: "draft-RSF-2.0.0",
+    code: "release-RSF-2.0.0",
     name: "RSF 2.0",
     short_desc: "Reconciliation and Settlement Framework v2.0.0",
-    status: "DRAFT",
+    status: "RELEASED",
   },
   {
     code: "release-IGM-1.0.0",
