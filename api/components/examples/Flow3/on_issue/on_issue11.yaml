@@ -58,12 +58,22 @@ message:
         type: TRANSACTION-COUNTERPARTY-NP
         info:
           org:
-            name: logisticsapp.com::ONDC:RET10
+            name: logisticsapp.com::nic2004:60232
           contact:
             phone: "9450394140"
             email: respondentapp@respond.com
           person:
             name: Alice Jones
+      - id: NP3-GRO
+        type: COUNTERPARTY-NP-GRO
+        info:
+          org:
+            name: logisticsapp.com::nic2004:60232
+          contact:
+            phone: "9999994039"
+            email: logisticsapp@gmail.com
+          person:
+            name: Grievance Officer LNP      
     source_id: CUST1
     complainant_id: NP2
     respondent_ids:

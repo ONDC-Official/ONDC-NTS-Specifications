@@ -16,7 +16,7 @@ context:
   timestamp: "2023-01-15T10:00:00.469Z"
   ttl: PT30S
 message:
-  updated_target:
+  updated_target::
     - path: issue.actions
       action: APPENDED
   issue:
@@ -45,7 +45,8 @@ message:
               - descriptor:
                   code: quantity.selected.count
                 value: "2"
-    actor_info:
+                # change this and build a  yaml - actor_info - actors
+    actors:   
       - id: CUST1
         type: CONSUMER
         info:
@@ -57,7 +58,8 @@ message:
             phone: "9879879870"
             email: sam@yahoo.com
       - id: NP1
-        type: INTERFACING-NP
+      #  _ needs 
+        type: INTERFACING_NP
         info:
           org:
             name: buyerapp.com::ONDC:RET10
@@ -67,7 +69,7 @@ message:
           person:
             name: John Doe
       - id: NP2
-        type: TRANSACTION-COUNTERPARTY-NP
+        type: TRANSACTION_COUNTERPARTY_NP
         info:
           org:
             name: sellerapp.com::ONDC:RET10

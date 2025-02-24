@@ -1180,7 +1180,7 @@ x-flows:
               timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
-              updated_target:
+              'updated_target:':
                 - path: issue.actions
                   action: APPENDED
               issue:
@@ -1209,7 +1209,7 @@ x-flows:
                           - descriptor:
                               code: quantity.selected.count
                             value: '2'
-                actor_info:
+                actors:
                   - id: CUST1
                     type: CONSUMER
                     info:
@@ -1221,7 +1221,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -1231,7 +1231,7 @@ x-flows:
                       person:
                         name: John Doe
                   - id: NP2
-                    type: TRANSACTION-COUNTERPARTY-NP
+                    type: TRANSACTION_COUNTERPARTY_NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -1302,7 +1302,7 @@ x-flows:
               timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
-              upated_target:
+              updated_target:
                 - path: issue.actions
                   action: APPENDED
               issue:
@@ -1467,7 +1467,7 @@ x-flows:
               timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
-              upated_target:
+              updated_target:
                 - path: issue.actions
                   action: APPENDED
               issue:
@@ -1589,7 +1589,7 @@ x-flows:
               timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
-              upated_target:
+              updated_target:
                 - path: issue.actions
                   action: APPENDED
               issue:
@@ -1741,7 +1741,7 @@ x-flows:
               timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
-              upated_target:
+              updated_target:
                 - path: issue.actions
                   action: APPENDED
               issue:
@@ -1899,7 +1899,7 @@ x-flows:
               timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
-              upated_target:
+              updated_target:
                 - path: issue.actions
                   action: APPENDED
               issue:
@@ -2067,7 +2067,7 @@ x-flows:
               timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
-              upated_target:
+              updated_target:
                 - path: issue.actions
                   action: APPENDED
               issue:
@@ -2246,7 +2246,7 @@ x-flows:
               timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
-              upated_target:
+              updated_target:
                 - path: issue.actions
                   action: APPENDED
               issue:
@@ -2433,7 +2433,7 @@ x-flows:
               timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
-              upated_target:
+              updated_target:
                 - path: issue.actions
                   action: APPENDED
               issue:
@@ -2669,7 +2669,7 @@ x-flows:
               timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
-              upated_target:
+              updated_target:
                 - path: issue.actions
                   action: APPENDED
               issue:
@@ -2914,7 +2914,7 @@ x-flows:
               timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
-              upated_target:
+              updated_target:
                 - path: issue.actions
                   action: APPENDED
               issue:
@@ -2974,6 +2974,16 @@ x-flows:
                         email: respondentapp@respond.com
                       person:
                         name: Jane Doe
+                  - id: NP2-GRO
+                    type: COUNTERPARTY-NP-GRO
+                    info:
+                      org:
+                        name: sellerapp.com::ONDC:RET10
+                      contact:
+                        phone: '9999994039'
+                        email: sellerapp@interface.com
+                      person:
+                        name: Grievance Officer SNP
                 source_id: CUST1
                 complainant_id: NP1
                 respondent_ids:
@@ -3172,7 +3182,7 @@ x-flows:
               timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
-              upated_target:
+              updated_target:
                 - path: issue.actions[?(@.id==’A12’)]
                   action: APPENDED
               issue:
@@ -5278,8 +5288,6 @@ x-flows:
                 complainant_id: NP1
                 respondent_ids:
                   - NP2
-                resolver_ids:
-                  - NP2
                 description:
                   code: FLM005
                   short_desc: Issue with packaging
@@ -5681,8 +5689,6 @@ x-flows:
                 source_id: CUST1
                 complainant_id: NP1
                 respondent_ids:
-                  - NP2
-                resolver_ids:
                   - NP2
                 description:
                   code: FLM005
@@ -6345,12 +6351,22 @@ x-flows:
                     type: TRANSACTION-COUNTERPARTY-NP
                     info:
                       org:
-                        name: logisticsapp.com::ONDC:RET10
+                        name: logisticsapp.com::nic2004:60232
                       contact:
                         phone: '9450394140'
                         email: respondentapp@respond.com
                       person:
                         name: Alice Jones
+                  - id: NP3-GRO
+                    type: COUNTERPARTY-NP-GRO
+                    info:
+                      org:
+                        name: logisticsapp.com::nic2004:60232
+                      contact:
+                        phone: '9999994039'
+                        email: logisticsapp@gmail.com
+                      person:
+                        name: Grievance Officer LNP
                 source_id: CUST1
                 complainant_id: NP2
                 respondent_ids:
