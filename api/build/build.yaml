@@ -807,7 +807,7 @@ components:
           enum:
             - ORDER
             - ITEM
-            - FULFILMENT
+            - FULFILLMENT
             - TRANSACTION_ID
             - MESSAGE_ID
             - PROVIDER
@@ -873,7 +873,7 @@ x-enum:
                 The specific item within the order that is relevant to the
                 issue.
               reference: <PR/Issue/Discussion Links md format text>
-            - code: FULFILMENT
+            - code: FULFILLMENT
               description: The fulfillment process or stage related to the issue.
               reference: <PR/Issue/Discussion Links md format text>
             - code: TRANSACTION_ID
@@ -913,7 +913,7 @@ x-enum:
                 A primary entity interfacing with the complainant regarding the
                 issue.
               reference: <PR/Issue/Discussion Links md format text>
-            - code: COUNTER_NP
+            - code: COUNTERPARTY_NP
               description: A counterparty entity involved in the issue.
               reference: <PR/Issue/Discussion Links md format text>
             - code: CASCADED_NP
@@ -930,7 +930,7 @@ x-enum:
             - code: CUSTOMER
               description: The customer who raised the issue or is affected by it.
               reference: <PR/Issue/Discussion Links md format text>
-            - code: INERFACING_NP_GRO
+            - code: INTERFACING_NP_GRO
               description: >-
                 Grievance Redressal Office of interfacing entities related to
                 the issue.
@@ -1099,7 +1099,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -1121,7 +1121,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -1199,7 +1199,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -1221,7 +1221,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -1321,7 +1321,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -1343,7 +1343,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -1461,7 +1461,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -1483,7 +1483,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -1613,7 +1613,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -1635,7 +1635,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -1771,7 +1771,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -1793,7 +1793,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -1939,7 +1939,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -1961,7 +1961,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -2118,7 +2118,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -2140,7 +2140,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -2305,7 +2305,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -2327,7 +2327,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -2541,7 +2541,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -2563,7 +2563,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -2786,7 +2786,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -2808,7 +2808,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -3044,7 +3044,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -3066,7 +3066,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -3359,7 +3359,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -3438,7 +3438,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -3537,7 +3537,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -3661,7 +3661,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -3793,7 +3793,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -3935,7 +3935,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -4084,7 +4084,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -4240,7 +4240,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -4410,7 +4410,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -4588,7 +4588,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -4774,7 +4774,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -4920,12 +4920,12 @@ x-flows:
                       short_desc: Error in interface, seller would now be visible.
                     updated_at: 2024-08-14T09:57:58.841Z
                     proposed_by: NP2
-  - summary: Flow3 - Buyer raises a complaint for fulfilment category
+  - summary: Flow3 - Buyer raises a complaint for FULFILLMENT category
     details:
       - description: >-
           This flow provides an illustrative example workflow for the IGM
           framework where an end consumer (complainant) raises a complaint with
-          regards to their fulfilment experience for their retail order. The
+          regards to their FULFILLMENT experience for their retail order. The
           seller app (on-network logistics buyer) analyses the complaint and
           feels the logistics seller app needs to be consulted for this
           complaint. The retail seller app creates a complaint to the logistics
@@ -4973,7 +4973,7 @@ x-flows:
               SellerApp->>BuyerApp: Closes the issue
     steps:
       - summary: >-
-          Buyer raises a complaint for fulfilment category; buyer app creates
+          Buyer raises a complaint for FULFILLMENT category; buyer app creates
           issue call
         api: issue
         details:
@@ -5015,7 +5015,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5028,7 +5028,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -5095,7 +5095,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5108,7 +5108,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -5198,7 +5198,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5211,7 +5211,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP2
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -5281,7 +5281,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5294,7 +5294,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP2
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -5382,7 +5382,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5395,7 +5395,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP2
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -5499,7 +5499,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5512,7 +5512,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -5616,7 +5616,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5629,7 +5629,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -5751,7 +5751,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5764,7 +5764,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP2
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -5888,7 +5888,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5901,7 +5901,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP2
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -6031,7 +6031,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -6044,7 +6044,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -6172,7 +6172,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -6185,7 +6185,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP2
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -6339,7 +6339,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -6352,7 +6352,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -6506,7 +6506,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -6519,7 +6519,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -6681,7 +6681,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -6694,7 +6694,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP2
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -6855,7 +6855,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -6868,7 +6868,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP2
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -7037,7 +7037,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -7050,7 +7050,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -7219,7 +7219,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -7232,7 +7232,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -7407,7 +7407,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -7420,7 +7420,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP2
-                    type: INTERFACING-NP
+                    type: INTERFACING_NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -7560,7 +7560,11 @@ x-examples:
       Issue and Grievance Management (IGM) framework enables NPs to handle
       complaints over the network. This developer guide provides the details of
       the IGM v2.0 specifications and model implementations covering enhanced
-      use cases over and above the IGM MVP v1.0.0.
+      use cases over and above the IGM MVP v1.0.0. Use cases / Features
+      available here. Technical specifications available here. Mock server steps
+      for testing and log submission test case scenarios available here. PRD
+      LINK - 
+      https://docs.google.com/document/d/1SGTCSzxNPtBvBpvtYf0I-MUxQCrYT_I-/edit
     example_set:
       issue:
         examples:
@@ -7638,7 +7642,7 @@ x-examples:
                     - ref_id: P1
                       ref_type: PROVIDER
                     - ref_id: F1
-                      ref_type: FULFILMENT
+                      ref_type: FULFILLMENT
                     - ref_id: I1
                       ref_type: ITEM
                       tags:
@@ -7660,7 +7664,7 @@ x-examples:
                           phone: '9879879870'
                           email: sam@yahoo.com
                     - id: NP1
-                      type: INTERFACING-NP
+                      type: INTERFACING_NP
                       info:
                         org:
                           name: buyerapp.com::ONDC:RET10

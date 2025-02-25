@@ -35,7 +35,7 @@ message:
       - ref_id: P1
         ref_type: PROVIDER
       - ref_id: F1
-        ref_type: FULFILMENT
+        ref_type: FULFILLMENT
       - ref_id: I1
         ref_type: ITEM
         tags:
@@ -57,7 +57,7 @@ message:
             phone: "9879879870"
             email: sam@yahoo.com
       - id: NP1
-        type: INTERFACING-NP
+        type: INTERFACING_NP
         info:
           org:
             name: buyerapp.com::ONDC:RET10

@@ -730,7 +730,7 @@ components:
            enum:
             - ORDER
             - ITEM
-            - FULFILMENT
+            - FULFILLMENT
             - TRANSACTION_ID
             - MESSAGE_ID
             - PROVIDER

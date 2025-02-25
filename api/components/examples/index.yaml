@@ -5,6 +5,7 @@ Flow1:
     Use cases / Features available here.
     Technical specifications available here.
     Mock server steps for testing and log submission test case scenarios available here.
+    PRD LINK -  https://docs.google.com/document/d/1SGTCSzxNPtBvBpvtYf0I-MUxQCrYT_I-/edit
   example_set:
    $ref: "./Flow1/index.yaml"
 

@@ -34,7 +34,7 @@ issue:
         - code: ITEM
           description: The specific item within the order that is relevant to the issue.
           reference: <PR/Issue/Discussion Links md format text>
-        - code: FULFILMENT
+        - code: FULFILLMENT
           description: The fulfillment process or stage related to the issue.
           reference: <PR/Issue/Discussion Links md format text>   
         - code: TRANSACTION_ID
@@ -67,7 +67,7 @@ issue:
         - code: INERFACING_NP
           description: A primary entity interfacing with the complainant regarding the issue.
           reference: <PR/Issue/Discussion Links md format text> 
-        - code: COUNTER_NP
+        - code: COUNTERPARTY_NP
           description: A counterparty entity involved in the issue.
           reference: <PR/Issue/Discussion Links md format text> 
         - code: CASCADED_NP
@@ -82,7 +82,7 @@ issue:
         - code: CUSTOMER
           description: The customer who raised the issue or is affected by it.
           reference: <PR/Issue/Discussion Links md format text> 
-        - code: INERFACING_NP_GRO
+        - code: INTERFACING_NP_GRO
           description: Grievance Redressal Office of interfacing entities related to the issue.
           reference: <PR/Issue/Discussion Links md format text>  
         - code: COUNTERPARTY_NP_GRO

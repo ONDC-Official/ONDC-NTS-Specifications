@@ -18,7 +18,7 @@ context:
 message:
   issue:  
     id: "1"
-    category: FULFILMENT
+    category: FULFILLMENT
     sub_category: FLM01
     complainant_info:
        person:
