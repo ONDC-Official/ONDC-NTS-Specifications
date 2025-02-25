@@ -57,7 +57,7 @@ message:
             phone: "9879879870"
             email: sam@yahoo.com
       - id: NP1
-        type: INTERFACING-NP
+        type: INTERFACING_NP
         info:
           org:
             name: buyerapp.com::ONDC:RET10
