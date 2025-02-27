@@ -119,6 +119,10 @@ code:
     Description: Invalid message_id
     From: Any
     code: 70029
+  - Event: on_recon
+    Description: Invalid Order id
+    From: Any
+    code: 70030
   - Event: https error
     Description: Internal server error
     From: Any
