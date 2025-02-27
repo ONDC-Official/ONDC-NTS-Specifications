@@ -346,7 +346,6 @@ paths:
                                   type: string
               required:
                 - context
-                - message
       responses:
         '200':
           description: Acknowledgement of message received
@@ -697,7 +696,7 @@ x-flows:
         reference: if any
         api: settle
         example:
-          value: &ref_15
+          value: &ref_16
             context:
               domain: ONDC:NTS10
               location:
@@ -761,7 +760,7 @@ x-flows:
         reference: if any
         api: settle
         example:
-          value: &ref_14
+          value: &ref_15
             context:
               domain: ONDC:NTS10
               location:
@@ -816,7 +815,7 @@ x-flows:
         reference: if any
         api: on_settle
         example:
-          value: &ref_10
+          value: &ref_11
             context:
               domain: ONDC:NTS10
               location:
@@ -891,7 +890,7 @@ x-flows:
         reference: if any
         api: on_settle
         example:
-          value: &ref_9
+          value: &ref_10
             context:
               domain: ONDC:NTS10
               location:
@@ -978,7 +977,7 @@ x-flows:
                Settlement_Agency ->> NP : on_settle API
         reference: if any
         example:
-          value: &ref_16
+          value: &ref_17
             context:
               domain: ONDC:NTS10
               location:
@@ -1016,7 +1015,7 @@ x-flows:
                Settlement_Agency ->> NP : on_settle API
         reference: if any
         example:
-          value: &ref_11
+          value: &ref_12
             context:
               domain: ONDC:NTS10
               location:
@@ -1070,7 +1069,7 @@ x-flows:
                 Settlement_Agency ->> NP(Collector/Receiver) : on_settle API
         reference: if any
         example:
-          value: &ref_17
+          value: &ref_18
             context:
               domain: ONDC:NTS10
               location:
@@ -1102,7 +1101,7 @@ x-flows:
                Settlement_Agency ->> NP : on_settle API
         reference: if any
         example:
-          value: &ref_12
+          value: &ref_13
             context:
               domain: ONDC:NTS10
               location:
@@ -1152,7 +1151,7 @@ x-flows:
                NP ->> Settlement_Agency : Ack
         reference: if any
         example:
-          value: &ref_13
+          value: &ref_14
             context:
               domain: ONDC:NTS10
               location:
@@ -1187,7 +1186,7 @@ x-flows:
                NP ->> Settlement_Agency : Ack
         reference: if any
         example:
-          value: &ref_7
+          value: &ref_8
             context:
               domain: ONDC:NTS10
               location:
@@ -1257,7 +1256,7 @@ x-flows:
                NP ->> Settlement_Agency : Ack
         reference: if any
         example:
-          value: &ref_8
+          value: &ref_9
             context:
               domain: ONDC:NTS10
               location:
@@ -1347,7 +1346,7 @@ x-flows:
                Receiver ->> Collector: /on_recon API
         reference: if any
         example:
-          value: &ref_18
+          value: &ref_7
             context:
               domain: ONDC:NTS10
               location:
@@ -1742,7 +1741,7 @@ x-flows:
                         currency: INR
                         value: '10.00'
                       updated_at: '2024-05-07T06:36:53.897Z'
-  - summary: ERROR
+  - summary: ERROR (on_settle)
     details:
       - description: >-
           Detailed flows covering the error response example where settlement
@@ -1849,6 +1848,85 @@ x-flows:
             error:
               code: '70005'
               message: Invalid bpp id
+  - summary: ERROR (on_recon)
+    details:
+      - description: >-
+          The reconciliation process among the NPs are facilitated through the
+          recon and on_recon APIs. In case settlement instructions are shared to
+          the settlement agency and it fails for certain orders due an order
+          mismatch or an order amount mismatch, NPs shall leverage the recon and
+          on_recon API to communicate the mismatches. <br> In case an NP
+          receives an order amount mismatch error code from the settlement
+          agency, the receiver initiates the /recon request to the collector
+          providing the breakup details for the respective order ID(s). The
+          collector then reconciles and responds with the on_recon including the
+          difference amount. <br>  In case an NP receives an order id mismatch
+          error code (i.e. order ID not shared by the counterparty), the NP is
+          expected to call the /recon API of the respective counterparty with
+          the specific order ID(s) and its breakup details. The counterparty
+          then reconciles and responds with details specific to the order id
+          requested. <br> In both cases, if the response is correctly reconciled
+          for the requisite orders, the settlement is initiated in the next
+          settlement cycle. Otherwise, NPs are expected to raise an IGM for
+          resolving the differences.
+        mermaid: |-
+          sequenceDiagram
+           participant Collector
+           participant Receiver
+           Receiver ->> Collector : /recon API
+           Collector ->> Receiver: /on_recon API
+    references: if any
+    steps:
+      - summary: RECON
+        api: recon
+        details:
+          - description: >-
+              Reconciliation call to understand the discrepancy in the
+              settlement instructions
+            mermaid: |-
+              sequenceDiagram
+               participant Collector
+               participant Receiver
+               Collector ->> Receiver : /recon API
+               Receiver ->> Collector: /on_recon API
+        reference: if any
+        example:
+          value: *ref_7
+      - summary: ON_RECON
+        api: on_recon
+        details:
+          - description: >-
+              Response to the reconciliation call, expressing disagreement with
+              the information provided in /recon
+            mermaid: |-
+              sequenceDiagram
+               participant Collector
+               participant Receiver
+               Collector ->> Receiver : /recon API
+               Receiver ->> Collector: /on_recon API
+        reference: if any
+        example:
+          value:
+            context:
+              domain: ONDC:NTS10
+              location:
+                country:
+                  code: IND
+                city:
+                  code: '*'
+              version: 2.0.0
+              action: on_recon
+              bap_id: collector-app.com
+              bap_uri: https://collector-app.com/ondc/1.0/
+              bpp_id: receiver-app.com
+              bpp_uri: https://receiver-app.com/ondc/
+              transaction_id: bd73a366-aebb-4144-9314-808dda82c7e6
+              message_id: 941ef6d7-d74d-4411-ac06-a05469c0f9ac
+              timestamp: '2024-05-07T06:36:51.897Z'
+              ttl: P1D
+            error:
+              code: '70030'
+              message: Invalid Order Id
 x-examples:
   RSF:
     summary: RSF 2.0
@@ -1897,20 +1975,20 @@ x-examples:
         examples:
           - summary: on_report (with provider)
             description: Response from settlement agency including provider details
-            value: *ref_7
+            value: *ref_8
           - summary: on_report
             description: Response from settlement agency
-            value: *ref_8
+            value: *ref_9
       on_settle:
         examples:
           - summary: on_settle np_np
             description: callback response for NP-NP settlement instruction
-            value: *ref_9
-          - summary: on_settle np-np (with provider)
             value: *ref_10
+          - summary: on_settle np-np (with provider)
+            value: *ref_11
           - summary: on_settle misc
             description: callback response for Misc / self settlement instruction
-            value: *ref_11
+            value: *ref_12
           - summary: on_settle misc (with provider)
             value:
               context:
@@ -1952,21 +2030,21 @@ x-examples:
                         status: SETTLED
                         reference_no: '3718683618631'
           - summary: on_settle nil
-            value: *ref_12
+            value: *ref_13
       report:
         examples:
           - summary: report
-            value: *ref_13
+            value: *ref_14
       settle:
         examples:
           - summary: settle np_np
             description: settlement instructions from NP to Settlement Agency
-            value: *ref_14
-          - summary: settle np-np (with provider)
             value: *ref_15
+          - summary: settle np-np (with provider)
+            value: *ref_16
           - summary: settle misc
             description: Miscellaneous / self settlement instruction
-            value: *ref_16
+            value: *ref_17
           - summary: settle misc (with provider)
             description: Miscellaneous / self settlement instruction
             value:
@@ -2006,14 +2084,14 @@ x-examples:
                           currency: INR
                           value: '200.00'
           - summary: settle nil
-            value: *ref_17
+            value: *ref_18
       recon:
         examples:
           - summary: recon
             description: >-
               reconciliation call to understand the discrepancy in the
               settlement instructions
-            value: *ref_18
+            value: *ref_7
       on_recon:
         examples:
           - summary: on_recon (recon_accord = false)
@@ -4022,6 +4100,10 @@ x-errorcodes:
       Description: Invalid message_id
       From: Any
       code: 70029
+    - Event: on_recon
+      Description: Invalid Order id
+      From: Any
+      code: 70030
     - Event: https error
       Description: Internal server error
       From: Any

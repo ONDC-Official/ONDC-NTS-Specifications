@@ -1,4 +1,4 @@
-summary: ERROR
+summary: ERROR (on_settle)
 details:
   - description: >-
       Detailed flows covering the error response example where settlement agency would respond with an error code for either a settlement instruction (/settle) or a status query (/report) based on the respective error code. Refer to the Error-UI for the possible error codes. The schema for error for on_settle and on_report would be the same.

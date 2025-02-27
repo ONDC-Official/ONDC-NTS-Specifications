@@ -1,0 +1,44 @@
+summary: ERROR (on_recon)
+details:
+  - description: >-
+      The reconciliation process among the NPs are facilitated through the recon and on_recon APIs. In case settlement instructions are shared to the settlement agency and it fails for certain orders due an order mismatch or an order amount mismatch, NPs shall leverage the recon and on_recon API to communicate the mismatches. <br>
+      In case an NP receives an order amount mismatch error code from the settlement agency, the receiver initiates the /recon request to the collector providing the breakup details for the respective order ID(s). The collector then reconciles and responds with the on_recon including the difference amount. <br> 
+      In case an NP receives an order id mismatch error code (i.e. order ID not shared by the counterparty), the NP is expected to call the /recon API of the respective counterparty with the specific order ID(s) and its breakup details. The counterparty then reconciles and responds with details specific to the order id requested. <br>
+      In both cases, if the response is correctly reconciled for the requisite orders, the settlement is initiated in the next settlement cycle. Otherwise, NPs are expected to raise an IGM for resolving the differences.
+    mermaid: >-
+      sequenceDiagram
+       participant Collector
+       participant Receiver
+       Receiver ->> Collector : /recon API
+       Collector ->> Receiver: /on_recon API
+references: if any
+steps:
+  - summary: RECON
+    api: recon
+    details:
+      - description: Reconciliation call to understand the discrepancy in the settlement instructions
+        mermaid: >-
+          sequenceDiagram
+           participant Collector
+           participant Receiver
+           Collector ->> Receiver : /recon API
+           Receiver ->> Collector: /on_recon API
+    reference: if any
+    example:
+      value:
+        $ref: "../../examples/RSF/recon/recon.yaml"
+  - summary: ON_RECON
+    api: on_recon
+    details:
+      - description: Response to the reconciliation call, expressing disagreement with the information provided in /recon
+        mermaid: >-
+          sequenceDiagram
+           participant Collector
+           participant Receiver
+           Collector ->> Receiver : /recon API
+           Receiver ->> Collector: /on_recon API
+
+    reference: if any
+    example:
+      value:
+        $ref: "../../examples/RSF/on_recon/on_recon_error.yaml"
