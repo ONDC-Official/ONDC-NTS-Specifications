@@ -1,0 +1,20 @@
+context:
+  domain: "ONDC:NTS10"
+  location:
+    country:
+      code: "IND"
+    city:
+      code: "*"
+  version: "2.0.0"
+  action: "on_recon"
+  bap_id: "collector-app.com"
+  bap_uri: "https://collector-app.com/ondc/1.0/"
+  bpp_id: "receiver-app.com"
+  bpp_uri: "https://receiver-app.com/ondc/"
+  transaction_id: "bd73a366-aebb-4144-9314-808dda82c7e6"
+  message_id: "941ef6d7-d74d-4411-ac06-a05469c0f9ac"
+  timestamp: "2024-05-07T06:36:51.897Z"
+  ttl: "P1D"
+error:
+  code: "70030"
+  message: Invalid Order Id

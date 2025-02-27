@@ -356,7 +356,6 @@ paths:
                                   type: string
               required:
                 - context
-                - message
       responses:
         "200":
           description: Acknowledgement of message received

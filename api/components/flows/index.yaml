@@ -3,4 +3,5 @@
 - $ref: ./NIL/index.yaml
 - $ref: ./Report/index.yaml
 - $ref: ./RECON/index.yaml
-- $ref: ./ERROR/index.yaml
+- $ref: ./ERROR(on_settle)/index.yaml
+- $ref: ./ERROR(on_recon)/index.yaml
