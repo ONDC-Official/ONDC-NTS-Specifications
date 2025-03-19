@@ -613,7 +613,7 @@ on_settle:
             required: true
             type: string
             owner: any
-            usage: NOT-SETTLED
+            usage: NOT_SETTLED
             description: Status of self fund settlement
           reference_no:
             required: true
@@ -681,7 +681,7 @@ on_settle:
             required: true
             type: string
             owner: any
-            usage: NOT-SETTLED
+            usage: NOT_SETTLED
             description: Status of provider fund settlement
           reference_no:
             required: true
@@ -903,7 +903,7 @@ report:
             required: true
             type: string
             owner: any
-            usage: NOT-SETTLED
+            usage: NOT_SETTLED
             description: Status of self fund settlement
           reference_no:
             required: true
@@ -971,7 +971,7 @@ report:
             required: true
             type: string
             owner: any
-            usage: NOT-SETTLED
+            usage: NOT_SETTLED
             description: Status of provider fund settlement
           reference_no:
             required: true
@@ -1205,7 +1205,7 @@ on_report:
             required: true
             type: string
             owner: any
-            usage: NOT-SETTLED
+            usage: NOT_SETTLED
             description: Status of self fund settlement
           reference_no:
             required: true
@@ -1273,7 +1273,7 @@ on_report:
             required: true
             type: string
             owner: any
-            usage: NOT-SETTLED
+            usage: NOT_SETTLED
             description: Status of provider fund settlement
           reference_no:
             required: true
