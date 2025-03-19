@@ -527,7 +527,7 @@ components:
                 type: string
                 enum:
                   - SETTLED
-                  - NOT-SETTLED
+                  - NOT_SETTLED
               reference_no:
                 type: string
               error:
@@ -555,7 +555,7 @@ components:
                 type: string
                 enum:
                   - SETTLED
-                  - NOT-SETTLED
+                  - NOT_SETTLED
               amount:
                 $ref: "#/components/schemas/Amount"
               reference_no:
@@ -573,7 +573,7 @@ components:
                 type: string
                 enum:
                   - SETTLED
-                  - NOT-SETTLED
+                  - NOT_SETTLED
               reference_no:
                 type: string
               error:
