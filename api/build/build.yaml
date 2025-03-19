@@ -527,7 +527,7 @@ components:
                 type: string
                 enum:
                   - SETTLED
-                  - NOT-SETTLED
+                  - NOT_SETTLED
               reference_no:
                 type: string
               error:
@@ -556,7 +556,7 @@ components:
                 type: string
                 enum:
                   - SETTLED
-                  - NOT-SETTLED
+                  - NOT_SETTLED
               amount:
                 $ref: '#/components/schemas/Amount'
               reference_no:
@@ -575,7 +575,7 @@ components:
                 type: string
                 enum:
                   - SETTLED
-                  - NOT-SETTLED
+                  - NOT_SETTLED
               reference_no:
                 type: string
               error:
@@ -859,7 +859,7 @@ x-flows:
                       amount:
                         currency: INR
                         value: '800.00'
-                      status: NOT-SETTLED
+                      status: NOT_SETTLED
                       error:
                         code: '01'
                         message: Account inactive
@@ -868,7 +868,7 @@ x-flows:
                       amount:
                         currency: INR
                         value: '200.00'
-                      status: NOT-SETTLED
+                      status: NOT_SETTLED
                       reference_no: '1238683618634'
                       error:
                         code: '01'
@@ -1230,7 +1230,7 @@ x-flows:
                       amount:
                         currency: INR
                         value: '800.00'
-                      status: NOT-SETTLED
+                      status: NOT_SETTLED
                       error:
                         code: '01'
                         message: Account Inactive
@@ -1238,7 +1238,7 @@ x-flows:
                       amount:
                         currency: INR
                         value: '200.00'
-                      status: NOT-SETTLED
+                      status: NOT_SETTLED
                       error:
                         code: '01'
                         message: Account Inactive
@@ -2018,7 +2018,7 @@ x-examples:
                         amount:
                           currency: INR
                           value: '200.12'
-                        status: NOT-SETTLED
+                        status: NOT_SETTLED
                         reference_no: '3718683618631'
                         error:
                           code: '01'

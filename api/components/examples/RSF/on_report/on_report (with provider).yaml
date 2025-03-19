@@ -41,7 +41,7 @@ message:
           amount:
             currency: INR
             value: "800.00"
-          status: NOT-SETTLED
+          status: NOT_SETTLED
           error:
             code: "01"
             message: Account Inactive
@@ -50,7 +50,7 @@ message:
           amount:
             currency: INR
             value: "200.00"
-          status: NOT-SETTLED
+          status: NOT_SETTLED
           # reference_no: "3718683618634"
           error:
             code: "01"

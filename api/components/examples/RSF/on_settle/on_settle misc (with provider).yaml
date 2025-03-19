@@ -4,7 +4,7 @@ context:
     country:
       code: IND
     city:
-      code: '*'
+      code: "*"
   version: 2.0.0
   action: on_settle
   bap_id: collectorapp.com
@@ -13,7 +13,7 @@ context:
   bpp_uri: https://sa_nocs.nbbl.com/nocs_test
   transaction_id: ad73a366-aebb-4144-9314-808dda82c8e6
   message_id: 354ef6d7-d74d-4411-ac06-a05469c0f9ac
-  timestamp: '2024-05-07T09:32:23.623Z'
+  timestamp: "2024-05-07T09:32:23.623Z"
   ttl: PT30S
 message:
   settlement:
@@ -24,15 +24,15 @@ message:
           id: provider-id-789
           amount:
             currency: INR
-            value: '200.12'
-          status: NOT-SETTLED
-          reference_no: '3718683618631'
+            value: "200.12"
+          status: NOT_SETTLED
+          reference_no: "3718683618631"
           error:
-            code: '01'
+            code: "01"
             message: Account inactive
         self:
           amount:
             currency: INR
-            value: '200.00'
+            value: "200.00"
           status: SETTLED
-          reference_no: '3718683618631'
+          reference_no: "3718683618631"
