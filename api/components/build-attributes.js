@@ -48,6 +48,6 @@ function formObject(attributes) {
   });
   return result;
 }
-buildAttribiutes();
+// buildAttribiutes();
 
 module.exports = { buildAttribiutes }

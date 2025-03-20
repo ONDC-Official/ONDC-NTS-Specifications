@@ -67,7 +67,6 @@ async function validateSchema(schema, data) {
 }
 
 async function validateFlows(flows, schemaMap) {
-  console.log("hi", flows);
   for (const flowItem of flows) {
     const { steps } = flowItem;
     if (steps && steps?.length) {
@@ -293,7 +292,6 @@ async function getSwaggerYaml(example_set, outputPath) {
       tags,
       attributes,
     } = schema || [];
-    console.log(schema);
     const { paths } = baseYAML;
     let hasTrueResult = false; // Flag variable
     let schemaMap = {};
