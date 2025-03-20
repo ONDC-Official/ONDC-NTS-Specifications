@@ -3,7 +3,6 @@ const yaml = require("js-yaml");
 const fs = require("fs");
 
 async function buildAttribiutes() {
-  console.log(323232323323)
   let attributes = {};
   const workSheetsFromBuffer = xlsx.parse(`../../output.xlsx`);
   // const workSheetsFromBuffer = xlsx.parse(`../../output.xlsx`);
