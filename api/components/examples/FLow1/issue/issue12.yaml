@@ -16,7 +16,7 @@ context:
   timestamp: "2023-01-15T10:00:00.469Z"
   ttl: PT30S
 message:
-  upated_target:
+  updated_target:
     - path: issue.actions[?(@.id==’A12’)]
       action: APPENDED
   issue:

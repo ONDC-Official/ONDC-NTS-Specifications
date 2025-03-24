@@ -16,7 +16,7 @@ context:
   timestamp: "2023-01-15T10:00:00.469Z"
   ttl: PT30S
 message:
-  upated_target:
+  updated_target:
     - path: issue.actions
       action: APPENDED
   issue:
@@ -90,7 +90,7 @@ message:
       images:
         - http://buyerapp.com/addtional-details/img1.png
         - http://buyerapp.com/addtional-details/img2.png
-    last_action_id: A4
+    last_action_id: A3_2
     actions:
       - id: A1
         description:

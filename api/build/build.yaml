@@ -371,7 +371,7 @@ components:
       type: object
       properties:
         id:
-          description: Describes id of the actors that are thier
+          description: Describes id of the actors that are their
           type: string
         type:
           description: Describes the type of actor
@@ -807,7 +807,7 @@ components:
           enum:
             - ORDER
             - ITEM
-            - FULFILLMENT
+            - FULFILMENT
             - TRANSACTION_ID
             - MESSAGE_ID
             - PROVIDER
@@ -873,7 +873,7 @@ x-enum:
                 The specific item within the order that is relevant to the
                 issue.
               reference: <PR/Issue/Discussion Links md format text>
-            - code: FULFILLMENT
+            - code: FULFILMENT
               description: The fulfillment process or stage related to the issue.
               reference: <PR/Issue/Discussion Links md format text>
             - code: TRANSACTION_ID
@@ -913,7 +913,7 @@ x-enum:
                 A primary entity interfacing with the complainant regarding the
                 issue.
               reference: <PR/Issue/Discussion Links md format text>
-            - code: COUNTERPARTY_NP
+            - code: COUNTER_NP
               description: A counterparty entity involved in the issue.
               reference: <PR/Issue/Discussion Links md format text>
             - code: CASCADED_NP
@@ -930,7 +930,7 @@ x-enum:
             - code: CUSTOMER
               description: The customer who raised the issue or is affected by it.
               reference: <PR/Issue/Discussion Links md format text>
-            - code: INTERFACING_NP_GRO
+            - code: INERFACING_NP_GRO
               description: >-
                 Grievance Redressal Office of interfacing entities related to
                 the issue.
@@ -1099,7 +1099,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -1180,7 +1180,7 @@ x-flows:
               timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
-              upated_target:
+              'updated_target:':
                 - path: issue.actions
                   action: APPENDED
               issue:
@@ -1199,7 +1199,294 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
+                  - ref_id: I1
+                    ref_type: ITEM
+                    tags:
+                      - descriptor:
+                          code: message.order.items
+                        list:
+                          - descriptor:
+                              code: quantity.selected.count
+                            value: '2'
+                actors:
+                  - id: CUST1
+                    type: CONSUMER
+                    info:
+                      org:
+                        name: buyerapp.com::ONDC:RET10
+                      person:
+                        name: Sam Manuel
+                      contact:
+                        phone: '9879879870'
+                        email: sam@yahoo.com
+                  - id: NP1
+                    type: INTERFACING_NP
+                    info:
+                      org:
+                        name: buyerapp.com::ONDC:RET10
+                      contact:
+                        phone: '9450394039'
+                        email: buyerapp@interface.com
+                      person:
+                        name: John Doe
+                  - id: NP2
+                    type: TRANSACTION_COUNTERPARTY_NP
+                    info:
+                      org:
+                        name: sellerapp.com::ONDC:RET10
+                      contact:
+                        phone: '9450394140'
+                        email: respondentapp@respond.com
+                      person:
+                        name: Jane Doe
+                source_id: CUST1
+                complainant_id: NP1
+                respondent_ids:
+                  - NP2
+                description:
+                  code: ITM004
+                  short_desc: Issue with product quality
+                  long_desc: >-
+                    product quality is not correct. facing issues while using
+                    the product
+                  additional_desc:
+                    url: https://buyerapp.com/additonal-details/desc.txt
+                    content_type: text/plain
+                  images:
+                    - http://buyerapp.com/addtional-details/img1.png
+                    - http://buyerapp.com/addtional-details/img2.png
+                last_action_id: A2
+                actions:
+                  - id: A1
+                    description:
+                      code: OPEN
+                      short_desc: Complaint created
+                    updated_at: '2023-01-15T10:00:00.469Z'
+                    action_by: NP1
+                    actor_details:
+                      name: Sam Manuel
+                  - id: A2
+                    description:
+                      code: PROCESSING
+                      short_desc: Complaint created
+                    updated_at: '2023-01-15T10:00:10.469Z'
+                    action_by: NP1
+                    actor_details:
+                      name: Sam Manuel
+      - summary: >-
+          Seller app needs more information to analyse (two info_request actions
+          for two requirements)
+        api: on_issue
+        details:
+          - description: on_issue
+            mermaid: ''
+        reference: if any
+        example:
+          value:
+            context:
+              domain: ONDC:RET10
+              location:
+                country:
+                  code: IND
+                city:
+                  code: '*'
+              action: on_issue
+              core_version: 2.0.0
+              bap_id: buyerapp.com
+              bap_uri: https://buyerapp.com/ondc
+              bpp_id: sellerapp.com
+              bpp_uri: https://sellerapp.com/ondc
+              transaction_id: T1
+              message_id: M2
+              timestamp: '2023-01-15T10:00:00.469Z'
+              ttl: PT30S
+            message:
+              updated_target:
+                - path: issue.actions
+                  action: APPENDED
+              issue:
+                id: ISSUE-1
+                status: PROCESSING
+                level: ISSUE
+                created_at: '2023-01-15T10:00:00.469Z'
+                updated_at: '2023-01-15T10:00:00.469Z'
+                expected_response_time:
+                  duration: PT2H
+                expected_resolution_time:
+                  duration: P1D
+                refs:
+                  - ref_id: O1
+                    ref_type: ORDER
+                  - ref_id: P1
+                    ref_type: PROVIDER
+                  - ref_id: F1
+                    ref_type: FULFILMENT
+                  - ref_id: I1
+                    ref_type: ITEM
+                    tags:
+                      - descriptor:
+                          code: message.order.items
+                        list:
+                          - descriptor:
+                              code: quantity.selected.count
+                            value: '2'
+                actors:
+                  - id: CUST1
+                    type: CONSUMER
+                    info:
+                      org:
+                        name: buyerapp.com::ONDC:RET10
+                      person:
+                        name: Sam Manuel
+                      contact:
+                        phone: '9879879870'
+                        email: sam@yahoo.com
+                  - id: NP1
+                    type: INTERFACING_NP
+                    info:
+                      org:
+                        name: buyerapp.com::ONDC:RET10
+                      contact:
+                        phone: '9450394039'
+                        email: buyerapp@interface.com
+                      person:
+                        name: John Doe
+                  - id: NP2
+                    type: TRANSACTION-COUNTERPARTY-NP
+                    info:
+                      org:
+                        name: sellerapp.com::ONDC:RET10
+                      contact:
+                        phone: '9450394140'
+                        email: respondentapp@respond.com
+                      person:
+                        name: Jane Doe
+                source_id: CUST1
+                complainant_id: NP1
+                respondent_ids:
+                  - NP2
+                description:
+                  code: ITM004
+                  short_desc: Issue with product quality
+                  long_desc: >-
+                    product quality is not correct. facing issues while using
+                    the product
+                  additional_desc:
+                    url: https://buyerapp.com/additonal-details/desc.txt
+                    content_type: text/plain
+                  images:
+                    - http://buyerapp.com/addtional-details/img1.png
+                    - http://buyerapp.com/addtional-details/img2.png
+                last_action_id: A3_2
+                actions:
+                  - id: A1
+                    description:
+                      code: OPEN
+                      short_desc: Complaint created
+                    updated_at: '2023-01-15T10:00:00.469Z'
+                    action_by: NP1
+                    actor_details:
+                      name: Sam Manuel
+                  - id: A2
+                    description:
+                      code: PROCESSING
+                      short_desc: Complaint created
+                    updated_at: '2023-01-15T10:00:00.469Z'
+                    action_by: NP1
+                    actor_details:
+                      name: Sam Manuel
+                  - id: A3_1
+                    description:
+                      code: INFO_REQUESTED
+                      name: INFO001
+                      short_desc: Please provide product images
+                    updated_at: '2023-01-15T10:00:00.469Z'
+                    action_by: NP1
+                    actor_details:
+                      name: Sam Manuel
+                  - id: A3_2
+                    description:
+                      code: INFO_REQUESTED
+                      name: INFO002
+                      short_desc: Please provide invoice
+                    updated_at: '2023-01-15T10:00:00.469Z'
+                    action_by: NP1
+                    actor_details:
+                      name: Sam Manuel
+      - summary: Buyer app requesting status
+        api: issue_status
+        details:
+          - description: issue_status
+            mermaid: ''
+        reference: if any
+        example:
+          value: &ref_3
+            context:
+              domain: ONDC:RET10
+              location:
+                country:
+                  code: IND
+                city:
+                  code: '*'
+              action: issue_status
+              core_version: 2.0.0
+              bap_id: buyerapp.com
+              bap_uri: https://buyerapp.com/ondc
+              bpp_id: sellerapp.com
+              bpp_uri: https://sellerapp.com/ondc
+              transaction_id: T1
+              message_id: M1
+              timestamp: '2023-01-15T10:00:00.469Z'
+              ttl: PT30S
+            message:
+              issue_id: I1
+      - summary: Seller app providing status
+        api: on_issue_status
+        details:
+          - description: on_issue_status
+            mermaid: ''
+        reference: if any
+        example:
+          value: &ref_4
+            context:
+              domain: ONDC:RET10
+              location:
+                country:
+                  code: IND
+                city:
+                  code: '*'
+              action: issue_status
+              core_version: 2.0.0
+              bap_id: buyerapp.com
+              bap_uri: https://buyerapp.com/ondc
+              bpp_id: sellerapp.com
+              bpp_uri: https://sellerapp.com/ondc
+              transaction_id: T1
+              message_id: M1
+              timestamp: '2023-01-15T10:00:00.469Z'
+              ttl: PT30S
+            message:
+              updated_target:
+                - path: issue.actions
+                  action: APPENDED
+              issue:
+                id: ISSUE-1
+                status: PROCESSING
+                level: ISSUE
+                created_at: '2023-01-15T10:00:00.469Z'
+                updated_at: '2023-01-15T10:00:00.469Z'
+                expected_response_time:
+                  duration: PT2H
+                expected_resolution_time:
+                  duration: P1D
+                refs:
+                  - ref_id: O1
+                    ref_type: ORDER
+                  - ref_id: P1
+                    ref_type: PROVIDER
+                  - ref_id: F1
+                    ref_type: FULFILMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -1275,146 +1562,6 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
       - summary: >-
-          Seller app needs more information to analyse (two info_request actions
-          for two requirements)
-        api: on_issue
-        details:
-          - description: on_issue
-            mermaid: ''
-        reference: if any
-        example:
-          value:
-            context:
-              domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
-              action: on_issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
-              bpp_id: sellerapp.com
-              bpp_uri: https://sellerapp.com/ondc
-              transaction_id: T1
-              message_id: M2
-              timestamp: '2023-01-15T10:00:00.469Z'
-              ttl: PT30S
-            message:
-              upated_target:
-                - path: issue.actions
-                  action: APPENDED
-              issue:
-                id: ISSUE-1
-                status: PROCESSING
-                level: ISSUE
-                created_at: '2023-01-15T10:00:00.469Z'
-                updated_at: '2023-01-15T10:00:00.469Z'
-                expected_response_time:
-                  duration: PT2H
-                expected_resolution_time:
-                  duration: P1D
-                refs:
-                  - ref_id: O1
-                    ref_type: ORDER
-                  - ref_id: P1
-                    ref_type: PROVIDER
-                  - ref_id: F1
-                    ref_type: FULFILLMENT
-                  - ref_id: I1
-                    ref_type: ITEM
-                    tags:
-                      - descriptor:
-                          code: message.order.items
-                        list:
-                          - descriptor:
-                              code: quantity.selected.count
-                            value: '2'
-                actors:
-                  - id: CUST1
-                    type: CONSUMER
-                    info:
-                      org:
-                        name: buyerapp.com::ONDC:RET10
-                      person:
-                        name: Sam Manuel
-                      contact:
-                        phone: '9879879870'
-                        email: sam@yahoo.com
-                  - id: NP1
-                    type: INTERFACING_NP
-                    info:
-                      org:
-                        name: buyerapp.com::ONDC:RET10
-                      contact:
-                        phone: '9450394039'
-                        email: buyerapp@interface.com
-                      person:
-                        name: John Doe
-                  - id: NP2
-                    type: TRANSACTION-COUNTERPARTY-NP
-                    info:
-                      org:
-                        name: sellerapp.com::ONDC:RET10
-                      contact:
-                        phone: '9450394140'
-                        email: respondentapp@respond.com
-                      person:
-                        name: Jane Doe
-                source_id: CUST1
-                complainant_id: NP1
-                respondent_ids:
-                  - NP2
-                description:
-                  code: ITM004
-                  short_desc: Issue with product quality
-                  long_desc: >-
-                    product quality is not correct. facing issues while using
-                    the product
-                  additional_desc:
-                    url: https://buyerapp.com/additonal-details/desc.txt
-                    content_type: text/plain
-                  images:
-                    - http://buyerapp.com/addtional-details/img1.png
-                    - http://buyerapp.com/addtional-details/img2.png
-                last_action_id: A4
-                actions:
-                  - id: A1
-                    description:
-                      code: OPEN
-                      short_desc: Complaint created
-                    updated_at: '2023-01-15T10:00:00.469Z'
-                    action_by: NP1
-                    actor_details:
-                      name: Sam Manuel
-                  - id: A2
-                    description:
-                      code: PROCESSING
-                      short_desc: Complaint created
-                    updated_at: '2023-01-15T10:00:00.469Z'
-                    action_by: NP1
-                    actor_details:
-                      name: Sam Manuel
-                  - id: A3_1
-                    description:
-                      code: INFO_REQUESTED
-                      name: INFO001
-                      short_desc: Please provide product images
-                    updated_at: '2023-01-15T10:00:00.469Z'
-                    action_by: NP1
-                    actor_details:
-                      name: Sam Manuel
-                  - id: A3_2
-                    description:
-                      code: INFO_REQUESTED
-                      name: INFO002
-                      short_desc: Please provide invoice
-                    updated_at: '2023-01-15T10:00:00.469Z'
-                    action_by: NP1
-                    actor_details:
-                      name: Sam Manuel
-      - summary: >-
           Buyer app provides relevant information (responds to one of the
           requests)
         api: issue
@@ -1442,7 +1589,7 @@ x-flows:
               timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
-              upated_target:
+              updated_target:
                 - path: issue.actions
                   action: APPENDED
               issue:
@@ -1461,7 +1608,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -1520,7 +1667,7 @@ x-flows:
                   images:
                     - http://buyerapp.com/addtional-details/img1.png
                     - http://buyerapp.com/addtional-details/img2.png
-                last_action_id: A5
+                last_action_id: A4
                 actions:
                   - id: A1
                     description:
@@ -1594,7 +1741,7 @@ x-flows:
               timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
-              upated_target:
+              updated_target:
                 - path: issue.actions
                   action: APPENDED
               issue:
@@ -1613,7 +1760,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -1670,7 +1817,7 @@ x-flows:
                   images:
                     - http://buyerapp.com/addtional-details/img1.png
                     - http://buyerapp.com/addtional-details/img2.png
-                last_action_id: A6
+                last_action_id: A5
                 actions:
                   - id: A1
                     description:
@@ -1752,7 +1899,7 @@ x-flows:
               timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
-              upated_target:
+              updated_target:
                 - path: issue.actions
                   action: APPENDED
               issue:
@@ -1771,7 +1918,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -1920,7 +2067,7 @@ x-flows:
               timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
-              upated_target:
+              updated_target:
                 - path: issue.actions
                   action: APPENDED
               issue:
@@ -1939,7 +2086,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -2099,7 +2246,7 @@ x-flows:
               timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
-              upated_target:
+              updated_target:
                 - path: issue.actions
                   action: APPENDED
               issue:
@@ -2118,7 +2265,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -2286,7 +2433,7 @@ x-flows:
               timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
-              upated_target:
+              updated_target:
                 - path: issue.actions
                   action: APPENDED
               issue:
@@ -2305,7 +2452,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -2522,7 +2669,7 @@ x-flows:
               timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
-              upated_target:
+              updated_target:
                 - path: issue.actions
                   action: APPENDED
               issue:
@@ -2541,7 +2688,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -2767,7 +2914,7 @@ x-flows:
               timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
-              upated_target:
+              updated_target:
                 - path: issue.actions
                   action: APPENDED
               issue:
@@ -2786,7 +2933,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -2827,6 +2974,16 @@ x-flows:
                         email: respondentapp@respond.com
                       person:
                         name: Jane Doe
+                  - id: NP2-GRO
+                    type: COUNTERPARTY-NP-GRO
+                    info:
+                      org:
+                        name: sellerapp.com::ONDC:RET10
+                      contact:
+                        phone: '9999994039'
+                        email: sellerapp@interface.com
+                      person:
+                        name: Grievance Officer SNP
                 source_id: CUST1
                 complainant_id: NP1
                 respondent_ids:
@@ -3025,7 +3182,7 @@ x-flows:
               timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
-              upated_target:
+              updated_target:
                 - path: issue.actions[?(@.id==’A12’)]
                   action: APPENDED
               issue:
@@ -3044,7 +3201,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -3343,7 +3500,7 @@ x-flows:
                 expected_resolution_time:
                   duration: P1D
                 refs:
-                  - ref_id: T1
+                  - ref_id: T10
                     ref_type: TRANSACTION
                   - ref_id: P1
                     ref_type: PROVIDER
@@ -3422,7 +3579,7 @@ x-flows:
                 expected_resolution_time:
                   duration: P1D
                 refs:
-                  - ref_id: T1
+                  - ref_id: T10
                     ref_type: TRANSACTION
                   - ref_id: P1
                     ref_type: PROVIDER
@@ -3521,7 +3678,7 @@ x-flows:
                 expected_resolution_time:
                   duration: P1D
                 refs:
-                  - ref_id: T1
+                  - ref_id: T10
                     ref_type: TRANSACTION
                   - ref_id: P1
                     ref_type: PROVIDER
@@ -3645,7 +3802,7 @@ x-flows:
                 expected_resolution_time:
                   duration: P1D
                 refs:
-                  - ref_id: T1
+                  - ref_id: T10
                     ref_type: TRANSACTION
                   - ref_id: P1
                     ref_type: PROVIDER
@@ -3777,7 +3934,7 @@ x-flows:
                 expected_resolution_time:
                   duration: P1D
                 refs:
-                  - ref_id: T1
+                  - ref_id: T10
                     ref_type: TRANSACTION
                   - ref_id: P1
                     ref_type: PROVIDER
@@ -3919,7 +4076,7 @@ x-flows:
                 expected_resolution_time:
                   duration: P1D
                 refs:
-                  - ref_id: T1
+                  - ref_id: T10
                     ref_type: TRANSACTION
                   - ref_id: P1
                     ref_type: PROVIDER
@@ -4068,7 +4225,7 @@ x-flows:
                 expected_resolution_time:
                   duration: P1D
                 refs:
-                  - ref_id: T1
+                  - ref_id: T10
                     ref_type: TRANSACTION
                   - ref_id: P1
                     ref_type: PROVIDER
@@ -4224,7 +4381,7 @@ x-flows:
                 expected_resolution_time:
                   duration: P1D
                 refs:
-                  - ref_id: T1
+                  - ref_id: T10
                     ref_type: TRANSACTION
                   - ref_id: P1
                     ref_type: PROVIDER
@@ -4394,7 +4551,7 @@ x-flows:
                 expected_resolution_time:
                   duration: P1D
                 refs:
-                  - ref_id: T1
+                  - ref_id: T10
                     ref_type: TRANSACTION
                   - ref_id: P1
                     ref_type: PROVIDER
@@ -4572,7 +4729,7 @@ x-flows:
                 expected_resolution_time:
                   duration: P1D
                 refs:
-                  - ref_id: T1
+                  - ref_id: T10
                     ref_type: TRANSACTION
                   - ref_id: P1
                     ref_type: PROVIDER
@@ -4758,7 +4915,7 @@ x-flows:
                 expected_resolution_time:
                   duration: P1D
                 refs:
-                  - ref_id: T1
+                  - ref_id: T10
                     ref_type: TRANSACTION
                   - ref_id: P1
                     ref_type: PROVIDER
@@ -4920,12 +5077,12 @@ x-flows:
                       short_desc: Error in interface, seller would now be visible.
                     updated_at: 2024-08-14T09:57:58.841Z
                     proposed_by: NP2
-  - summary: Flow3 - Buyer raises a complaint for FULFILLMENT category
+  - summary: Flow3 - Buyer raises a complaint for fulfilment category
     details:
       - description: >-
           This flow provides an illustrative example workflow for the IGM
           framework where an end consumer (complainant) raises a complaint with
-          regards to their FULFILLMENT experience for their retail order. The
+          regards to their fulfilment experience for their retail order. The
           seller app (on-network logistics buyer) analyses the complaint and
           feels the logistics seller app needs to be consulted for this
           complaint. The retail seller app creates a complaint to the logistics
@@ -4973,7 +5130,7 @@ x-flows:
               SellerApp->>BuyerApp: Closes the issue
     steps:
       - summary: >-
-          Buyer raises a complaint for FULFILLMENT category; buyer app creates
+          Buyer raises a complaint for fulfilment category; buyer app creates
           issue call
         api: issue
         details:
@@ -5015,7 +5172,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5046,7 +5203,7 @@ x-flows:
                   images:
                     - http://buyerapp.com/addtional-details/img1.png
                     - http://buyerapp.com/addtional-details/img2.png
-                last_action_id: A1
+                last_action_id: AR1
                 actions:
                   - id: AR1
                     description:
@@ -5095,7 +5252,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5130,8 +5287,6 @@ x-flows:
                 source_id: CUST1
                 complainant_id: NP1
                 respondent_ids:
-                  - NP2
-                resolver_ids:
                   - NP2
                 description:
                   code: FLM005
@@ -5198,7 +5353,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5281,7 +5436,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5382,7 +5537,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5499,7 +5654,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5534,8 +5689,6 @@ x-flows:
                 source_id: CUST1
                 complainant_id: NP1
                 respondent_ids:
-                  - NP2
-                resolver_ids:
                   - NP2
                 description:
                   code: FLM005
@@ -5616,7 +5769,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5661,7 +5814,7 @@ x-flows:
                   images:
                     - http://buyerapp.com/addtional-details/img1.png
                     - http://buyerapp.com/addtional-details/img2.png
-                last_action_id: AR4
+                last_action_id: AR6
                 actions:
                   - id: AR1
                     description:
@@ -5751,7 +5904,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5796,7 +5949,7 @@ x-flows:
                   images:
                     - http://buyerapp.com/addtional-details/img1.png
                     - http://buyerapp.com/addtional-details/img2.png
-                last_action_id: AL2
+                last_action_id: AL6
                 actions:
                   - id: AL1
                     description:
@@ -5888,7 +6041,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5933,7 +6086,7 @@ x-flows:
                   images:
                     - http://buyerapp.com/addtional-details/img1.png
                     - http://buyerapp.com/addtional-details/img2.png
-                last_action_id: AL2
+                last_action_id: AL7
                 actions:
                   - id: AL1
                     description:
@@ -6031,7 +6184,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -6076,7 +6229,7 @@ x-flows:
                   images:
                     - http://buyerapp.com/addtional-details/img1.png
                     - http://buyerapp.com/addtional-details/img2.png
-                last_action_id: AR4
+                last_action_id: AR7
                 actions:
                   - id: AR1
                     description:
@@ -6172,7 +6325,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -6198,12 +6351,22 @@ x-flows:
                     type: TRANSACTION-COUNTERPARTY-NP
                     info:
                       org:
-                        name: logisticsapp.com::ONDC:RET10
+                        name: logisticsapp.com::nic2004:60232
                       contact:
                         phone: '9450394140'
                         email: respondentapp@respond.com
                       person:
                         name: Alice Jones
+                  - id: NP3-GRO
+                    type: COUNTERPARTY-NP-GRO
+                    info:
+                      org:
+                        name: logisticsapp.com::nic2004:60232
+                      contact:
+                        phone: '9999994039'
+                        email: logisticsapp@gmail.com
+                      person:
+                        name: Grievance Officer LNP
                 source_id: CUST1
                 complainant_id: NP2
                 respondent_ids:
@@ -6217,7 +6380,7 @@ x-flows:
                   images:
                     - http://buyerapp.com/addtional-details/img1.png
                     - http://buyerapp.com/addtional-details/img2.png
-                last_action_id: AL2
+                last_action_id: AL8
                 actions:
                   - id: AL1
                     description:
@@ -6339,7 +6502,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -6384,7 +6547,7 @@ x-flows:
                   images:
                     - http://buyerapp.com/addtional-details/img1.png
                     - http://buyerapp.com/addtional-details/img2.png
-                last_action_id: AR4
+                last_action_id: AR8
                 actions:
                   - id: AR1
                     description:
@@ -6506,7 +6669,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -6551,7 +6714,7 @@ x-flows:
                   images:
                     - http://buyerapp.com/addtional-details/img1.png
                     - http://buyerapp.com/addtional-details/img2.png
-                last_action_id: AR4
+                last_action_id: AR9
                 actions:
                   - id: AR1
                     description:
@@ -6681,7 +6844,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -6726,7 +6889,7 @@ x-flows:
                   images:
                     - http://buyerapp.com/addtional-details/img1.png
                     - http://buyerapp.com/addtional-details/img2.png
-                last_action_id: AL2
+                last_action_id: AL9
                 actions:
                   - id: AL1
                     description:
@@ -6855,7 +7018,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -6900,7 +7063,7 @@ x-flows:
                   images:
                     - http://buyerapp.com/addtional-details/img1.png
                     - http://buyerapp.com/addtional-details/img2.png
-                last_action_id: AL2
+                last_action_id: AL10
                 actions:
                   - id: AL1
                     description:
@@ -7037,7 +7200,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -7082,7 +7245,7 @@ x-flows:
                   images:
                     - http://buyerapp.com/addtional-details/img1.png
                     - http://buyerapp.com/addtional-details/img2.png
-                last_action_id: AR4
+                last_action_id: AR10
                 actions:
                   - id: AR1
                     description:
@@ -7219,7 +7382,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -7264,7 +7427,7 @@ x-flows:
                   images:
                     - http://buyerapp.com/addtional-details/img1.png
                     - http://buyerapp.com/addtional-details/img2.png
-                last_action_id: AR4
+                last_action_id: AR11
                 actions:
                   - id: AR1
                     description:
@@ -7407,7 +7570,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -7452,7 +7615,7 @@ x-flows:
                   images:
                     - http://buyerapp.com/addtional-details/img1.png
                     - http://buyerapp.com/addtional-details/img2.png
-                last_action_id: AL2
+                last_action_id: AL11
                 actions:
                   - id: AL1
                     description:
@@ -7560,11 +7723,12 @@ x-examples:
       Issue and Grievance Management (IGM) framework enables NPs to handle
       complaints over the network. This developer guide provides the details of
       the IGM v2.0 specifications and model implementations covering enhanced
-      use cases over and above the IGM MVP v1.0.0. Use cases / Features
-      available here. Technical specifications available here. Mock server steps
-      for testing and log submission test case scenarios available here. PRD
-      LINK - 
-      https://docs.google.com/document/d/1SGTCSzxNPtBvBpvtYf0I-MUxQCrYT_I-/edit
+      use cases over and above the IGM MVP v1.0.0. <br> Use cases /Features
+      available <a href =
+      "https://docs.google.com/document/d/1CBTOuFP4o6KqwYVPlN6H9ArUvygMjFiII-gSv4WXk4s/edit?usp=sharing">here</a>.
+      <br> Mock server steps for testing and log submission test case scenarios
+      available <a href =
+      "https://docs.google.com/document/d/1SGTCSzxNPtBvBpvtYf0I-MUxQCrYT_I-/edit?usp=sharing&ouid=100595989766867836454&rtpof=true&sd=true">here</a>
     example_set:
       issue:
         examples:
@@ -7580,143 +7744,12 @@ x-examples:
         examples:
           - summary: issue_status
             description: issue_status
-            value:
-              context:
-                domain: ONDC:RET10
-                location:
-                  country:
-                    code: IND
-                  city:
-                    code: '*'
-                action: issue_status
-                core_version: 2.0.0
-                bap_id: buyerapp.com
-                bap_uri: https://buyerapp.com/ondc
-                bpp_id: sellerapp.com
-                bpp_uri: https://sellerapp.com/ondc
-                transaction_id: T1
-                message_id: M1
-                timestamp: '2023-01-15T10:00:00.469Z'
-                ttl: PT30S
-              message:
-                issue_id: I1
+            value: *ref_3
       on_issue_status:
         examples:
           - summary: on_issue_status
             description: on_issue_status
-            value:
-              context:
-                domain: ONDC:RET10
-                location:
-                  country:
-                    code: IND
-                  city:
-                    code: '*'
-                action: issue_status
-                core_version: 2.0.0
-                bap_id: buyerapp.com
-                bap_uri: https://buyerapp.com/ondc
-                bpp_id: sellerapp.com
-                bpp_uri: https://sellerapp.com/ondc
-                transaction_id: T1
-                message_id: M1
-                timestamp: '2023-01-15T10:00:00.469Z'
-                ttl: PT30S
-              message:
-                upated_target:
-                  - path: issue.actions
-                    action: APPENDED
-                issue:
-                  id: ISSUE-1
-                  status: PROCESSING
-                  level: ISSUE
-                  created_at: '2023-01-15T10:00:00.469Z'
-                  updated_at: '2023-01-15T10:00:00.469Z'
-                  expected_response_time:
-                    duration: PT2H
-                  expected_resolution_time:
-                    duration: P1D
-                  refs:
-                    - ref_id: O1
-                      ref_type: ORDER
-                    - ref_id: P1
-                      ref_type: PROVIDER
-                    - ref_id: F1
-                      ref_type: FULFILLMENT
-                    - ref_id: I1
-                      ref_type: ITEM
-                      tags:
-                        - descriptor:
-                            code: message.order.items
-                          list:
-                            - descriptor:
-                                code: quantity.selected.count
-                              value: '2'
-                  actor_info:
-                    - id: CUST1
-                      type: CONSUMER
-                      info:
-                        org:
-                          name: buyerapp.com::ONDC:RET10
-                        person:
-                          name: Sam Manuel
-                        contact:
-                          phone: '9879879870'
-                          email: sam@yahoo.com
-                    - id: NP1
-                      type: INTERFACING_NP
-                      info:
-                        org:
-                          name: buyerapp.com::ONDC:RET10
-                        contact:
-                          phone: '9450394039'
-                          email: buyerapp@interface.com
-                        person:
-                          name: John Doe
-                    - id: NP2
-                      type: TRANSACTION-COUNTERPARTY-NP
-                      info:
-                        org:
-                          name: sellerapp.com::ONDC:RET10
-                        contact:
-                          phone: '9450394140'
-                          email: respondentapp@respond.com
-                        person:
-                          name: Jane Doe
-                  source_id: CUST1
-                  complainant_id: NP1
-                  respondent_ids:
-                    - NP2
-                  description:
-                    code: ITM004
-                    short_desc: Issue with product quality
-                    long_desc: >-
-                      product quality is not correct. facing issues while using
-                      the product
-                    additional_desc:
-                      url: https://buyerapp.com/additonal-details/desc.txt
-                      content_type: text/plain
-                    images:
-                      - http://buyerapp.com/addtional-details/img1.png
-                      - http://buyerapp.com/addtional-details/img2.png
-                  last_action_id: A2
-                  actions:
-                    - id: A1
-                      description:
-                        code: OPEN
-                        short_desc: Complaint created
-                      updated_at: '2023-01-15T10:00:00.469Z'
-                      action_by: NP1
-                      actor_details:
-                        name: Sam Manuel
-                    - id: A2
-                      description:
-                        code: PROCESSING
-                        short_desc: Complaint created
-                      updated_at: '2023-01-15T10:00:10.469Z'
-                      action_by: NP1
-                      actor_details:
-                        name: Sam Manuel
+            value: *ref_4
 x-attributes:
   Flow1:
     attribute_set:
@@ -8136,3 +8169,6 @@ x-attributes:
                   owner: BPP
                   usage: Sam Manuel
                   description: Name of an agent of the actor
+x-featureui:
+  filenames:
+    - Technical Salient Features.md
