@@ -189,7 +189,7 @@ message:
         descriptor:
           code: PARENT
           short_desc: PROVIDING RESOLUTION OPTIONS. PLEASE SELECT ONE
-        updated_at: 2024-08-14T09:57:58.841Z
+        updated_at: "2024-08-14T09:57:58.841Z"
         proposed_by: NP2
       - id: R1
         ref_id: R_PARENT
@@ -197,7 +197,7 @@ message:
         descriptor:
           code: REFUND
           short_desc: Providing refund for the item
-        updated_at: 2024-08-14T09:57:58.841Z
+        updated_at: "2024-08-14T09:57:58.841Z"
         proposed_by: NP2
         tags:
           - descriptor:
@@ -207,15 +207,15 @@ message:
                   code: ITEM
                 value: I1
               - descriptor:
-                  code: REFUND_AMOUNT
-                value: "200"
+                  code: REFUND
+      
       - id: R2
         ref_id: R_PARENT
         ref_type: PARENT
         descriptor:
           code: REPLACEMENT
           short_desc: Providing replacement of the item
-        updated_at: 2024-08-14T09:57:58.841Z
+        updated_at: "2024-08-14T09:57:58.841Z"
         proposed_by: NP2
         tags:
           - descriptor:
@@ -224,3 +224,4 @@ message:
               - descriptor:
                   code: ITEM
                 value: I1
+      

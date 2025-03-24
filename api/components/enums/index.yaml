@@ -140,13 +140,13 @@ issue:
         - code: REPLACEMENT
           description: The issue was resolved by providing a replacement.
           reference: <PR/Issue/Discussion Links md format text> 
-        - code: NO-ACTION 
+        - code: NO_ACTION 
           description: No action was required or taken to resolve the issue.
           reference: <PR/Issue/Discussion Links md format text>
         - code: CANCEL
           description: The issue was resolved by canceling the transaction or order.
           reference: <PR/Issue/Discussion Links md format text>
-        - code: NOW-VISIBLE
+        - code: NOW_VISIBLE
           description: The issue was resolved as the item or information is now visible.
           reference: <PR/Issue/Discussion Links md format text> 
         - code: PARENT

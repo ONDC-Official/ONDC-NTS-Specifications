@@ -1,0 +1,69 @@
+{
+    "success": false,
+    "response": {
+        "message": "Logs were not verified successfully",
+        "report": {
+            "search1": {},
+            "on_search1": {
+                "Fulfillment 0": {
+                    "stops[9].id": "duplicate stop.id: 1 at stop[9]",
+                    "stops[10].id": "duplicate stop.id: 2 at stop[10]",
+                    "stops[11].id": "duplicate stop.id: 3 at stop[11]",
+                    "stops[12].id": "duplicate stop.id: 4 at stop[12]",
+                    "stops[13].id": "duplicate stop.id: 5 at stop[13]",
+                    "stops[14].id": "duplicate stop.id: 6 at stop[14]",
+                    "stops[15].id": "duplicate stop.id: 7 at stop[15]",
+                    "stops[16].id": "duplicate stop.id: 8 at stop[16]",
+                    "stops_17.gps": "GPS coordinates must be precise upto six decimal places only in longitude.",
+                    "stops[17].id": "duplicate stop.id: 9 at stop[17]"
+                }
+            },
+            "search2": {
+                "bppIdContextMismatch": "BPP Id mismatch in /on_search and /search"
+            },
+            "on_search2": {
+                "bppIdContextMismatch": "BPP Id mismatch in /search and /on_search"
+            },
+            "init": {
+                "payemnts[0]_collected_by": "payments.collected_by value sent in on_search should be BPP as sent in init"
+            },
+            "confirm": {
+                "payment_params_bank_code": "params.bank_code must be present in /confirm",
+                "payment_params_bank_account_number": "params.bank_account_number must be present in /confirm",
+                "tags": [
+                    "list has missing property BUYER_FINDER_FEES_TYPE in [0] of tags,"
+                ]
+            },
+            "on_confirm": {
+                "tags": [
+                    "list has missing property BUYER_FINDER_FEES_TYPE in [0] of tags,"
+                ],
+                "created_at": "created_at must match with context.timestamp in /on_confirm",
+                "updated_at": "updated_at must match with context.timestamp in /on_confirm"
+            },
+            "on_status": {
+                "tags": [
+                    "list has missing property BUYER_FINDER_FEES_TYPE in [0] of tags,"
+                ]
+            },
+            "soft_cancel": {
+                "cancel": "Json cannot be empty"
+            },
+            "confirm_cancel": {
+                "cancel": "Json cannot be empty"
+            },
+            "soft_on_cancel": {
+                "on_cancel": "Json cannot be empty"
+            },
+            "confirm_on_cancel": {
+                "on_cancel": "Json cannot be empty"
+            }
+        },
+        "bpp_id": "SELLER_APP_SUBSCRIBER_ID",
+        "bap_id": "BUYER_APP_SUBSCRIBER_ID",
+        "domain": "ONDC:TRV11",
+        "reportTimestamp": "2025-03-19T12:08:58.588Z"
+    },
+    "signature": "E+Gn4OLqicHcuCRfJDqxlkw+Vw8WxrzH9W/Zk7IA4gDX/Yjhy3lsoTqJ3hA5ZXcXA7wqhNtnMWwgesArEwm2DQ==",
+    "signTimestamp": "2025-03-19T12:08:58.588Z"
+}

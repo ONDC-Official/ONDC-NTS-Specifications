@@ -66,25 +66,25 @@ async function validateSchema(schema, data) {
   return false;
 }
 
-// async function validateFlows(flows, schemaMap) {
-//   for (const flowItem of flows) {
-//     const { steps } = flowItem;
-//     if (steps && steps?.length) {
-//       for (const step of steps) {
-//         for (const api of Object.keys(schemaMap)) {
-//           // Not validating the flows for forms.
-//           if (step.api === api && step.api !== "form") {
-//             const result = await validateSchema(schemaMap[api], step.example);
-//             if (result) {
-//               console.log("Error[flows]:", `${flowItem?.summary + "/" + api}`);
-//               return (hasTrueResult = true);
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
+async function validateFlows(flows, schemaMap) {
+  for (const flowItem of flows) {
+    const { steps } = flowItem;
+    if (steps && steps?.length) {
+      for (const step of steps) {
+        for (const api of Object.keys(schemaMap)) {
+          // Not validating the flows for forms.
+          if (step.api === api && step.api !== "form") {
+            const result = await validateSchema(schemaMap[api], step.example);
+            if (result) {
+              console.log("Error[flows]:", `${flowItem?.summary + "/" + api}`);
+              return (hasTrueResult = true);
+            }
+          }
+        }
+      }
+    }
+  }
+}
 
 async function validateExamples(exampleSets, schemaMap) {
 
@@ -298,24 +298,24 @@ async function getSwaggerYaml(example_set, outputPath) {
       schemaMap[path.substring(1)] = pathSchema;
     }
     
-    // if (!process.argv.includes(SKIP_VALIDATION.flows)) {
-    //   hasTrueResult = await validateFlows(flows, schemaMap);
-    // }
+    if (!process.argv.includes(SKIP_VALIDATION.flows)) {
+      hasTrueResult = await validateFlows(flows, schemaMap);
+    }
     if (!process.argv.includes(SKIP_VALIDATION.examples) && !hasTrueResult) {
       hasTrueResult = await validateExamples(exampleSets, schemaMap);
     }
 
-    //move to separate files
-    // if (!process.argv.includes(SKIP_VALIDATION.enums) && !hasTrueResult) {
-    //   hasTrueResult = await validateEnumsTags(enums, schemaMap);
-    // }
-    // if (!process.argv.includes(SKIP_VALIDATION.tags) && !hasTrueResult) {
-    //   hasTrueResult = await validateTags(tags, schemaMap);
-    // }
+    // move to separate files
+    if (!process.argv.includes(SKIP_VALIDATION.enums) && !hasTrueResult) {
+      hasTrueResult = await validateEnumsTags(enums, schemaMap);
+    }
+    if (!process.argv.includes(SKIP_VALIDATION.tags) && !hasTrueResult) {
+      hasTrueResult = await validateTags(tags, schemaMap);
+    }
 
-    // if (!process.argv.includes(SKIP_VALIDATION.attributes) && !hasTrueResult) {
-    //   hasTrueResult = await validateAttributes(attributes, schemaMap);
-    // }
+    if (!process.argv.includes(SKIP_VALIDATION.attributes) && !hasTrueResult) {
+      hasTrueResult = await validateAttributes(attributes, schemaMap);
+    }
 
     if (hasTrueResult) return;
 
