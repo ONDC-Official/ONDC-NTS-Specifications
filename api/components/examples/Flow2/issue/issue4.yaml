@@ -13,15 +13,15 @@ context:
   bpp_uri: https://sellerapp.com/ondc
   transaction_id: T1
   message_id: M3
-  timestamp: 2023-01-15T10:00:00.469Z
+  timestamp: '2023-01-15T10:00:00.469Z'
   ttl: PT30S
 message:
   issue:
     id: ISSUE-2
     status: OPEN
     level: ISSUE
-    created_at: 2023-01-15T10:00:00.469Z
-    updated_at: 2023-01-15T10:00:00.469Z
+    created_at: '2023-01-15T10:00:00.469Z'
+    updated_at: '2023-01-15T10:00:00.469Z'
     expected_response_time:
       duration: PT2H
     expected_resolution_time:
@@ -87,7 +87,7 @@ message:
         description:
           code: OPEN
           short_desc: Complaint created
-        updated_at: 2023-01-15T10:00:00.469Z
+        updated_at: '2023-01-15T10:00:00.469Z'
         action_by: NP1
         actor_details:
           name: Sam Manuel
@@ -95,7 +95,7 @@ message:
         description:
           code: PROCESSING
           short_desc: Checking the issue raised
-        updated_at: 2023-01-15T10:00:00.469Z
+        updated_at: '2023-01-15T10:00:00.469Z'
         action_by: NP2
       - id: A3
         ref_id: R1
@@ -103,7 +103,7 @@ message:
         description:
           code: RESOLUTION_PROPOSED
           short_desc: Resolution provided
-        updated_at: 2023-01-15T10:00:00.469Z
+        updated_at: '2023-01-15T10:00:00.469Z'
         action_by: NP2
       - id: A4
         ref_id: R1
@@ -111,7 +111,7 @@ message:
         description:
           code: RESOLUTION_ACCEPTED
           short_desc: Will check once enabled
-        updated_at: 2023-01-15T10:00:00.469Z
+        updated_at: '2023-01-15T10:00:00.469Z'
         action_by: NP1
     resolutions:
       - id: R1
