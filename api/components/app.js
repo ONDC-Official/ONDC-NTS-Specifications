@@ -443,28 +443,4 @@ function writeFilenamesToYaml(filenames) {
   fs.writeFileSync(yamlFilePath, yamlString, "utf8");
 }
 
-function debugFlows() {
-  console.log("Debugging flows...");
-  const flowsDir = path.join(__dirname, 'flows');
-  const flowDirs = fs.readdirSync(flowsDir).filter(
-    file => fs.statSync(path.join(flowsDir, file)).isDirectory()
-  );
-  console.log('Flow directories found:', flowDirs);
-  
-  // Try to read each index.yaml
-  flowDirs.forEach(dir => {
-    const indexPath = path.join(flowsDir, dir, 'index.yaml');
-    try {
-      if (fs.existsSync(indexPath)) {
-        console.log(`Found ${dir}/index.yaml`);
-      } else {
-        console.log(`No index.yaml found in ${dir}`);
-      }
-    } catch (error) {
-      console.error(`Error checking ${dir}/index.yaml:`, error.message);
-    }
-  });
-}
 
-// Call this function in the main execution
-debugFlows();

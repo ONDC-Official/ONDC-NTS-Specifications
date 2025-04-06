@@ -43,7 +43,6 @@ steps:
     example:
       value:
         $ref: "../../examples/RSF/on_report/on_report (with provider).yaml"
-
   - summary: ON_REPORT
     api: on_report
     details:
