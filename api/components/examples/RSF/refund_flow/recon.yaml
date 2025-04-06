@@ -1,0 +1,63 @@
+context:
+  domain: "ONDC:NTS10"
+  location:
+    country:
+      code: "IND"
+    city:
+      code: "*"
+  version: "2.0.0"
+  action: "recon"
+  bap_id: "collector-app.com"
+  bap_uri: "https://collector-app.com/ondc/1.0/"
+  bpp_id: "receiver-app.com"
+  bpp_uri: "https://receiver-app.com/ondc/"
+  transaction_id: "bd73a366-aebb-4144-9314-808dda82c7e6"
+  message_id: "941ef6d7-d74d-4411-ac06-a05469c0f9ac"
+  timestamp: "2024-05-07T06:36:50.897Z"
+  ttl: "P1D"
+message:
+  orders:
+    - id: "order-123456"
+      amount:
+        currency: "INR"
+        value: "700.00"
+      settlements:
+        - id: "settlement-id-abc"
+          payment_id: "pymnt-1"
+          status: "SETTLED"
+          amount:
+            currency: "INR"
+            value: "1000.00"
+          commission:
+            currency: "INR"
+            value: "50.00"
+          withholding_amount:
+            currency: "INR"
+            value: "10.00"
+          tds:
+            currency: "INR"
+            value: "10.00"
+          tcs:
+            currency: "INR"
+            value: "10.00"
+          settlement_ref_no: "utr-1234"
+          updated_at: "2024-05-07T06:36:50.897Z"
+        - id: "settlement-id-112"
+          payment_id: "pymnt-2"
+          status: "TO-BE-INITIATED"
+          amount:
+            currency: "INR"
+            value: "300.00"
+          commission:
+            currency: "INR"
+            value: "0.00"
+          withholding_amount:
+            currency: "INR"
+            value: "0.00"
+          tds:
+            currency: "INR"
+            value: "0.00"
+          tcs:
+            currency: "INR"
+            value: "0.00"
+          updated_at: "2024-05-07T06:36:50.897Z"
