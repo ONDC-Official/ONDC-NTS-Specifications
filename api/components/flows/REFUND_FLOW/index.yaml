@@ -91,7 +91,7 @@ steps:
            Collector ->> Receiver : /recon API
            Receiver ->> Collector: /on_recon API
   - summary: Reconciliation for Updated Settlement
-    reference: if any
+    reference: if any 
     api: on_recon
     example: 
       value:
@@ -106,7 +106,7 @@ steps:
            Receiver ->> Collector: /on_recon API
            Collector ->> Receiver : /recon API
            Receiver ->> Collector: /on_recon API
-  - summary: Initiate Refund Settlement
+  - summary: Initiate Refund Settlement.
     reference: if any
     api: settle
     example: 
