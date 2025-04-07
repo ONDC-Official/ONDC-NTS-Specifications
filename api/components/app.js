@@ -8,6 +8,7 @@ const Ajv = require("ajv");
 const ajv = new Ajv({
   allErrors: true,
   strict: "log",
+  keywords: ['example']
 });
 const addFormats = require("ajv-formats");
 ajv.addFormat("phone", "");
@@ -57,12 +58,12 @@ async function baseYMLFile(file) {
 }
 
 async function validateSchema(schema, data) {
-  // const validate = ajv.compile(schema);
-  // const valid = validate(data?.value);
-  // if (!valid) {
-  //   console.log(validate.errors);
-  //   return true;
-  // }
+  const validate = ajv.compile(schema);
+  const valid = validate(data?.value);
+  if (!valid) {
+    console.log(validate.errors);
+    return true;
+  }
   return false;
 }
 
