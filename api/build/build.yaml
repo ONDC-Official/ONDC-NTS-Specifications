@@ -2279,7 +2279,7 @@ x-flows:
               receiver_app_id: receiverapp.com
               settlement:
                 type: NP-NP
-                id: settlement-id-abc
+                id: settlement-id-abde
                 orders:
                   - id: ordr-123456
                     inter_participant:
@@ -2336,7 +2336,7 @@ x-flows:
               receiver_app_id: receiverapp.com
               settlement:
                 type: NP-NP
-                id: settlement-id-abd
+                id: settlement-id-abde
                 orders:
                   - id: ordr-123456
                     inter_participant:
@@ -2347,7 +2347,7 @@ x-flows:
                         currency: INR
                         value: '700.00'
                       status: SETTLED
-                      reference_no: '3245683618631'
+                      reference_no: '457876977022'
                     collector:
                       amount:
                         currency: INR

@@ -20,7 +20,7 @@ message:
   receiver_app_id: receiverapp.com
   settlement:
     type: NP-NP
-    id: settlement-id-abc
+    id: settlement-id-abde
     orders:
       - id: ordr-123456
         inter_participant:
