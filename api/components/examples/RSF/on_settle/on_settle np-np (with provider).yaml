@@ -38,6 +38,7 @@ message:
             value: "50.00"
         provider:
           id: prvdr-id-789
+          name: provider-name
           amount:
             currency: INR
             value: "800.00"

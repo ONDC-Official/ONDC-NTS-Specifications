@@ -22,6 +22,7 @@ message:
     orders:
       - provider:
           id: provider-id-789
+          name: provider-name
           amount:
             currency: INR
             value: "200.12"
