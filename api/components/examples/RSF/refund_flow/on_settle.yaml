@@ -7,8 +7,8 @@ context:
       code: '*'
   version: 2.0.0
   action: on_settle
-  bap_id: collectorapp.com
-  bap_uri: https://collectorapp.in/ondc/1.0/
+  bap_id: receiverapp.com
+  bap_uri: https://receiverapp.com/ondc/1.0/
   bpp_id: sa_nocs.nbbl.com
   bpp_uri: https://sa_nocs.nbbl.com/nocs_test
   transaction_id: dc34a366-aebb-4144-9314-808dda82c7e6

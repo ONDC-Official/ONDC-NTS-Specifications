@@ -20,7 +20,7 @@ details:
         Buyer -->> SA: ack
         
         %% Refund process initiated by Seller
-        Note over Seller,SA: Refund process begins
+        Note over Seller,Buyer: Refund process begins
 
         %% Reconciliation between Buyer and Seller
         Buyer ->> Seller: recon API (update settlement records)

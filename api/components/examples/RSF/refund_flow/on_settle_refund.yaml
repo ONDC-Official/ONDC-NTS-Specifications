@@ -26,10 +26,10 @@ message:
         inter_participant:
           settled_amount:
             currency: INR
-            value: '700.00'
+            value: '300.00'
           amount:
             currency: INR
-            value: '700.00'
+            value: '300.00'
           status: SETTLED
           reference_no: '457876977022'
         collector:
@@ -39,6 +39,6 @@ message:
         self:
           amount:
             currency: INR
-            value: '50.00'
+            value: '0.00'
           status: SETTLED
           reference_no: '1238683618634'
