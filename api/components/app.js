@@ -8,6 +8,7 @@ const Ajv = require("ajv");
 const ajv = new Ajv({
   allErrors: true,
   strict: "log",
+  keywords: ['example']
 });
 const addFormats = require("ajv-formats");
 ajv.addFormat("phone", "");
@@ -442,3 +443,5 @@ function writeFilenamesToYaml(filenames) {
   const yamlString = yaml.dump(yamlData);
   fs.writeFileSync(yamlFilePath, yamlString, "utf8");
 }
+
+

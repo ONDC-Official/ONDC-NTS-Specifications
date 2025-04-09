@@ -1,0 +1,146 @@
+summary: REFUND FLOW AFTER SETTELEMENT
+details:
+  - description: |
+      In scenarios where the original settlement has already been processed by the buyer app, any subsequent refund requires an additional settlement flow to be initiated by the seller app.
+
+      If a refund is triggered after the buyer app has completed its settlement, the seller app must settle the refund amount with the buyer app by executing the settle and on_settle flows. This ensures that the refund is correctly reconciled and the buyer app receives the appropriate amount, effectively reversing the prior settlement associated with the order.
+
+      The refund settlement instructions from the seller app include the necessary adjustments to reflect the reversal of the original transaction and maintain consistency in inter-participant accounting.
+      
+    mermaid: |-
+      sequenceDiagram
+        participant Buyer
+        participant SA as Settlement_Agency
+        participant Seller
+        
+        %% Initial settlement from Buyer
+        Buyer ->> SA: settle API (initial payment)
+        SA -->> Buyer: ack
+        SA ->> Buyer: on_settle API (confirmation)
+        Buyer -->> SA: ack
+        
+        %% Refund process initiated by Seller
+        Note over Seller,Buyer: Refund process begins
+
+        %% Reconciliation between Buyer and Seller
+        Buyer ->> Seller: recon API (update settlement records)
+        Seller -->> Buyer: ack
+        Seller ->> Buyer: on_recon API (confirmation of updated records)
+        Buyer -->> Seller: ack
+
+        Seller ->> SA: settle API (refund amount)
+        SA -->> Seller: ack
+        SA ->> Seller: on_settle API (refund confirmation)
+        Seller -->> SA: ack
+        
+
+references: if any
+steps:
+  - summary: Order Settlement Processing
+    reference: if any
+    api: settle
+    example:
+      value:
+        $ref: ../../examples/RSF/refund_flow/settle.yaml
+    details:
+      - description: settlement instructions from NP to Settlement Agency
+        mermaid: |-
+          sequenceDiagram participant Collector
+           participant Settlement_Agency
+           participant Receiver
+           rect rgb(191, 223, 255)
+           Collector ->> Settlement_Agency: settle API 
+           Settlement_Agency ->> Collector: Ack
+           end 
+           Receiver ->> Settlement_Agency: settle API
+           Settlement_Agency ->> Collector : on_settle API
+           Settlement_Agency ->> Receiver : on_settle API
+  - summary: Settlement Confirmation from Agency
+    reference: if any
+    api: on_settle
+    example: 
+      value:
+        $ref: ../../examples/RSF/refund_flow/on_settle.yaml
+    details:
+      - description: Response from settlement agency
+        mermaid: |-
+          sequenceDiagram participant Collector
+           participant Settlement_Agency
+           participant Receiver
+           Collector ->> Settlement_Agency: settle API 
+           Receiver ->> Settlement_Agency: settle API
+           Settlement_Agency ->> Collector : on_settle API
+           rect rgb(191, 223, 255)
+           Settlement_Agency ->> Receiver : on_settle API
+           Receiver ->> Settlement_Agency : Ack
+           end
+  - summary: Reconciliation Triggered by Receiver
+    reference: if any
+    api: recon
+    example: 
+      value:
+        $ref: ../../examples/RSF/refund_flow/recon.yaml
+    details:
+      - description: Reconciliation call to understand the discrepancy in the settlement instructions or updation of new settlements
+        mermaid: >-
+          sequenceDiagram
+           participant Collector
+           participant Receiver
+           Collector ->> Receiver : /recon API
+           Receiver ->> Collector: /on_recon API
+           Collector ->> Receiver : /recon API
+           Receiver ->> Collector: /on_recon API
+  - summary: Reconciliation for Updated Settlement
+    reference: if any 
+    api: on_recon
+    example: 
+      value:
+        $ref: ../../examples/RSF/refund_flow/on_recon.yaml
+    details:
+      - description: Response to the reconciliation call, agreeing with the information provided in /recon
+        mermaid: >-
+          sequenceDiagram
+           participant Collector
+           participant Receiver
+           Collector ->> Receiver : /recon API
+           Receiver ->> Collector: /on_recon API
+           Collector ->> Receiver : /recon API
+           Receiver ->> Collector: /on_recon API
+  - summary: Initiate Refund Settlement.
+    reference: if any
+    api: settle
+    example: 
+      value:
+        $ref: ../../examples/RSF/refund_flow/settle_refund.yaml
+    details:
+      - description: Sending the settlement to the settlement agency to process the refund amount
+        mermaid: |-
+          sequenceDiagram participant Collector
+           participant Settlement_Agency
+           participant Receiver
+           rect rgb(191, 223, 255)
+           Collector ->> Settlement_Agency: settle API 
+           Settlement_Agency ->> Collector: Ack
+           end 
+           Receiver ->> Settlement_Agency: settle API
+           Settlement_Agency ->> Collector : on_settle API
+           Settlement_Agency ->> Receiver : on_settle API
+  - summary: Settlement Confirmation from Agency
+    reference: if any
+    api: on_settle
+    example:
+      value:
+        $ref: ../../examples/RSF/refund_flow/on_settle_refund.yaml
+    details:
+      - description: Response from settlement agency
+        mermaid: |-
+          sequenceDiagram participant Collector
+          participant Settlement_Agency
+          participant Receiver
+          Collector ->> Settlement_Agency: settle API 
+          Receiver ->> Settlement_Agency: settle API
+          Settlement_Agency ->> Collector : on_settle API
+          rect rgb(191, 223, 255)
+          Settlement_Agency ->> Receiver : on_settle API
+          Receiver ->> Settlement_Agency : Ack
+          end

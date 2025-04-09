@@ -1,0 +1,37 @@
+context:
+  domain: ONDC:NTS10
+  location:
+    country:
+      code: IND
+    city:
+      code: '*'
+  version: 2.0.0
+  action: settle
+  bap_id: receiverapp.com
+  bap_uri: https://receiverapp.com/ondc/1.0/
+  bpp_id: sa_nocs.nbbl.com
+  bpp_uri: https://sa_nocs.nbbl.com/nocs_test
+  transaction_id: dc34a366-aebb-4144-9314-808dda82c7e6
+  message_id: 941ed9a4-d74d-4411-ac06-469c0f9ac
+  timestamp: '2024-05-09T11:36:51.897Z'
+  ttl: P1D
+message:
+  collector_app_id: collectorapp.com
+  receiver_app_id: receiverapp.com
+  settlement:
+    type: NP-NP
+    id: settlement-id-abde
+    orders:
+      - id: ordr-123456
+        inter_participant:
+          amount:
+            currency: INR
+            value: '300.00'
+        collector:
+          amount:
+            currency: INR
+            value: '0.00'
+        self:
+          amount:
+            currency: INR
+            value: '0.00'

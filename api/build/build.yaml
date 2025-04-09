@@ -856,6 +856,7 @@ x-flows:
                         value: '50.00'
                     provider:
                       id: prvdr-id-789
+                      name: provider-name
                       amount:
                         currency: INR
                         value: '800.00'
@@ -863,13 +864,11 @@ x-flows:
                       error:
                         code: '01'
                         message: Account inactive
-                      reference_no: '1238683618634'
                     self:
                       amount:
                         currency: INR
                         value: '200.00'
                       status: NOT_SETTLED
-                      reference_no: '1238683618634'
                       error:
                         code: '01'
                         message: Account inactive
@@ -1927,6 +1926,452 @@ x-flows:
             error:
               code: '70030'
               message: Invalid Order Id
+  - summary: REFUND FLOW AFTER SETTELEMENT
+    details:
+      - description: >
+          In scenarios where the original settlement has already been processed
+          by the buyer app, any subsequent refund requires an additional
+          settlement flow to be initiated by the seller app.
+
+
+          If a refund is triggered after the buyer app has completed its
+          settlement, the seller app must settle the refund amount with the
+          buyer app by executing the settle and on_settle flows. This ensures
+          that the refund is correctly reconciled and the buyer app receives the
+          appropriate amount, effectively reversing the prior settlement
+          associated with the order.
+
+
+          The refund settlement instructions from the seller app include the
+          necessary adjustments to reflect the reversal of the original
+          transaction and maintain consistency in inter-participant accounting.
+        mermaid: |-
+          sequenceDiagram
+            participant Buyer
+            participant SA as Settlement_Agency
+            participant Seller
+            
+            %% Initial settlement from Buyer
+            Buyer ->> SA: settle API (initial payment)
+            SA -->> Buyer: ack
+            SA ->> Buyer: on_settle API (confirmation)
+            Buyer -->> SA: ack
+            
+            %% Refund process initiated by Seller
+            Note over Seller,SA: Refund process begins
+
+            %% Reconciliation between Buyer and Seller
+            Buyer ->> Seller: recon API (update settlement records)
+            Seller -->> Buyer: ack
+            Seller ->> Buyer: on_recon API (confirmation of updated records)
+            Buyer -->> Seller: ack
+
+            Seller ->> SA: settle API (refund amount)
+            SA -->> Seller: ack
+            SA ->> Seller: on_settle API (refund confirmation)
+            Seller -->> SA: ack
+            
+    references: if any
+    steps:
+      - summary: Order Settlement Processing
+        reference: if any
+        api: settle
+        example:
+          value:
+            context:
+              domain: ONDC:NTS10
+              location:
+                country:
+                  code: IND
+                city:
+                  code: '*'
+              version: 2.0.0
+              action: settle
+              bap_id: collectorapp.com
+              bap_uri: https://collectorapp.com/ondc/1.0/
+              bpp_id: sa_nocs.nbbl.com
+              bpp_uri: https://sa_nocs.nbbl.com/nocs_test
+              transaction_id: dc34a366-aebb-4144-9314-808dda82c7e6
+              message_id: 941ed9a4-d74d-4411-ac06-469c0f9ac
+              timestamp: '2024-05-09T11:36:51.897Z'
+              ttl: P1D
+            message:
+              collector_app_id: collectorapp.com
+              receiver_app_id: receiverapp.com
+              settlement:
+                type: NP-NP
+                id: settlement-id-abc
+                orders:
+                  - id: ordr-123456
+                    inter_participant:
+                      amount:
+                        currency: INR
+                        value: '1000.00'
+                    collector:
+                      amount:
+                        currency: INR
+                        value: '50.00'
+                    self:
+                      amount:
+                        currency: INR
+                        value: '50.00'
+        details:
+          - description: settlement instructions from NP to Settlement Agency
+            mermaid: |-
+              sequenceDiagram participant Collector
+               participant Settlement_Agency
+               participant Receiver
+               rect rgb(191, 223, 255)
+               Collector ->> Settlement_Agency: settle API 
+               Settlement_Agency ->> Collector: Ack
+               end 
+               Receiver ->> Settlement_Agency: settle API
+               Settlement_Agency ->> Collector : on_settle API
+               Settlement_Agency ->> Receiver : on_settle API
+      - summary: Settlement Confirmation from Agency
+        reference: if any
+        api: on_settle
+        example:
+          value:
+            context:
+              domain: ONDC:NTS10
+              location:
+                country:
+                  code: IND
+                city:
+                  code: '*'
+              version: 2.0.0
+              action: on_settle
+              bap_id: collectorapp.com
+              bap_uri: https://collectorapp.in/ondc/1.0/
+              bpp_id: sa_nocs.nbbl.com
+              bpp_uri: https://sa_nocs.nbbl.com/nocs_test
+              transaction_id: dc34a366-aebb-4144-9314-808dda82c7e6
+              message_id: 941ed9a4-d74d-4411-ac06-469c0f9ac
+              timestamp: '2024-05-09T13:36:51.000Z'
+              ttl: P1D
+            message:
+              collector_app_id: collectorapp.com
+              receiver_app_id: receiverapp.com
+              settlement:
+                type: NP-NP
+                id: settlement-id-abc
+                orders:
+                  - id: ordr-123456
+                    inter_participant:
+                      settled_amount:
+                        currency: INR
+                        value: '1000.00'
+                      amount:
+                        currency: INR
+                        value: '900.00'
+                      status: SETTLED
+                      reference_no: '3245683618631'
+                    collector:
+                      amount:
+                        currency: INR
+                        value: '50.00'
+                    self:
+                      amount:
+                        currency: INR
+                        value: '50.00'
+                      status: SETTLED
+                      reference_no: '1238683618634'
+        details:
+          - description: Response from settlement agency
+            mermaid: |-
+              sequenceDiagram participant Collector
+               participant Settlement_Agency
+               participant Receiver
+               Collector ->> Settlement_Agency: settle API 
+               Receiver ->> Settlement_Agency: settle API
+               Settlement_Agency ->> Collector : on_settle API
+               rect rgb(191, 223, 255)
+               Settlement_Agency ->> Receiver : on_settle API
+               Receiver ->> Settlement_Agency : Ack
+               end
+      - summary: Reconciliation Triggered by Receiver
+        reference: if any
+        api: recon
+        example:
+          value:
+            context:
+              domain: ONDC:NTS10
+              location:
+                country:
+                  code: IND
+                city:
+                  code: '*'
+              version: 2.0.0
+              action: recon
+              bap_id: collector-app.com
+              bap_uri: https://collector-app.com/ondc/1.0/
+              bpp_id: receiver-app.com
+              bpp_uri: https://receiver-app.com/ondc/
+              transaction_id: bd73a366-aebb-4144-9314-808dda82c7e6
+              message_id: 941ef6d7-d74d-4411-ac06-a05469c0f9ac
+              timestamp: '2024-05-07T06:36:50.897Z'
+              ttl: P1D
+            message:
+              orders:
+                - id: order-123456
+                  amount:
+                    currency: INR
+                    value: '700.00'
+                  settlements:
+                    - id: settlement-id-abc
+                      payment_id: pymnt-1
+                      status: SETTLED
+                      amount:
+                        currency: INR
+                        value: '1000.00'
+                      commission:
+                        currency: INR
+                        value: '50.00'
+                      withholding_amount:
+                        currency: INR
+                        value: '10.00'
+                      tds:
+                        currency: INR
+                        value: '10.00'
+                      tcs:
+                        currency: INR
+                        value: '10.00'
+                      settlement_ref_no: utr-1234
+                      updated_at: '2024-05-07T06:36:50.897Z'
+                    - id: settlement-id-112
+                      payment_id: pymnt-2
+                      status: TO-BE-INITIATED
+                      amount:
+                        currency: INR
+                        value: '300.00'
+                      commission:
+                        currency: INR
+                        value: '0.00'
+                      withholding_amount:
+                        currency: INR
+                        value: '0.00'
+                      tds:
+                        currency: INR
+                        value: '0.00'
+                      tcs:
+                        currency: INR
+                        value: '0.00'
+                      updated_at: '2024-05-07T06:36:50.897Z'
+        details:
+          - description: >-
+              Reconciliation call to understand the discrepancy in the
+              settlement instructions or updation of new settlements
+            mermaid: |-
+              sequenceDiagram
+               participant Collector
+               participant Receiver
+               Collector ->> Receiver : /recon API
+               Receiver ->> Collector: /on_recon API
+               Collector ->> Receiver : /recon API
+               Receiver ->> Collector: /on_recon API
+      - summary: Reconciliation for Updated Settlement
+        reference: if any
+        api: on_recon
+        example:
+          value:
+            context:
+              domain: ONDC:NTS10
+              location:
+                country:
+                  code: IND
+                city:
+                  code: '*'
+              version: 2.0.0
+              action: on_recon
+              bap_id: collector-app.com
+              bap_uri: https://collector-app.com/ondc/1.0/
+              bpp_id: receiver-app.com
+              bpp_uri: https://receiver-app.com/ondc/
+              transaction_id: bd73a366-aebb-4144-9314-808dda82c7e6
+              message_id: 990ef6d7-d74d-4411-ac06-a05469c0f9ac
+              timestamp: '2024-05-07T06:36:53.897Z'
+              ttl: P1D
+            message:
+              orders:
+                - id: order-123456
+                  amount:
+                    currency: INR
+                    value: '700.00'
+                  recon_accord: true
+                  settlements:
+                    - id: settlement-id-abc
+                      payment_id: pymnt-1
+                      status: SETTLED
+                      amount:
+                        currency: INR
+                        value: '1000.00'
+                      commission:
+                        currency: INR
+                        value: '50.00'
+                      withholding_amount:
+                        currency: INR
+                        value: '10.00'
+                      tds:
+                        currency: INR
+                        value: '10.00'
+                      tcs:
+                        currency: INR
+                        value: '10.00'
+                      settlement_ref_no: utr-1234
+                      updated_at: '2024-05-07T06:36:51.897Z'
+                    - id: settlement-id-112
+                      payment_id: pymnt-2
+                      status: TO-BE-INITIATED
+                      due_date: '2024-05-09'
+                      amount:
+                        currency: INR
+                        value: '300.00'
+                        diff_value: '0.00'
+                      commission:
+                        currency: INR
+                        value: '0.00'
+                      withholding_amount:
+                        currency: INR
+                        value: '0.00'
+                      tds:
+                        currency: INR
+                        value: '0.00'
+                      tcs:
+                        currency: INR
+                        value: '0.00'
+                      updated_at: '2024-05-07T06:36:53.897Z'
+        details:
+          - description: >-
+              Response to the reconciliation call, agreeing with the information
+              provided in /recon
+            mermaid: |-
+              sequenceDiagram
+               participant Collector
+               participant Receiver
+               Collector ->> Receiver : /recon API
+               Receiver ->> Collector: /on_recon API
+               Collector ->> Receiver : /recon API
+               Receiver ->> Collector: /on_recon API
+      - summary: Initiate Refund Settlement.
+        reference: if any
+        api: settle
+        example:
+          value:
+            context:
+              domain: ONDC:NTS10
+              location:
+                country:
+                  code: IND
+                city:
+                  code: '*'
+              version: 2.0.0
+              action: settle
+              bap_id: collectorapp.com
+              bap_uri: https://collectorapp.com/ondc/1.0/
+              bpp_id: sa_nocs.nbbl.com
+              bpp_uri: https://sa_nocs.nbbl.com/nocs_test
+              transaction_id: dc34a366-aebb-4144-9314-808dda82c7e6
+              message_id: 941ed9a4-d74d-4411-ac06-469c0f9ac
+              timestamp: '2024-05-09T11:36:51.897Z'
+              ttl: P1D
+            message:
+              collector_app_id: collectorapp.com
+              receiver_app_id: receiverapp.com
+              settlement:
+                type: NP-NP
+                id: settlement-id-abde
+                orders:
+                  - id: ordr-123456
+                    inter_participant:
+                      amount:
+                        currency: INR
+                        value: '1000.00'
+                    collector:
+                      amount:
+                        currency: INR
+                        value: '50.00'
+                    self:
+                      amount:
+                        currency: INR
+                        value: '50.00'
+        details:
+          - description: >-
+              Sending the settlement to the settlement agency to process the
+              refund amount
+            mermaid: |-
+              sequenceDiagram participant Collector
+               participant Settlement_Agency
+               participant Receiver
+               rect rgb(191, 223, 255)
+               Collector ->> Settlement_Agency: settle API 
+               Settlement_Agency ->> Collector: Ack
+               end 
+               Receiver ->> Settlement_Agency: settle API
+               Settlement_Agency ->> Collector : on_settle API
+               Settlement_Agency ->> Receiver : on_settle API
+      - summary: Settlement Confirmation from Agency
+        reference: if any
+        api: on_settle
+        example:
+          value:
+            context:
+              domain: ONDC:NTS10
+              location:
+                country:
+                  code: IND
+                city:
+                  code: '*'
+              version: 2.0.0
+              action: on_settle
+              bap_id: collectorapp.com
+              bap_uri: https://collectorapp.in/ondc/1.0/
+              bpp_id: sa_nocs.nbbl.com
+              bpp_uri: https://sa_nocs.nbbl.com/nocs_test
+              transaction_id: dc34a366-aebb-4144-9314-808dda82c7e6
+              message_id: 941ed9a4-d74d-4411-ac06-469c0f9ac
+              timestamp: '2024-05-09T13:36:51.000Z'
+              ttl: P1D
+            message:
+              collector_app_id: collectorapp.com
+              receiver_app_id: receiverapp.com
+              settlement:
+                type: NP-NP
+                id: settlement-id-abde
+                orders:
+                  - id: ordr-123456
+                    inter_participant:
+                      settled_amount:
+                        currency: INR
+                        value: '700.00'
+                      amount:
+                        currency: INR
+                        value: '700.00'
+                      status: SETTLED
+                      reference_no: '457876977022'
+                    collector:
+                      amount:
+                        currency: INR
+                        value: '0.00'
+                    self:
+                      amount:
+                        currency: INR
+                        value: '50.00'
+                      status: SETTLED
+                      reference_no: '1238683618634'
+        details:
+          - description: Response from settlement agency
+            mermaid: |-
+              sequenceDiagram participant Collector
+              participant Settlement_Agency
+              participant Receiver
+              Collector ->> Settlement_Agency: settle API 
+              Receiver ->> Settlement_Agency: settle API
+              Settlement_Agency ->> Collector : on_settle API
+              rect rgb(191, 223, 255)
+              Settlement_Agency ->> Receiver : on_settle API
+              Receiver ->> Settlement_Agency : Ack
+              end
 x-examples:
   RSF:
     summary: RSF 2.0
@@ -2015,6 +2460,7 @@ x-examples:
                   orders:
                     - provider:
                         id: provider-id-789
+                        name: provider-name
                         amount:
                           currency: INR
                           value: '200.12'
