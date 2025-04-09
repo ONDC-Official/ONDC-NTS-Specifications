@@ -1958,7 +1958,7 @@ x-flows:
             Buyer -->> SA: ack
             
             %% Refund process initiated by Seller
-            Note over Seller,SA: Refund process begins
+            Note over Seller,Buyer: Refund process begins
 
             %% Reconciliation between Buyer and Seller
             Buyer ->> Seller: recon API (update settlement records)
@@ -2011,6 +2011,15 @@ x-flows:
                       amount:
                         currency: INR
                         value: '50.00'
+                    provider:
+                      id: prvdr-id-789
+                      name: provider-name
+                      bank_details:
+                        account_no: '1234567890'
+                        ifsc_code: IFSC0001
+                      amount:
+                        currency: INR
+                        value: '800.00'
                     self:
                       amount:
                         currency: INR
@@ -2043,7 +2052,7 @@ x-flows:
               version: 2.0.0
               action: on_settle
               bap_id: collectorapp.com
-              bap_uri: https://collectorapp.in/ondc/1.0/
+              bap_uri: https://collectorapp.com/ondc/1.0/
               bpp_id: sa_nocs.nbbl.com
               bpp_uri: https://sa_nocs.nbbl.com/nocs_test
               transaction_id: dc34a366-aebb-4144-9314-808dda82c7e6
@@ -2071,6 +2080,13 @@ x-flows:
                       amount:
                         currency: INR
                         value: '50.00'
+                    provider:
+                      id: prvdr-id-789
+                      name: provider-name
+                      amount:
+                        currency: INR
+                        value: '800.00'
+                      status: SETTLED
                     self:
                       amount:
                         currency: INR
@@ -2267,8 +2283,8 @@ x-flows:
                   code: '*'
               version: 2.0.0
               action: settle
-              bap_id: collectorapp.com
-              bap_uri: https://collectorapp.com/ondc/1.0/
+              bap_id: receiverapp.com
+              bap_uri: https://receiverapp.com/ondc/1.0/
               bpp_id: sa_nocs.nbbl.com
               bpp_uri: https://sa_nocs.nbbl.com/nocs_test
               transaction_id: dc34a366-aebb-4144-9314-808dda82c7e6
@@ -2286,15 +2302,15 @@ x-flows:
                     inter_participant:
                       amount:
                         currency: INR
-                        value: '1000.00'
+                        value: '300.00'
                     collector:
                       amount:
                         currency: INR
-                        value: '50.00'
+                        value: '0.00'
                     self:
                       amount:
                         currency: INR
-                        value: '50.00'
+                        value: '0.00'
         details:
           - description: >-
               Sending the settlement to the settlement agency to process the
@@ -2343,10 +2359,10 @@ x-flows:
                     inter_participant:
                       settled_amount:
                         currency: INR
-                        value: '700.00'
+                        value: '300.00'
                       amount:
                         currency: INR
-                        value: '700.00'
+                        value: '300.00'
                       status: SETTLED
                       reference_no: '457876977022'
                     collector:
@@ -2356,7 +2372,7 @@ x-flows:
                     self:
                       amount:
                         currency: INR
-                        value: '50.00'
+                        value: '0.00'
                       status: SETTLED
                       reference_no: '1238683618634'
         details:
