@@ -1,22 +1,19 @@
 context:
-  domain: ONDC:RET10
-  location:
-    country:
-      code: IND
-    city:
-      code: "*"
-  action: issue
-  core_version: 2.0.0
-  bap_id: buyerapp.com
-  bap_uri: https://buyerapp.com/ondc
-  bpp_id: sellerapp.com
-  bpp_uri: https://sellerapp.com/ondc
-  transaction_id: T1
-  message_id: M3
-  timestamp: "2023-01-15T10:00:00.469Z"
-  ttl: PT30S
+    domain: ONDC:RET10
+    action: issue
+    country: IND
+    city: std:080,
+    core_version: 1.2.0
+    bap_id: buyerNP.com
+    bap_uri: https://buyerNP.com/ondc
+    bpp_id: sellerapp.com
+    bpp_uri: https://sellerapp.com/ondc
+    transaction_id: T1
+    message_id: M4
+    timestamp: "2023-06-03T08:00:00.000Z"
+    ttl: PT30S
 message:
-  updated_target:
+  update_target:
     - path: issue.actions
       action: APPENDED
   issue:
@@ -90,8 +87,9 @@ message:
         url: https://buyerapp.com/additonal-details/desc.txt
         content_type: text/plain
       images:
-        - http://buyerapp.com/addtional-details/img1.png
-        - http://buyerapp.com/addtional-details/img2.png
+        - url: https://transitsolutions.in/logos/logo.icon
+      media: 
+        - url: https://transitsolutions.in/logos/logo.icon  
     last_action_id: A4
     actions:
       - id: A1

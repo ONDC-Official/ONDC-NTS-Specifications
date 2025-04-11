@@ -1,22 +1,19 @@
 context:
-  domain: ONDC:RET10
-  location:
-    country:
-      code: IND
-    city:
-      code: "*"
-  action: on_issue
-  core_version: 2.0.0
-  bap_id: buyerapp.com
-  bap_uri: https://buyerapp.com/ondc
-  bpp_id: sellerapp.com
-  bpp_uri: https://sellerapp.com/ondc
-  transaction_id: T1
-  message_id: M1
-  timestamp: "2023-01-15T10:00:00.469Z"
-  ttl: PT30S
+    domain: ONDC:RET10
+    action: on_issue
+    country: IND
+    city: std:080,
+    core_version: 1.2.0
+    bap_id: buyerNP.com
+    bap_uri: https://buyerNP.com/ondc
+    bpp_id: sellerapp.com
+    bpp_uri: https://sellerapp.com/ondc
+    transaction_id: T1
+    message_id: M2
+    timestamp: "2023-06-03T08:00:00.000Z"
+    ttl: PT30S
 message:
-  updated_target::
+  updated_target:
     - path: issue.actions
       action: APPENDED
   issue:
@@ -35,7 +32,7 @@ message:
       - ref_id: P1
         ref_type: PROVIDER
       - ref_id: F1
-        ref_type: FULFILMENT
+        ref_type: FULFILLMENT
       - ref_id: I1
         ref_type: ITEM
         tags:
