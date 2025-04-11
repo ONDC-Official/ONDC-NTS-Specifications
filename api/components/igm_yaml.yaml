@@ -309,6 +309,7 @@ components:
             $ref: '#/components/schemas/TagGroup'
     Action:
        type: object
+       additionalProperties: false
        properties:
         id:
           description: Describes id of the action
@@ -352,6 +353,36 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TagGroup'
+        actor_details:
+          type: object
+          properties:
+            name:
+              type: string
+        description:
+         allOf:
+          - $ref: "#/components/schemas/Descriptor"
+          - type: object
+            properties:
+              code:
+                type: string
+                enum:
+                  - OPEN
+                  - PROCESSING
+                  - CLOSED
+                  - CASCADED
+                  - INFO_REQUESTED
+                  - INFO_PROCESSING
+                  - INFO_PROVIDED
+                  - INFO_NOT_AVAILABLE
+                  - RESOLUTION_PROPOSED
+                  - RESOLUTION_FORWARDED
+                  - RESOLUTION_PROCESSING
+                  - RESOLUTION_ACCEPTED
+                  - RESOLUTION_REJECTED
+                  - RESOLVED
+                  - ESCALATED
+               
+
     Actor_info:
       type: object
       properties:
@@ -711,6 +742,7 @@ components:
                   - CBIL_CORRECTION
                   - ENACH_CANCEL
                   - PARENT
+                  - NOW-VISIBLE
                   
         updated_at:
           description: timestamp for the capturing the time an issue status was last updated

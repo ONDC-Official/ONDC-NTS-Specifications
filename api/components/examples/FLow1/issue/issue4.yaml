@@ -87,7 +87,8 @@ message:
         url: https://buyerapp.com/additonal-details/desc.txt
         content_type: text/plain
       images:
-        - url: https://transitsolutions.in/logos/logo.icon
+        - url:  http://buyerapp.com/addtional-details/img1.png
+          size_type: xs
       media: 
         - url: https://transitsolutions.in/logos/logo.icon  
     last_action_id: A4
@@ -132,8 +133,10 @@ message:
           code: INFO_PROVIDED
           short_desc: Info provided from buyer app
           images:
-            - http://buyerapp.com/addtional-details/img3.png
-            - http://buyerapp.com/addtional-details/img4.png
+            - url:  http://buyerapp.com/addtional-details/img1.png
+              size_type: xs
+            - url: http://buyerapp.com/addtional-details/img2.png
+              size_type: xs
         updated_at: "2023-01-15T10:00:00.489Z"
         action_by: NP1
         actor_details:

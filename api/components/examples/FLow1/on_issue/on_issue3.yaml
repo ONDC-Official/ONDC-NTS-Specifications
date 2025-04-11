@@ -85,8 +85,10 @@ message:
         url: https://buyerapp.com/additonal-details/desc.txt
         content_type: text/plain
       images:
-        - http://buyerapp.com/addtional-details/img1.png
-        - http://buyerapp.com/addtional-details/img2.png
+        - url:  http://buyerapp.com/addtional-details/img1.png
+          size_type: xs
+        - url: http://buyerapp.com/addtional-details/img2.png
+          size_type: xs
     last_action_id: A3_2
     actions:
       - id: A1

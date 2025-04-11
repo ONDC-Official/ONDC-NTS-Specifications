@@ -10,15 +10,15 @@ context:
   bpp_uri: https://sellerapp.com/ondc
   transaction_id: T1
   message_id: M2
-  timestamp: 2023-06-03T08:00:00.000Z
+  timestamp: '2023-06-03T08:00:00.000Z'
   ttl: PT30S
 message:
   issue:
     id: ISSUE-2
     status: OPEN
     level: ISSUE
-    created_at: 2023-01-15T10:00:00.469Z
-    updated_at: 2023-01-15T10:00:00.469Z
+    created_at: '2023-01-15T10:00:00.469Z'
+    updated_at: '2023-01-15T10:00:00.469Z'
     expected_response_time:
       duration: PT2H
     expected_resolution_time:
@@ -67,14 +67,15 @@ message:
       code: VIS001
       short_desc: Seller not visible on interface
       images:
-        - http://buyerapp.com/addtional-details/img1.png
+        - url:  http://buyerapp.com/addtional-details/img1.png
+          size_type: xs
     last_action_id: A2
     actions:
       - id: A1
         description:
           code: OPEN
           short_desc: Complaint created
-        updated_at: 2023-01-15T10:00:00.469Z
+        updated_at: '2023-01-15T10:00:00.469Z'
         action_by: NP1
         actor_details:
           name: Sam Manuel
@@ -82,7 +83,7 @@ message:
         description:
           code: PROCESSING
           short_desc: Checking the issue raised
-        updated_at: 2023-01-15T10:00:00.469Z
+        updated_at: '2023-01-15T10:00:00.469Z'
         action_by: NP2
         actor_details:
           name: Sam Manuel

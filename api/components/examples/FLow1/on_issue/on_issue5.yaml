@@ -85,8 +85,10 @@ message:
         url: https://buyerapp.com/additonal-details/desc.txt
         content_type: text/plain
       images:
-        - http://buyerapp.com/addtional-details/img1.png
-        - http://buyerapp.com/addtional-details/img2.png
+        - url:  http://buyerapp.com/addtional-details/img1.png
+          size_type: xs
+        - url: http://buyerapp.com/addtional-details/img2.png
+          size_type: xs
     last_action_id: A5
     actions:
       - id: A1
@@ -128,7 +130,11 @@ message:
         description:
           code: INFO_PROVIDED
           short_desc: Info provided from buyer app
-          images: ""
+          images:
+            - url:  http://buyerapp.com/addtional-details/img1.png
+              size_type: xs
+            - url: http://buyerapp.com/addtional-details/img2.png
+              size_type: xs
         updated_at: "2023-01-15T10:00:00.469Z"
         action_by: NP1
         actor_details:

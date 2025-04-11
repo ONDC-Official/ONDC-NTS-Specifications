@@ -70,14 +70,15 @@ message:
         url: https://buyerapp.com/additonal-details/desc.txt
         content_type: text/plain
       images:
-        url: https://transitsolutions.in/logos/logo.icon
+        - url: https://transitsolutions.in/logos/logo.icon
+          size_type: xs
       media:
         url: https://transitsolutions.in/logos/logo.icon
           
     last_action_id: A1
     actions:
       - id: A1
-        description:
+        descriptor:
           code: OPEN
           short_desc: Complaint created
         updated_at: "2023-01-15T10:00:00.469Z"
