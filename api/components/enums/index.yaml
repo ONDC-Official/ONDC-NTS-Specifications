@@ -19,7 +19,7 @@ issue:
         - code: ISSUE
           description: Level 1 - A basic level of concern or problem that needs attention.
           reference: <PR/Issue/Discussion Links md format text>
-        - code: GREVIENCE
+        - code: GRIEVANCE
           description: Level 2 - A formal complaint that requires a more detailed review and resolution.
           reference: <PR/Issue/Discussion Links md format text>  
         - code: DISPUTE
@@ -64,7 +64,7 @@ issue:
 
       actors: &actors
         type:      
-          - code: INERFACING_NP
+          - code: INTERFACING_NP
             description: A primary entity interfacing with the complainant regarding the issue.
             reference: <PR/Issue/Discussion Links md format text> 
           - code: COUNTERPARTY_NP

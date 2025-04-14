@@ -60,7 +60,7 @@ message:
           person:
             name: Jane Doe
       - id: NP2-GRO
-        type: OUNTERPARTY_NP_GRO
+        type: COUNTERPARTY_NP_GRO
         info:
           org:
             name: buyerapp.com::ONDC:RET10

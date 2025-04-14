@@ -891,7 +891,7 @@ x-enum:
               Level 1 - A basic level of concern or problem that needs
               attention.
             reference: <PR/Issue/Discussion Links md format text>
-          - code: GREVIENCE
+          - code: GRIEVANCE
             description: >-
               Level 2 - A formal complaint that requires a more detailed review
               and resolution.
@@ -946,7 +946,7 @@ x-enum:
               reference: <PR/Issue/Discussion Links md format text>
         actors:
           type:
-            - code: INERFACING_NP
+            - code: INTERFACING_NP
               description: >-
                 A primary entity interfacing with the complainant regarding the
                 issue.
@@ -1069,7 +1069,7 @@ x-enum:
   on_issue:
     message: *ref_0
 x-flows:
-  - summary: Flow1 - Buyer raises a complaint for item category
+  - summary: Illustrative Flow 1
     details:
       - description: >-
           This flow provides an illustrative example workflow of the IGM
@@ -3027,7 +3027,7 @@ x-flows:
                       person:
                         name: Jane Doe
                   - id: NP2-GRO
-                    type: OUNTERPARTY_NP_GRO
+                    type: COUNTERPARTY_NP_GRO
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -3486,7 +3486,7 @@ x-flows:
                           - descriptor:
                               code: ITEM
                             value: I1
-  - summary: Flow2 - Seller raisies a complaint for policy issue
+  - summary: Illustrative Flow 2
     details:
       - description: >-
           This flow provides an illustrative example workflow for the IGM
@@ -3764,7 +3764,7 @@ x-flows:
                       person:
                         name: Jane Doe
                   - id: NP2-GRO
-                    type: OUNTERPARTY_NP_GRO
+                    type: COUNTERPARTY_NP_GRO
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -3886,7 +3886,7 @@ x-flows:
                       person:
                         name: Jane Doe
                   - id: NP2-GRO
-                    type: OUNTERPARTY_NP_GRO
+                    type: COUNTERPARTY_NP_GRO
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -4016,7 +4016,7 @@ x-flows:
                       person:
                         name: Jane Doe
                   - id: NP2-GRO
-                    type: OUNTERPARTY_NP_GRO
+                    type: COUNTERPARTY_NP_GRO
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -4156,7 +4156,7 @@ x-flows:
                       person:
                         name: Jane Doe
                   - id: NP2-GRO
-                    type: OUNTERPARTY_NP_GRO
+                    type: COUNTERPARTY_NP_GRO
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -4303,7 +4303,7 @@ x-flows:
                       person:
                         name: Jane Doe
                   - id: NP2-GRO
-                    type: OUNTERPARTY_NP_GRO
+                    type: COUNTERPARTY_NP_GRO
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -4457,7 +4457,7 @@ x-flows:
                       person:
                         name: Jane Doe
                   - id: NP2-GRO
-                    type: OUNTERPARTY_NP_GRO
+                    type: COUNTERPARTY_NP_GRO
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -4625,7 +4625,7 @@ x-flows:
                       person:
                         name: Jane Doe
                   - id: NP2-GRO
-                    type: OUNTERPARTY_NP_GRO
+                    type: COUNTERPARTY_NP_GRO
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -4801,7 +4801,7 @@ x-flows:
                       person:
                         name: Jane Doe
                   - id: NP2-GRO
-                    type: OUNTERPARTY_NP_GRO
+                    type: COUNTERPARTY_NP_GRO
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -4985,7 +4985,7 @@ x-flows:
                       person:
                         name: Jane Doe
                   - id: NP2-GRO
-                    type: OUNTERPARTY_NP_GRO
+                    type: COUNTERPARTY_NP_GRO
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -5112,7 +5112,7 @@ x-flows:
                       short_desc: Error in interface, seller would now be visible.
                     updated_at: '2024-08-14T09:57:58.841Z'
                     proposed_by: NP2
-  - summary: Flow3 - Buyer raises a complaint for FULFILLMENT category
+  - summary: Illustrative Flow 3
     details:
       - description: >-
           This flow provides an illustrative example workflow for the IGM
@@ -6396,7 +6396,7 @@ x-flows:
                       person:
                         name: Alice Jones
                   - id: NP3-GRO
-                    type: OUNTERPARTY_NP_GRO
+                    type: COUNTERPARTY_NP_GRO
                     info:
                       org:
                         name: logisticsapp.com::nic2004:60232

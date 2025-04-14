@@ -62,7 +62,7 @@ message:
           person:
             name: Alice Jones
       - id: NP3-GRO
-        type: OUNTERPARTY_NP_GRO
+        type: COUNTERPARTY_NP_GRO
         info:
           org:
             name: logisticsapp.com::nic2004:60232
