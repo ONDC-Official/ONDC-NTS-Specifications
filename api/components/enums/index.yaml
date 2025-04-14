@@ -28,73 +28,73 @@ issue:
 
       refs:  
         ref_type: 
-        - code: ORDER
-          description: The reference to an order related to the issue at hand.
-          reference: <PR/Issue/Discussion Links md format text>  
-        - code: ITEM
-          description: The specific item within the order that is relevant to the issue.
-          reference: <PR/Issue/Discussion Links md format text>
-        - code: FULFILLMENT
-          description: The fulfillment process or stage related to the issue.
-          reference: <PR/Issue/Discussion Links md format text>   
-        - code: TRANSACTION_ID
-          description: The transaction ID associated with the issue for tracking purposes.
-          reference: <PR/Issue/Discussion Links md format text>
-        - code: MESSAGE_ID
-          description: The ID of the message for which the complaint is reported.
-          reference: <PR/Issue/Discussion Links md format text>  
-        - code: PROVIDER
-          description: The service provider or vendor related to the issue.
-          reference: <PR/Issue/Discussion Links md format text> 
-        - code: COMPLAINT
-          description: A reference to a formal complaint filed regarding the issue. (issue.id)
-          reference: <PR/Issue/Discussion Links md format text>  
-        - code: ACTION
-          description: The specific action taken or required regarding the issue.
-          reference: <PR/Issue/Discussion Links md format text> 
-        - code: PAYMENT
-          description: The payment associated complaint, including discrepancies or failures.
-          reference: <PR/Issue/Discussion Links md format text> 
-        - code: CUSTOMER
-          description: The customer involved in or affected by the issue.
-          reference: <PR/Issue/Discussion Links md format text> 
-        - code: AGENT
-          description: The agent handling or associated with the issue.
-          reference: <PR/Issue/Discussion Links md format text> 
+          - code: ORDER
+            description: The reference to an order related to the issue at hand.
+            reference: <PR/Issue/Discussion Links md format text>  
+          - code: ITEM
+            description: The specific item within the order that is relevant to the issue.
+            reference: <PR/Issue/Discussion Links md format text>
+          - code: FULFILLMENT
+            description: The fulfillment process or stage related to the issue.
+            reference: <PR/Issue/Discussion Links md format text>   
+          - code: TRANSACTION_ID
+            description: The transaction ID associated with the issue for tracking purposes.
+            reference: <PR/Issue/Discussion Links md format text>
+          - code: MESSAGE_ID
+            description: The ID of the message for which the complaint is reported.
+            reference: <PR/Issue/Discussion Links md format text>  
+          - code: PROVIDER
+            description: The service provider or vendor related to the issue.
+            reference: <PR/Issue/Discussion Links md format text> 
+          - code: COMPLAINT
+            description: A reference to a formal complaint filed regarding the issue. (issue.id)
+            reference: <PR/Issue/Discussion Links md format text>  
+          - code: ACTION
+            description: The specific action taken or required regarding the issue.
+            reference: <PR/Issue/Discussion Links md format text> 
+          - code: PAYMENT
+            description: The payment associated complaint, including discrepancies or failures.
+            reference: <PR/Issue/Discussion Links md format text> 
+          - code: CUSTOMER
+            description: The customer involved in or affected by the issue.
+            reference: <PR/Issue/Discussion Links md format text> 
+          - code: AGENT
+            description: The agent handling or associated with the issue.
+            reference: <PR/Issue/Discussion Links md format text> 
 
-      actor_info:
-       type :      
-        - code: INERFACING_NP
-          description: A primary entity interfacing with the complainant regarding the issue.
-          reference: <PR/Issue/Discussion Links md format text> 
-        - code: COUNTERPARTY_NP
-          description: A counterparty entity involved in the issue.
-          reference: <PR/Issue/Discussion Links md format text> 
-        - code: CASCADED_NP
-          description: A cascaded entity involved in the issue.
-          reference: <PR/Issue/Discussion Links md format text>
-        - code: PROVIDER
-          description: The service provider responsible for the service or product in question.
-          reference: <PR/Issue/Discussion Links md format text>
-        - code: AGENT
-          description: The individual or team responsible for managing the issue.
-          reference: <PR/Issue/Discussion Links md format text>  
-        - code: CUSTOMER
-          description: The customer who raised the issue or is affected by it.
-          reference: <PR/Issue/Discussion Links md format text> 
-        - code: INTERFACING_NP_GRO
-          description: Grievance Redressal Office of interfacing entities related to the issue.
-          reference: <PR/Issue/Discussion Links md format text>  
-        - code: COUNTERPARTY_NP_GRO
-          description: Grievance Redressal Office of counterparty entities involved in the issue.
-          reference: <PR/Issue/Discussion Links md format text>  
-        - code: CASCADED_NP_GRO
-          description: Grievance Redressal Office of cascaded entities involved by the issue.
-          reference: <PR/Issue/Discussion Links md format text>
+      actors: &actors
+        type:      
+          - code: INERFACING_NP
+            description: A primary entity interfacing with the complainant regarding the issue.
+            reference: <PR/Issue/Discussion Links md format text> 
+          - code: COUNTERPARTY_NP
+            description: A counterparty entity involved in the issue.
+            reference: <PR/Issue/Discussion Links md format text> 
+          - code: CASCADED_NP
+            description: A cascaded entity involved in the issue.
+            reference: <PR/Issue/Discussion Links md format text>
+          - code: PROVIDER
+            description: The service provider responsible for the service or product in question.
+            reference: <PR/Issue/Discussion Links md format text>
+          - code: AGENT
+            description: The individual or team responsible for managing the issue.
+            reference: <PR/Issue/Discussion Links md format text>  
+          - code: CUSTOMER
+            description: The customer who raised the issue or is affected by it.
+            reference: <PR/Issue/Discussion Links md format text> 
+          - code: INTERFACING_NP_GRO
+            description: Grievance Redressal Office of interfacing entities related to the issue.
+            reference: <PR/Issue/Discussion Links md format text>  
+          - code: COUNTERPARTY_NP_GRO
+            description: Grievance Redressal Office of counterparty entities involved in the issue.
+            reference: <PR/Issue/Discussion Links md format text>  
+          - code: CASCADED_NP_GRO
+            description: Grievance Redressal Office of cascaded entities involved by the issue.
+            reference: <PR/Issue/Discussion Links md format text>
 
-      action:
+      actions:
         description:
-          type:
+          code:
             - code: OPEN
               description: The issue is currently open and requires action.
               reference: <PR/Issue/Discussion Links md format text>  
@@ -128,29 +128,40 @@ issue:
             - code: RESOLUTION_REJECTED
               description: The proposed resolution(s) has been rejected and requires further review.
               reference: <PR/Issue/Discussion Links md format text> 
+            - code: ESCALATED
+              description: Complaint is escalated
+              reference: <PR/Issue/Discussion Links md format text>  
             
-      resolutions:
-        descriptor:
-        - code: REFUND
-          description: The issue was resolved by issuing a refund.
-          reference: <PR/Issue/Discussion Links md format text>
-        - code: RETURN 
-          description: The issue was resolved by accepting a return.
-          reference: <PR/Issue/Discussion Links md format text> 
-        - code: REPLACEMENT
-          description: The issue was resolved by providing a replacement.
-          reference: <PR/Issue/Discussion Links md format text> 
-        - code: NO_ACTION 
-          description: No action was required or taken to resolve the issue.
-          reference: <PR/Issue/Discussion Links md format text>
-        - code: CANCEL
-          description: The issue was resolved by canceling the transaction or order.
-          reference: <PR/Issue/Discussion Links md format text>
-        - code: NOW_VISIBLE
-          description: The issue was resolved as the item or information is now visible.
-          reference: <PR/Issue/Discussion Links md format text> 
-        - code: PARENT
-          description: Identifying the group of various resolutions proposed for a complaint.
-          reference: <PR/Issue/Discussion Links md format text>
+      # resolutions:
+      #   description:
+      #     code: 
+      #       - code: REFUND
+      #         description: The issue was resolved by issuing a refund.
+      #         reference: <PR/Issue/Discussion Links md format text>
+      #       - code: RETURN 
+      #         description: The issue was resolved by accepting a return.
+      #         reference: <PR/Issue/Discussion Links md format text> 
+      #       - code: REPLACEMENT
+      #         description: The issue was resolved by providing a replacement.
+      #         reference: <PR/Issue/Discussion Links md format text> 
+      #       - code: NO_ACTION 
+      #         description: No action was required or taken to resolve the issue.
+      #         reference: <PR/Issue/Discussion Links md format text>
+      #       - code: CANCEL
+      #         description: The issue was resolved by canceling the transaction or order.
+      #         reference: <PR/Issue/Discussion Links md format text>
+      #       - code: NOW_VISIBLE
+      #         description: The issue was resolved as the item or information is now visible.
+      #         reference: <PR/Issue/Discussion Links md format text> 
+      #       - code: PARENT
+      #         description: Identifying the group of various resolutions proposed for a complaint.
+      #         reference: <PR/Issue/Discussion Links md format text>
+      #       - code: RECONCILED
+      #         description: Resolution for RSF
+      #         reference: <PR/Issue/Discussion Links md format text>
+      #       - code: NOT_RECONCILED
+      #         description: Resolution for RSF
+      #         reference: <PR/Issue/Discussion Links md format text>    
+
 on_issue:
   message: *message

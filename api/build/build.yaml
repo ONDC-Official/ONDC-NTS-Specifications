@@ -324,6 +324,7 @@ components:
             $ref: '#/components/schemas/TagGroup'
     Action:
       type: object
+      additionalProperties: false
       properties:
         id:
           description: Describes id of the action
@@ -366,7 +367,37 @@ components:
           description: Describes the action_by
           type: string
         tags:
-          $ref: '#/components/schemas/TagGroup'
+          type: array
+          items:
+            $ref: '#/components/schemas/TagGroup'
+        actor_details:
+          type: object
+          properties:
+            name:
+              type: string
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Descriptor'
+            - type: object
+              properties:
+                code:
+                  type: string
+                  enum:
+                    - OPEN
+                    - PROCESSING
+                    - CLOSED
+                    - CASCADED
+                    - INFO_REQUESTED
+                    - INFO_PROCESSING
+                    - INFO_PROVIDED
+                    - INFO_NOT_AVAILABLE
+                    - RESOLUTION_PROPOSED
+                    - RESOLUTION_FORWARDED
+                    - RESOLUTION_PROCESSING
+                    - RESOLUTION_ACCEPTED
+                    - RESOLUTION_REJECTED
+                    - RESOLVED
+                    - ESCALATED
     Actor_info:
       type: object
       properties:
@@ -784,6 +815,8 @@ components:
                     - REPLACEMENT
                     - CBIL_CORRECTION
                     - ENACH_CANCEL
+                    - PARENT
+                    - NOW-VISIBLE
         updated_at:
           description: >-
             timestamp for the capturing the time an issue status was last
@@ -794,7 +827,9 @@ components:
           description: Describes the action_by
           type: string
         tags:
-          $ref: '#/components/schemas/TagGroup'
+          type: array
+          items:
+            $ref: '#/components/schemas/TagGroup'
     Refs:
       type: object
       properties:
@@ -807,7 +842,7 @@ components:
           enum:
             - ORDER
             - ITEM
-            - FULFILMENT
+            - FULFILLMENT
             - TRANSACTION_ID
             - MESSAGE_ID
             - PROVIDER
@@ -816,6 +851,8 @@ components:
             - PAYMENT
             - CONSUMER
             - AGENT
+            - FULFILMENT
+            - TRANSACTION
         tags:
           description: tells abot ref details
           type: array
@@ -873,7 +910,7 @@ x-enum:
                 The specific item within the order that is relevant to the
                 issue.
               reference: <PR/Issue/Discussion Links md format text>
-            - code: FULFILMENT
+            - code: FULFILLMENT
               description: The fulfillment process or stage related to the issue.
               reference: <PR/Issue/Discussion Links md format text>
             - code: TRANSACTION_ID
@@ -906,14 +943,14 @@ x-enum:
             - code: AGENT
               description: The agent handling or associated with the issue.
               reference: <PR/Issue/Discussion Links md format text>
-        actor_info:
+        actors:
           type:
             - code: INERFACING_NP
               description: >-
                 A primary entity interfacing with the complainant regarding the
                 issue.
               reference: <PR/Issue/Discussion Links md format text>
-            - code: COUNTER_NP
+            - code: COUNTERPARTY_NP
               description: A counterparty entity involved in the issue.
               reference: <PR/Issue/Discussion Links md format text>
             - code: CASCADED_NP
@@ -930,7 +967,7 @@ x-enum:
             - code: CUSTOMER
               description: The customer who raised the issue or is affected by it.
               reference: <PR/Issue/Discussion Links md format text>
-            - code: INERFACING_NP_GRO
+            - code: INTERFACING_NP_GRO
               description: >-
                 Grievance Redressal Office of interfacing entities related to
                 the issue.
@@ -945,9 +982,9 @@ x-enum:
                 Grievance Redressal Office of cascaded entities involved by the
                 issue.
               reference: <PR/Issue/Discussion Links md format text>
-        action:
+        actions:
           description:
-            type:
+            code:
               - code: OPEN
                 description: The issue is currently open and requires action.
                 reference: <PR/Issue/Discussion Links md format text>
@@ -991,33 +1028,9 @@ x-enum:
                   The proposed resolution(s) has been rejected and requires
                   further review.
                 reference: <PR/Issue/Discussion Links md format text>
-        resolutions:
-          descriptor:
-            - code: REFUND
-              description: The issue was resolved by issuing a refund.
-              reference: <PR/Issue/Discussion Links md format text>
-            - code: RETURN
-              description: The issue was resolved by accepting a return.
-              reference: <PR/Issue/Discussion Links md format text>
-            - code: REPLACEMENT
-              description: The issue was resolved by providing a replacement.
-              reference: <PR/Issue/Discussion Links md format text>
-            - code: NO-ACTION
-              description: No action was required or taken to resolve the issue.
-              reference: <PR/Issue/Discussion Links md format text>
-            - code: CANCEL
-              description: The issue was resolved by canceling the transaction or order.
-              reference: <PR/Issue/Discussion Links md format text>
-            - code: NOW-VISIBLE
-              description: >-
-                The issue was resolved as the item or information is now
-                visible.
-              reference: <PR/Issue/Discussion Links md format text>
-            - code: PARENT
-              description: >-
-                Identifying the group of various resolutions proposed for a
-                complaint.
-              reference: <PR/Issue/Discussion Links md format text>
+              - code: ESCALATED
+                description: Complaint is escalated
+                reference: <PR/Issue/Discussion Links md format text>
   on_issue:
     message: *ref_0
 x-flows:
@@ -1064,23 +1077,20 @@ x-flows:
             mermaid: ''
             reference: if any
         example:
-          value: &ref_1
+          value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
               message_id: M1
-              timestamp: '2023-01-15T10:00:00.469Z'
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               issue:
@@ -1099,7 +1109,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -1142,12 +1152,14 @@ x-flows:
                     url: https://buyerapp.com/additonal-details/desc.txt
                     content_type: text/plain
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
-                    - http://buyerapp.com/addtional-details/img2.png
+                    - url: https://transitsolutions.in/logos/logo.icon
+                      size_type: xs
+                  media:
+                    url: https://transitsolutions.in/logos/logo.icon
                 last_action_id: A1
                 actions:
                   - id: A1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -1161,26 +1173,23 @@ x-flows:
             mermaid: ''
         reference: if any
         example:
-          value: &ref_2
+          value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: on_issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M1
-              timestamp: '2023-01-15T10:00:00.469Z'
+              message_id: M2
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
-              'updated_target:':
+              updated_target:
                 - path: issue.actions
                   action: APPENDED
               issue:
@@ -1199,7 +1208,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -1254,8 +1263,10 @@ x-flows:
                     url: https://buyerapp.com/additonal-details/desc.txt
                     content_type: text/plain
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
-                    - http://buyerapp.com/addtional-details/img2.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
+                    - url: http://buyerapp.com/addtional-details/img2.png
+                      size_type: xs
                 last_action_id: A2
                 actions:
                   - id: A1
@@ -1286,20 +1297,17 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: on_issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M2
-              timestamp: '2023-01-15T10:00:00.469Z'
+              message_id: M3
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               updated_target:
@@ -1321,7 +1329,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -1376,8 +1384,10 @@ x-flows:
                     url: https://buyerapp.com/additonal-details/desc.txt
                     content_type: text/plain
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
-                    - http://buyerapp.com/addtional-details/img2.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
+                    - url: http://buyerapp.com/addtional-details/img2.png
+                      size_type: xs
                 last_action_id: A3_2
                 actions:
                   - id: A1
@@ -1421,7 +1431,7 @@ x-flows:
             mermaid: ''
         reference: if any
         example:
-          value: &ref_3
+          value:
             context:
               domain: ONDC:RET10
               location:
@@ -1448,7 +1458,7 @@ x-flows:
             mermaid: ''
         reference: if any
         example:
-          value: &ref_4
+          value:
             context:
               domain: ONDC:RET10
               location:
@@ -1486,7 +1496,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -1541,8 +1551,10 @@ x-flows:
                     url: https://buyerapp.com/additonal-details/desc.txt
                     content_type: text/plain
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
-                    - http://buyerapp.com/addtional-details/img2.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
+                    - url: http://buyerapp.com/addtional-details/img2.png
+                      size_type: xs
                 last_action_id: A2
                 actions:
                   - id: A1
@@ -1573,31 +1585,28 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M3
-              timestamp: '2023-01-15T10:00:00.469Z'
+              message_id: M4
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
-              updated_target:
+              update_target:
                 - path: issue.actions
                   action: APPENDED
               issue:
                 id: ISSUE-1
                 status: PROCESSING
                 level: ISSUE
-                created_at: ''
-                updated_at: ''
+                created_at: '2023-01-15T10:00:00.489Z'
+                updated_at: '2023-01-15T10:00:00.489Z'
                 expected_response_time:
                   duration: PT2H
                 expected_resolution_time:
@@ -1608,7 +1617,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -1665,15 +1674,17 @@ x-flows:
                     url: https://buyerapp.com/additonal-details/desc.txt
                     content_type: text/plain
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
-                    - http://buyerapp.com/addtional-details/img2.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
+                  media:
+                    - url: https://transitsolutions.in/logos/logo.icon
                 last_action_id: A4
                 actions:
                   - id: A1
                     description:
                       code: OPEN
                       short_desc: Complaint created
-                    updated_at: ''
+                    updated_at: '2023-01-15T10:00:00.489Z'
                     action_by: NP1
                     actor_details:
                       name: Sam Manuel
@@ -1681,7 +1692,7 @@ x-flows:
                     description:
                       code: PROCESSING
                       short_desc: Complaint created
-                    updated_at: ''
+                    updated_at: '2023-01-15T10:00:00.489Z'
                     action_by: NP2
                     actor_details:
                       name: Sam Manuel
@@ -1690,7 +1701,7 @@ x-flows:
                       code: INFO_REQUESTED
                       name: INFO01
                       short_desc: Please provide product image
-                    updated_at: ''
+                    updated_at: '2023-01-15T10:00:00.489Z'
                     action_by: NP2
                     actor_details:
                       name: Sam Manuel
@@ -1699,7 +1710,7 @@ x-flows:
                       code: INFO_REQUESTED
                       name: INFO002
                       short_desc: Please provide invoice
-                    updated_at: ''
+                    updated_at: '2023-01-15T10:00:00.489Z'
                     action_by: NP2
                     actor_details:
                       name: Sam Manuel
@@ -1709,9 +1720,11 @@ x-flows:
                       code: INFO_PROVIDED
                       short_desc: Info provided from buyer app
                       images:
-                        - http://buyerapp.com/addtional-details/img3.png
-                        - http://buyerapp.com/addtional-details/img4.png
-                    updated_at: ''
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
+                    updated_at: '2023-01-15T10:00:00.489Z'
                     action_by: NP1
                     actor_details:
                       name: Sam Manuel
@@ -1725,20 +1738,17 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: on_issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M3
-              timestamp: '2023-01-15T10:00:00.469Z'
+              message_id: M5
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               updated_target:
@@ -1760,7 +1770,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -1815,8 +1825,10 @@ x-flows:
                     url: https://buyerapp.com/additonal-details/desc.txt
                     content_type: text/plain
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
-                    - http://buyerapp.com/addtional-details/img2.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
+                    - url: http://buyerapp.com/addtional-details/img2.png
+                      size_type: xs
                 last_action_id: A5
                 actions:
                   - id: A1
@@ -1858,7 +1870,11 @@ x-flows:
                     description:
                       code: INFO_PROVIDED
                       short_desc: Info provided from buyer app
-                      images: ''
+                      images:
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                     actor_details:
@@ -1883,20 +1899,17 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: on_issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M4
-              timestamp: '2023-01-15T10:00:00.469Z'
+              message_id: M6
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               updated_target:
@@ -1918,7 +1931,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -1973,8 +1986,10 @@ x-flows:
                     url: https://buyerapp.com/additonal-details/desc.txt
                     content_type: text/plain
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
-                    - http://buyerapp.com/addtional-details/img2.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
+                    - url: http://buyerapp.com/addtional-details/img2.png
+                      size_type: xs
                 last_action_id: A6
                 actions:
                   - id: A1
@@ -2017,8 +2032,10 @@ x-flows:
                       code: INFO_PROVIDED
                       short_desc: Responded with images
                       images:
-                        - http://buyerapp.com/addtional-details/img3.png
-                        - http://buyerapp.com/addtional-details/img4.png
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                     actor_details:
@@ -2051,23 +2068,20 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M5
-              timestamp: '2023-01-15T10:00:00.469Z'
+              message_id: M7
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
-              updated_target:
+              update_target:
                 - path: issue.actions
                   action: APPENDED
               issue:
@@ -2086,7 +2100,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -2141,8 +2155,10 @@ x-flows:
                     url: https://buyerapp.com/additonal-details/desc.txt
                     content_type: text/plain
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
-                    - http://buyerapp.com/addtional-details/img2.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
+                  media:
+                    url: https://transitsolutions.in/logos/logo.icon
                 last_action_id: A7
                 actions:
                   - id: A1
@@ -2185,8 +2201,10 @@ x-flows:
                       code: INFO_PROVIDED
                       short_desc: Responded with images
                       images:
-                        - http://buyerapp.com/addtional-details/img3.png
-                        - http://buyerapp.com/addtional-details/img4.png
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                     actor_details:
@@ -2230,20 +2248,17 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: on_issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M5
-              timestamp: '2023-01-15T10:00:00.469Z'
+              message_id: M8
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               updated_target:
@@ -2265,7 +2280,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -2320,8 +2335,10 @@ x-flows:
                     url: https://buyerapp.com/additonal-details/desc.txt
                     content_type: text/plain
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
-                    - http://buyerapp.com/addtional-details/img2.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
+                    - url: http://buyerapp.com/addtional-details/img2.png
+                      size_type: xs
                 last_action_id: A8
                 actions:
                   - id: A1
@@ -2364,8 +2381,10 @@ x-flows:
                       code: INFO_PROVIDED
                       short_desc: Responded with images
                       images:
-                        - http://buyerapp.com/addtional-details/img3.png
-                        - http://buyerapp.com/addtional-details/img4.png
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                     actor_details:
@@ -2417,20 +2436,17 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: on_issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M6
-              timestamp: '2023-01-15T10:00:00.469Z'
+              message_id: M9
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               updated_target:
@@ -2452,7 +2468,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -2507,8 +2523,10 @@ x-flows:
                     url: https://buyerapp.com/additonal-details/desc.txt
                     content_type: text/plain
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
-                    - http://buyerapp.com/addtional-details/img2.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
+                    - url: http://buyerapp.com/addtional-details/img2.png
+                      size_type: xs
                 last_action_id: A9
                 actions:
                   - id: A1
@@ -2551,8 +2569,10 @@ x-flows:
                       code: INFO_PROVIDED
                       short_desc: Responded with images
                       images:
-                        - http://buyerapp.com/addtional-details/img3.png
-                        - http://buyerapp.com/addtional-details/img4.png
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                     actor_details:
@@ -2608,7 +2628,7 @@ x-flows:
                     descriptor:
                       code: PARENT
                       short_desc: PROVIDING RESOLUTION OPTIONS. PLEASE SELECT ONE
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2024-08-14T09:57:58.841Z'
                     proposed_by: NP2
                   - id: R1
                     ref_id: R_PARENT
@@ -2616,7 +2636,7 @@ x-flows:
                     descriptor:
                       code: REFUND
                       short_desc: Providing refund for the item
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2024-08-14T09:57:58.841Z'
                     proposed_by: NP2
                     tags:
                       - descriptor:
@@ -2626,15 +2646,14 @@ x-flows:
                               code: ITEM
                             value: I1
                           - descriptor:
-                              code: REFUND_AMOUNT
-                            value: '200'
+                              code: REFUND
                   - id: R2
                     ref_id: R_PARENT
                     ref_type: PARENT
                     descriptor:
                       code: REPLACEMENT
                       short_desc: Providing replacement of the item
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2024-08-14T09:57:58.841Z'
                     proposed_by: NP2
                     tags:
                       - descriptor:
@@ -2653,23 +2672,20 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M7
-              timestamp: '2023-01-15T10:00:00.469Z'
+              message_id: M10
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
-              updated_target:
+              update_target:
                 - path: issue.actions
                   action: APPENDED
               issue:
@@ -2688,7 +2704,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -2743,8 +2759,10 @@ x-flows:
                     url: https://buyerapp.com/additonal-details/desc.txt
                     content_type: text/plain
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
-                    - http://buyerapp.com/addtional-details/img2.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
+                  media:
+                    url: https://transitsolutions.in/logos/logo.icon
                 last_action_id: A10
                 actions:
                   - id: A1
@@ -2787,8 +2805,10 @@ x-flows:
                       code: INFO_PROVIDED
                       short_desc: Responded with images
                       images:
-                        - http://buyerapp.com/addtional-details/img3.png
-                        - http://buyerapp.com/addtional-details/img4.png
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                     actor_details:
@@ -2853,7 +2873,7 @@ x-flows:
                     descriptor:
                       code: PARENT
                       short_desc: PROVIDING RESOLUTION OPTIONS. PLEASE SELECT ONE
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2024-08-14T09:57:58.841Z'
                     proposed_by: NP2
                   - id: R1
                     ref_id: R_PARENT
@@ -2861,7 +2881,7 @@ x-flows:
                     descriptor:
                       code: REFUND
                       short_desc: Providing refund for the item
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2024-08-14T09:57:58.841Z'
                     proposed_by: NP2
                     tags:
                       - descriptor:
@@ -2879,7 +2899,7 @@ x-flows:
                     descriptor:
                       code: REPLACEMENT
                       short_desc: Providing replacement of the item
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2024-08-14T09:57:58.841Z'
                     proposed_by: NP2
                     tags:
                       - descriptor:
@@ -2898,20 +2918,17 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: on_issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M7
-              timestamp: '2023-01-15T10:00:00.469Z'
+              message_id: M11
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               updated_target:
@@ -2933,7 +2950,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -3000,8 +3017,10 @@ x-flows:
                     url: https://buyerapp.com/additonal-details/desc.txt
                     content_type: text/plain
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
-                    - http://buyerapp.com/addtional-details/img2.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
+                    - url: http://buyerapp.com/addtional-details/img2.png
+                      size_type: xs
                 last_action_id: A11
                 actions:
                   - id: A1
@@ -3044,8 +3063,10 @@ x-flows:
                       code: INFO_PROVIDED
                       short_desc: Responded with images
                       images:
-                        - http://buyerapp.com/addtional-details/img3.png
-                        - http://buyerapp.com/addtional-details/img4.png
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                     actor_details:
@@ -3121,7 +3142,7 @@ x-flows:
                     descriptor:
                       code: PARENT
                       short_desc: PROVIDING RESOLUTION OPTIONS. PLEASE SELECT ONE
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2024-08-14T09:57:58.841Z'
                     proposed_by: NP2
                   - id: R1
                     ref_id: R_PARENT
@@ -3129,7 +3150,7 @@ x-flows:
                     descriptor:
                       code: REFUND
                       short_desc: Providing refund for the item
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2024-08-14T09:57:58.841Z'
                     proposed_by: NP2
                     tags:
                       - descriptor:
@@ -3147,7 +3168,7 @@ x-flows:
                     descriptor:
                       code: REPLACEMENT
                       short_desc: Providing replacement of the item
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2024-08-14T09:57:58.841Z'
                     proposed_by: NP2
                     tags:
                       - descriptor:
@@ -3166,23 +3187,20 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M8
-              timestamp: '2023-01-15T10:00:00.469Z'
+              message_id: M12
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
-              updated_target:
+              update_target:
                 - path: issue.actions[?(@.id==’A12’)]
                   action: APPENDED
               issue:
@@ -3201,7 +3219,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                   - ref_id: I1
                     ref_type: ITEM
                     tags:
@@ -3258,8 +3276,10 @@ x-flows:
                     url: https://buyerapp.com/additonal-details/desc.txt
                     content_type: text/plain
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
-                    - http://buyerapp.com/addtional-details/img2.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
+                  media:
+                    url: https://transitsolutions.in/logos/logo.icon
                 last_action_id: A12
                 actions:
                   - id: A1
@@ -3302,8 +3322,10 @@ x-flows:
                       code: INFO_PROVIDED
                       short_desc: Responded with images
                       images:
-                        - http://buyerapp.com/addtional-details/img3.png
-                        - http://buyerapp.com/addtional-details/img4.png
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                     actor_details:
@@ -3394,7 +3416,7 @@ x-flows:
                     descriptor:
                       code: PARENT
                       short_desc: PROVIDING RESOLUTION OPTIONS. PLEASE SELECT ONE
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2024-08-14T09:57:58.841Z'
                     proposed_by: NP2
                   - id: R1
                     ref_id: R_PARENT
@@ -3402,7 +3424,7 @@ x-flows:
                     descriptor:
                       code: REFUND
                       short_desc: Providing refund for the item
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2024-08-14T09:57:58.841Z'
                     proposed_by: NP2
                     tags:
                       - descriptor:
@@ -3420,7 +3442,7 @@ x-flows:
                     descriptor:
                       code: REPLACEMENT
                       short_desc: Providing replacement of the item
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2024-08-14T09:57:58.841Z'
                     proposed_by: NP2
                     tags:
                       - descriptor:
@@ -3473,28 +3495,25 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
               message_id: M1
-              timestamp: 2023-01-15T10:00:00.469Z
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               issue:
                 id: ISSUE-2
                 status: OPEN
                 level: ISSUE
-                created_at: 2023-01-15T10:00:00.469Z
-                updated_at: 2023-01-15T10:00:00.469Z
+                created_at: '2023-01-15T10:00:00.469Z'
+                updated_at: '2023-01-15T10:00:00.469Z'
                 expected_response_time:
                   duration: PT2H
                 expected_resolution_time:
@@ -3531,14 +3550,15 @@ x-flows:
                   code: VIS001
                   short_desc: Seller not visible on interface
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
                 last_action_id: A1
                 actions:
                   - id: A1
                     description:
                       code: OPEN
                       short_desc: Complaint created
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                     actor_details:
                       name: Sam Manuel
@@ -3552,28 +3572,25 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: on_issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M1
-              timestamp: 2023-01-15T10:00:00.469Z
+              message_id: M2
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               issue:
                 id: ISSUE-2
                 status: OPEN
                 level: ISSUE
-                created_at: 2023-01-15T10:00:00.469Z
-                updated_at: 2023-01-15T10:00:00.469Z
+                created_at: '2023-01-15T10:00:00.469Z'
+                updated_at: '2023-01-15T10:00:00.469Z'
                 expected_response_time:
                   duration: PT2H
                 expected_resolution_time:
@@ -3622,14 +3639,15 @@ x-flows:
                   code: VIS001
                   short_desc: Seller not visible on interface
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
                 last_action_id: A2
                 actions:
                   - id: A1
                     description:
                       code: OPEN
                       short_desc: Complaint created
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                     actor_details:
                       name: Sam Manuel
@@ -3637,7 +3655,7 @@ x-flows:
                     description:
                       code: PROCESSING
                       short_desc: Checking the issue raised
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                     actor_details:
                       name: Sam Manuel
@@ -3651,28 +3669,25 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: on_issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M2
-              timestamp: 2023-01-15T10:00:00.469Z
+              message_id: M3
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               issue:
                 id: ISSUE-2
                 status: OPEN
                 level: ISSUE
-                created_at: 2023-01-15T10:00:00.469Z
-                updated_at: 2023-01-15T10:00:00.469Z
+                created_at: '2023-01-15T10:00:00.469Z'
+                updated_at: '2023-01-15T10:00:00.469Z'
                 expected_response_time:
                   duration: PT2H
                 expected_resolution_time:
@@ -3731,14 +3746,15 @@ x-flows:
                   code: VIS001
                   short_desc: Seller not visible on interface
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
                 last_action_id: A3
                 actions:
                   - id: A1
                     description:
                       code: OPEN
                       short_desc: Complaint created
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                     actor_details:
                       name: Sam Manuel
@@ -3746,7 +3762,7 @@ x-flows:
                     description:
                       code: PROCESSING
                       short_desc: Checking the issue raised
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A3
                     ref_id: R1
@@ -3754,7 +3770,7 @@ x-flows:
                     description:
                       code: RESOLUTION_PROPOSED
                       short_desc: Resolution provided
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                 resolutions:
                   - id: R1
@@ -3763,7 +3779,7 @@ x-flows:
                       short_desc: >-
                         Error in ingestion, seller would be visible through the
                         next ingestion.
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2023-06-03T08:00:00.000Z'
                     proposed_by: NP2
       - summary: Seller app accepts the resolution proposed
         api: issue
@@ -3775,28 +3791,25 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M3
-              timestamp: 2023-01-15T10:00:00.469Z
+              message_id: M4
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               issue:
                 id: ISSUE-2
                 status: OPEN
                 level: ISSUE
-                created_at: 2023-01-15T10:00:00.469Z
-                updated_at: 2023-01-15T10:00:00.469Z
+                created_at: '2023-01-15T10:00:00.469Z'
+                updated_at: '2023-01-15T10:00:00.469Z'
                 expected_response_time:
                   duration: PT2H
                 expected_resolution_time:
@@ -3855,14 +3868,15 @@ x-flows:
                   code: VIS001
                   short_desc: Seller not visible on interface
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
                 last_action_id: A4
                 actions:
                   - id: A1
                     description:
                       code: OPEN
                       short_desc: Complaint created
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                     actor_details:
                       name: Sam Manuel
@@ -3870,7 +3884,7 @@ x-flows:
                     description:
                       code: PROCESSING
                       short_desc: Checking the issue raised
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A3
                     ref_id: R1
@@ -3878,7 +3892,7 @@ x-flows:
                     description:
                       code: RESOLUTION_PROPOSED
                       short_desc: Resolution provided
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A4
                     ref_id: R1
@@ -3886,7 +3900,7 @@ x-flows:
                     description:
                       code: RESOLUTION_ACCEPTED
                       short_desc: Will check once enabled
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                 resolutions:
                   - id: R1
@@ -3895,7 +3909,7 @@ x-flows:
                       short_desc: >-
                         Error in ingestion, seller would be visible through the
                         next ingestion.
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2024-08-14T09:57:58.841Z'
                     proposed_by: NP2
       - summary: Buyer app provides the resolution
         api: on_issue
@@ -3907,28 +3921,25 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: on_issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M3
-              timestamp: 2023-01-15T10:00:00.469Z
+              message_id: M5
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               issue:
                 id: ISSUE-2
                 status: RESOLVED
                 level: ISSUE
-                created_at: 2023-01-15T10:00:00.469Z
-                updated_at: 2023-01-15T10:00:00.469Z
+                created_at: '2023-01-15T10:00:00.469Z'
+                updated_at: '2023-01-15T10:00:00.469Z'
                 expected_response_time:
                   duration: PT2H
                 expected_resolution_time:
@@ -3989,14 +4000,15 @@ x-flows:
                   code: VIS001
                   short_desc: Seller not visible on interface
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
                 last_action_id: A5
                 actions:
                   - id: A1
                     description:
                       code: OPEN
                       short_desc: Complaint created
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                     actor_details:
                       name: Sam Manuel
@@ -4004,7 +4016,7 @@ x-flows:
                     description:
                       code: PROCESSING
                       short_desc: Checking the issue raised
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A3
                     ref_id: R1
@@ -4012,7 +4024,7 @@ x-flows:
                     description:
                       code: RESOLUTION_PROPOSED
                       short_desc: Resolution provided
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A4
                     ref_id: R1
@@ -4020,7 +4032,7 @@ x-flows:
                     description:
                       code: RESOLUTION_ACCEPTED
                       short_desc: Will check once enabled
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: A5
                     ref_id: R1
@@ -4028,7 +4040,7 @@ x-flows:
                     description:
                       code: RESOLVED
                       short_desc: Complaint resolved. Seller would be visible now
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                 resolutions:
                   - id: R1
@@ -4037,7 +4049,7 @@ x-flows:
                       short_desc: >-
                         Error in ingestion, seller would be visible through the
                         next ingestion.
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2023-06-03T08:00:00.000Z'
                     proposed_by: NP2
       - summary: Seller app escalates the complaint
         api: issue
@@ -4049,28 +4061,25 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M4
-              timestamp: 2023-01-15T10:00:00.469Z
+              message_id: M6
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               issue:
                 id: ISSUE-2
                 status: OPEN
                 level: GRIEVANCE
-                created_at: 2023-01-15T10:00:00.469Z
-                updated_at: 2023-01-15T10:00:00.469Z
+                created_at: '2023-01-15T10:00:00.469Z'
+                updated_at: '2023-01-15T10:00:00.469Z'
                 expected_response_time:
                   duration: PT2H
                 expected_resolution_time:
@@ -4131,14 +4140,15 @@ x-flows:
                   code: VIS001
                   short_desc: Seller not visible on interface
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
                 last_action_id: A6
                 actions:
                   - id: A1
                     description:
                       code: OPEN
                       short_desc: Complaint created
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                     actor_details:
                       name: Sam Manuel
@@ -4146,7 +4156,7 @@ x-flows:
                     description:
                       code: PROCESSING
                       short_desc: Checking the issue raised
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A3
                     ref_id: R1
@@ -4154,7 +4164,7 @@ x-flows:
                     description:
                       code: RESOLUTION_PROPOSED
                       short_desc: Resolution provided
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A4
                     ref_id: R1
@@ -4162,7 +4172,7 @@ x-flows:
                     description:
                       code: RESOLUTION_ACCEPTED
                       short_desc: Will check once enabled
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: A5
                     ref_id: R1
@@ -4170,7 +4180,7 @@ x-flows:
                     description:
                       code: RESOLVED
                       short_desc: Complaint resolved. Seller would be visible now
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A6
                     description:
@@ -4178,7 +4188,7 @@ x-flows:
                       short_desc: >-
                         Seller not visible on interface after the second
                         ingestion
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                 resolutions:
                   - id: R1
@@ -4187,7 +4197,7 @@ x-flows:
                       short_desc: >-
                         Error in ingestion, seller would be visible through the
                         next ingestion.
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2024-08-14T09:57:58.841Z'
                     proposed_by: NP2
       - summary: Buyer app responds with processing action
         api: on_issue
@@ -4198,28 +4208,25 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: on_issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M4
-              timestamp: 2023-01-15T10:00:00.469Z
+              message_id: M7
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               issue:
                 id: ISSUE-2
                 status: OPEN
                 level: GRIEVANCE
-                created_at: 2023-01-15T10:00:00.469Z
-                updated_at: 2023-01-15T10:00:00.469Z
+                created_at: '2023-01-15T10:00:00.469Z'
+                updated_at: '2023-01-15T10:00:00.469Z'
                 expected_response_time:
                   duration: PT2H
                 expected_resolution_time:
@@ -4280,14 +4287,15 @@ x-flows:
                   code: VIS001
                   short_desc: Seller not visible on interface
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
                 last_action_id: A7
                 actions:
                   - id: A1
                     description:
                       code: OPEN
                       short_desc: Complaint created
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                     actor_details:
                       name: Sam Manuel
@@ -4295,7 +4303,7 @@ x-flows:
                     description:
                       code: PROCESSING
                       short_desc: Checking the issue raised
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A3
                     ref_id: R1
@@ -4303,7 +4311,7 @@ x-flows:
                     description:
                       code: RESOLUTION_PROPOSED
                       short_desc: Resolution provided
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A4
                     ref_id: R1
@@ -4311,7 +4319,7 @@ x-flows:
                     description:
                       code: RESOLUTION_ACCEPTED
                       short_desc: Will check once enabled
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: A5
                     ref_id: R1
@@ -4319,7 +4327,7 @@ x-flows:
                     description:
                       code: RESOLVED
                       short_desc: Complaint resolved. Seller would be visible now
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A6
                     description:
@@ -4327,13 +4335,13 @@ x-flows:
                       short_desc: >-
                         Seller not visible on interface after the second
                         ingestion
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: A7
                     description:
                       code: PROCESSING
                       short_desc: Processing the complaint
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                 resolutions:
                   - id: R1
@@ -4342,7 +4350,7 @@ x-flows:
                       short_desc: >-
                         Error in ingestion, seller would be visible through the
                         next ingestion.
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2023-06-03T08:00:00.000Z'
                     proposed_by: NP2
       - summary: Buyer app responds with a proposed resolution
         api: on_issue
@@ -4354,28 +4362,25 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: on_issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M5
-              timestamp: 2023-01-15T10:00:00.469Z
+              message_id: M8
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               issue:
                 id: ISSUE-2
                 status: OPEN
                 level: GRIEVANCE
-                created_at: 2023-01-15T10:00:00.469Z
-                updated_at: 2023-01-15T10:00:00.469Z
+                created_at: '2023-01-15T10:00:00.469Z'
+                updated_at: '2023-01-15T10:00:00.469Z'
                 expected_response_time:
                   duration: PT2H
                 expected_resolution_time:
@@ -4436,14 +4441,15 @@ x-flows:
                   code: VIS001
                   short_desc: Seller not visible on interface
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
                 last_action_id: A8
                 actions:
                   - id: A1
                     description:
                       code: OPEN
                       short_desc: Complaint created
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                     actor_details:
                       name: Sam Manuel
@@ -4451,7 +4457,7 @@ x-flows:
                     description:
                       code: PROCESSING
                       short_desc: Checking the issue raised
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A3
                     ref_id: R1
@@ -4459,7 +4465,7 @@ x-flows:
                     description:
                       code: RESOLUTION_PROPOSED
                       short_desc: Resolution provided
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A4
                     ref_id: R1
@@ -4467,7 +4473,7 @@ x-flows:
                     description:
                       code: RESOLUTION_ACCEPTED
                       short_desc: Will check once enabled
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: A5
                     ref_id: R1
@@ -4475,7 +4481,7 @@ x-flows:
                     description:
                       code: RESOLVED
                       short_desc: Complaint resolved. Seller would be visible now
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A6
                     description:
@@ -4483,13 +4489,13 @@ x-flows:
                       short_desc: >-
                         Seller not visible on interface after the second
                         ingestion
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: A7
                     description:
                       code: PROCESSING
                       short_desc: Processing the complaint
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A8
                     ref_id: R2
@@ -4497,7 +4503,7 @@ x-flows:
                     description:
                       code: RESOLUTION_PROPOSED
                       short_desc: Resolution proposed
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                 resolutions:
                   - id: R1
@@ -4506,13 +4512,13 @@ x-flows:
                       short_desc: >-
                         Error in ingestion, seller would be visible through the
                         next ingestion.
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2023-06-03T08:00:00.000Z'
                     proposed_by: NP2
                   - id: R2
                     descriptor:
                       code: NOW-VISIBLE
                       short_desc: Error in interface, seller would now be visible.
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2023-06-03T08:00:00.000Z'
                     proposed_by: NP2
       - summary: Seller app accepts the resolution
         api: issue
@@ -4524,28 +4530,25 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M6
-              timestamp: 2023-01-15T10:00:00.469Z
+              message_id: M9
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               issue:
                 id: ISSUE-2
                 status: OPEN
                 level: GRIEVANCE
-                created_at: 2023-01-15T10:00:00.469Z
-                updated_at: 2023-01-15T10:00:00.469Z
+                created_at: '2023-01-15T10:00:00.469Z'
+                updated_at: '2023-01-15T10:00:00.469Z'
                 expected_response_time:
                   duration: PT2H
                 expected_resolution_time:
@@ -4606,14 +4609,15 @@ x-flows:
                   code: VIS001
                   short_desc: Seller not visible on interface
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
                 last_action_id: A9
                 actions:
                   - id: A1
                     description:
                       code: OPEN
                       short_desc: Complaint created
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                     actor_details:
                       name: Sam Manuel
@@ -4621,7 +4625,7 @@ x-flows:
                     description:
                       code: PROCESSING
                       short_desc: Checking the issue raised
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A3
                     ref_id: R1
@@ -4629,7 +4633,7 @@ x-flows:
                     description:
                       code: RESOLUTION_PROPOSED
                       short_desc: Resolution provided
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A4
                     ref_id: R1
@@ -4637,7 +4641,7 @@ x-flows:
                     description:
                       code: RESOLUTION_ACCEPTED
                       short_desc: Will check once enabled
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: A5
                     ref_id: R1
@@ -4645,7 +4649,7 @@ x-flows:
                     description:
                       code: RESOLVED
                       short_desc: Complaint resolved. Seller would be visible now
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A6
                     description:
@@ -4653,13 +4657,13 @@ x-flows:
                       short_desc: >-
                         Seller not visible on interface after the second
                         ingestion
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: A7
                     description:
                       code: PROCESSING
                       short_desc: Processing the complaint
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A8
                     ref_id: R2
@@ -4667,7 +4671,7 @@ x-flows:
                     description:
                       code: RESOLUTION_PROPOSED
                       short_desc: Resolution proposed
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A9
                     ref_id: R2
@@ -4675,7 +4679,7 @@ x-flows:
                     description:
                       code: RESOLUTION_ACCEPTED
                       short_desc: Will check once enabled
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                 resolutions:
                   - id: R1
@@ -4684,13 +4688,13 @@ x-flows:
                       short_desc: >-
                         Error in ingestion, seller would be visible through the
                         next ingestion.
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2024-08-14T09:57:58.841Z'
                     proposed_by: NP2
                   - id: R2
                     descriptor:
                       code: NOW-VISIBLE
                       short_desc: Error in interface, seller would now be visible.
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2024-08-14T09:57:58.841Z'
                     proposed_by: NP2
       - summary: Buyer app provides the resolution
         api: on_issue
@@ -4702,28 +4706,25 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: on_issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M6
-              timestamp: 2023-01-15T10:00:00.469Z
+              message_id: M10
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               issue:
                 id: ISSUE-2
                 status: RESOLVED
                 level: GRIEVANCE
-                created_at: 2023-01-15T10:00:00.469Z
-                updated_at: 2023-01-15T10:00:00.469Z
+                created_at: '2023-01-15T10:00:00.469Z'
+                updated_at: '2023-01-15T10:00:00.469Z'
                 expected_response_time:
                   duration: PT2H
                 expected_resolution_time:
@@ -4784,14 +4785,15 @@ x-flows:
                   code: VIS001
                   short_desc: Seller not visible on interface
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
                 last_action_id: A10
                 actions:
                   - id: A1
                     description:
                       code: OPEN
                       short_desc: Complaint created
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                     actor_details:
                       name: Sam Manuel
@@ -4799,7 +4801,7 @@ x-flows:
                     description:
                       code: PROCESSING
                       short_desc: Checking the issue raised
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A3
                     ref_id: R1
@@ -4807,7 +4809,7 @@ x-flows:
                     description:
                       code: RESOLUTION_PROPOSED
                       short_desc: Resolution provided
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A4
                     ref_id: R1
@@ -4815,7 +4817,7 @@ x-flows:
                     description:
                       code: RESOLUTION_ACCEPTED
                       short_desc: Will check once enabled
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: A5
                     ref_id: R1
@@ -4823,7 +4825,7 @@ x-flows:
                     description:
                       code: RESOLVED
                       short_desc: Complaint resolved. Seller would be visible now
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A6
                     description:
@@ -4831,13 +4833,13 @@ x-flows:
                       short_desc: >-
                         Seller not visible on interface after the second
                         ingestion
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: A7
                     description:
                       code: PROCESSING
                       short_desc: Processing the complaint
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A8
                     ref_id: R2
@@ -4845,7 +4847,7 @@ x-flows:
                     description:
                       code: RESOLUTION_PROPOSED
                       short_desc: Resolution proposed
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A9
                     ref_id: R2
@@ -4853,7 +4855,7 @@ x-flows:
                     description:
                       code: RESOLUTION_ACCEPTED
                       short_desc: Will check once enabled
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: A10
                     ref_id: R2
@@ -4861,7 +4863,7 @@ x-flows:
                     description:
                       code: RESOLVED
                       short_desc: Complaint resolved. Seller is visible now
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                 resolutions:
                   - id: R1
@@ -4870,13 +4872,13 @@ x-flows:
                       short_desc: >-
                         Error in ingestion, seller would be visible through the
                         next ingestion.
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2023-06-03T08:00:00.000Z'
                     proposed_by: NP2
                   - id: R2
                     descriptor:
                       code: NOW-VISIBLE
                       short_desc: Error in interface, seller would now be visible.
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2023-06-03T08:00:00.000Z'
                     proposed_by: NP2
       - summary: Seller app closes the complaint
         api: issue
@@ -4888,28 +4890,25 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M7
-              timestamp: 2023-01-15T10:00:00.469Z
+              message_id: M11
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               issue:
                 id: ISSUE-2
                 status: CLOSED
                 level: GRIEVANCE
-                created_at: 2023-01-15T10:00:00.469Z
-                updated_at: 2023-01-15T10:00:00.469Z
+                created_at: '2023-01-15T10:00:00.469Z'
+                updated_at: '2023-01-15T10:00:00.469Z'
                 expected_response_time:
                   duration: PT2H
                 expected_resolution_time:
@@ -4970,14 +4969,15 @@ x-flows:
                   code: VIS001
                   short_desc: Seller not visible on interface
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
                 last_action_id: A11
                 actions:
                   - id: A1
                     description:
                       code: OPEN
                       short_desc: Complaint created
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                     actor_details:
                       name: Sam Manuel
@@ -4985,7 +4985,7 @@ x-flows:
                     description:
                       code: PROCESSING
                       short_desc: Checking the issue raised
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A3
                     ref_id: R1
@@ -4993,7 +4993,7 @@ x-flows:
                     description:
                       code: RESOLUTION_PROPOSED
                       short_desc: Resolution provided
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A4
                     ref_id: R1
@@ -5001,7 +5001,7 @@ x-flows:
                     description:
                       code: RESOLUTION_ACCEPTED
                       short_desc: Will check once enabled
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: A5
                     ref_id: R1
@@ -5009,7 +5009,7 @@ x-flows:
                     description:
                       code: RESOLVED
                       short_desc: Complaint resolved. Seller would be visible now
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A6
                     description:
@@ -5017,13 +5017,13 @@ x-flows:
                       short_desc: >-
                         Seller not visible on interface after the second
                         ingestion
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: A7
                     description:
                       code: PROCESSING
                       short_desc: Processing the complaint
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A8
                     ref_id: R2
@@ -5031,7 +5031,7 @@ x-flows:
                     description:
                       code: RESOLUTION_PROPOSED
                       short_desc: Resolution proposed
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A9
                     ref_id: R2
@@ -5039,7 +5039,7 @@ x-flows:
                     description:
                       code: RESOLUTION_ACCEPTED
                       short_desc: Will check once enabled
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: A10
                     ref_id: R2
@@ -5047,13 +5047,13 @@ x-flows:
                     description:
                       code: RESOLVED
                       short_desc: Complaint resolved. Seller is visible now
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A11
                     description:
                       code: CLOSED
                       short_desc: Seller now visible, closing the complaint
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                     tags:
                       - descriptor:
@@ -5069,20 +5069,20 @@ x-flows:
                       short_desc: >-
                         Error in ingestion, seller would be visible through the
                         next ingestion.
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2024-08-14T09:57:58.841Z'
                     proposed_by: NP2
                   - id: R2
                     descriptor:
                       code: NOW-VISIBLE
                       short_desc: Error in interface, seller would now be visible.
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2024-08-14T09:57:58.841Z'
                     proposed_by: NP2
-  - summary: Flow3 - Buyer raises a complaint for fulfilment category
+  - summary: Flow3 - Buyer raises a complaint for FULFILLMENT category
     details:
       - description: >-
           This flow provides an illustrative example workflow for the IGM
           framework where an end consumer (complainant) raises a complaint with
-          regards to their fulfilment experience for their retail order. The
+          regards to their FULFILLMENT experience for their retail order. The
           seller app (on-network logistics buyer) analyses the complaint and
           feels the logistics seller app needs to be consulted for this
           complaint. The retail seller app creates a complaint to the logistics
@@ -5130,7 +5130,7 @@ x-flows:
               SellerApp->>BuyerApp: Closes the issue
     steps:
       - summary: >-
-          Buyer raises a complaint for fulfilment category; buyer app creates
+          Buyer raises a complaint for FULFILLMENT category; buyer app creates
           issue call
         api: issue
         details:
@@ -5140,20 +5140,17 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
               message_id: M1
-              timestamp: '2023-01-15T10:00:00.469Z'
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               issue:
@@ -5172,7 +5169,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5220,20 +5217,17 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: on_issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M1
-              timestamp: '2023-01-15T10:00:00.469Z'
+              message_id: M2
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               issue:
@@ -5252,7 +5246,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5293,8 +5287,10 @@ x-flows:
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
-                    - http://buyerapp.com/addtional-details/img2.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
+                    - url: http://buyerapp.com/addtional-details/img2.png
+                      size_type: xs
                 last_action_id: AR2
                 actions:
                   - id: AR1
@@ -5320,29 +5316,26 @@ x-flows:
         example:
           value:
             context:
-              domain: nic2004:60232
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
+              domain: ONDC:RET10
               action: issue
-              core_version: 2.0.0
-              bap_id: sellerapp.com
-              bap_uri: https://sellerapp.com/ondc
-              bpp_id: logisticsapp.com
-              bpp_uri: https://logisticsapp.com/ondc
-              transaction_id: T2
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
+              bpp_id: sellerapp.com
+              bpp_uri: https://sellerapp.com/ondc
+              transaction_id: T1
               message_id: M3
-              timestamp: 2023-01-15T10:00:00.469Z
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               issue:
                 id: ISSUE-2
                 status: OPEN
                 level: ISSUE
-                created_at: 2023-01-15T10:00:00.469Z
-                updated_at: 2023-01-15T10:00:00.469Z
+                created_at: '2023-01-15T10:00:00.469Z'
+                updated_at: '2023-01-15T10:00:00.469Z'
                 expected_response_time:
                   duration: PT2H
                 expected_resolution_time:
@@ -5353,7 +5346,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5382,15 +5375,17 @@ x-flows:
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
-                    - http://buyerapp.com/addtional-details/img2.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
+                    - url: http://buyerapp.com/addtional-details/img2.png
+                      size_type: xs
                 last_action_id: AL1
                 actions:
                   - id: AL1
                     description:
                       code: OPEN
                       short_desc: Complaint created
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                     actor_details:
                       name: Mark Anthony
@@ -5403,21 +5398,18 @@ x-flows:
         example:
           value:
             context:
-              domain: nic2004:60232
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
+              domain: ONDC:RET10
               action: on_issue
-              core_version: 2.0.0
-              bap_id: sellerapp.com
-              bap_uri: https://sellerapp.com/ondc
-              bpp_id: logisticsapp.com
-              bpp_uri: https://logisticsapp.com/ondc
-              transaction_id: T2
-              message_id: M3
-              timestamp: '2023-01-15T10:00:00.469Z'
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
+              bpp_id: sellerapp.com
+              bpp_uri: https://sellerapp.com/ondc
+              transaction_id: T1
+              message_id: M4
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               issue:
@@ -5436,7 +5428,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5477,8 +5469,10 @@ x-flows:
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
-                    - http://buyerapp.com/addtional-details/img2.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
+                    - url: http://buyerapp.com/addtional-details/img2.png
+                      size_type: xs
                 last_action_id: AL2
                 actions:
                   - id: AL1
@@ -5504,21 +5498,18 @@ x-flows:
         example:
           value:
             context:
-              domain: nic2004:60232
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
+              domain: ONDC:RET10
               action: on_issue
-              core_version: 2.0.0
-              bap_id: sellerapp.com
-              bap_uri: https://sellerapp.com/ondc
-              bpp_id: logisticsapp.com
-              bpp_uri: https://logisticsapp.com/ondc
-              transaction_id: T2
-              message_id: M4
-              timestamp: '2023-01-15T10:00:00.469Z'
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
+              bpp_id: sellerapp.com
+              bpp_uri: https://sellerapp.com/ondc
+              transaction_id: T1
+              message_id: M5
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               issue:
@@ -5537,7 +5528,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5578,8 +5569,10 @@ x-flows:
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
-                    - http://buyerapp.com/addtional-details/img2.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
+                    - url: http://buyerapp.com/addtional-details/img2.png
+                      size_type: xs
                 last_action_id: AL4
                 actions:
                   - id: AL1
@@ -5599,14 +5592,14 @@ x-flows:
                   - id: AL3
                     description:
                       name: INFO001
-                      code: INFO-REQUESTED
+                      code: INFO_REQUESTED
                       short_desc: Please provide item images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
                   - id: AL4
                     description:
                       name: INFO002
-                      code: INFO-REQUESTED
+                      code: INFO_REQUESTED
                       short_desc: Please provide package images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
@@ -5622,20 +5615,17 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: on_issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M5
-              timestamp: '2023-01-15T10:00:00.469Z'
+              message_id: M6
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               issue:
@@ -5654,7 +5644,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5695,8 +5685,10 @@ x-flows:
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
-                    - http://buyerapp.com/addtional-details/img2.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
+                    - url: http://buyerapp.com/addtional-details/img2.png
+                      size_type: xs
                 last_action_id: AR4
                 actions:
                   - id: AR1
@@ -5716,14 +5708,14 @@ x-flows:
                   - id: AR3
                     description:
                       name: INFO001
-                      code: INFO-REQUESTED
+                      code: INFO_REQUESTED
                       short_desc: Please provide item images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
                   - id: AR4
                     description:
                       name: INFO002
-                      code: INFO-REQUESTED
+                      code: INFO_REQUESTED
                       short_desc: Please provide package images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
@@ -5737,28 +5729,25 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M6
-              timestamp: 2023-01-15T10:00:00.469Z
+              message_id: M7
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               issue:
                 id: ISSUE-1
                 status: OPEN
                 level: ISSUE
-                created_at: 2023-01-15T10:00:00.469Z
-                updated_at: 2023-01-15T10:00:00.469Z
+                created_at: '2023-01-15T10:00:00.469Z'
+                updated_at: '2023-01-15T10:00:00.469Z'
                 expected_response_time:
                   duration: PT2H
                 expected_resolution_time:
@@ -5769,7 +5758,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5812,55 +5801,61 @@ x-flows:
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
-                    - http://buyerapp.com/addtional-details/img2.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
+                    - url: http://buyerapp.com/addtional-details/img2.png
+                      size_type: xs
                 last_action_id: AR6
                 actions:
                   - id: AR1
                     description:
                       code: OPEN
                       short_desc: Complaint created
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: AR2
                     description:
                       code: PROCESSING
                       short_desc: Complaint is being processed
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                     actor_details:
                       name: Mark Anthony
                   - id: AR3
                     description:
                       name: INFO001
-                      code: INFO-REQUESTED
+                      code: INFO_REQUESTED
                       short_desc: Please provide item images
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AR4
                     description:
                       name: INFO002
-                      code: INFO-REQUESTED
+                      code: INFO_REQUESTED
                       short_desc: Please provide package images
-                    updated_at: 2023-01-15T10:00:00.469Z
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AR5
                     description:
                       name: INFO001
-                      code: INFO-PROVIDED
+                      code: INFO_PROVIDED
                       images:
-                        - http://buyerapp.com/addtional-details/img1.png
-                        - http://buyerapp.com/addtional-details/img2.png
-                    updated_at: 2023-01-15T10:00:00.469Z
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: AR6
                     description:
                       name: INFO002
-                      code: INFO-PROVIDED
+                      code: INFO_PROVIDED
                       images:
-                        - http://buyerapp.com/addtional-details/img1.png
-                        - http://buyerapp.com/addtional-details/img2.png
-                    updated_at: 2023-01-15T10:00:00.469Z
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
+                    updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
       - summary: Seller app cascades with the relevant information
         api: issue
@@ -5871,21 +5866,18 @@ x-flows:
         example:
           value:
             context:
-              domain: nic2004:60232
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
+              domain: ONDC:RET10
               action: issue
-              core_version: 2.0.0
-              bap_id: sellerapp.com
-              bap_uri: https://sellerapp.com/ondc
-              bpp_id: logisticsapp.com
-              bpp_uri: https://logisticsapp.com/ondc
-              transaction_id: T2
-              message_id: M7
-              timestamp: '2023-01-15T10:00:00.469Z'
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
+              bpp_id: sellerapp.com
+              bpp_uri: https://sellerapp.com/ondc
+              transaction_id: T1
+              message_id: M8
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               issue:
@@ -5904,7 +5896,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5947,8 +5939,10 @@ x-flows:
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
-                    - http://buyerapp.com/addtional-details/img2.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
+                    - url: http://buyerapp.com/addtional-details/img2.png
+                      size_type: xs
                 last_action_id: AL6
                 actions:
                   - id: AL1
@@ -5968,14 +5962,14 @@ x-flows:
                   - id: AL3
                     description:
                       name: INFO001
-                      code: INFO-REQUESTED
+                      code: INFO_REQUESTED
                       short_desc: Please provide item images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
                   - id: AL4
                     description:
                       name: INFO002
-                      code: INFO-REQUESTED
+                      code: INFO_REQUESTED
                       short_desc: Please provide package images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
@@ -5983,20 +5977,24 @@ x-flows:
                     ref_id: AL3
                     description:
                       name: INFO001
-                      code: INFO-PROVIDED
+                      code: INFO_PROVIDED
                       images:
-                        - http://buyerapp.com/addtional-details/img1.png
-                        - http://buyerapp.com/addtional-details/img2.png
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AL6
                     ref_id: AL4
                     description:
                       name: INFO002
-                      code: INFO-PROVIDED
+                      code: INFO_PROVIDED
                       images:
-                        - http://buyerapp.com/addtional-details/img1.png
-                        - http://buyerapp.com/addtional-details/img2.png
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
       - summary: Lsp responds with processing action
@@ -6008,21 +6006,18 @@ x-flows:
         example:
           value:
             context:
-              domain: nic2004:60232
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
+              domain: ONDC:RET10
               action: on_issue
-              core_version: 2.0.0
-              bap_id: sellerapp.com
-              bap_uri: https://sellerapp.com/ondc
-              bpp_id: logisticsapp.com
-              bpp_uri: https://logisticsapp.com/ondc
-              transaction_id: T2
-              message_id: M7
-              timestamp: '2023-01-15T10:00:00.469Z'
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
+              bpp_id: sellerapp.com
+              bpp_uri: https://sellerapp.com/ondc
+              transaction_id: T1
+              message_id: M9
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               issue:
@@ -6041,7 +6036,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -6084,8 +6079,10 @@ x-flows:
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
-                    - http://buyerapp.com/addtional-details/img2.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
+                    - url: http://buyerapp.com/addtional-details/img2.png
+                      size_type: xs
                 last_action_id: AL7
                 actions:
                   - id: AL1
@@ -6105,14 +6102,14 @@ x-flows:
                   - id: AL3
                     description:
                       name: INFO001
-                      code: INFO-REQUESTED
+                      code: INFO_REQUESTED
                       short_desc: Please provide item images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
                   - id: AL4
                     description:
                       name: INFO002
-                      code: INFO-REQUESTED
+                      code: INFO_REQUESTED
                       short_desc: Please provide package images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
@@ -6120,20 +6117,24 @@ x-flows:
                     ref_id: AL3
                     description:
                       name: INFO001
-                      code: INFO-PROVIDED
+                      code: INFO_PROVIDED
                       images:
-                        - http://buyerapp.com/addtional-details/img1.png
-                        - http://buyerapp.com/addtional-details/img2.png
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AL6
                     ref_id: AL4
                     description:
                       name: INFO002
-                      code: INFO-PROVIDED
+                      code: INFO_PROVIDED
                       images:
-                        - http://buyerapp.com/addtional-details/img1.png
-                        - http://buyerapp.com/addtional-details/img2.png
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AL7
@@ -6152,20 +6153,17 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: on_issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M8
-              timestamp: '2023-01-15T10:00:00.469Z'
+              message_id: M10
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               issue:
@@ -6184,7 +6182,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -6227,8 +6225,10 @@ x-flows:
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
-                    - http://buyerapp.com/addtional-details/img2.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
+                    - url: http://buyerapp.com/addtional-details/img2.png
+                      size_type: xs
                 last_action_id: AR7
                 actions:
                   - id: AR1
@@ -6248,33 +6248,37 @@ x-flows:
                   - id: AR3
                     description:
                       name: INFO001
-                      code: INFO-REQUESTED
+                      code: INFO_REQUESTED
                       short_desc: Please provide item images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AR4
                     description:
                       name: INFO002
-                      code: INFO-REQUESTED
+                      code: INFO_REQUESTED
                       short_desc: Please provide package images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AR5
                     description:
                       name: INFO001
-                      code: INFO-PROVIDED
+                      code: INFO_PROVIDED
                       images:
-                        - http://buyerapp.com/addtional-details/img1.png
-                        - http://buyerapp.com/addtional-details/img2.png
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: AR6
                     description:
                       name: INFO002
-                      code: INFO-PROVIDED
+                      code: INFO_PROVIDED
                       images:
-                        - http://buyerapp.com/addtional-details/img1.png
-                        - http://buyerapp.com/addtional-details/img2.png
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: AR7
@@ -6292,21 +6296,18 @@ x-flows:
         example:
           value:
             context:
-              domain: nic2004:60232
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
+              domain: ONDC:RET10
               action: on_issue
-              core_version: 2.0.0
-              bap_id: sellerapp.com
-              bap_uri: https://sellerapp.com/ondc
-              bpp_id: logisticsapp.com
-              bpp_uri: https://logisticsapp.com/ondc
-              transaction_id: T2
-              message_id: M9
-              timestamp: '2023-01-15T10:00:00.469Z'
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
+              bpp_id: sellerapp.com
+              bpp_uri: https://sellerapp.com/ondc
+              transaction_id: T1
+              message_id: M11
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               issue:
@@ -6325,7 +6326,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -6378,8 +6379,10 @@ x-flows:
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
-                    - http://buyerapp.com/addtional-details/img2.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
+                    - url: http://buyerapp.com/addtional-details/img2.png
+                      size_type: xs
                 last_action_id: AL8
                 actions:
                   - id: AL1
@@ -6399,14 +6402,14 @@ x-flows:
                   - id: AL3
                     description:
                       name: INFO001
-                      code: INFO-REQUESTED
+                      code: INFO_REQUESTED
                       short_desc: Please provide item images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
                   - id: AL4
                     description:
                       name: INFO002
-                      code: INFO-REQUESTED
+                      code: INFO_REQUESTED
                       short_desc: Please provide package images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
@@ -6414,20 +6417,24 @@ x-flows:
                     ref_id: AL3
                     description:
                       name: INFO001
-                      code: INFO-PROVIDED
+                      code: INFO_PROVIDED
                       images:
-                        - http://buyerapp.com/addtional-details/img1.png
-                        - http://buyerapp.com/addtional-details/img2.png
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AL6
                     ref_id: AL4
                     description:
                       name: INFO002
-                      code: INFO-PROVIDED
+                      code: INFO_PROVIDED
                       images:
-                        - http://buyerapp.com/addtional-details/img1.png
-                        - http://buyerapp.com/addtional-details/img2.png
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AL7
@@ -6448,7 +6455,7 @@ x-flows:
                     descriptor:
                       code: REFUND
                       short_desc: Providing refund for the item
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2024-08-14T09:57:58.841Z'
                     proposed_by: NP3
                     tags:
                       - descriptor:
@@ -6470,20 +6477,17 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: on_issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M10
-              timestamp: '2023-01-15T10:00:00.469Z'
+              message_id: M12
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               issue:
@@ -6502,7 +6506,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -6545,8 +6549,10 @@ x-flows:
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
-                    - http://buyerapp.com/addtional-details/img2.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
+                    - url: http://buyerapp.com/addtional-details/img2.png
+                      size_type: xs
                 last_action_id: AR8
                 actions:
                   - id: AR1
@@ -6566,14 +6572,14 @@ x-flows:
                   - id: AR3
                     description:
                       name: INFO001
-                      code: INFO-REQUESTED
+                      code: INFO_REQUESTED
                       short_desc: Please provide item images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AR4
                     description:
                       name: INFO002
-                      code: INFO-REQUESTED
+                      code: INFO_REQUESTED
                       short_desc: Please provide package images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
@@ -6581,20 +6587,24 @@ x-flows:
                     ref_id: AL3
                     description:
                       name: INFO001
-                      code: INFO-PROVIDED
+                      code: INFO_PROVIDED
                       images:
-                        - http://buyerapp.com/addtional-details/img1.png
-                        - http://buyerapp.com/addtional-details/img2.png
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: AR6
                     ref_id: AL4
                     description:
                       name: INFO002
-                      code: INFO-PROVIDED
+                      code: INFO_PROVIDED
                       images:
-                        - http://buyerapp.com/addtional-details/img1.png
-                        - http://buyerapp.com/addtional-details/img2.png
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: AR7
@@ -6615,7 +6625,7 @@ x-flows:
                     descriptor:
                       code: REFUND
                       short_desc: Providing refund for the item
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2024-08-14T09:57:58.841Z'
                     proposed_by: NP2
                     tags:
                       - descriptor:
@@ -6637,20 +6647,17 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M1
-              timestamp: '2023-01-15T10:00:00.469Z'
+              message_id: M13
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               issue:
@@ -6669,7 +6676,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -6712,8 +6719,10 @@ x-flows:
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
-                    - http://buyerapp.com/addtional-details/img2.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
+                    - url: http://buyerapp.com/addtional-details/img2.png
+                      size_type: xs
                 last_action_id: AR9
                 actions:
                   - id: AR1
@@ -6733,14 +6742,14 @@ x-flows:
                   - id: AR3
                     description:
                       name: INFO001
-                      code: INFO-REQUESTED
+                      code: INFO_REQUESTED
                       short_desc: Please provide item images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AR4
                     description:
                       name: INFO002
-                      code: INFO-REQUESTED
+                      code: INFO_REQUESTED
                       short_desc: Please provide package images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
@@ -6748,20 +6757,24 @@ x-flows:
                     ref_id: AL3
                     description:
                       name: INFO001
-                      code: INFO-PROVIDED
+                      code: INFO_PROVIDED
                       images:
-                        - http://buyerapp.com/addtional-details/img1.png
-                        - http://buyerapp.com/addtional-details/img2.png
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: AR6
                     ref_id: AL4
                     description:
                       name: INFO002
-                      code: INFO-PROVIDED
+                      code: INFO_PROVIDED
                       images:
-                        - http://buyerapp.com/addtional-details/img1.png
-                        - http://buyerapp.com/addtional-details/img2.png
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: AR7
@@ -6811,21 +6824,18 @@ x-flows:
         example:
           value:
             context:
-              domain: nic2004:60232
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
+              domain: ONDC:RET10
               action: issue
-              core_version: 2.0.0
-              bap_id: sellerapp.com
-              bap_uri: https://sellerapp.com/ondc
-              bpp_id: logisticsapp.com
-              bpp_uri: https://logisticsapp.com/ondc
-              transaction_id: T2
-              message_id: M3
-              timestamp: '2023-01-15T10:00:00.469Z'
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
+              bpp_id: sellerapp.com
+              bpp_uri: https://sellerapp.com/ondc
+              transaction_id: T1
+              message_id: M14
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               issue:
@@ -6844,7 +6854,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -6887,8 +6897,10 @@ x-flows:
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
-                    - http://buyerapp.com/addtional-details/img2.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
+                    - url: http://buyerapp.com/addtional-details/img2.png
+                      size_type: xs
                 last_action_id: AL9
                 actions:
                   - id: AL1
@@ -6908,14 +6920,14 @@ x-flows:
                   - id: AL3
                     description:
                       name: INFO001
-                      code: INFO-REQUESTED
+                      code: INFO_REQUESTED
                       short_desc: Please provide item images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
                   - id: AL4
                     description:
                       name: INFO002
-                      code: INFO-REQUESTED
+                      code: INFO_REQUESTED
                       short_desc: Please provide package images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
@@ -6923,20 +6935,24 @@ x-flows:
                     ref_id: AL3
                     description:
                       name: INFO001
-                      code: INFO-PROVIDED
+                      code: INFO_PROVIDED
                       images:
-                        - http://buyerapp.com/addtional-details/img1.png
-                        - http://buyerapp.com/addtional-details/img2.png
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AL6
                     ref_id: AL4
                     description:
                       name: INFO002
-                      code: INFO-PROVIDED
+                      code: INFO_PROVIDED
                       images:
-                        - http://buyerapp.com/addtional-details/img1.png
-                        - http://buyerapp.com/addtional-details/img2.png
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AL7
@@ -6964,7 +6980,7 @@ x-flows:
                     descriptor:
                       code: REFUND
                       short_desc: Providing refund for the item
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2024-08-14T09:57:58.841Z'
                     proposed_by: NP3
                     tags:
                       - descriptor:
@@ -6985,21 +7001,18 @@ x-flows:
         example:
           value:
             context:
-              domain: nic2004:60232
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
+              domain: ONDC:RET10
               action: on_issue
-              core_version: 2.0.0
-              bap_id: sellerapp.com
-              bap_uri: https://sellerapp.com/ondc
-              bpp_id: logisticsapp.com
-              bpp_uri: https://logisticsapp.com/ondc
-              transaction_id: T2
-              message_id: M3
-              timestamp: '2023-01-15T10:00:00.469Z'
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
+              bpp_id: sellerapp.com
+              bpp_uri: https://sellerapp.com/ondc
+              transaction_id: T1
+              message_id: M15
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               issue:
@@ -7018,7 +7031,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -7082,14 +7095,14 @@ x-flows:
                   - id: AL3
                     description:
                       name: INFO001
-                      code: INFO-REQUESTED
+                      code: INFO_REQUESTED
                       short_desc: Please provide item images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
                   - id: AL4
                     description:
                       name: INFO002
-                      code: INFO-REQUESTED
+                      code: INFO_REQUESTED
                       short_desc: Please provide package images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
@@ -7097,20 +7110,24 @@ x-flows:
                     ref_id: AL3
                     description:
                       name: INFO001
-                      code: INFO-PROVIDED
+                      code: INFO_PROVIDED
                       images:
-                        - http://buyerapp.com/addtional-details/img1.png
-                        - http://buyerapp.com/addtional-details/img2.png
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AL6
                     ref_id: AL4
                     description:
                       name: INFO002
-                      code: INFO-PROVIDED
+                      code: INFO_PROVIDED
                       images:
-                        - http://buyerapp.com/addtional-details/img1.png
-                        - http://buyerapp.com/addtional-details/img2.png
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AL7
@@ -7146,7 +7163,7 @@ x-flows:
                     descriptor:
                       code: REFUND
                       short_desc: Providing refund for the item
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2024-08-14T09:57:58.841Z'
                     proposed_by: NP3
                     tags:
                       - descriptor:
@@ -7168,20 +7185,17 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: on_issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M1
-              timestamp: '2023-01-15T10:00:00.469Z'
+              message_id: M16
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               issue:
@@ -7200,7 +7214,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -7243,8 +7257,10 @@ x-flows:
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
-                    - http://buyerapp.com/addtional-details/img2.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
+                    - url: http://buyerapp.com/addtional-details/img2.png
+                      size_type: xs
                 last_action_id: AR10
                 actions:
                   - id: AR1
@@ -7264,14 +7280,14 @@ x-flows:
                   - id: AR3
                     description:
                       name: INFO001
-                      code: INFO-REQUESTED
+                      code: INFO_REQUESTED
                       short_desc: Please provide item images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AR4
                     description:
                       name: INFO002
-                      code: INFO-REQUESTED
+                      code: INFO_REQUESTED
                       short_desc: Please provide package images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
@@ -7279,20 +7295,24 @@ x-flows:
                     ref_id: AL3
                     description:
                       name: INFO001
-                      code: INFO-PROVIDED
+                      code: INFO_PROVIDED
                       images:
-                        - http://buyerapp.com/addtional-details/img1.png
-                        - http://buyerapp.com/addtional-details/img2.png
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: AR6
                     ref_id: AL4
                     description:
                       name: INFO002
-                      code: INFO-PROVIDED
+                      code: INFO_PROVIDED
                       images:
-                        - http://buyerapp.com/addtional-details/img1.png
-                        - http://buyerapp.com/addtional-details/img2.png
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: AR7
@@ -7328,7 +7348,7 @@ x-flows:
                     descriptor:
                       code: REFUND
                       short_desc: Providing refund for the item
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2024-08-14T09:57:58.841Z'
                     proposed_by: NP2
                     tags:
                       - descriptor:
@@ -7350,20 +7370,17 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
               action: issue
-              core_version: 2.0.0
-              bap_id: buyerapp.com
-              bap_uri: https://buyerapp.com/ondc
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M1
-              timestamp: '2023-01-15T10:00:00.469Z'
+              message_id: M17
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               issue:
@@ -7382,7 +7399,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -7425,8 +7442,10 @@ x-flows:
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
-                    - http://buyerapp.com/addtional-details/img2.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
+                    - url: http://buyerapp.com/addtional-details/img2.png
+                      size_type: xs
                 last_action_id: AR11
                 actions:
                   - id: AR1
@@ -7446,14 +7465,14 @@ x-flows:
                   - id: AR3
                     description:
                       name: INFO001
-                      code: INFO-REQUESTED
+                      code: INFO_REQUESTED
                       short_desc: Please provide item images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AR4
                     description:
                       name: INFO002
-                      code: INFO-REQUESTED
+                      code: INFO_REQUESTED
                       short_desc: Please provide package images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
@@ -7461,20 +7480,24 @@ x-flows:
                     ref_id: AL3
                     description:
                       name: INFO001
-                      code: INFO-PROVIDED
+                      code: INFO_PROVIDED
                       images:
-                        - http://buyerapp.com/addtional-details/img1.png
-                        - http://buyerapp.com/addtional-details/img2.png
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: AR6
                     ref_id: AL4
                     description:
                       name: INFO002
-                      code: INFO-PROVIDED
+                      code: INFO_PROVIDED
                       images:
-                        - http://buyerapp.com/addtional-details/img1.png
-                        - http://buyerapp.com/addtional-details/img2.png
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: AR7
@@ -7516,7 +7539,7 @@ x-flows:
                     descriptor:
                       code: REFUND
                       short_desc: Providing refund for the item
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2024-08-14T09:57:58.841Z'
                     proposed_by: NP2
                     tags:
                       - descriptor:
@@ -7537,21 +7560,18 @@ x-flows:
         example:
           value:
             context:
-              domain: nic2004:60232
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
+              domain: ONDC:RET10
               action: issue
-              core_version: 2.0.0
-              bap_id: sellerapp.com
-              bap_uri: https://sellerapp.com/ondc
-              bpp_id: logisticsapp.com
-              bpp_uri: https://logisticsapp.com/ondc
-              transaction_id: T2
-              message_id: M3
-              timestamp: '2023-01-15T10:00:00.469Z'
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
+              bpp_id: sellerapp.com
+              bpp_uri: https://sellerapp.com/ondc
+              transaction_id: T1
+              message_id: M18
+              timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
               issue:
@@ -7570,7 +7590,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILMENT
+                    ref_type: FULFILLMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -7613,8 +7633,10 @@ x-flows:
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
                   images:
-                    - http://buyerapp.com/addtional-details/img1.png
-                    - http://buyerapp.com/addtional-details/img2.png
+                    - url: http://buyerapp.com/addtional-details/img1.png
+                      size_type: xs
+                    - url: http://buyerapp.com/addtional-details/img2.png
+                      size_type: xs
                 last_action_id: AL11
                 actions:
                   - id: AL1
@@ -7634,14 +7656,14 @@ x-flows:
                   - id: AL3
                     description:
                       name: INFO001
-                      code: INFO-REQUESTED
+                      code: INFO_REQUESTED
                       short_desc: Please provide item images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
                   - id: AL4
                     description:
                       name: INFO002
-                      code: INFO-REQUESTED
+                      code: INFO_REQUESTED
                       short_desc: Please provide package images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
@@ -7649,20 +7671,24 @@ x-flows:
                     ref_id: AL3
                     description:
                       name: INFO001
-                      code: INFO-PROVIDED
+                      code: INFO_PROVIDED
                       images:
-                        - http://buyerapp.com/addtional-details/img1.png
-                        - http://buyerapp.com/addtional-details/img2.png
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AL6
                     ref_id: AL4
                     description:
                       name: INFO002
-                      code: INFO-PROVIDED
+                      code: INFO_PROVIDED
                       images:
-                        - http://buyerapp.com/addtional-details/img1.png
-                        - http://buyerapp.com/addtional-details/img2.png
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                          size_type: xs
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                          size_type: xs
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AL7
@@ -7704,7 +7730,7 @@ x-flows:
                     descriptor:
                       code: REFUND
                       short_desc: Providing refund for the item
-                    updated_at: 2024-08-14T09:57:58.841Z
+                    updated_at: '2024-08-14T09:57:58.841Z'
                     proposed_by: NP3
                     tags:
                       - descriptor:
@@ -7717,39 +7743,362 @@ x-flows:
                               code: REFUND_AMOUNT
                             value: '200'
 x-examples:
-  Flow1:
-    summary: IGM implementation
-    description: >-
-      Issue and Grievance Management (IGM) framework enables NPs to handle
-      complaints over the network. This developer guide provides the details of
-      the IGM v2.0 specifications and model implementations covering enhanced
-      use cases over and above the IGM MVP v1.0.0. <br> Use cases /Features
-      available <a href =
-      "https://docs.google.com/document/d/1CBTOuFP4o6KqwYVPlN6H9ArUvygMjFiII-gSv4WXk4s/edit?usp=sharing">here</a>.
-      <br> Mock server steps for testing and log submission test case scenarios
-      available <a href =
-      "https://docs.google.com/document/d/1SGTCSzxNPtBvBpvtYf0I-MUxQCrYT_I-/edit?usp=sharing&ouid=100595989766867836454&rtpof=true&sd=true">here</a>
+  flow1:
+    summary: Examples for flow1
+    description: Examples for flow1
     example_set:
       issue:
         examples:
           - summary: issue
             description: TBD
-            value: *ref_1
+            value:
+              context:
+                domain: ONDC:RET10
+                action: issue
+                country: IND
+                city: std:080,
+                core_version: 1.2.0
+                bap_id: buyerNP.com
+                bap_uri: https://buyerNP.com/ondc
+                bpp_id: sellerapp.com
+                bpp_uri: https://sellerapp.com/ondc
+                transaction_id: T1
+                message_id: M1
+                timestamp: '2023-06-03T08:00:00.000Z'
+                ttl: PT30S
+              message:
+                issue:
+                  id: ISSUE-1
+                  status: OPEN
+                  level: ISSUE
+                  created_at: '2023-01-15T10:00:00.469Z'
+                  updated_at: '2023-01-15T10:00:00.469Z'
+                  expected_response_time:
+                    duration: PT2H
+                  expected_resolution_time:
+                    duration: P1D
+                  refs:
+                    - ref_id: O1
+                      ref_type: ORDER
+                    - ref_id: P1
+                      ref_type: PROVIDER
+                    - ref_id: F1
+                      ref_type: FULFILLMENT
+                    - ref_id: I1
+                      ref_type: ITEM
+                      tags:
+                        - descriptor:
+                            code: message.order.items
+                          list:
+                            - descriptor:
+                                code: quantity.selected.count
+                              value: '2'
+                  actors:
+                    - id: CUST1
+                      type: CONSUMER
+                      info:
+                        org:
+                          name: buyerapp.com::ONDC:RET10
+                        person:
+                          name: Sam Manuel
+                        contact:
+                          phone: '9879879870'
+                          email: sam@yahoo.com
+                    - id: NP1
+                      type: INTERFACING_NP
+                      info:
+                        org:
+                          name: buyerapp.com::ONDC:RET10
+                        contact:
+                          phone: '9450394039'
+                          email: buyerapp@interface.com
+                        person:
+                          name: John Doe
+                  source_id: CUST1
+                  complainant_id: NP1
+                  description:
+                    code: ITM004
+                    short_desc: Issue with product quality
+                    long_desc: >-
+                      Product quality is not correct. facing issues while using
+                      the product
+                    additional_desc:
+                      url: https://buyerapp.com/additonal-details/desc.txt
+                      content_type: text/plain
+                    images:
+                      - url: https://transitsolutions.in/logos/logo.icon
+                        size_type: xs
+                    media:
+                      url: https://transitsolutions.in/logos/logo.icon
+                  last_action_id: A1
+                  actions:
+                    - id: A1
+                      descriptor:
+                        code: OPEN
+                        short_desc: Complaint created
+                      updated_at: '2023-01-15T10:00:00.469Z'
+                      action_by: NP1
+                      actor_details:
+                        name: Sam Manuel
       on_issue:
         examples:
           - summary: on_issue
             description: on_issue
-            value: *ref_2
+            value:
+              context:
+                domain: ONDC:RET10
+                action: on_issue
+                country: IND
+                city: std:080,
+                core_version: 1.2.0
+                bap_id: buyerNP.com
+                bap_uri: https://buyerNP.com/ondc
+                bpp_id: sellerapp.com
+                bpp_uri: https://sellerapp.com/ondc
+                transaction_id: T1
+                message_id: M2
+                timestamp: '2023-06-03T08:00:00.000Z'
+                ttl: PT30S
+              message:
+                updated_target:
+                  - path: issue.actions
+                    action: APPENDED
+                issue:
+                  id: ISSUE-1
+                  status: PROCESSING
+                  level: ISSUE
+                  created_at: '2023-01-15T10:00:00.469Z'
+                  updated_at: '2023-01-15T10:00:00.469Z'
+                  expected_response_time:
+                    duration: PT2H
+                  expected_resolution_time:
+                    duration: P1D
+                  refs:
+                    - ref_id: O1
+                      ref_type: ORDER
+                    - ref_id: P1
+                      ref_type: PROVIDER
+                    - ref_id: F1
+                      ref_type: FULFILLMENT
+                    - ref_id: I1
+                      ref_type: ITEM
+                      tags:
+                        - descriptor:
+                            code: message.order.items
+                          list:
+                            - descriptor:
+                                code: quantity.selected.count
+                              value: '2'
+                  actors:
+                    - id: CUST1
+                      type: CONSUMER
+                      info:
+                        org:
+                          name: buyerapp.com::ONDC:RET10
+                        person:
+                          name: Sam Manuel
+                        contact:
+                          phone: '9879879870'
+                          email: sam@yahoo.com
+                    - id: NP1
+                      type: INTERFACING_NP
+                      info:
+                        org:
+                          name: buyerapp.com::ONDC:RET10
+                        contact:
+                          phone: '9450394039'
+                          email: buyerapp@interface.com
+                        person:
+                          name: John Doe
+                    - id: NP2
+                      type: TRANSACTION_COUNTERPARTY_NP
+                      info:
+                        org:
+                          name: sellerapp.com::ONDC:RET10
+                        contact:
+                          phone: '9450394140'
+                          email: respondentapp@respond.com
+                        person:
+                          name: Jane Doe
+                  source_id: CUST1
+                  complainant_id: NP1
+                  respondent_ids:
+                    - NP2
+                  description:
+                    code: ITM004
+                    short_desc: Issue with product quality
+                    long_desc: >-
+                      product quality is not correct. facing issues while using
+                      the product
+                    additional_desc:
+                      url: https://buyerapp.com/additonal-details/desc.txt
+                      content_type: text/plain
+                    images:
+                      - url: http://buyerapp.com/addtional-details/img1.png
+                        size_type: xs
+                      - url: http://buyerapp.com/addtional-details/img2.png
+                        size_type: xs
+                  last_action_id: A2
+                  actions:
+                    - id: A1
+                      description:
+                        code: OPEN
+                        short_desc: Complaint created
+                      updated_at: '2023-01-15T10:00:00.469Z'
+                      action_by: NP1
+                      actor_details:
+                        name: Sam Manuel
+                    - id: A2
+                      description:
+                        code: PROCESSING
+                        short_desc: Complaint created
+                      updated_at: '2023-01-15T10:00:10.469Z'
+                      action_by: NP1
+                      actor_details:
+                        name: Sam Manuel
       issue_status:
         examples:
           - summary: issue_status
             description: issue_status
-            value: *ref_3
+            value:
+              context:
+                domain: ONDC:RET10
+                location:
+                  country:
+                    code: IND
+                  city:
+                    code: '*'
+                action: issue_status
+                core_version: 2.0.0
+                bap_id: buyerapp.com
+                bap_uri: https://buyerapp.com/ondc
+                bpp_id: sellerapp.com
+                bpp_uri: https://sellerapp.com/ondc
+                transaction_id: T1
+                message_id: M1
+                timestamp: '2023-01-15T10:00:00.469Z'
+                ttl: PT30S
+              message:
+                issue_id: I1
       on_issue_status:
         examples:
           - summary: on_issue_status
             description: on_issue_status
-            value: *ref_4
+            value:
+              context:
+                domain: ONDC:RET10
+                location:
+                  country:
+                    code: IND
+                  city:
+                    code: '*'
+                action: issue_status
+                core_version: 2.0.0
+                bap_id: buyerapp.com
+                bap_uri: https://buyerapp.com/ondc
+                bpp_id: sellerapp.com
+                bpp_uri: https://sellerapp.com/ondc
+                transaction_id: T1
+                message_id: M1
+                timestamp: '2023-01-15T10:00:00.469Z'
+                ttl: PT30S
+              message:
+                updated_target:
+                  - path: issue.actions
+                    action: APPENDED
+                issue:
+                  id: ISSUE-1
+                  status: PROCESSING
+                  level: ISSUE
+                  created_at: '2023-01-15T10:00:00.469Z'
+                  updated_at: '2023-01-15T10:00:00.469Z'
+                  expected_response_time:
+                    duration: PT2H
+                  expected_resolution_time:
+                    duration: P1D
+                  refs:
+                    - ref_id: O1
+                      ref_type: ORDER
+                    - ref_id: P1
+                      ref_type: PROVIDER
+                    - ref_id: F1
+                      ref_type: FULFILLMENT
+                    - ref_id: I1
+                      ref_type: ITEM
+                      tags:
+                        - descriptor:
+                            code: message.order.items
+                          list:
+                            - descriptor:
+                                code: quantity.selected.count
+                              value: '2'
+                  actor_info:
+                    - id: CUST1
+                      type: CONSUMER
+                      info:
+                        org:
+                          name: buyerapp.com::ONDC:RET10
+                        person:
+                          name: Sam Manuel
+                        contact:
+                          phone: '9879879870'
+                          email: sam@yahoo.com
+                    - id: NP1
+                      type: INTERFACING_NP
+                      info:
+                        org:
+                          name: buyerapp.com::ONDC:RET10
+                        contact:
+                          phone: '9450394039'
+                          email: buyerapp@interface.com
+                        person:
+                          name: John Doe
+                    - id: NP2
+                      type: TRANSACTION-COUNTERPARTY-NP
+                      info:
+                        org:
+                          name: sellerapp.com::ONDC:RET10
+                        contact:
+                          phone: '9450394140'
+                          email: respondentapp@respond.com
+                        person:
+                          name: Jane Doe
+                  source_id: CUST1
+                  complainant_id: NP1
+                  respondent_ids:
+                    - NP2
+                  description:
+                    code: ITM004
+                    short_desc: Issue with product quality
+                    long_desc: >-
+                      product quality is not correct. facing issues while using
+                      the product
+                    additional_desc:
+                      url: https://buyerapp.com/additonal-details/desc.txt
+                      content_type: text/plain
+                    images:
+                      - url: http://buyerapp.com/addtional-details/img1.png
+                        size_type: xs
+                      - url: http://buyerapp.com/addtional-details/img2.png
+                        size_type: xs
+                  last_action_id: A2
+                  actions:
+                    - id: A1
+                      description:
+                        code: OPEN
+                        short_desc: Complaint created
+                      updated_at: '2023-01-15T10:00:00.469Z'
+                      action_by: NP1
+                      actor_details:
+                        name: Sam Manuel
+                    - id: A2
+                      description:
+                        code: PROCESSING
+                        short_desc: Complaint created
+                      updated_at: '2023-01-15T10:00:10.469Z'
+                      action_by: NP1
+                      actor_details:
+                        name: Sam Manuel
 x-attributes:
   Flow1:
     attribute_set:

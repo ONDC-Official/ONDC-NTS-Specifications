@@ -1,20 +1,17 @@
 context:
-  domain: nic2004:60232
-  location:
-    country:
-      code: IND
-    city:
-      code: "*"
-  action: on_issue
-  core_version: 2.0.0
-  bap_id: sellerapp.com
-  bap_uri: https://sellerapp.com/ondc
-  bpp_id: logisticsapp.com
-  bpp_uri: https://logisticsapp.com/ondc
-  transaction_id: T2
-  message_id: M7
-  timestamp: "2023-01-15T10:00:00.469Z"
-  ttl: PT30S
+    domain: ONDC:RET10
+    action: on_issue
+    country: IND
+    city: std:080,
+    core_version: 1.2.0
+    bap_id: buyerNP.com
+    bap_uri: https://buyerNP.com/ondc
+    bpp_id: sellerapp.com
+    bpp_uri: https://sellerapp.com/ondc
+    transaction_id: T1
+    message_id: M9
+    timestamp: '2023-06-03T08:00:00.000Z'
+    ttl: PT30S
 message:
   issue:
     id: ISSUE-2
@@ -75,8 +72,10 @@ message:
       short_desc: Issue with packaging
       long_desc: Food has spilled in the package
       images:
-        - http://buyerapp.com/addtional-details/img1.png
-        - http://buyerapp.com/addtional-details/img2.png
+        - url: http://buyerapp.com/addtional-details/img1.png
+          size_type: xs
+        - url: http://buyerapp.com/addtional-details/img2.png
+          size_type: xs 
     last_action_id: AL7
     actions:
       - id: AL1
@@ -96,14 +95,14 @@ message:
       - id: AL3
         description:
           name: INFO001
-          code: INFO-REQUESTED
+          code: INFO_REQUESTED
           short_desc: Please provide item images
         updated_at: "2023-01-15T10:00:00.469Z"
         action_by: NP3
       - id: AL4
         description:
           name: INFO002
-          code: INFO-REQUESTED
+          code: INFO_REQUESTED
           short_desc: Please provide package images
         updated_at: "2023-01-15T10:00:00.469Z"
         action_by: NP3
@@ -111,20 +110,24 @@ message:
         ref_id: AL3
         description:
           name: INFO001
-          code: INFO-PROVIDED
+          code: INFO_PROVIDED
           images:
-            - http://buyerapp.com/addtional-details/img1.png
-            - http://buyerapp.com/addtional-details/img2.png
+            - url: http://buyerapp.com/addtional-details/img1.png
+              size_type: xs
+            - url: http://buyerapp.com/addtional-details/img2.png
+              size_type: xs 
         updated_at: "2023-01-15T10:00:00.469Z"
         action_by: NP2
       - id: AL6
         ref_id: AL4
         description:
           name: INFO002
-          code: INFO-PROVIDED
+          code: INFO_PROVIDED
           images:
-            - http://buyerapp.com/addtional-details/img1.png
-            - http://buyerapp.com/addtional-details/img2.png
+            - url: http://buyerapp.com/addtional-details/img1.png
+              size_type: xs
+            - url: http://buyerapp.com/addtional-details/img2.png
+              size_type: xs 
         updated_at: "2023-01-15T10:00:00.469Z"
         action_by: NP2
       - id: AL7

@@ -309,6 +309,7 @@ components:
             $ref: '#/components/schemas/TagGroup'
     Action:
        type: object
+       additionalProperties: false
        properties:
         id:
           description: Describes id of the action
@@ -349,7 +350,39 @@ components:
           description: Describes the action_by
           type: string
         tags:
-          $ref: '#/components/schemas/TagGroup'
+          type: array
+          items:
+            $ref: '#/components/schemas/TagGroup'
+        actor_details:
+          type: object
+          properties:
+            name:
+              type: string
+        description:
+         allOf:
+          - $ref: "#/components/schemas/Descriptor"
+          - type: object
+            properties:
+              code:
+                type: string
+                enum:
+                  - OPEN
+                  - PROCESSING
+                  - CLOSED
+                  - CASCADED
+                  - INFO_REQUESTED
+                  - INFO_PROCESSING
+                  - INFO_PROVIDED
+                  - INFO_NOT_AVAILABLE
+                  - RESOLUTION_PROPOSED
+                  - RESOLUTION_FORWARDED
+                  - RESOLUTION_PROCESSING
+                  - RESOLUTION_ACCEPTED
+                  - RESOLUTION_REJECTED
+                  - RESOLVED
+                  - ESCALATED
+               
+
     Actor_info:
       type: object
       properties:
@@ -655,7 +688,7 @@ components:
             - JSON-SCHEMA-ERROR 
     TagGroup:
       description: 'A collection of tag objects with group level attributes. For detailed documentation on the Tags and Tag Groups schema go to https://github.com/beckn/protocol-specifications/discussions/316'
-      type: array
+      type: object
       properties:
         display:
           description: 'Indicates the display properties of the tag group. If display is set to false, then the group will not be displayed. If it is set to true, it should be displayed. However, group-level display properties can be overriden by individual tag-level display property. As this schema is purely for catalog display purposes, it is not recommended to send this value during search.'
@@ -709,6 +742,7 @@ components:
                   - CBIL_CORRECTION
                   - ENACH_CANCEL
                   - PARENT
+                  - NOW-VISIBLE
                   
         updated_at:
           description: timestamp for the capturing the time an issue status was last updated
@@ -718,7 +752,9 @@ components:
           description: Describes the action_by
           type: string
         tags:
-          $ref: '#/components/schemas/TagGroup'
+          type: array
+          items:
+            $ref: '#/components/schemas/TagGroup'
       
     Refs:
       type: object
@@ -741,6 +777,8 @@ components:
             - PAYMENT
             - CONSUMER
             - AGENT
+            - FULFILMENT
+            - TRANSACTION
         tags:
           description: tells abot ref details
           type: array

@@ -176,12 +176,11 @@ async function checkObjectKeys(currentExamplePos, currentSchemaPos, logObject) {
 }
 
 async function validateEnumsTags(exampleEnums, schemaMap) {
-  console.log(exampleEnums);
   for (const example of Object.keys(exampleEnums)) {
     const currentExample = exampleEnums[example];
     const currentSchema = schemaMap[example];
 
-    //context & mesage loop
+    //context & message loop
     for (const currentExamples of Object.keys(currentExample)) {
       const currentSchemaPos =
         currentSchema?.properties[currentExamples]?.properties ||
@@ -309,13 +308,13 @@ async function getSwaggerYaml(example_set, outputPath) {
     if (!process.argv.includes(SKIP_VALIDATION.enums) && !hasTrueResult) {
       hasTrueResult = await validateEnumsTags(enums, schemaMap);
     }
-    if (!process.argv.includes(SKIP_VALIDATION.tags) && !hasTrueResult) {
-      hasTrueResult = await validateTags(tags, schemaMap);
-    }
+    // if (!process.argv.includes(SKIP_VALIDATION.tags) && !hasTrueResult) {
+    //   hasTrueResult = await validateTags(tags, schemaMap);
+    // }
 
-    if (!process.argv.includes(SKIP_VALIDATION.attributes) && !hasTrueResult) {
-      hasTrueResult = await validateAttributes(attributes, schemaMap);
-    }
+    // if (!process.argv.includes(SKIP_VALIDATION.attributes) && !hasTrueResult) {
+    //   hasTrueResult = await validateAttributes(attributes, schemaMap);
+    // }
 
     if (hasTrueResult) return;
 
@@ -367,14 +366,14 @@ function buildSwagger(inPath, outPath) {
 
 function addEnumTag(base, layer) {
   base["x-enum"] = layer["enum"];
-  base["x-tags"] = layer["tags"];
+  // base["x-tags"] = layer["tags"];
   base["x-flows"] = layer["flows"];
   base["x-examples"] = layer["examples"];
   base["x-attributes"] = layer["attributes"];
-  base["x-errorcodes"] = layer["error_codes"];
-  base["x-tlc"] = layer["tlc"];
+  // base["x-errorcodes"] = layer["error_codes"];
+  // base["x-tlc"] = layer["tlc"];
   base["x-featureui"] = layer["feature-ui"]
-  base["x-sandboxui"] = layer["sandbox-ui"]
+  // base["x-sandboxui"] = layer["sandbox-ui"]
 
 }
 

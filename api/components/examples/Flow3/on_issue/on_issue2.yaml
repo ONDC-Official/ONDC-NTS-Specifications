@@ -1,20 +1,17 @@
 context:
-  domain: ONDC:RET10
-  location:
-    country:
-      code: IND
-    city:
-      code: "*"
-  action: on_issue
-  core_version: 2.0.0
-  bap_id: buyerapp.com
-  bap_uri: https://buyerapp.com/ondc
-  bpp_id: sellerapp.com
-  bpp_uri: https://sellerapp.com/ondc
-  transaction_id: T1
-  message_id: M1
-  timestamp: "2023-01-15T10:00:00.469Z"
-  ttl: PT30S
+    domain: ONDC:RET10
+    action: on_issue
+    country: IND
+    city: std:080,
+    core_version: 1.2.0
+    bap_id: buyerNP.com
+    bap_uri: https://buyerNP.com/ondc
+    bpp_id: sellerapp.com
+    bpp_uri: https://sellerapp.com/ondc
+    transaction_id: T1
+    message_id: M2
+    timestamp: '2023-06-03T08:00:00.000Z'
+    ttl: PT30S
 message:
   issue:
     id: ISSUE-1
@@ -75,8 +72,10 @@ message:
       short_desc: Issue with packaging
       long_desc: Food has spilled in the package
       images:
-        - http://buyerapp.com/addtional-details/img1.png
-        - http://buyerapp.com/addtional-details/img2.png
+        - url: http://buyerapp.com/addtional-details/img1.png
+          size_type: xs
+        - url: http://buyerapp.com/addtional-details/img2.png
+          size_type: xs 
     last_action_id: AR2
     actions:
       - id: AR1

@@ -37,8 +37,10 @@ message:
         url: https://buyerapp.com/additonal-details/desc.txt
         content_type: text/plain
       images:
-        - http://buyerapp.com/addtional-details/img1.png
-        - http://buyerapp.com/addtional-details/img2.png
+        - url:  http://buyerapp.com/addtional-details/img1.png
+          size_type: xs
+        - url: http://buyerapp.com/addtional-details/img2.png
+          size_type: xs
     source:
       network_participant_id: buyerapp.com/ondc
       type: CONSUMER
