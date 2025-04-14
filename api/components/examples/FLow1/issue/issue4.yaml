@@ -64,7 +64,7 @@ message:
           person:
             name: John Doe
       - id: NP2
-        type: TRANSACTION-COUNTERPARTY-NP
+        type: COUNTERPARTY_NP
         info:
           org:
             name: "sellerapp.com::ONDC:RET10"

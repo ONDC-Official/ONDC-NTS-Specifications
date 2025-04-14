@@ -59,8 +59,10 @@ message:
       short_desc: Issue with packaging
       long_desc: Food has spilled in the package
       images:
-        - http://buyerapp.com/addtional-details/img1.png
-        - http://buyerapp.com/addtional-details/img2.png
+        - url: http://buyerapp.com/addtional-details/img1.png
+          size_type: xs
+        - url: http://buyerapp.com/addtional-details/img2.png
+          size_type: xs
     last_action_id: AR1
     actions:
       - id: AR1

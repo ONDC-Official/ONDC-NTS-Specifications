@@ -132,36 +132,36 @@ issue:
               description: Complaint is escalated
               reference: <PR/Issue/Discussion Links md format text>  
             
-      # resolutions:
-      #   description:
-      #     code: 
-      #       - code: REFUND
-      #         description: The issue was resolved by issuing a refund.
-      #         reference: <PR/Issue/Discussion Links md format text>
-      #       - code: RETURN 
-      #         description: The issue was resolved by accepting a return.
-      #         reference: <PR/Issue/Discussion Links md format text> 
-      #       - code: REPLACEMENT
-      #         description: The issue was resolved by providing a replacement.
-      #         reference: <PR/Issue/Discussion Links md format text> 
-      #       - code: NO_ACTION 
-      #         description: No action was required or taken to resolve the issue.
-      #         reference: <PR/Issue/Discussion Links md format text>
-      #       - code: CANCEL
-      #         description: The issue was resolved by canceling the transaction or order.
-      #         reference: <PR/Issue/Discussion Links md format text>
-      #       - code: NOW_VISIBLE
-      #         description: The issue was resolved as the item or information is now visible.
-      #         reference: <PR/Issue/Discussion Links md format text> 
-      #       - code: PARENT
-      #         description: Identifying the group of various resolutions proposed for a complaint.
-      #         reference: <PR/Issue/Discussion Links md format text>
-      #       - code: RECONCILED
-      #         description: Resolution for RSF
-      #         reference: <PR/Issue/Discussion Links md format text>
-      #       - code: NOT_RECONCILED
-      #         description: Resolution for RSF
-      #         reference: <PR/Issue/Discussion Links md format text>    
+      resolutions:
+        descriptor:
+          code: 
+            - code: REFUND
+              description: The issue was resolved by issuing a refund.
+              reference: <PR/Issue/Discussion Links md format text>
+            - code: RETURN 
+              description: The issue was resolved by accepting a return.
+              reference: <PR/Issue/Discussion Links md format text> 
+            - code: REPLACEMENT
+              description: The issue was resolved by providing a replacement.
+              reference: <PR/Issue/Discussion Links md format text> 
+            - code: NO_ACTION 
+              description: No action was required or taken to resolve the issue.
+              reference: <PR/Issue/Discussion Links md format text>
+            - code: CANCEL
+              description: The issue was resolved by canceling the transaction or order.
+              reference: <PR/Issue/Discussion Links md format text>
+            - code: NOW_VISIBLE
+              description: The issue was resolved as the item or information is now visible.
+              reference: <PR/Issue/Discussion Links md format text> 
+            - code: PARENT
+              description: Identifying the group of various resolutions proposed for a complaint.
+              reference: <PR/Issue/Discussion Links md format text>
+            - code: RECONCILED
+              description: Resolution for RSF
+              reference: <PR/Issue/Discussion Links md format text>
+            - code: NOT_RECONCILED
+              description: Resolution for RSF
+              reference: <PR/Issue/Discussion Links md format text>    
 
 on_issue:
   message: *message

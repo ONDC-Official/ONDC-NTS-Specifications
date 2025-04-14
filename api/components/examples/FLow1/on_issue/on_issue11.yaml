@@ -13,7 +13,7 @@ context:
     timestamp: "2023-06-03T08:00:00.000Z"
     ttl: PT30S
 message:
-  updated_target:
+  update_target:
     - path: issue.actions
       action: APPENDED
   issue:
@@ -64,7 +64,7 @@ message:
           person:
             name: John Doe
       - id: NP2
-        type: TRANSACTION-COUNTERPARTY-NP
+        type: COUNTERPARTY_NP
         info:
           org:
             name: sellerapp.com::ONDC:RET10
@@ -74,7 +74,7 @@ message:
           person:
             name: Jane Doe
       - id: NP2-GRO
-        type: COUNTERPARTY-NP-GRO
+        type: OUNTERPARTY_NP_GRO
         info:
           org:
             name: sellerapp.com::ONDC:RET10

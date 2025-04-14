@@ -52,7 +52,7 @@ message:
           person:
             name: Jane Doe
       - id: NP3
-        type: TRANSACTION-COUNTERPARTY-NP
+        type: COUNTERPARTY_NP
         info:
           org:
             name: logisticsapp.com::ONDC:RET10
