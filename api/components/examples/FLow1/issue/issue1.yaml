@@ -73,8 +73,7 @@ message:
         - url: https://transitsolutions.in/logos/logo.icon
           size_type: xs
       media:
-        url: https://transitsolutions.in/logos/logo.icon
-          
+        - url: https://transitsolutions.in/logos/logo.icon
     last_action_id: A1
     actions:
       - id: A1

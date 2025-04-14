@@ -64,7 +64,7 @@ message:
           person:
             name: John Doe
       - id: NP2
-        type: TRANSACTION-COUNTERPARTY-NP
+        type: COUNTERPARTY_NP
         info:
           org:
             name: "sellerapp.com::ONDC:RET10"
@@ -88,7 +88,7 @@ message:
         - url:  http://buyerapp.com/addtional-details/img1.png
           size_type: xs
       media:  
-        url: https://transitsolutions.in/logos/logo.icon
+        - url: https://transitsolutions.in/logos/logo.icon
     last_action_id: A7
     actions:
       - id: A1

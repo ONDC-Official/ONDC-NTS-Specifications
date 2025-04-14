@@ -47,7 +47,7 @@ message:
     updated_at: "2023-01-15T10:31:00.523Z"
     resolution_provider:
       respondent_info:
-        type: TRANSACTION-COUNTERPARTY-NP
+        type: COUNTERPARTY_NP
         organization:
           org:
             name: sellerapp.com
@@ -67,7 +67,7 @@ message:
               contact:
                 phone: "9605960796"
                 email: email@gro.com
-              gro_type: TRANSACTION-COUNTERPARTY-NP-GRO
+              gro_type: COUNTERPARTY_NP_GRO
     resolution:
       short_desc: Loan disbursed
       long_desc: For this complaint, loan is now disbursed

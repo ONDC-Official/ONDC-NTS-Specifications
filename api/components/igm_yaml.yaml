@@ -221,6 +221,7 @@ components:
             * Picutres providing further information about the issue
             * documents attachment/links providing further information about the issue etc
       type: object
+      additionalProperties: false
       properties:
         id:
           description: |
@@ -287,8 +288,10 @@ components:
           type: array
           items:
             $ref:  "#/components/schemas/Action"       
-        descriptor:
-          $ref: "#/components/schemas/Descriptor"
+        # descriptor:
+        #   $ref: "#/components/schemas/Descriptor"
+        description:
+          $ref: "#/components/schemas/Descriptor"   
         actors:
           description: state the description of the actor that are involve
           type: array

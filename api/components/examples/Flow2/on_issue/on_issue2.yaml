@@ -50,7 +50,7 @@ message:
           person:
             name: John Doe
       - id: NP2
-        type: COUNTERPARTY-NP
+        type: COUNTERPARTY_NP
         info:
           org:
             name: buyerapp.com::ONDC:RET10
