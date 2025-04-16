@@ -2554,7 +2554,7 @@ x-flows:
                         name: sellerapp.com::ONDC:RET10
                       contact:
                         phone: '9999994039'
-                        email: buyerapp@interface.com
+                        email: sellerapp@interface.com
                       person:
                         name: Grievance Officer BNP
                 source_id: CUST1
@@ -2800,7 +2800,7 @@ x-flows:
                         name: sellerapp.com::ONDC:RET10
                       contact:
                         phone: '9999994039'
-                        email: buyerapp@interface.com
+                        email: sellerapp@interface.com
                       person:
                         name: Grievance Officer BNP
                 source_id: CUST1
@@ -3325,7 +3325,7 @@ x-flows:
                         name: sellerapp.com::ONDC:RET10
                       contact:
                         phone: '9999994039'
-                        email: buyerapp@interface.com
+                        email: sellerapp@interface.com
                       person:
                         name: Grievance Officer BNP
                 source_id: CUST1
