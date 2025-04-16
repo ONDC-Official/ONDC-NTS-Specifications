@@ -1,0 +1,52 @@
+code:
+  - Event: All (nack)
+    Description: Bad Request Error/ Signature failure
+    From: BAP/BPP
+    code: As per the transaction domain (viz 20001/ 30016…)
+  - Event: All (nack)
+    Description: Required fields are not updated in API request/ Schema failure
+    From: BAP/BPP
+    code: IGM001
+  - Event: /on_issue (error object
+    Description: order_id does not exist/ mismatched
+    From: BAP/BPP
+    code: IGM002
+  - Event: /on_issue (error object
+    Description: fullfilment_id does not exist/ mismatched
+    From: BAP/BPP
+    code: IGM003
+  - Event: /on_issue (error object
+    Description: item_id does not exist/ mismatched
+    From: BAP/BPP
+    code: IGM004 
+  - Event: /on_issue_status (error object)
+    Description: Specified network issue id does not exist
+    From: BAP/BPP
+    code: IGM005 
+  - Event: /on_issue_status (error object)
+    Description: NP subscriber id is not correct (bap_id / bpp_id)
+    From: BAP/BPP
+    code: IGM006  
+  - Event: /on_issue (error object)
+    Description: Wrong escalation/ Issue should be escalated to GRO before going to ODR
+    From: BAP/BPP
+    code: IGM007
+  - Event: /on_issue (error object
+    Description: >-
+      Duplicate complaint created 
+      (in case an open complaint is already created with same item/ fulfilment with same category and sub category)
+    From: BAP/BPP
+    code: IGM008 
+  - Event: /on_issue (error object)
+    Description: Invalid context.transaction_id
+    From: BAP/BPP
+    code: IGM009 
+  - Event: issue/ issue_status (nack)
+    Description: Failed due to internal errors (API call to be retried as per retrial mechanism)
+    From: BAP/BPP
+    code: 31001
+  - Event: on_issue/ on_issue_status (nack)
+    Description: Failed due to internal errors (API call to be retried as per retrial mechanism)
+    From: BAP/BPP
+    code: 23001               
+  
