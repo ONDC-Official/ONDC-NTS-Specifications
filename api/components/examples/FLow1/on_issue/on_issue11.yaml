@@ -82,7 +82,7 @@ message:
             phone: "9999994039"
             email: sellerapp@interface.com
           person:
-            name: Grievance Officer SNP     
+            name: Grievance Officer SNP
     source_id: CUST1
     complainant_id: NP1
     respondent_ids:
