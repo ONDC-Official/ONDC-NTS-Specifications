@@ -1,6 +1,9 @@
 summary: Illustrative Flow 1
 details:
- - description: This flow provides an illustrative example workflow of the IGM framework where an end consumer (complainant source) is raising a complaint related to a retail item bought with regards to its quality. The seller/ seller app (respondent) analyses the details shared and asks for additional information in the form of more images and the invoice. The buyer only provides images and may not have provided the invoice. The seller asks for the invoice again and the buyer then provides the same. Once received the seller provides two resolution options to the buyer and the buyer seller selects one of the resolutions. The seller then resolves the complaint with the chosen resolution and the buyer then closes the complaint.
+ - description: >-
+    Buyer raises a complaint for item category --> name change to --> Illustrative Flow 1
+    This flow provides an illustrative example workflow of the IGM framework in the retail domain where an end consumer (complainant source) is raising a complaint related to an item bought with regards to its quality. The seller/ seller app (respondent) analyses the details shared and asks for additional information in the form of more images and the invoice. The buyer only provides images and not the invoice. The seller asks for the invoice again and the buyer then provides the same. Once received, the seller provides two resolution options to the buyer and the buyer seller selects one of the resolutions. The seller then resolves the complaint with the chosen resolution and the buyer then closes the complaint.</br></br>
+    Features from the use case document covered in this flow - Use case 1, 2, 3
    mermaid: >-
     sequenceDiagram
       title  Buyer raising a complaint for an item

@@ -1,0 +1,47 @@
+## Change Log: Personal Loan API specs
+
+<table>
+<colgroup>
+<col style="width: 63%" />
+<col style="width: 36%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Version</th>
+<th>IGM_2.0.0_160425</th>
+</tr>
+
+<tr class="odd">
+<th>Updates in API Specs on dev doc</th>
+<th>16th April 2025</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+
+
+**IGM-2.0.0**
+  - Updated `images` structure with url & size_type
+      ```
+        "images": [
+          {
+            "url": "http://buyerapp.com/addtional-details/img1.png",
+            "size_type": "xs"
+          }
+        ]
+      ```
+  - Added `message.issue.action.description.name` in attribute_ui.
+  - Updated `media` structure with url
+      ```
+        "media": [
+          {
+            "url": "http://buyerapp.com/addtional-details/img1.png",
+          }
+        ]
+      ```
+  - Updated enums from actor_info to actors
+  - Added new enum, ESCALATED in actions.
+  - Updated, `updated_target` to `update_target`.
+  - Added type `COUNTERPARTY_NP_GRO` in issue/on_issue calls for Illustrative Flow 1.
+

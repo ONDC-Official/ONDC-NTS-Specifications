@@ -1072,17 +1072,20 @@ x-flows:
   - summary: Illustrative Flow 1
     details:
       - description: >-
-          This flow provides an illustrative example workflow of the IGM
-          framework where an end consumer (complainant source) is raising a
-          complaint related to a retail item bought with regards to its quality.
-          The seller/ seller app (respondent) analyses the details shared and
-          asks for additional information in the form of more images and the
-          invoice. The buyer only provides images and may not have provided the
-          invoice. The seller asks for the invoice again and the buyer then
-          provides the same. Once received the seller provides two resolution
-          options to the buyer and the buyer seller selects one of the
-          resolutions. The seller then resolves the complaint with the chosen
-          resolution and the buyer then closes the complaint.
+          Buyer raises a complaint for item category --> name change to -->
+          Illustrative Flow 1 This flow provides an illustrative example
+          workflow of the IGM framework in the retail domain where an end
+          consumer (complainant source) is raising a complaint related to an
+          item bought with regards to its quality. The seller/ seller app
+          (respondent) analyses the details shared and asks for additional
+          information in the form of more images and the invoice. The buyer only
+          provides images and not the invoice. The seller asks for the invoice
+          again and the buyer then provides the same. Once received, the seller
+          provides two resolution options to the buyer and the buyer seller
+          selects one of the resolutions. The seller then resolves the complaint
+          with the chosen resolution and the buyer then closes the
+          complaint.</br></br> Features from the use case document covered in
+          this flow - Use case 1, 2, 3
         mermaid: |-
           sequenceDiagram
             title  Buyer raising a complaint for an item
@@ -2544,6 +2547,16 @@ x-flows:
                         email: respondentapp@respond.com
                       person:
                         name: Jane Doe
+                  - id: NP2-GRO
+                    type: COUNTERPARTY_NP_GRO
+                    info:
+                      org:
+                        name: sellerapp.com::ONDC:RET10
+                      contact:
+                        phone: '9999994039'
+                        email: sellerapp@interface.com
+                      person:
+                        name: Grievance Officer BNP
                 source_id: CUST1
                 complainant_id: NP1
                 respondent_ids:
@@ -2780,6 +2793,16 @@ x-flows:
                         email: respondentapp@respond.com
                       person:
                         name: Jane Doe
+                  - id: NP2-GRO
+                    type: COUNTERPARTY_NP_GRO
+                    info:
+                      org:
+                        name: sellerapp.com::ONDC:RET10
+                      contact:
+                        phone: '9999994039'
+                        email: sellerapp@interface.com
+                      person:
+                        name: Grievance Officer BNP
                 source_id: CUST1
                 complainant_id: NP1
                 respondent_ids:
@@ -3295,6 +3318,16 @@ x-flows:
                         email: respondentapp@respond.com
                       person:
                         name: Jane Doe
+                  - id: NP2-GRO
+                    type: COUNTERPARTY_NP_GRO
+                    info:
+                      org:
+                        name: sellerapp.com::ONDC:RET10
+                      contact:
+                        phone: '9999994039'
+                        email: sellerapp@interface.com
+                      person:
+                        name: Grievance Officer BNP
                 source_id: CUST1
                 complainant_id: NP1
                 respondent_ids:
@@ -3489,19 +3522,22 @@ x-flows:
   - summary: Illustrative Flow 2
     details:
       - description: >-
-          This flow provides an illustrative example workflow for the IGM
-          framework where a seller / seller app (complainant) raises a complaint
-          that their store is not visible on the respective buyer app tagging
-          the transaction id of the /on_search request shared along with the
-          provider_id of the seller. The buyer analyses the complaints and
-          proposes a resolution saying the seller would now be visible. The
-          seller accepts the resolution and the buyer app resolves the same
-          claiming it is now visible on the interface. The seller escalates the
-          complaint as the seller is still not visible. The GRO of the buyer app
-          gets involved and attempts to analyse the complaint. They propose a
-          resolution acknowledging the mistake in their catalogue processing
-          workflow and resolve the complaint. The seller is now visible on the
-          buyer app interface and the seller closes the complaint.
+          Seller raises a complaint for policy issue --> name change to -->
+          Illustrative Flow 2 This flow provides an illustrative example
+          workflow for the IGM framework in the retail domain where a seller /
+          seller app (complainant) raises a complaint that their store is not
+          visible on the respective buyer app tagging the transaction id of the
+          /on_search request shared along with the provider_id of the seller.
+          The buyer analyses the complaints and proposes a resolution saying the
+          seller would now be visible. The seller accepts the resolution and the
+          buyer app resolves the same claiming it is now visible on the
+          interface. The seller escalates the complaint as the seller is still
+          not visible. The GRO of the buyer app gets involved and attempts to
+          analyse the complaint. They propose a resolution acknowledging the
+          mistake in their catalogue processing workflow and resolve the
+          complaint. The seller is now visible on the buyer app interface and
+          the seller closes the complaint.</br></br> Features from the use case
+          document covered in this flow - Use case 4, 5
         mermaid: |-
           sequenceDiagram
             participant SellerApp as Seller App
@@ -5115,29 +5151,33 @@ x-flows:
   - summary: Illustrative Flow 3
     details:
       - description: >-
-          This flow provides an illustrative example workflow for the IGM
-          framework where an end consumer (complainant) raises a complaint with
-          regards to their FULFILLMENT experience for their retail order. The
-          seller app (on-network logistics buyer) analyses the complaint and
-          feels the logistics seller app needs to be consulted for this
-          complaint. The retail seller app creates a complaint to the logistics
-          seller app with relevant information. Example illustrated here creates
-          a new complaint (new issue_id) for the logistics transaction with an
-          independent flow for the new complaint itself. In this case the seller
-          app is expected to maintain the mapping of the complaint flows and
-          ensure that in case disputes are raised for a complaint, they are able
-          source/ provide the complete trail of the complaint. The seller app
-          may choose to cascade the same "issue_id" or the same complaint as
-          well and build the actions array inclusive of all actions in which
-          case all actions taken by the logistics seller app are communicated
-          as-is to the retail buyer app as well as status updates. The logistics
-          seller app analyses the complaint and requires more images of the
-          packaging received. The seller app cascades the same request to the
-          buyer app and then the buyer provides the images required which is
-          cascaded back to the logistics provider. The logistics provider then
-          processes it and proposes a resolution. The cascaded resolution is
-          accepted by the buyer after which the logistics provider resolves the
-          complaint and the buyer closes the complaint
+          Buyer raises a complaint for fulfilment category --> change to -->
+          Illustrative Flow 3. </br> This flow provides an illustrative example
+          workflow for the IGM framework in the retail & logistics domain
+          involving a retail seller app that is also an on-network logistics
+          buyer app. Here an end consumer (complainant) raises a complaint with
+          regards to their fulfilment experience for their retail order. The
+          retail seller app analyses the complaint and feels the logistics
+          seller app needs to be consulted for this complaint. The retail seller
+          app creates a complaint to the logistics seller app with relevant
+          information. </br> Example illustrated here creates a new complaint
+          (new issue_id) for the logistics transaction with an independent flow
+          for the new complaint itself. In this case the seller app is expected
+          to maintain the mapping of the complaint flows and ensure that in case
+          disputes are raised for a complaint, they are able source/ provide the
+          complete trail of the complaint. The seller app may choose to cascade
+          the same "issue_id" or the same complaint as well and build the
+          actions array inclusive of all actions in which case all actions taken
+          by the logistics seller app are communicated as-is to the retail buyer
+          app as well as status updates.</br> The logistics seller app analyses
+          the complaint and requires more images of the packaging received. The
+          seller app cascades the same request to the buyer app and then the
+          buyer provides the images required which is cascaded back to the
+          logistics provider. The logistics provider then processes it and
+          proposes a resolution. The cascaded resolution is accepted by the
+          buyer after which the logistics provider resolves the complaint and
+          the buyer closes the complaint.</br> </br> Features from the use case
+          document covered in this flow - Use case 1, 2
         mermaid: |-
           sequenceDiagram
               participant BuyerApp as Buyer App
@@ -7794,6 +7834,9 @@ x-examples:
       <br> Mock server steps for testing and log submission test case scenarios
       available <a href =
       "https://docs.google.com/document/d/1SGTCSzxNPtBvBpvtYf0I-MUxQCrYT_I-/edit?usp=sharing&ouid=100595989766867836454&rtpof=true&sd=true">here</a>
+      </br> Frequently Asked Questions are available <a href =
+      "https://docs.google.com/document/d/1-NULesI1Z6GQ9y4Z0loGEG5yfunX5u9woON-qxYH6w0/edit?tab=t.0#heading=h.xp3r32ko292b"
+      target="_blank">here</a>. <br>
     example_set:
       issue:
         examples:
@@ -8007,6 +8050,14 @@ x-attributes:
                   owner: BAP
                   usage: Complaint created
                   description: Short description of the action performed
+                name:
+                  required: optional
+                  type: String
+                  owner: BAP
+                  usage: INFO001
+                  description: >-
+                    Used to provide details for the action taken, mandatory when
+                    action is INFO_REQUESTED
               'updated_at:':
                 required: mandatory
                 type: String
@@ -8215,6 +8266,14 @@ x-attributes:
                   owner: BPP
                   usage: Complaint created
                   description: Short description of the action performed
+                name:
+                  required: optional
+                  type: String
+                  owner: BPP
+                  usage: INFO001
+                  description: >-
+                    Used to provide details for the action taken, mandatory when
+                    action is INFO_REQUESTED
               updated_at:
                 required: mandatory
                 type: String
@@ -8234,6 +8293,65 @@ x-attributes:
                   owner: BPP
                   usage: Sam Manuel
                   description: Name of an agent of the actor
+x-errorcodes:
+  code:
+    - Event: All (nack)
+      Description: Bad Request Error/ Signature failure
+      From: BAP/BPP
+      code: As per the transaction domain (viz 20001/ 30016…)
+    - Event: All (nack)
+      Description: Required fields are not updated in API request/ Schema failure
+      From: BAP/BPP
+      code: IGM001
+    - Event: /on_issue (error object
+      Description: order_id does not exist/ mismatched
+      From: BAP/BPP
+      code: IGM002
+    - Event: /on_issue (error object
+      Description: fullfilment_id does not exist/ mismatched
+      From: BAP/BPP
+      code: IGM003
+    - Event: /on_issue (error object
+      Description: item_id does not exist/ mismatched
+      From: BAP/BPP
+      code: IGM004
+    - Event: /on_issue_status (error object)
+      Description: Specified network issue id does not exist
+      From: BAP/BPP
+      code: IGM005
+    - Event: /on_issue_status (error object)
+      Description: NP subscriber id is not correct (bap_id / bpp_id)
+      From: BAP/BPP
+      code: IGM006
+    - Event: /on_issue (error object)
+      Description: Wrong escalation/ Issue should be escalated to GRO before going to ODR
+      From: BAP/BPP
+      code: IGM007
+    - Event: /on_issue (error object
+      Description: >-
+        Duplicate complaint created  (in case an open complaint is already
+        created with same item/ fulfilment with same category and sub category)
+      From: BAP/BPP
+      code: IGM008
+    - Event: /on_issue (error object)
+      Description: Invalid context.transaction_id
+      From: BAP/BPP
+      code: IGM009
+    - Event: issue/ issue_status (nack)
+      Description: >-
+        Failed due to internal errors (API call to be retried as per retrial
+        mechanism)
+      From: BAP/BPP
+      code: 31001
+    - Event: on_issue/ on_issue_status (nack)
+      Description: >-
+        Failed due to internal errors (API call to be retried as per retrial
+        mechanism)
+      From: BAP/BPP
+      code: 23001
 x-featureui:
   filenames:
     - Technical Salient Features.md
+x-changeLog:
+  filenames:
+    - IGM_2.0.0_160425.md

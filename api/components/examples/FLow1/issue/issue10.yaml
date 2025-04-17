@@ -73,6 +73,16 @@
               email: respondentapp@respond.com
             person:
               name: Jane Doe
+        - id: NP2-GRO
+          type: COUNTERPARTY_NP_GRO
+          info:
+            org:
+              name: sellerapp.com::ONDC:RET10
+            contact:
+              phone: "9999994039"
+              email: sellerapp@interface.com
+            person:
+              name: Grievance Officer BNP
       source_id: CUST1
       complainant_id: NP1
       respondent_ids:

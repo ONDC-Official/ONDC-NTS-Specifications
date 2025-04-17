@@ -183,6 +183,12 @@ issue:
             owner: BAP
             usage: Complaint created
             description: Short description of the action performed
+          name:
+            required: optional
+            type: String
+            owner: BAP
+            usage: INFO001
+            description: Used to provide details for the action taken, mandatory when action is INFO_REQUESTED  
         'updated_at:':
           required: mandatory
           type: String
@@ -202,6 +208,10 @@ issue:
             owner: BAP
             usage: Sam Manuel
             description: Name of an agent of the actor
+      
+
+
+
 on_issue:
   message:
     issue:
@@ -387,6 +397,12 @@ on_issue:
             owner: BPP
             usage: Complaint created
             description: Short description of the action performed
+          name:
+            required: optional
+            type: String
+            owner: BPP
+            usage: INFO001
+            description: Used to provide details for the action taken, mandatory when action is INFO_REQUESTED  
         updated_at:
           required: mandatory
           type: String
@@ -406,3 +422,4 @@ on_issue:
             owner: BPP
             usage: Sam Manuel
             description: Name of an agent of the actor
+    

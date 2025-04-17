@@ -1,6 +1,9 @@
 summary: Illustrative Flow 2
 details:
-  - description:  This flow provides an illustrative example workflow for the IGM framework where a seller / seller app (complainant) raises a complaint that their store is not visible on the respective buyer app tagging the transaction id of the /on_search request shared along with the provider_id of the seller. The buyer analyses the complaints and proposes a resolution saying the seller would now be visible. The seller accepts the resolution and the buyer app resolves the same claiming it is now visible on the interface. The seller escalates the complaint as the seller is still not visible. The GRO of the buyer app gets involved and attempts to analyse the complaint. They propose a resolution acknowledging the mistake in their catalogue processing workflow and resolve the complaint. The seller is now visible on the buyer app interface and the seller closes the complaint.
+  - description:  >-
+      Seller raises a complaint for policy issue --> name change to --> Illustrative Flow 2
+      This flow provides an illustrative example workflow for the IGM framework in the retail domain where a seller / seller app (complainant) raises a complaint that their store is not visible on the respective buyer app tagging the transaction id of the /on_search request shared along with the provider_id of the seller. The buyer analyses the complaints and proposes a resolution saying the seller would now be visible. The seller accepts the resolution and the buyer app resolves the same claiming it is now visible on the interface. The seller escalates the complaint as the seller is still not visible. The GRO of the buyer app gets involved and attempts to analyse the complaint. They propose a resolution acknowledging the mistake in their catalogue processing workflow and resolve the complaint. The seller is now visible on the buyer app interface and the seller closes the complaint.</br></br>
+      Features from the use case document covered in this flow - Use case 4, 5
     mermaid: >-
       sequenceDiagram
         participant SellerApp as Seller App
