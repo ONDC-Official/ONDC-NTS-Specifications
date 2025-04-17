@@ -1072,20 +1072,18 @@ x-flows:
   - summary: Illustrative Flow 1
     details:
       - description: >-
-          Buyer raises a complaint for item category --> name change to -->
-          Illustrative Flow 1 This flow provides an illustrative example
-          workflow of the IGM framework in the retail domain where an end
-          consumer (complainant source) is raising a complaint related to an
-          item bought with regards to its quality. The seller/ seller app
-          (respondent) analyses the details shared and asks for additional
-          information in the form of more images and the invoice. The buyer only
-          provides images and not the invoice. The seller asks for the invoice
-          again and the buyer then provides the same. Once received, the seller
-          provides two resolution options to the buyer and the buyer seller
-          selects one of the resolutions. The seller then resolves the complaint
-          with the chosen resolution and the buyer then closes the
-          complaint.</br></br> Features from the use case document covered in
-          this flow - Use case 1, 2, 3
+          This flow provides an illustrative example workflow of the IGM
+          framework in the retail domain where an end consumer (complainant
+          source) is raising a complaint related to an item bought with regards
+          to its quality. The seller/ seller app (respondent) analyses the
+          details shared and asks for additional information in the form of more
+          images and the invoice. The buyer only provides images and not the
+          invoice. The seller asks for the invoice again and the buyer then
+          provides the same. Once received, the seller provides two resolution
+          options to the buyer and the buyer seller selects one of the
+          resolutions. The seller then resolves the complaint with the chosen
+          resolution and the buyer then closes the complaint.</br></br> Features
+          from the use case document covered in this flow - Use case 1, 2, 3
         mermaid: |-
           sequenceDiagram
             title  Buyer raising a complaint for an item
@@ -1278,7 +1276,7 @@ x-flows:
                       person:
                         name: John Doe
                   - id: NP2
-                    type: TRANSACTION_COUNTERPARTY_NP
+                    type: COUNTERPARTY_NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -1472,11 +1470,8 @@ x-flows:
           value: &ref_3
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
+              country: IND
+              city: std:080
               action: issue_status
               core_version: 2.0.0
               bap_id: buyerapp.com
@@ -1499,11 +1494,8 @@ x-flows:
           value: &ref_4
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
+              country: IND
+              city: std:080
               action: issue_status
               core_version: 2.0.0
               bap_id: buyerapp.com
@@ -3522,22 +3514,21 @@ x-flows:
   - summary: Illustrative Flow 2
     details:
       - description: >-
-          Seller raises a complaint for policy issue --> name change to -->
-          Illustrative Flow 2 This flow provides an illustrative example
-          workflow for the IGM framework in the retail domain where a seller /
-          seller app (complainant) raises a complaint that their store is not
-          visible on the respective buyer app tagging the transaction id of the
-          /on_search request shared along with the provider_id of the seller.
-          The buyer analyses the complaints and proposes a resolution saying the
-          seller would now be visible. The seller accepts the resolution and the
-          buyer app resolves the same claiming it is now visible on the
-          interface. The seller escalates the complaint as the seller is still
-          not visible. The GRO of the buyer app gets involved and attempts to
-          analyse the complaint. They propose a resolution acknowledging the
-          mistake in their catalogue processing workflow and resolve the
-          complaint. The seller is now visible on the buyer app interface and
-          the seller closes the complaint.</br></br> Features from the use case
-          document covered in this flow - Use case 4, 5
+          This flow provides an illustrative example workflow for the IGM
+          framework in the retail domain where a seller / seller app
+          (complainant) raises a complaint that their store is not visible on
+          the respective buyer app tagging the transaction id of the /on_search
+          request shared along with the provider_id of the seller. The buyer
+          analyses the complaints and proposes a resolution saying the seller
+          would now be visible. The seller accepts the resolution and the buyer
+          app resolves the same claiming it is now visible on the interface. The
+          seller escalates the complaint as the seller is still not visible. The
+          GRO of the buyer app gets involved and attempts to analyse the
+          complaint. They propose a resolution acknowledging the mistake in
+          their catalogue processing workflow and resolve the complaint. The
+          seller is now visible on the buyer app interface and the seller closes
+          the complaint.</br></br> Features from the use case document covered
+          in this flow - Use case 4, 5
         mermaid: |-
           sequenceDiagram
             participant SellerApp as Seller App
@@ -5151,26 +5142,25 @@ x-flows:
   - summary: Illustrative Flow 3
     details:
       - description: >-
-          Buyer raises a complaint for fulfilment category --> change to -->
-          Illustrative Flow 3. </br> This flow provides an illustrative example
-          workflow for the IGM framework in the retail & logistics domain
-          involving a retail seller app that is also an on-network logistics
-          buyer app. Here an end consumer (complainant) raises a complaint with
-          regards to their fulfilment experience for their retail order. The
-          retail seller app analyses the complaint and feels the logistics
-          seller app needs to be consulted for this complaint. The retail seller
-          app creates a complaint to the logistics seller app with relevant
-          information. </br> Example illustrated here creates a new complaint
-          (new issue_id) for the logistics transaction with an independent flow
-          for the new complaint itself. In this case the seller app is expected
-          to maintain the mapping of the complaint flows and ensure that in case
-          disputes are raised for a complaint, they are able source/ provide the
-          complete trail of the complaint. The seller app may choose to cascade
-          the same "issue_id" or the same complaint as well and build the
-          actions array inclusive of all actions in which case all actions taken
-          by the logistics seller app are communicated as-is to the retail buyer
-          app as well as status updates.</br> The logistics seller app analyses
-          the complaint and requires more images of the packaging received. The
+          This flow provides an illustrative example workflow for the IGM
+          framework in the retail & logistics domain involving a retail seller
+          app that is also an on-network logistics buyer app. Here an end
+          consumer (complainant) raises a complaint with regards to their
+          fulfilment experience for their retail order. The retail seller app
+          analyses the complaint and feels the logistics seller app needs to be
+          consulted for this complaint. The retail seller app creates a
+          complaint to the logistics seller app with relevant information. </br>
+          Example illustrated here creates a new complaint (new issue_id) for
+          the logistics transaction with an independent flow for the new
+          complaint itself. In this case the seller app is expected to maintain
+          the mapping of the complaint flows and ensure that in case disputes
+          are raised for a complaint, they are able source/ provide the complete
+          trail of the complaint. The seller app may choose to cascade the same
+          "issue_id" or the same complaint as well and build the actions array
+          inclusive of all actions in which case all actions taken by the
+          logistics seller app are communicated as-is to the retail buyer app as
+          well as status updates.</br> The logistics seller app analyses the
+          complaint and requires more images of the packaging received. The
           seller app cascades the same request to the buyer app and then the
           buyer provides the images required which is cascaded back to the
           logistics provider. The logistics provider then processes it and
