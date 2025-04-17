@@ -1,4 +1,4 @@
-## Change Log: Personal Loan API specs
+## Change Log: IGM-2.0.0
 
 <table>
 <colgroup>
@@ -41,7 +41,7 @@
         ]
       ```
   - Updated enums from actor_info to actors
-  - Added new enum, ESCALATED in actions.
+  - Synced enums for actions and actors.
   - Updated, `updated_target` to `update_target`.
   - Added type `COUNTERPARTY_NP_GRO` in issue/on_issue calls for Illustrative Flow 1.
 
