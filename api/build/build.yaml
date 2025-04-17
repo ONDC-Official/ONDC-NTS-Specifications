@@ -1472,11 +1472,8 @@ x-flows:
           value: &ref_3
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
+              country: IND
+              city: std:080
               action: issue_status
               core_version: 2.0.0
               bap_id: buyerapp.com
@@ -1499,11 +1496,8 @@ x-flows:
           value: &ref_4
             context:
               domain: ONDC:RET10
-              location:
-                country:
-                  code: IND
-                city:
-                  code: '*'
+              country: IND
+              city: std:080
               action: issue_status
               core_version: 2.0.0
               bap_id: buyerapp.com
