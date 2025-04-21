@@ -141,7 +141,7 @@ paths:
     post:
       tags:
         - Complaint lifecycle management
-      description: Send the issue resolution details object
+      description: Request for latest status of the complaint
       requestBody:
         description: Seller confirms order
         content:
