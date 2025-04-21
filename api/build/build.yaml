@@ -92,51 +92,6 @@ paths:
                     $ref: '#/components/schemas/Error'
                 required:
                   - message
-  /on_issue_status:
-    post:
-      tags:
-        - Complaint lifecycle management
-      description: Send the issue resolution details object
-      requestBody:
-        description: Seller confirms order
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                context:
-                  $ref: '#/components/schemas/Context'
-                message:
-                  type: object
-                  properties:
-                    issue:
-                      $ref: '#/components/schemas/Issue'
-                  required:
-                    - issue
-                error:
-                  $ref: '#/components/schemas/Error'
-              required:
-                - context
-                - message
-      responses:
-        '200':
-          description: Acknowledgement of message received
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: object
-                    properties:
-                      ack:
-                        $ref: '#/components/schemas/Ack'
-                    required:
-                      - ack
-                  error:
-                    $ref: '#/components/schemas/Error'
-                required:
-                  - message
   /issue_status:
     post:
       tags:
@@ -161,6 +116,51 @@ paths:
                       type: string
                   required:
                     - issue_id
+              required:
+                - context
+                - message
+      responses:
+        '200':
+          description: Acknowledgement of message received
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: object
+                    properties:
+                      ack:
+                        $ref: '#/components/schemas/Ack'
+                    required:
+                      - ack
+                  error:
+                    $ref: '#/components/schemas/Error'
+                required:
+                  - message
+  /on_issue_status:
+    post:
+      tags:
+        - Complaint lifecycle management
+      description: Send the issue resolution details object
+      requestBody:
+        description: Seller confirms order
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                context:
+                  $ref: '#/components/schemas/Context'
+                message:
+                  type: object
+                  properties:
+                    issue:
+                      $ref: '#/components/schemas/Issue'
+                  required:
+                    - issue
+                error:
+                  $ref: '#/components/schemas/Error'
               required:
                 - context
                 - message
@@ -1318,7 +1318,7 @@ x-flows:
                       code: PROCESSING
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:10.469Z'
-                    action_by: NP1
+                    action_by: NP2
                     actor_details:
                       name: Sam Manuel
       - summary: >-
@@ -1439,7 +1439,7 @@ x-flows:
                       code: PROCESSING
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
-                    action_by: NP1
+                    action_by: NP2
                     actor_details:
                       name: Sam Manuel
                   - id: A3_1
@@ -1448,7 +1448,7 @@ x-flows:
                       name: INFO001
                       short_desc: Please provide product images
                     updated_at: '2023-01-15T10:00:00.469Z'
-                    action_by: NP1
+                    action_by: NP2
                     actor_details:
                       name: Sam Manuel
                   - id: A3_2
@@ -1457,7 +1457,7 @@ x-flows:
                       name: INFO002
                       short_desc: Please provide invoice
                     updated_at: '2023-01-15T10:00:00.469Z'
-                    action_by: NP1
+                    action_by: NP2
                     actor_details:
                       name: Sam Manuel
       - summary: Buyer app requesting status
@@ -1599,8 +1599,26 @@ x-flows:
                     description:
                       code: PROCESSING
                       short_desc: Complaint created
-                    updated_at: '2023-01-15T10:00:10.469Z'
-                    action_by: NP1
+                    updated_at: '2023-01-15T10:00:00.469Z'
+                    action_by: NP2
+                    actor_details:
+                      name: Sam Manuel
+                  - id: A3_1
+                    description:
+                      code: INFO_REQUESTED
+                      name: INFO001
+                      short_desc: Please provide product images
+                    updated_at: '2023-01-15T10:00:00.469Z'
+                    action_by: NP2
+                    actor_details:
+                      name: Sam Manuel
+                  - id: A3_2
+                    description:
+                      code: INFO_REQUESTED
+                      name: INFO002
+                      short_desc: Please provide invoice
+                    updated_at: '2023-01-15T10:00:00.469Z'
+                    action_by: NP2
                     actor_details:
                       name: Sam Manuel
       - summary: >-

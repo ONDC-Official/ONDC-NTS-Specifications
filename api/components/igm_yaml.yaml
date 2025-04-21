@@ -92,51 +92,6 @@ paths:
                     $ref: "#/components/schemas/Error"
                 required:
                   - message
-  /on_issue_status:
-    post:
-      tags:
-        - Complaint lifecycle management
-      description: Send the issue resolution details object
-      requestBody:
-        description: Seller confirms order
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                context:
-                  $ref: "#/components/schemas/Context"
-                message:
-                  type: object
-                  properties:
-                    issue:
-                      $ref: "#/components/schemas/Issue"
-                  required:
-                    - issue
-                error:
-                  $ref: "#/components/schemas/Error"
-              required:
-                - context
-                - message
-      responses:
-        "200":
-          description: Acknowledgement of message received
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: object
-                    properties:
-                      ack:
-                        $ref: "#/components/schemas/Ack"
-                    required:
-                      - ack
-                  error:
-                    $ref: "#/components/schemas/Error"
-                required:
-                  - message                           
   /issue_status:
     post:
       tags:
@@ -189,6 +144,51 @@ paths:
                     $ref: "#/components/schemas/Error"
                 required:
                   - message                 
+  /on_issue_status:
+    post:
+      tags:
+        - Complaint lifecycle management
+      description: Send the issue resolution details object
+      requestBody:
+        description: Seller confirms order
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                context:
+                  $ref: "#/components/schemas/Context"
+                message:
+                  type: object
+                  properties:
+                    issue:
+                      $ref: "#/components/schemas/Issue"
+                  required:
+                    - issue
+                error:
+                  $ref: "#/components/schemas/Error"
+              required:
+                - context
+                - message
+      responses:
+        "200":
+          description: Acknowledgement of message received
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: object
+                    properties:
+                      ack:
+                        $ref: "#/components/schemas/Ack"
+                    required:
+                      - ack
+                  error:
+                    $ref: "#/components/schemas/Error"
+                required:
+                  - message                           
  
  
 components:

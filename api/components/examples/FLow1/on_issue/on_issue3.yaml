@@ -104,7 +104,7 @@ message:
           code: PROCESSING
           short_desc: Complaint created
         updated_at: "2023-01-15T10:00:00.469Z"
-        action_by: NP1
+        action_by: NP2
         actor_details:
           name: Sam Manuel
       - id: A3_1
@@ -113,7 +113,7 @@ message:
           name: INFO001
           short_desc: Please provide product images
         updated_at: "2023-01-15T10:00:00.469Z"
-        action_by: NP1
+        action_by: NP2
         actor_details:
           name: Sam Manuel
       - id: A3_2
@@ -122,6 +122,6 @@ message:
           name: INFO002
           short_desc: Please provide invoice
         updated_at: "2023-01-15T10:00:00.469Z"
-        action_by: NP1
+        action_by: NP2
         actor_details:
           name: Sam Manuel
