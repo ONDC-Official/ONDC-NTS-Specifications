@@ -79,7 +79,7 @@ message:
     complainant_id: NP1
     respondent_ids:
       - NP2
-    description:
+    descriptor:
       code: ITM004
       short_desc: Issue with product quality
       long_desc: product quality is not correct. facing issues while using the product
@@ -94,7 +94,7 @@ message:
     last_action_id: A2
     actions:
       - id: A1
-        description:
+        descriptor:
           code: OPEN
           short_desc: Complaint created
         updated_at: "2023-01-15T10:00:00.469Z"
@@ -102,7 +102,7 @@ message:
         actor_details:
           name: Sam Manuel
       - id: A2
-        description:
+        descriptor:
           code: PROCESSING
           short_desc: Complaint created
         updated_at: "2023-01-15T10:00:10.469Z"

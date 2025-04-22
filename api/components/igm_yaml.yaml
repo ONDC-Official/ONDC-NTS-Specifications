@@ -288,10 +288,10 @@ components:
           type: array
           items:
             $ref:  "#/components/schemas/Action"       
-        # descriptor:
-        #   $ref: "#/components/schemas/Descriptor"
-        description:
-          $ref: "#/components/schemas/Descriptor"   
+        descriptor:
+          $ref: "#/components/schemas/Descriptor"
+        # description:
+        #   $ref: "#/components/schemas/Descriptor"   
         actors:
           description: state the description of the actor that are involve
           type: array
@@ -345,6 +345,7 @@ components:
                   - RESOLUTION_ACCEPTED
                   - RESOLUTION_REJECTED
                   - RESOLVED
+                  - ESCALATED
         updated_at:
           description: timestamp for the capturing the time an issue status was last updated
           type: string
@@ -361,29 +362,29 @@ components:
           properties:
             name:
               type: string
-        description:
-         allOf:
-          - $ref: "#/components/schemas/Descriptor"
-          - type: object
-            properties:
-              code:
-                type: string
-                enum:
-                  - OPEN
-                  - PROCESSING
-                  - CLOSED
-                  - CASCADED
-                  - INFO_REQUESTED
-                  - INFO_PROCESSING
-                  - INFO_PROVIDED
-                  - INFO_NOT_AVAILABLE
-                  - RESOLUTION_PROPOSED
-                  - RESOLUTION_FORWARDED
-                  - RESOLUTION_PROCESSING
-                  - RESOLUTION_ACCEPTED
-                  - RESOLUTION_REJECTED
-                  - RESOLVED
-                  - ESCALATED
+        # description:
+        #  allOf:
+        #   - $ref: "#/components/schemas/Descriptor"
+        #   - type: object
+        #     properties:
+        #       code:
+        #         type: string
+        #         enum:
+        #           - OPEN
+        #           - PROCESSING
+        #           - CLOSED
+        #           - CASCADED
+        #           - INFO_REQUESTED
+        #           - INFO_PROCESSING
+        #           - INFO_PROVIDED
+        #           - INFO_NOT_AVAILABLE
+        #           - RESOLUTION_PROPOSED
+        #           - RESOLUTION_FORWARDED
+        #           - RESOLUTION_PROCESSING
+        #           - RESOLUTION_ACCEPTED
+        #           - RESOLUTION_REJECTED
+        #           - RESOLVED
+        #           - ESCALATED
                
 
     Actor_info:

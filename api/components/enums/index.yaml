@@ -93,7 +93,7 @@ issue:
             reference: <PR/Issue/Discussion Links md format text>
 
       actions:
-        description:
+        descriptor:
           code:
             - code: OPEN
               description: The issue is currently open and requires action.

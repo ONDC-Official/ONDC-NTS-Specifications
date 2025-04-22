@@ -67,7 +67,7 @@ message:
       - NP2
     resolver_ids:
       - NP2
-    description:
+    descriptor:
       code: FLM005
       short_desc: Issue with packaging
       long_desc: Food has spilled in the package
@@ -79,13 +79,13 @@ message:
     last_action_id: AR11
     actions:
       - id: AR1
-        description:
+        descriptor:
           code: OPEN
           short_desc: Complaint created
         updated_at: "2023-01-15T10:00:00.469Z"
         action_by: NP1
       - id: AR2
-        description:
+        descriptor:
           code: PROCESSING
           short_desc: Complaint is being processed
         updated_at: "2023-01-15T10:00:00.469Z"
@@ -93,14 +93,14 @@ message:
         actor_details:
           name: Mark Anthony
       - id: AR3
-        description:
+        descriptor:
           name: INFO001
           code: INFO_REQUESTED
           short_desc: Please provide item images
         updated_at: "2023-01-15T10:00:00.469Z"
         action_by: NP2
       - id: AR4
-        description:
+        descriptor:
           name: INFO002
           code: INFO_REQUESTED
           short_desc: Please provide package images
@@ -108,7 +108,7 @@ message:
         action_by: NP2
       - id: AR5
         ref_id: AL3
-        description:
+        descriptor:
           name: INFO001
           code: INFO_PROVIDED
           images:
@@ -120,7 +120,7 @@ message:
         action_by: NP1
       - id: AR6
         ref_id: AL4
-        description:
+        descriptor:
           name: INFO002
           code: INFO_PROVIDED
           images:
@@ -131,7 +131,7 @@ message:
         updated_at: "2023-01-15T10:00:00.469Z"
         action_by: NP1
       - id: AR7
-        description:
+        descriptor:
           code: PROCESSING
           short_desc: Please wait. We are processing the request.
         updated_at: "2023-01-15T10:00:00.469Z"
@@ -139,14 +139,14 @@ message:
       - id: AR8
         ref_id: R1
         ref_type: RESOLUTIONS
-        description:
+        descriptor:
           code: RESOLUTION_PROPOSED
         updated_at: "2023-01-15T10:00:00.469Z"
         action_by: NP2
       - id: AR9
         ref_id: R1
         ref_type: RESOLUTIONS
-        description:
+        descriptor:
           name: REFUND
           code: RESOLUTION_ACCEPTED
         updated_at: "2023-01-15T10:00:00.469Z"
@@ -154,12 +154,12 @@ message:
       - id: AR10
         ref_id: R1
         ref_type: RESOLUTIONS
-        description:
+        descriptor:
           code: RESOLVED
         updated_at: "2023-01-15T10:00:00.469Z"
         action_by: NP2
       - id: AR11
-        description:
+        descriptor:
           code: CLOSED
           short_desc: THUMBS-UP
         updated_at: "2023-01-15T10:00:00.469Z"

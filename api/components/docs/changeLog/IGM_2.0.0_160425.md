@@ -45,3 +45,6 @@
   - Updated, `updated_target` to `update_target`.
   - Added type `COUNTERPARTY_NP_GRO` in issue/on_issue calls for Illustrative Flow 1.
 
+  ****22nd April 2025****
+  - Changed description to descriptor in `actions` and `issues` to align with the core schema specification.
+

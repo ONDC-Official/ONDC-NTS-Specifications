@@ -73,7 +73,7 @@ message:
     complainant_id: NP1
     respondent_ids:
       - NP2
-    description:
+    descriptor:
       code: VIS001
       short_desc: Seller not visible on interface
       images:
@@ -82,7 +82,7 @@ message:
     last_action_id: A3
     actions:
       - id: A1
-        description:
+        descriptor:
           code: OPEN
           short_desc: Complaint created
         updated_at: '2023-01-15T10:00:00.469Z'
@@ -90,7 +90,7 @@ message:
         actor_details:
           name: Sam Manuel
       - id: A2
-        description:
+        descriptor:
           code: PROCESSING
           short_desc: Checking the issue raised
         updated_at: '2023-01-15T10:00:00.469Z'
@@ -98,7 +98,7 @@ message:
       - id: A3
         ref_id: R1
         ref_type: RESOLUTIONS
-        description:
+        descriptor:
           code: RESOLUTION_PROPOSED
           short_desc: Resolution provided
         updated_at: '2023-01-15T10:00:00.469Z'

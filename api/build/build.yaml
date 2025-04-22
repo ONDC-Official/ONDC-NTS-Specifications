@@ -303,7 +303,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Action'
-        description:
+        descriptor:
           $ref: '#/components/schemas/Descriptor'
         actors:
           description: state the description of the actor that are involve
@@ -358,6 +358,7 @@ components:
                     - RESOLUTION_ACCEPTED
                     - RESOLUTION_REJECTED
                     - RESOLVED
+                    - ESCALATED
         updated_at:
           description: >-
             timestamp for the capturing the time an issue status was last
@@ -376,29 +377,6 @@ components:
           properties:
             name:
               type: string
-        description:
-          allOf:
-            - $ref: '#/components/schemas/Descriptor'
-            - type: object
-              properties:
-                code:
-                  type: string
-                  enum:
-                    - OPEN
-                    - PROCESSING
-                    - CLOSED
-                    - CASCADED
-                    - INFO_REQUESTED
-                    - INFO_PROCESSING
-                    - INFO_PROVIDED
-                    - INFO_NOT_AVAILABLE
-                    - RESOLUTION_PROPOSED
-                    - RESOLUTION_FORWARDED
-                    - RESOLUTION_PROCESSING
-                    - RESOLUTION_ACCEPTED
-                    - RESOLUTION_REJECTED
-                    - RESOLVED
-                    - ESCALATED
     Actor_info:
       type: object
       properties:
@@ -984,7 +962,7 @@ x-enum:
                 issue.
               reference: <PR/Issue/Discussion Links md format text>
         actions:
-          description:
+          descriptor:
             code:
               - code: OPEN
                 description: The issue is currently open and requires action.
@@ -1178,7 +1156,7 @@ x-flows:
                         name: John Doe
                 source_id: CUST1
                 complainant_id: NP1
-                description:
+                descriptor:
                   code: ITM004
                   short_desc: Issue with product quality
                   long_desc: >-
@@ -1289,7 +1267,7 @@ x-flows:
                 complainant_id: NP1
                 respondent_ids:
                   - NP2
-                description:
+                descriptor:
                   code: ITM004
                   short_desc: Issue with product quality
                   long_desc: >-
@@ -1306,7 +1284,7 @@ x-flows:
                 last_action_id: A2
                 actions:
                   - id: A1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -1314,7 +1292,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:10.469Z'
@@ -1410,7 +1388,7 @@ x-flows:
                 complainant_id: NP1
                 respondent_ids:
                   - NP2
-                description:
+                descriptor:
                   code: ITM004
                   short_desc: Issue with product quality
                   long_desc: >-
@@ -1427,7 +1405,7 @@ x-flows:
                 last_action_id: A3_2
                 actions:
                   - id: A1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -1435,7 +1413,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -1443,7 +1421,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A3_1
-                    description:
+                    descriptor:
                       code: INFO_REQUESTED
                       name: INFO001
                       short_desc: Please provide product images
@@ -1452,7 +1430,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A3_2
-                    description:
+                    descriptor:
                       code: INFO_REQUESTED
                       name: INFO002
                       short_desc: Please provide invoice
@@ -1571,7 +1549,7 @@ x-flows:
                 complainant_id: NP1
                 respondent_ids:
                   - NP2
-                description:
+                descriptor:
                   code: ITM004
                   short_desc: Issue with product quality
                   long_desc: >-
@@ -1588,7 +1566,7 @@ x-flows:
                 last_action_id: A2
                 actions:
                   - id: A1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -1596,7 +1574,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -1604,7 +1582,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A3_1
-                    description:
+                    descriptor:
                       code: INFO_REQUESTED
                       name: INFO001
                       short_desc: Please provide product images
@@ -1613,7 +1591,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A3_2
-                    description:
+                    descriptor:
                       code: INFO_REQUESTED
                       name: INFO002
                       short_desc: Please provide invoice
@@ -1712,7 +1690,7 @@ x-flows:
                   - NP2
                 resolver_ids:
                   - NP2
-                description:
+                descriptor:
                   code: ITM004
                   short_desc: Issue with product quality
                   long_desc: >-
@@ -1729,7 +1707,7 @@ x-flows:
                 last_action_id: A4
                 actions:
                   - id: A1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.489Z'
@@ -1737,7 +1715,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.489Z'
@@ -1745,7 +1723,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A3_1
-                    description:
+                    descriptor:
                       code: INFO_REQUESTED
                       name: INFO01
                       short_desc: Please provide product image
@@ -1754,7 +1732,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A3_2
-                    description:
+                    descriptor:
                       code: INFO_REQUESTED
                       name: INFO002
                       short_desc: Please provide invoice
@@ -1764,7 +1742,7 @@ x-flows:
                       name: Sam Manuel
                   - id: A4
                     ref_id: A3_1
-                    description:
+                    descriptor:
                       code: INFO_PROVIDED
                       short_desc: Info provided from buyer app
                       images:
@@ -1863,7 +1841,7 @@ x-flows:
                 complainant_id: NP1
                 respondent_ids:
                   - NP2
-                description:
+                descriptor:
                   code: ITM004
                   short_desc: Issue with product quality
                   long_desc: >-
@@ -1880,7 +1858,7 @@ x-flows:
                 last_action_id: A5
                 actions:
                   - id: A1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -1888,7 +1866,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -1896,7 +1874,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A3_1
-                    description:
+                    descriptor:
                       code: INFO_REQUESTED
                       name: INFO001
                       short_desc: Please provide product image
@@ -1905,7 +1883,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A3_2
-                    description:
+                    descriptor:
                       code: INFO_REQUESTED
                       name: INFO002
                       short_desc: Please provide invoice
@@ -1915,7 +1893,7 @@ x-flows:
                       name: Sam Manuel
                   - id: A4
                     ref_id: A3_1
-                    description:
+                    descriptor:
                       code: INFO_PROVIDED
                       short_desc: Info provided from buyer app
                       images:
@@ -1928,7 +1906,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A5
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Seller app processing the info
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -2024,7 +2002,7 @@ x-flows:
                 complainant_id: NP1
                 respondent_ids:
                   - NP2
-                description:
+                descriptor:
                   code: ITM004
                   short_desc: Issue with product quality
                   long_desc: >-
@@ -2041,7 +2019,7 @@ x-flows:
                 last_action_id: A6
                 actions:
                   - id: A1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -2049,7 +2027,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -2057,26 +2035,26 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A3_1
-                    description:
+                    descriptor:
                       code: INFO_REQUESTED
                       name: INFO001
                       short_desc: Please provide product image
                     updated_at: '2023-01-15T10:00:00.469Z'
-                    action_by: NP1
+                    action_by: NP2
                     actor_details:
                       name: Sam Manuel
                   - id: A3_2
-                    description:
+                    descriptor:
                       code: INFO_REQUESTED
                       name: INFO002
                       short_desc: Please provide invoice
                     updated_at: '2023-01-15T10:00:00.469Z'
-                    action_by: NP1
+                    action_by: NP2
                     actor_details:
                       name: Sam Manuel
                   - id: A4
                     ref_id: A3_1
-                    description:
+                    descriptor:
                       code: INFO_PROVIDED
                       short_desc: Responded with images
                       images:
@@ -2089,7 +2067,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A5
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -2098,7 +2076,7 @@ x-flows:
                       name: Sam Manuel
                   - id: A6
                     ref_id: A3_2
-                    description:
+                    descriptor:
                       code: INFO_REQUESTED
                       name: INFO002
                       short_desc: Please provide invoice
@@ -2193,7 +2171,7 @@ x-flows:
                 complainant_id: NP1
                 respondent_ids:
                   - NP2
-                description:
+                descriptor:
                   code: ITM004
                   short_desc: Issue with product quality
                   long_desc: >-
@@ -2210,7 +2188,7 @@ x-flows:
                 last_action_id: A7
                 actions:
                   - id: A1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -2218,7 +2196,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -2226,7 +2204,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A3_1
-                    description:
+                    descriptor:
                       code: INFO_REQUESTED
                       name: INFO001
                       short_desc: Please provide product image
@@ -2235,7 +2213,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A3_2
-                    description:
+                    descriptor:
                       code: INFO_REQUESTED
                       name: INFO002
                       short_desc: Please provide invoice
@@ -2245,7 +2223,7 @@ x-flows:
                       name: Sam Manuel
                   - id: A4
                     ref_id: A3_1
-                    description:
+                    descriptor:
                       code: INFO_PROVIDED
                       short_desc: Responded with images
                       images:
@@ -2258,7 +2236,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A5
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -2267,7 +2245,7 @@ x-flows:
                       name: Sam Manuel
                   - id: A6
                     ref_id: A3_2
-                    description:
+                    descriptor:
                       code: INFO_REQUESTED
                       name: INFO002
                       short_desc: Please provide invoice
@@ -2277,7 +2255,7 @@ x-flows:
                       name: Sam Manuel
                   - id: A7
                     ref_id: A6
-                    description:
+                    descriptor:
                       code: INFO_PROVIDED
                       short_desc: Provided invoice
                       media:
@@ -2373,7 +2351,7 @@ x-flows:
                 complainant_id: NP1
                 respondent_ids:
                   - NP2
-                description:
+                descriptor:
                   code: ITM004
                   short_desc: Issue with product quality
                   long_desc: >-
@@ -2390,7 +2368,7 @@ x-flows:
                 last_action_id: A8
                 actions:
                   - id: A1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -2398,7 +2376,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -2406,7 +2384,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A3_1
-                    description:
+                    descriptor:
                       code: INFO_REQUESTED
                       name: INFO001
                       short_desc: Please provide product image
@@ -2415,17 +2393,17 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A3_2
-                    description:
+                    descriptor:
                       code: INFO_REQUESTED
                       name: INFO002
                       short_desc: Please provide invoice
                     updated_at: '2023-01-15T10:00:00.469Z'
-                    action_by: NP1
+                    action_by: NP2
                     actor_details:
                       name: Sam Manuel
                   - id: A4
                     ref_id: A3_1
-                    description:
+                    descriptor:
                       code: INFO_PROVIDED
                       short_desc: Responded with images
                       images:
@@ -2438,7 +2416,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A5
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -2447,7 +2425,7 @@ x-flows:
                       name: Sam Manuel
                   - id: A6
                     ref_id: A3_2
-                    description:
+                    descriptor:
                       code: INFO_REQUESTED
                       name: INFO002
                       short_desc: Please provide invoice
@@ -2457,7 +2435,7 @@ x-flows:
                       name: Sam Manuel
                   - id: A7
                     ref_id: A6
-                    description:
+                    descriptor:
                       code: INFO_PROVIDED
                       short_desc: Provided invoice
                       media:
@@ -2467,7 +2445,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A8
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Processing the complaint information
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -2571,7 +2549,7 @@ x-flows:
                 complainant_id: NP1
                 respondent_ids:
                   - NP2
-                description:
+                descriptor:
                   code: ITM004
                   short_desc: Issue with product quality
                   long_desc: >-
@@ -2588,7 +2566,7 @@ x-flows:
                 last_action_id: A9
                 actions:
                   - id: A1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -2596,7 +2574,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -2604,7 +2582,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A3_1
-                    description:
+                    descriptor:
                       code: INFO_REQUESTED
                       name: INFO001
                       short_desc: Please provide product image
@@ -2613,17 +2591,17 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A3_2
-                    description:
+                    descriptor:
                       code: INFO_REQUESTED
                       name: INFO002
                       short_desc: Please provide invoice
                     updated_at: '2023-01-15T10:00:00.469Z'
-                    action_by: NP1
+                    action_by: NP2
                     actor_details:
                       name: Sam Manuel
                   - id: A4
                     ref_id: A3_1
-                    description:
+                    descriptor:
                       code: INFO_PROVIDED
                       short_desc: Responded with images
                       images:
@@ -2636,7 +2614,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A5
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -2645,7 +2623,7 @@ x-flows:
                       name: Sam Manuel
                   - id: A6
                     ref_id: A3_2
-                    description:
+                    descriptor:
                       code: INFO_REQUESTED
                       name: INFO002
                       short_desc: Please provide invoice
@@ -2655,7 +2633,7 @@ x-flows:
                       name: Sam Manuel
                   - id: A7
                     ref_id: A6
-                    description:
+                    descriptor:
                       code: INFO_PROVIDED
                       short_desc: Provided invoice
                       media:
@@ -2665,7 +2643,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A8
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Processing the complaint information
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -2675,7 +2653,7 @@ x-flows:
                   - id: A9
                     ref_id: R_PARENT
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_PROPOSED
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
@@ -2817,7 +2795,7 @@ x-flows:
                 complainant_id: NP1
                 respondent_ids:
                   - NP2
-                description:
+                descriptor:
                   code: ITM004
                   short_desc: Issue with product quality
                   long_desc: >-
@@ -2834,7 +2812,7 @@ x-flows:
                 last_action_id: A10
                 actions:
                   - id: A1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -2842,7 +2820,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -2850,7 +2828,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A3_1
-                    description:
+                    descriptor:
                       code: INFO_REQUESTED
                       name: INFO001
                       short_desc: Please provide product image
@@ -2859,7 +2837,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A3_2
-                    description:
+                    descriptor:
                       code: INFO_REQUESTED
                       name: INFO002
                       short_desc: Please provide invoice
@@ -2869,7 +2847,7 @@ x-flows:
                       name: Sam Manuel
                   - id: A4
                     ref_id: A3_1
-                    description:
+                    descriptor:
                       code: INFO_PROVIDED
                       short_desc: Responded with images
                       images:
@@ -2882,7 +2860,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A5
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -2891,7 +2869,7 @@ x-flows:
                       name: Sam Manuel
                   - id: A6
                     ref_id: A3_2
-                    description:
+                    descriptor:
                       code: INFO_REQUESTED
                       name: INFO002
                       short_desc: Please provide invoice
@@ -2901,7 +2879,7 @@ x-flows:
                       name: Sam Manuel
                   - id: A7
                     ref_id: A6
-                    description:
+                    descriptor:
                       code: INFO_PROVIDED
                       short_desc: Provided invoice
                       media:
@@ -2911,7 +2889,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A8
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Processing the complaint information
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -2921,7 +2899,7 @@ x-flows:
                   - id: A9
                     ref_id: R_PARENT
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_PROPOSED
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
@@ -2930,7 +2908,7 @@ x-flows:
                   - id: A10
                     ref_id: R2
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_ACCEPTED
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
@@ -3075,7 +3053,7 @@ x-flows:
                   - NP2
                 resolver_ids:
                   - NP2
-                description:
+                descriptor:
                   code: ITM004
                   short_desc: Issue with product quality
                   long_desc: >-
@@ -3092,7 +3070,7 @@ x-flows:
                 last_action_id: A11
                 actions:
                   - id: A1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -3100,7 +3078,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -3108,26 +3086,26 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A3_1
-                    description:
+                    descriptor:
                       code: INFO_REQUESTED
                       name: INFO001
                       short_desc: Please provide product image
                     updated_at: '2023-01-15T10:00:00.469Z'
-                    action_by: NP1
+                    action_by: NP2
                     actor_details:
                       name: Sam Manuel
                   - id: A3_2
-                    description:
+                    descriptor:
                       code: INFO_REQUESTED
                       name: INFO002
                       short_desc: Please provide invoice
                     updated_at: '2023-01-15T10:00:00.469Z'
-                    action_by: NP1
+                    action_by: NP2
                     actor_details:
                       name: Sam Manuel
                   - id: A4
                     ref_id: A3_1
-                    description:
+                    descriptor:
                       code: INFO_PROVIDED
                       short_desc: Responded with images
                       images:
@@ -3140,7 +3118,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A5
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -3149,7 +3127,7 @@ x-flows:
                       name: Sam Manuel
                   - id: A6
                     ref_id: A3_2
-                    description:
+                    descriptor:
                       code: INFO_REQUESTED
                       name: INFO002
                       short_desc: Please provide invoice
@@ -3159,7 +3137,7 @@ x-flows:
                       name: Sam Manuel
                   - id: A7
                     ref_id: A6
-                    description:
+                    descriptor:
                       code: INFO_PROVIDED
                       short_desc: Provided invoice
                       media:
@@ -3169,7 +3147,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A8
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Processing the complaint information
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -3179,7 +3157,7 @@ x-flows:
                   - id: A9
                     ref_id: R_PARENT
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_PROPOSED
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
@@ -3188,7 +3166,7 @@ x-flows:
                   - id: A10
                     ref_id: R2
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_ACCEPTED
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
@@ -3197,7 +3175,7 @@ x-flows:
                   - id: A11
                     ref_id: R2
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLVED
                       name: REPLACEMENT
                       short_desc: Providing replacement
@@ -3344,7 +3322,7 @@ x-flows:
                   - NP2
                 resolver_ids:
                   - NP2
-                description:
+                descriptor:
                   code: ITM004
                   short_desc: Issue with product quality
                   long_desc: >-
@@ -3361,7 +3339,7 @@ x-flows:
                 last_action_id: A12
                 actions:
                   - id: A1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -3369,7 +3347,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -3377,7 +3355,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A3_1
-                    description:
+                    descriptor:
                       code: INFO_REQUESTED
                       name: INFO001
                       short_desc: Please provide product image
@@ -3386,7 +3364,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A3_2
-                    description:
+                    descriptor:
                       code: INFO_REQUESTED
                       name: INFO002
                       short_desc: Please provide invoice
@@ -3396,7 +3374,7 @@ x-flows:
                       name: Sam Manuel
                   - id: A4
                     ref_id: A3_1
-                    description:
+                    descriptor:
                       code: INFO_PROVIDED
                       short_desc: Responded with images
                       images:
@@ -3409,7 +3387,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A5
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -3418,7 +3396,7 @@ x-flows:
                       name: Sam Manuel
                   - id: A6
                     ref_id: A3_2
-                    description:
+                    descriptor:
                       code: INFO_REQUESTED
                       name: INFO002
                       short_desc: Please provide invoice
@@ -3428,7 +3406,7 @@ x-flows:
                       name: Sam Manuel
                   - id: A7
                     ref_id: A6
-                    description:
+                    descriptor:
                       code: INFO_PROVIDED
                       short_desc: Provided invoice
                       media:
@@ -3438,7 +3416,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A8
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Processing the complaint information
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -3448,7 +3426,7 @@ x-flows:
                   - id: A9
                     ref_id: R_PARENT
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_PROPOSED
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
@@ -3457,7 +3435,7 @@ x-flows:
                   - id: A10
                     ref_id: R2
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_ACCEPTED
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
@@ -3466,7 +3444,7 @@ x-flows:
                   - id: A11
                     ref_id: R2
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLVED
                       name: REPLACEMENT
                       short_desc: Providing replacement
@@ -3475,7 +3453,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A12
-                    description:
+                    descriptor:
                       code: CLOSED
                       short_desc: Closing the complaint
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -3626,7 +3604,7 @@ x-flows:
                         name: John Doe
                 source_id: SELLER1
                 complainant_id: NP1
-                description:
+                descriptor:
                   code: VIS001
                   short_desc: Seller not visible on interface
                   images:
@@ -3635,7 +3613,7 @@ x-flows:
                 last_action_id: A1
                 actions:
                   - id: A1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -3715,7 +3693,7 @@ x-flows:
                 complainant_id: NP1
                 respondent_ids:
                   - NP2
-                description:
+                descriptor:
                   code: VIS001
                   short_desc: Seller not visible on interface
                   images:
@@ -3724,7 +3702,7 @@ x-flows:
                 last_action_id: A2
                 actions:
                   - id: A1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -3732,7 +3710,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Checking the issue raised
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -3822,7 +3800,7 @@ x-flows:
                 complainant_id: NP1
                 respondent_ids:
                   - NP2
-                description:
+                descriptor:
                   code: VIS001
                   short_desc: Seller not visible on interface
                   images:
@@ -3831,7 +3809,7 @@ x-flows:
                 last_action_id: A3
                 actions:
                   - id: A1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -3839,7 +3817,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Checking the issue raised
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -3847,7 +3825,7 @@ x-flows:
                   - id: A3
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_PROPOSED
                       short_desc: Resolution provided
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -3944,7 +3922,7 @@ x-flows:
                 complainant_id: NP1
                 respondent_ids:
                   - NP2
-                description:
+                descriptor:
                   code: VIS001
                   short_desc: Seller not visible on interface
                   images:
@@ -3953,7 +3931,7 @@ x-flows:
                 last_action_id: A4
                 actions:
                   - id: A1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -3961,7 +3939,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Checking the issue raised
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -3969,7 +3947,7 @@ x-flows:
                   - id: A3
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_PROPOSED
                       short_desc: Resolution provided
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -3977,7 +3955,7 @@ x-flows:
                   - id: A4
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_ACCEPTED
                       short_desc: Will check once enabled
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4076,7 +4054,7 @@ x-flows:
                   - NP2
                 resolver_ids:
                   - NP2
-                description:
+                descriptor:
                   code: VIS001
                   short_desc: Seller not visible on interface
                   images:
@@ -4085,7 +4063,7 @@ x-flows:
                 last_action_id: A5
                 actions:
                   - id: A1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4093,7 +4071,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Checking the issue raised
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4101,7 +4079,7 @@ x-flows:
                   - id: A3
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_PROPOSED
                       short_desc: Resolution provided
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4109,7 +4087,7 @@ x-flows:
                   - id: A4
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_ACCEPTED
                       short_desc: Will check once enabled
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4117,7 +4095,7 @@ x-flows:
                   - id: A5
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLVED
                       short_desc: Complaint resolved. Seller would be visible now
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4216,7 +4194,7 @@ x-flows:
                   - NP2
                 resolver_ids:
                   - NP2
-                description:
+                descriptor:
                   code: VIS001
                   short_desc: Seller not visible on interface
                   images:
@@ -4225,7 +4203,7 @@ x-flows:
                 last_action_id: A6
                 actions:
                   - id: A1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4233,7 +4211,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Checking the issue raised
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4241,7 +4219,7 @@ x-flows:
                   - id: A3
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_PROPOSED
                       short_desc: Resolution provided
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4249,7 +4227,7 @@ x-flows:
                   - id: A4
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_ACCEPTED
                       short_desc: Will check once enabled
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4257,13 +4235,13 @@ x-flows:
                   - id: A5
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLVED
                       short_desc: Complaint resolved. Seller would be visible now
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A6
-                    description:
+                    descriptor:
                       code: ESCALATED
                       short_desc: >-
                         Seller not visible on interface after the second
@@ -4363,7 +4341,7 @@ x-flows:
                   - NP2
                 resolver_ids:
                   - NP2
-                description:
+                descriptor:
                   code: VIS001
                   short_desc: Seller not visible on interface
                   images:
@@ -4372,7 +4350,7 @@ x-flows:
                 last_action_id: A7
                 actions:
                   - id: A1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4380,7 +4358,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Checking the issue raised
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4388,7 +4366,7 @@ x-flows:
                   - id: A3
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_PROPOSED
                       short_desc: Resolution provided
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4396,7 +4374,7 @@ x-flows:
                   - id: A4
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_ACCEPTED
                       short_desc: Will check once enabled
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4404,13 +4382,13 @@ x-flows:
                   - id: A5
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLVED
                       short_desc: Complaint resolved. Seller would be visible now
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A6
-                    description:
+                    descriptor:
                       code: ESCALATED
                       short_desc: >-
                         Seller not visible on interface after the second
@@ -4418,7 +4396,7 @@ x-flows:
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: A7
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Processing the complaint
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4517,7 +4495,7 @@ x-flows:
                   - NP2
                 resolver_ids:
                   - NP2
-                description:
+                descriptor:
                   code: VIS001
                   short_desc: Seller not visible on interface
                   images:
@@ -4526,7 +4504,7 @@ x-flows:
                 last_action_id: A8
                 actions:
                   - id: A1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4534,7 +4512,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Checking the issue raised
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4542,7 +4520,7 @@ x-flows:
                   - id: A3
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_PROPOSED
                       short_desc: Resolution provided
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4550,7 +4528,7 @@ x-flows:
                   - id: A4
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_ACCEPTED
                       short_desc: Will check once enabled
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4558,13 +4536,13 @@ x-flows:
                   - id: A5
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLVED
                       short_desc: Complaint resolved. Seller would be visible now
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A6
-                    description:
+                    descriptor:
                       code: ESCALATED
                       short_desc: >-
                         Seller not visible on interface after the second
@@ -4572,7 +4550,7 @@ x-flows:
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: A7
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Processing the complaint
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4580,7 +4558,7 @@ x-flows:
                   - id: A8
                     ref_id: R2
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_PROPOSED
                       short_desc: Resolution proposed
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4685,7 +4663,7 @@ x-flows:
                   - NP2
                 resolver_ids:
                   - NP2
-                description:
+                descriptor:
                   code: VIS001
                   short_desc: Seller not visible on interface
                   images:
@@ -4694,7 +4672,7 @@ x-flows:
                 last_action_id: A9
                 actions:
                   - id: A1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4702,7 +4680,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Checking the issue raised
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4710,7 +4688,7 @@ x-flows:
                   - id: A3
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_PROPOSED
                       short_desc: Resolution provided
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4718,7 +4696,7 @@ x-flows:
                   - id: A4
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_ACCEPTED
                       short_desc: Will check once enabled
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4726,13 +4704,13 @@ x-flows:
                   - id: A5
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLVED
                       short_desc: Complaint resolved. Seller would be visible now
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A6
-                    description:
+                    descriptor:
                       code: ESCALATED
                       short_desc: >-
                         Seller not visible on interface after the second
@@ -4740,7 +4718,7 @@ x-flows:
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: A7
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Processing the complaint
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4748,7 +4726,7 @@ x-flows:
                   - id: A8
                     ref_id: R2
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_PROPOSED
                       short_desc: Resolution proposed
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4756,7 +4734,7 @@ x-flows:
                   - id: A9
                     ref_id: R2
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_ACCEPTED
                       short_desc: Will check once enabled
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4861,7 +4839,7 @@ x-flows:
                   - NP2
                 resolver_ids:
                   - NP2
-                description:
+                descriptor:
                   code: VIS001
                   short_desc: Seller not visible on interface
                   images:
@@ -4870,7 +4848,7 @@ x-flows:
                 last_action_id: A10
                 actions:
                   - id: A1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4878,7 +4856,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Checking the issue raised
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4886,7 +4864,7 @@ x-flows:
                   - id: A3
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_PROPOSED
                       short_desc: Resolution provided
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4894,7 +4872,7 @@ x-flows:
                   - id: A4
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_ACCEPTED
                       short_desc: Will check once enabled
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4902,13 +4880,13 @@ x-flows:
                   - id: A5
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLVED
                       short_desc: Complaint resolved. Seller would be visible now
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A6
-                    description:
+                    descriptor:
                       code: ESCALATED
                       short_desc: >-
                         Seller not visible on interface after the second
@@ -4916,7 +4894,7 @@ x-flows:
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: A7
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Processing the complaint
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4924,7 +4902,7 @@ x-flows:
                   - id: A8
                     ref_id: R2
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_PROPOSED
                       short_desc: Resolution proposed
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4932,7 +4910,7 @@ x-flows:
                   - id: A9
                     ref_id: R2
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_ACCEPTED
                       short_desc: Will check once enabled
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -4940,7 +4918,7 @@ x-flows:
                   - id: A10
                     ref_id: R2
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLVED
                       short_desc: Complaint resolved. Seller is visible now
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -5045,7 +5023,7 @@ x-flows:
                   - NP2
                 resolver_ids:
                   - NP2
-                description:
+                descriptor:
                   code: VIS001
                   short_desc: Seller not visible on interface
                   images:
@@ -5054,7 +5032,7 @@ x-flows:
                 last_action_id: A11
                 actions:
                   - id: A1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -5062,7 +5040,7 @@ x-flows:
                     actor_details:
                       name: Sam Manuel
                   - id: A2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Checking the issue raised
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -5070,7 +5048,7 @@ x-flows:
                   - id: A3
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_PROPOSED
                       short_desc: Resolution provided
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -5078,7 +5056,7 @@ x-flows:
                   - id: A4
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_ACCEPTED
                       short_desc: Will check once enabled
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -5086,13 +5064,13 @@ x-flows:
                   - id: A5
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLVED
                       short_desc: Complaint resolved. Seller would be visible now
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A6
-                    description:
+                    descriptor:
                       code: ESCALATED
                       short_desc: >-
                         Seller not visible on interface after the second
@@ -5100,7 +5078,7 @@ x-flows:
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: A7
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Processing the complaint
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -5108,7 +5086,7 @@ x-flows:
                   - id: A8
                     ref_id: R2
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_PROPOSED
                       short_desc: Resolution proposed
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -5116,7 +5094,7 @@ x-flows:
                   - id: A9
                     ref_id: R2
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_ACCEPTED
                       short_desc: Will check once enabled
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -5124,13 +5102,13 @@ x-flows:
                   - id: A10
                     ref_id: R2
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLVED
                       short_desc: Complaint resolved. Seller is visible now
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: A11
-                    description:
+                    descriptor:
                       code: CLOSED
                       short_desc: Seller now visible, closing the complaint
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -5276,7 +5254,7 @@ x-flows:
                         name: John Doe
                 source_id: CUST1
                 complainant_id: NP1
-                description:
+                descriptor:
                   code: FLM005
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
@@ -5288,7 +5266,7 @@ x-flows:
                 last_action_id: AR1
                 actions:
                   - id: AR1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -5367,7 +5345,7 @@ x-flows:
                 complainant_id: NP1
                 respondent_ids:
                   - NP2
-                description:
+                descriptor:
                   code: FLM005
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
@@ -5379,13 +5357,13 @@ x-flows:
                 last_action_id: AR2
                 actions:
                   - id: AR1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: AR2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint is being processed
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -5455,7 +5433,7 @@ x-flows:
                         name: Jane Doe
                 source_id: CUST1
                 complainant_id: NP2
-                description:
+                descriptor:
                   code: FLM005
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
@@ -5467,7 +5445,7 @@ x-flows:
                 last_action_id: AL1
                 actions:
                   - id: AL1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -5549,7 +5527,7 @@ x-flows:
                 complainant_id: NP2
                 respondent_ids:
                   - NP3
-                description:
+                descriptor:
                   code: FLM005
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
@@ -5561,7 +5539,7 @@ x-flows:
                 last_action_id: AL2
                 actions:
                   - id: AL1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -5569,7 +5547,7 @@ x-flows:
                     actor_details:
                       name: Mark Anthony
                   - id: AL2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -5649,7 +5627,7 @@ x-flows:
                 complainant_id: NP2
                 respondent_ids:
                   - NP3
-                description:
+                descriptor:
                   code: FLM005
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
@@ -5661,7 +5639,7 @@ x-flows:
                 last_action_id: AL4
                 actions:
                   - id: AL1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -5669,20 +5647,20 @@ x-flows:
                     actor_details:
                       name: Mark Anthony
                   - id: AL2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
                   - id: AL3
-                    description:
+                    descriptor:
                       name: INFO001
                       code: INFO_REQUESTED
                       short_desc: Please provide item images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
                   - id: AL4
-                    description:
+                    descriptor:
                       name: INFO002
                       code: INFO_REQUESTED
                       short_desc: Please provide package images
@@ -5765,7 +5743,7 @@ x-flows:
                 complainant_id: NP1
                 respondent_ids:
                   - NP2
-                description:
+                descriptor:
                   code: FLM005
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
@@ -5777,13 +5755,13 @@ x-flows:
                 last_action_id: AR4
                 actions:
                   - id: AR1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: AR2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint is being processed
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -5791,14 +5769,14 @@ x-flows:
                     actor_details:
                       name: Mark Anthony
                   - id: AR3
-                    description:
+                    descriptor:
                       name: INFO001
                       code: INFO_REQUESTED
                       short_desc: Please provide item images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
                   - id: AR4
-                    description:
+                    descriptor:
                       name: INFO002
                       code: INFO_REQUESTED
                       short_desc: Please provide package images
@@ -5881,7 +5859,7 @@ x-flows:
                   - NP2
                 resolver_ids:
                   - NP2
-                description:
+                descriptor:
                   code: FLM005
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
@@ -5893,13 +5871,13 @@ x-flows:
                 last_action_id: AR6
                 actions:
                   - id: AR1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: AR2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint is being processed
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -5907,21 +5885,21 @@ x-flows:
                     actor_details:
                       name: Mark Anthony
                   - id: AR3
-                    description:
+                    descriptor:
                       name: INFO001
                       code: INFO_REQUESTED
                       short_desc: Please provide item images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AR4
-                    description:
+                    descriptor:
                       name: INFO002
                       code: INFO_REQUESTED
                       short_desc: Please provide package images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AR5
-                    description:
+                    descriptor:
                       name: INFO001
                       code: INFO_PROVIDED
                       images:
@@ -5932,7 +5910,7 @@ x-flows:
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: AR6
-                    description:
+                    descriptor:
                       name: INFO002
                       code: INFO_PROVIDED
                       images:
@@ -6019,7 +5997,7 @@ x-flows:
                   - NP3
                 resolver_ids:
                   - NP3
-                description:
+                descriptor:
                   code: FLM005
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
@@ -6031,7 +6009,7 @@ x-flows:
                 last_action_id: AL6
                 actions:
                   - id: AL1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -6039,20 +6017,20 @@ x-flows:
                     actor_details:
                       name: Mark Anthony
                   - id: AL2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
                   - id: AL3
-                    description:
+                    descriptor:
                       name: INFO001
                       code: INFO_REQUESTED
                       short_desc: Please provide item images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
                   - id: AL4
-                    description:
+                    descriptor:
                       name: INFO002
                       code: INFO_REQUESTED
                       short_desc: Please provide package images
@@ -6060,7 +6038,7 @@ x-flows:
                     action_by: NP3
                   - id: AL5
                     ref_id: AL3
-                    description:
+                    descriptor:
                       name: INFO001
                       code: INFO_PROVIDED
                       images:
@@ -6072,7 +6050,7 @@ x-flows:
                     action_by: NP2
                   - id: AL6
                     ref_id: AL4
-                    description:
+                    descriptor:
                       name: INFO002
                       code: INFO_PROVIDED
                       images:
@@ -6159,7 +6137,7 @@ x-flows:
                   - NP3
                 resolver_ids:
                   - NP3
-                description:
+                descriptor:
                   code: FLM005
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
@@ -6171,7 +6149,7 @@ x-flows:
                 last_action_id: AL7
                 actions:
                   - id: AL1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -6179,20 +6157,20 @@ x-flows:
                     actor_details:
                       name: Mark Anthony
                   - id: AL2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
                   - id: AL3
-                    description:
+                    descriptor:
                       name: INFO001
                       code: INFO_REQUESTED
                       short_desc: Please provide item images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
                   - id: AL4
-                    description:
+                    descriptor:
                       name: INFO002
                       code: INFO_REQUESTED
                       short_desc: Please provide package images
@@ -6200,7 +6178,7 @@ x-flows:
                     action_by: NP3
                   - id: AL5
                     ref_id: AL3
-                    description:
+                    descriptor:
                       name: INFO001
                       code: INFO_PROVIDED
                       images:
@@ -6212,7 +6190,7 @@ x-flows:
                     action_by: NP2
                   - id: AL6
                     ref_id: AL4
-                    description:
+                    descriptor:
                       name: INFO002
                       code: INFO_PROVIDED
                       images:
@@ -6223,7 +6201,7 @@ x-flows:
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AL7
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Please wait. We are processing the request.
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -6305,7 +6283,7 @@ x-flows:
                   - NP2
                 resolver_ids:
                   - NP2
-                description:
+                descriptor:
                   code: FLM005
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
@@ -6317,13 +6295,13 @@ x-flows:
                 last_action_id: AR7
                 actions:
                   - id: AR1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: AR2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint is being processed
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -6331,21 +6309,21 @@ x-flows:
                     actor_details:
                       name: Mark Anthony
                   - id: AR3
-                    description:
+                    descriptor:
                       name: INFO001
                       code: INFO_REQUESTED
                       short_desc: Please provide item images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AR4
-                    description:
+                    descriptor:
                       name: INFO002
                       code: INFO_REQUESTED
                       short_desc: Please provide package images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AR5
-                    description:
+                    descriptor:
                       name: INFO001
                       code: INFO_PROVIDED
                       images:
@@ -6356,7 +6334,7 @@ x-flows:
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: AR6
-                    description:
+                    descriptor:
                       name: INFO002
                       code: INFO_PROVIDED
                       images:
@@ -6367,7 +6345,7 @@ x-flows:
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: AR7
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Please wait. We are processing the request.
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -6459,7 +6437,7 @@ x-flows:
                   - NP3
                 resolver_ids:
                   - NP3
-                description:
+                descriptor:
                   code: FLM005
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
@@ -6471,7 +6449,7 @@ x-flows:
                 last_action_id: AL8
                 actions:
                   - id: AL1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -6479,20 +6457,20 @@ x-flows:
                     actor_details:
                       name: Mark Anthony
                   - id: AL2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
                   - id: AL3
-                    description:
+                    descriptor:
                       name: INFO001
                       code: INFO_REQUESTED
                       short_desc: Please provide item images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
                   - id: AL4
-                    description:
+                    descriptor:
                       name: INFO002
                       code: INFO_REQUESTED
                       short_desc: Please provide package images
@@ -6500,7 +6478,7 @@ x-flows:
                     action_by: NP3
                   - id: AL5
                     ref_id: AL3
-                    description:
+                    descriptor:
                       name: INFO001
                       code: INFO_PROVIDED
                       images:
@@ -6512,7 +6490,7 @@ x-flows:
                     action_by: NP2
                   - id: AL6
                     ref_id: AL4
-                    description:
+                    descriptor:
                       name: INFO002
                       code: INFO_PROVIDED
                       images:
@@ -6523,7 +6501,7 @@ x-flows:
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AL7
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Please wait. We are processing the request.
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -6531,7 +6509,7 @@ x-flows:
                   - id: AL8
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_PROPOSED
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
@@ -6629,7 +6607,7 @@ x-flows:
                   - NP2
                 resolver_ids:
                   - NP2
-                description:
+                descriptor:
                   code: FLM005
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
@@ -6641,13 +6619,13 @@ x-flows:
                 last_action_id: AR8
                 actions:
                   - id: AR1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: AR2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint is being processed
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -6655,14 +6633,14 @@ x-flows:
                     actor_details:
                       name: Mark Anthony
                   - id: AR3
-                    description:
+                    descriptor:
                       name: INFO001
                       code: INFO_REQUESTED
                       short_desc: Please provide item images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AR4
-                    description:
+                    descriptor:
                       name: INFO002
                       code: INFO_REQUESTED
                       short_desc: Please provide package images
@@ -6670,7 +6648,7 @@ x-flows:
                     action_by: NP2
                   - id: AR5
                     ref_id: AL3
-                    description:
+                    descriptor:
                       name: INFO001
                       code: INFO_PROVIDED
                       images:
@@ -6682,7 +6660,7 @@ x-flows:
                     action_by: NP1
                   - id: AR6
                     ref_id: AL4
-                    description:
+                    descriptor:
                       name: INFO002
                       code: INFO_PROVIDED
                       images:
@@ -6693,7 +6671,7 @@ x-flows:
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: AR7
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Please wait. We are processing the request.
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -6701,7 +6679,7 @@ x-flows:
                   - id: AR8
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_PROPOSED
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
@@ -6799,7 +6777,7 @@ x-flows:
                   - NP2
                 resolver_ids:
                   - NP2
-                description:
+                descriptor:
                   code: FLM005
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
@@ -6811,13 +6789,13 @@ x-flows:
                 last_action_id: AR9
                 actions:
                   - id: AR1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: AR2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint is being processed
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -6825,14 +6803,14 @@ x-flows:
                     actor_details:
                       name: Mark Anthony
                   - id: AR3
-                    description:
+                    descriptor:
                       name: INFO001
                       code: INFO_REQUESTED
                       short_desc: Please provide item images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AR4
-                    description:
+                    descriptor:
                       name: INFO002
                       code: INFO_REQUESTED
                       short_desc: Please provide package images
@@ -6840,7 +6818,7 @@ x-flows:
                     action_by: NP2
                   - id: AR5
                     ref_id: AL3
-                    description:
+                    descriptor:
                       name: INFO001
                       code: INFO_PROVIDED
                       images:
@@ -6852,7 +6830,7 @@ x-flows:
                     action_by: NP1
                   - id: AR6
                     ref_id: AL4
-                    description:
+                    descriptor:
                       name: INFO002
                       code: INFO_PROVIDED
                       images:
@@ -6863,7 +6841,7 @@ x-flows:
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: AR7
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Please wait. We are processing the request.
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -6871,14 +6849,14 @@ x-flows:
                   - id: AR8
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_PROPOSED
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AR9
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       name: REFUND
                       code: RESOLUTION_ACCEPTED
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -6977,7 +6955,7 @@ x-flows:
                   - NP3
                 resolver_ids:
                   - NP3
-                description:
+                descriptor:
                   code: FLM005
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
@@ -6989,7 +6967,7 @@ x-flows:
                 last_action_id: AL9
                 actions:
                   - id: AL1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -6997,20 +6975,20 @@ x-flows:
                     actor_details:
                       name: Mark Anthony
                   - id: AL2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
                   - id: AL3
-                    description:
+                    descriptor:
                       name: INFO001
                       code: INFO_REQUESTED
                       short_desc: Please provide item images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
                   - id: AL4
-                    description:
+                    descriptor:
                       name: INFO002
                       code: INFO_REQUESTED
                       short_desc: Please provide package images
@@ -7018,7 +6996,7 @@ x-flows:
                     action_by: NP3
                   - id: AL5
                     ref_id: AL3
-                    description:
+                    descriptor:
                       name: INFO001
                       code: INFO_PROVIDED
                       images:
@@ -7030,7 +7008,7 @@ x-flows:
                     action_by: NP2
                   - id: AL6
                     ref_id: AL4
-                    description:
+                    descriptor:
                       name: INFO002
                       code: INFO_PROVIDED
                       images:
@@ -7041,7 +7019,7 @@ x-flows:
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AL7
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Please wait. We are processing the request.
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -7049,14 +7027,14 @@ x-flows:
                   - id: AL8
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_PROPOSED
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
                   - id: AL9
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_ACCEPTED
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
@@ -7154,7 +7132,7 @@ x-flows:
                   - NP3
                 resolver_ids:
                   - NP3
-                description:
+                descriptor:
                   code: FLM005
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
@@ -7166,7 +7144,7 @@ x-flows:
                 last_action_id: AL10
                 actions:
                   - id: AL1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -7174,20 +7152,20 @@ x-flows:
                     actor_details:
                       name: Mark Anthony
                   - id: AL2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
                   - id: AL3
-                    description:
+                    descriptor:
                       name: INFO001
                       code: INFO_REQUESTED
                       short_desc: Please provide item images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
                   - id: AL4
-                    description:
+                    descriptor:
                       name: INFO002
                       code: INFO_REQUESTED
                       short_desc: Please provide package images
@@ -7195,7 +7173,7 @@ x-flows:
                     action_by: NP3
                   - id: AL5
                     ref_id: AL3
-                    description:
+                    descriptor:
                       name: INFO001
                       code: INFO_PROVIDED
                       images:
@@ -7207,7 +7185,7 @@ x-flows:
                     action_by: NP2
                   - id: AL6
                     ref_id: AL4
-                    description:
+                    descriptor:
                       name: INFO002
                       code: INFO_PROVIDED
                       images:
@@ -7218,7 +7196,7 @@ x-flows:
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AL7
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Please wait. We are processing the request.
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -7226,21 +7204,21 @@ x-flows:
                   - id: AL8
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_PROPOSED
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
                   - id: AL9
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_ACCEPTED
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AL10
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLVED
                       short_desc: Providing a refund of 150 Rupees
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -7339,7 +7317,7 @@ x-flows:
                   - NP2
                 resolver_ids:
                   - NP2
-                description:
+                descriptor:
                   code: FLM005
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
@@ -7351,13 +7329,13 @@ x-flows:
                 last_action_id: AR10
                 actions:
                   - id: AR1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: AR2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint is being processed
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -7365,14 +7343,14 @@ x-flows:
                     actor_details:
                       name: Mark Anthony
                   - id: AR3
-                    description:
+                    descriptor:
                       name: INFO001
                       code: INFO_REQUESTED
                       short_desc: Please provide item images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AR4
-                    description:
+                    descriptor:
                       name: INFO002
                       code: INFO_REQUESTED
                       short_desc: Please provide package images
@@ -7380,7 +7358,7 @@ x-flows:
                     action_by: NP2
                   - id: AR5
                     ref_id: AL3
-                    description:
+                    descriptor:
                       name: INFO001
                       code: INFO_PROVIDED
                       images:
@@ -7392,7 +7370,7 @@ x-flows:
                     action_by: NP1
                   - id: AR6
                     ref_id: AL4
-                    description:
+                    descriptor:
                       name: INFO002
                       code: INFO_PROVIDED
                       images:
@@ -7403,7 +7381,7 @@ x-flows:
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: AR7
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Please wait. We are processing the request.
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -7411,14 +7389,14 @@ x-flows:
                   - id: AR8
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_PROPOSED
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AR9
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       name: REFUND
                       code: RESOLUTION_ACCEPTED
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -7426,7 +7404,7 @@ x-flows:
                   - id: AR10
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLVED
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
@@ -7524,7 +7502,7 @@ x-flows:
                   - NP2
                 resolver_ids:
                   - NP2
-                description:
+                descriptor:
                   code: FLM005
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
@@ -7536,13 +7514,13 @@ x-flows:
                 last_action_id: AR11
                 actions:
                   - id: AR1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: AR2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint is being processed
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -7550,14 +7528,14 @@ x-flows:
                     actor_details:
                       name: Mark Anthony
                   - id: AR3
-                    description:
+                    descriptor:
                       name: INFO001
                       code: INFO_REQUESTED
                       short_desc: Please provide item images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AR4
-                    description:
+                    descriptor:
                       name: INFO002
                       code: INFO_REQUESTED
                       short_desc: Please provide package images
@@ -7565,7 +7543,7 @@ x-flows:
                     action_by: NP2
                   - id: AR5
                     ref_id: AL3
-                    description:
+                    descriptor:
                       name: INFO001
                       code: INFO_PROVIDED
                       images:
@@ -7577,7 +7555,7 @@ x-flows:
                     action_by: NP1
                   - id: AR6
                     ref_id: AL4
-                    description:
+                    descriptor:
                       name: INFO002
                       code: INFO_PROVIDED
                       images:
@@ -7588,7 +7566,7 @@ x-flows:
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
                   - id: AR7
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Please wait. We are processing the request.
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -7596,14 +7574,14 @@ x-flows:
                   - id: AR8
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_PROPOSED
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AR9
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       name: REFUND
                       code: RESOLUTION_ACCEPTED
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -7611,12 +7589,12 @@ x-flows:
                   - id: AR10
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLVED
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AR11
-                    description:
+                    descriptor:
                       code: CLOSED
                       short_desc: THUMBS-UP
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -7715,7 +7693,7 @@ x-flows:
                   - NP3
                 resolver_ids:
                   - NP3
-                description:
+                descriptor:
                   code: FLM005
                   short_desc: Issue with packaging
                   long_desc: Food has spilled in the package
@@ -7727,7 +7705,7 @@ x-flows:
                 last_action_id: AL11
                 actions:
                   - id: AL1
-                    description:
+                    descriptor:
                       code: OPEN
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -7735,20 +7713,20 @@ x-flows:
                     actor_details:
                       name: Mark Anthony
                   - id: AL2
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Complaint created
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
                   - id: AL3
-                    description:
+                    descriptor:
                       name: INFO001
                       code: INFO_REQUESTED
                       short_desc: Please provide item images
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
                   - id: AL4
-                    description:
+                    descriptor:
                       name: INFO002
                       code: INFO_REQUESTED
                       short_desc: Please provide package images
@@ -7756,7 +7734,7 @@ x-flows:
                     action_by: NP3
                   - id: AL5
                     ref_id: AL3
-                    description:
+                    descriptor:
                       name: INFO001
                       code: INFO_PROVIDED
                       images:
@@ -7768,7 +7746,7 @@ x-flows:
                     action_by: NP2
                   - id: AL6
                     ref_id: AL4
-                    description:
+                    descriptor:
                       name: INFO002
                       code: INFO_PROVIDED
                       images:
@@ -7779,7 +7757,7 @@ x-flows:
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AL7
-                    description:
+                    descriptor:
                       code: PROCESSING
                       short_desc: Please wait. We are processing the request.
                     updated_at: '2023-01-15T10:00:00.469Z'
@@ -7787,27 +7765,27 @@ x-flows:
                   - id: AL8
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_PROPOSED
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
                   - id: AL9
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLUTION_ACCEPTED
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
                   - id: AL10
                     ref_id: R1
                     ref_type: RESOLUTIONS
-                    description:
+                    descriptor:
                       code: RESOLVED
                       short_desc: Providing a refund of 150 Rupees
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP3
                   - id: AL11
-                    description:
+                    descriptor:
                       code: CLOSED
                       short_desc: THUMBS-UP
                     updated_at: '2023-01-15T10:00:00.469Z'
