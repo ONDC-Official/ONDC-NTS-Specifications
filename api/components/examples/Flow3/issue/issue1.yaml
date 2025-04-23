@@ -1,25 +1,24 @@
 context:
-    domain: ONDC:RET10
-    action: issue
-    country: IND
-    city: std:080,
-    core_version: 1.2.0
-    bap_id: buyerNP.com
-    bap_uri: https://buyerNP.com/ondc
-    bpp_id: sellerapp.com
-    bpp_uri: https://sellerapp.com/ondc
-    transaction_id: T1
-    message_id: M1
-    timestamp: '2023-06-03T08:00:00.000Z'
-    ttl: PT30S
-
+  domain: ONDC:RET10
+  country: IND
+  city: std:080
+  action: issue
+  core_version: 1.2.0
+  bap_id: buyerapp.com
+  bap_uri: https://buyerapp.com/ondc
+  bpp_id: sellerapp.com
+  bpp_uri: https://sellerapp.com/ondc
+  transaction_id: T1
+  message_id: M1
+  timestamp: '2023-01-15T10:00:00.469Z'
+  ttl: PT30S
 message:
   issue:
     id: ISSUE-1
     status: OPEN
     level: ISSUE
-    created_at: "2023-01-15T10:00:00.469Z"
-    updated_at: "2023-01-15T10:00:00.469Z"
+    created_at: '2023-01-15T10:00:00.469Z'
+    updated_at: '2023-01-15T10:00:00.469Z'
     expected_response_time:
       duration: PT2H
     expected_resolution_time:
@@ -69,5 +68,5 @@ message:
         descriptor:
           code: OPEN
           short_desc: Complaint created
-        updated_at: "2023-01-15T10:00:00.469Z"
+        updated_at: '2023-01-15T10:00:00.469Z'
         action_by: NP1

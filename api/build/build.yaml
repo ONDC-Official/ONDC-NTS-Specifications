@@ -1199,7 +1199,7 @@ x-flows:
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M2
+              message_id: M1
               timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
@@ -1320,7 +1320,7 @@ x-flows:
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M3
+              message_id: M2
               timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
@@ -1457,7 +1457,7 @@ x-flows:
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M1
+              message_id: M3
               timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
@@ -1481,7 +1481,7 @@ x-flows:
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M1
+              message_id: M3
               timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
@@ -1773,7 +1773,7 @@ x-flows:
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M5
+              message_id: M4
               timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
@@ -1934,7 +1934,7 @@ x-flows:
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M6
+              message_id: M5
               timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
@@ -2103,7 +2103,7 @@ x-flows:
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M7
+              message_id: M6
               timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
@@ -2283,7 +2283,7 @@ x-flows:
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M8
+              message_id: M6
               timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
@@ -2471,7 +2471,7 @@ x-flows:
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M9
+              message_id: M7
               timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
@@ -2717,7 +2717,7 @@ x-flows:
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M10
+              message_id: M8
               timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
@@ -2973,7 +2973,7 @@ x-flows:
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M11
+              message_id: M8
               timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
@@ -3242,7 +3242,7 @@ x-flows:
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M12
+              message_id: M9
               timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
@@ -3639,7 +3639,7 @@ x-flows:
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M2
+              message_id: M1
               timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
@@ -3736,7 +3736,7 @@ x-flows:
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M3
+              message_id: M2
               timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
@@ -3858,7 +3858,7 @@ x-flows:
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M4
+              message_id: M3
               timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
@@ -3988,7 +3988,7 @@ x-flows:
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M5
+              message_id: M3
               timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
@@ -4128,7 +4128,7 @@ x-flows:
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M6
+              message_id: M4
               timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
@@ -4275,7 +4275,7 @@ x-flows:
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M7
+              message_id: M4
               timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
@@ -4429,7 +4429,7 @@ x-flows:
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M8
+              message_id: M5
               timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
@@ -4597,7 +4597,7 @@ x-flows:
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M9
+              message_id: M6
               timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
@@ -4773,7 +4773,7 @@ x-flows:
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M10
+              message_id: M6
               timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
@@ -4957,7 +4957,7 @@ x-flows:
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M11
+              message_id: M7
               timestamp: '2023-06-03T08:00:00.000Z'
               ttl: PT30S
             message:
@@ -5201,17 +5201,17 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              action: issue
               country: IND
-              city: std:080,
+              city: std:080
+              action: issue
               core_version: 1.2.0
-              bap_id: buyerNP.com
-              bap_uri: https://buyerNP.com/ondc
+              bap_id: buyerapp.com
+              bap_uri: https://buyerapp.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
               message_id: M1
-              timestamp: '2023-06-03T08:00:00.000Z'
+              timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
               issue:
@@ -5230,7 +5230,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5243,7 +5243,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING_NP
+                    type: INTERFACING-NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -5280,17 +5280,17 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              action: on_issue
               country: IND
-              city: std:080,
-              core_version: 1.2.0
-              bap_id: buyerNP.com
-              bap_uri: https://buyerNP.com/ondc
+              city: std:080
+              action: on_issue
+              core_version: 2.0.0
+              bap_id: buyerapp.com
+              bap_uri: https://buyerapp.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M2
-              timestamp: '2023-06-03T08:00:00.000Z'
+              message_id: M1
+              timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
               issue:
@@ -5309,7 +5309,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5322,7 +5322,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING_NP
+                    type: INTERFACING-NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -5344,6 +5344,8 @@ x-flows:
                 source_id: CUST1
                 complainant_id: NP1
                 respondent_ids:
+                  - NP2
+                resolver_ids:
                   - NP2
                 descriptor:
                   code: FLM005
@@ -5379,18 +5381,18 @@ x-flows:
         example:
           value:
             context:
-              domain: ONDC:RET10
-              action: issue
+              domain: nic2004:60232
               country: IND
-              city: std:080,
-              core_version: 1.2.0
-              bap_id: buyerNP.com
-              bap_uri: https://buyerNP.com/ondc
-              bpp_id: sellerapp.com
-              bpp_uri: https://sellerapp.com/ondc
-              transaction_id: T1
+              city: std:080
+              action: issue
+              core_version: 2.0.0
+              bap_id: sellerapp.com
+              bap_uri: https://sellerapp.com/ondc
+              bpp_id: logisticsapp.com
+              bpp_uri: https://logisticsapp.com/ondc
+              transaction_id: T2
               message_id: M3
-              timestamp: '2023-06-03T08:00:00.000Z'
+              timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
               issue:
@@ -5409,7 +5411,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5422,7 +5424,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP2
-                    type: INTERFACING_NP
+                    type: INTERFACING-NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -5461,18 +5463,18 @@ x-flows:
         example:
           value:
             context:
-              domain: ONDC:RET10
-              action: on_issue
+              domain: nic2004:60232
               country: IND
-              city: std:080,
-              core_version: 1.2.0
-              bap_id: buyerNP.com
-              bap_uri: https://buyerNP.com/ondc
-              bpp_id: sellerapp.com
-              bpp_uri: https://sellerapp.com/ondc
-              transaction_id: T1
-              message_id: M4
-              timestamp: '2023-06-03T08:00:00.000Z'
+              city: std:080
+              action: on_issue
+              core_version: 2.0.0
+              bap_id: sellerapp.com
+              bap_uri: https://sellerapp.com/ondc
+              bpp_id: logisticsapp.com
+              bpp_uri: https://logisticsapp.com/ondc
+              transaction_id: T2
+              message_id: M3
+              timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
               issue:
@@ -5491,7 +5493,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5504,7 +5506,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP2
-                    type: INTERFACING_NP
+                    type: INTERFACING-NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -5517,7 +5519,7 @@ x-flows:
                     type: COUNTERPARTY_NP
                     info:
                       org:
-                        name: logisticsapp.com::ONDC:RET10
+                        name: logisticsapp.com::nic2004:60232
                       contact:
                         phone: '9450394140'
                         email: respondentapp@respond.com
@@ -5561,18 +5563,18 @@ x-flows:
         example:
           value:
             context:
-              domain: ONDC:RET10
-              action: on_issue
+              domain: nic2004:60232
               country: IND
-              city: std:080,
-              core_version: 1.2.0
-              bap_id: buyerNP.com
-              bap_uri: https://buyerNP.com/ondc
-              bpp_id: sellerapp.com
-              bpp_uri: https://sellerapp.com/ondc
-              transaction_id: T1
-              message_id: M5
-              timestamp: '2023-06-03T08:00:00.000Z'
+              city: std:080
+              action: on_issue
+              core_version: 2.0.0
+              bap_id: sellerapp.com
+              bap_uri: https://sellerapp.com/ondc
+              bpp_id: logisticsapp.com
+              bpp_uri: https://logisticsapp.com/ondc
+              transaction_id: T2
+              message_id: M4
+              timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
               issue:
@@ -5591,7 +5593,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5604,7 +5606,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP2
-                    type: INTERFACING_NP
+                    type: INTERFACING-NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -5617,7 +5619,7 @@ x-flows:
                     type: COUNTERPARTY_NP
                     info:
                       org:
-                        name: logisticsapp.com::ONDC:RET10
+                        name: logisticsapp.com::nic2004:60232
                       contact:
                         phone: '9450394140'
                         email: respondentapp@respond.com
@@ -5678,17 +5680,17 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              action: on_issue
               country: IND
-              city: std:080,
-              core_version: 1.2.0
-              bap_id: buyerNP.com
-              bap_uri: https://buyerNP.com/ondc
+              city: std:080
+              action: on_issue
+              core_version: 2.0.0
+              bap_id: buyerapp.com
+              bap_uri: https://buyerapp.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M6
-              timestamp: '2023-06-03T08:00:00.000Z'
+              message_id: M5
+              timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
               issue:
@@ -5707,7 +5709,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5720,7 +5722,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING_NP
+                    type: INTERFACING-NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -5742,6 +5744,8 @@ x-flows:
                 source_id: CUST1
                 complainant_id: NP1
                 respondent_ids:
+                  - NP2
+                resolver_ids:
                   - NP2
                 descriptor:
                   code: FLM005
@@ -5792,17 +5796,17 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              action: issue
               country: IND
-              city: std:080,
-              core_version: 1.2.0
-              bap_id: buyerNP.com
-              bap_uri: https://buyerNP.com/ondc
+              city: std:080
+              action: issue
+              core_version: 2.0.0
+              bap_id: buyerapp.com
+              bap_uri: https://buyerapp.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M7
-              timestamp: '2023-06-03T08:00:00.000Z'
+              message_id: M6
+              timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
               issue:
@@ -5821,7 +5825,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5834,7 +5838,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING_NP
+                    type: INTERFACING-NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -5929,18 +5933,18 @@ x-flows:
         example:
           value:
             context:
-              domain: ONDC:RET10
-              action: issue
+              domain: nic2004:60232
               country: IND
-              city: std:080,
-              core_version: 1.2.0
-              bap_id: buyerNP.com
-              bap_uri: https://buyerNP.com/ondc
-              bpp_id: sellerapp.com
-              bpp_uri: https://sellerapp.com/ondc
-              transaction_id: T1
-              message_id: M8
-              timestamp: '2023-06-03T08:00:00.000Z'
+              city: std:080
+              action: issue
+              core_version: 2.0.0
+              bap_id: sellerapp.com
+              bap_uri: https://sellerapp.com/ondc
+              bpp_id: logisticsapp.com
+              bpp_uri: https://logisticsapp.com/ondc
+              transaction_id: T2
+              message_id: M7
+              timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
               issue:
@@ -5959,7 +5963,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -5972,7 +5976,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP2
-                    type: INTERFACING_NP
+                    type: INTERFACING-NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -5985,7 +5989,7 @@ x-flows:
                     type: COUNTERPARTY_NP
                     info:
                       org:
-                        name: logisticsapp.com::ONDC:RET10
+                        name: logisticsapp.com::nic2004:60232
                       contact:
                         phone: '9450394140'
                         email: respondentapp@respond.com
@@ -6069,18 +6073,18 @@ x-flows:
         example:
           value:
             context:
-              domain: ONDC:RET10
-              action: on_issue
+              domain: nic2004:60232
               country: IND
-              city: std:080,
-              core_version: 1.2.0
-              bap_id: buyerNP.com
-              bap_uri: https://buyerNP.com/ondc
-              bpp_id: sellerapp.com
-              bpp_uri: https://sellerapp.com/ondc
-              transaction_id: T1
-              message_id: M9
-              timestamp: '2023-06-03T08:00:00.000Z'
+              city: std:080
+              core_version: 2.0.0
+              action: on_issue
+              bap_id: sellerapp.com
+              bap_uri: https://sellerapp.com/ondc
+              bpp_id: logisticsapp.com
+              bpp_uri: https://logisticsapp.com/ondc
+              transaction_id: T2
+              message_id: M6
+              timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
               issue:
@@ -6099,7 +6103,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -6112,7 +6116,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP2
-                    type: INTERFACING_NP
+                    type: INTERFACING-NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -6125,7 +6129,7 @@ x-flows:
                     type: COUNTERPARTY_NP
                     info:
                       org:
-                        name: logisticsapp.com::ONDC:RET10
+                        name: logisticsapp.com::nic2004:60232
                       contact:
                         phone: '9450394140'
                         email: respondentapp@respond.com
@@ -6216,17 +6220,17 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              action: on_issue
               country: IND
-              city: std:080,
-              core_version: 1.2.0
-              bap_id: buyerNP.com
-              bap_uri: https://buyerNP.com/ondc
+              city: std:080
+              action: on_issue
+              core_version: 2.0.0
+              bap_id: buyerapp.com
+              bap_uri: https://buyerapp.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M10
-              timestamp: '2023-06-03T08:00:00.000Z'
+              message_id: M7
+              timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
               issue:
@@ -6245,7 +6249,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -6258,7 +6262,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING_NP
+                    type: INTERFACING-NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -6359,18 +6363,18 @@ x-flows:
         example:
           value:
             context:
-              domain: ONDC:RET10
-              action: on_issue
+              domain: nic2004:60232
               country: IND
-              city: std:080,
-              core_version: 1.2.0
-              bap_id: buyerNP.com
-              bap_uri: https://buyerNP.com/ondc
-              bpp_id: sellerapp.com
-              bpp_uri: https://sellerapp.com/ondc
-              transaction_id: T1
-              message_id: M11
-              timestamp: '2023-06-03T08:00:00.000Z'
+              city: std:080
+              action: on_issue
+              core_version: 2.0.0
+              bap_id: sellerapp.com
+              bap_uri: https://sellerapp.com/ondc
+              bpp_id: logisticsapp.com
+              bpp_uri: https://logisticsapp.com/ondc
+              transaction_id: T2
+              message_id: M9
+              timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
               issue:
@@ -6389,7 +6393,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -6402,7 +6406,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP2
-                    type: INTERFACING_NP
+                    type: INTERFACING-NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -6425,12 +6429,12 @@ x-flows:
                     type: COUNTERPARTY_NP_GRO
                     info:
                       org:
-                        name: logisticsapp.com::nic2004:60232
+                        name: logisticsapp.com::nic20004:60232
                       contact:
                         phone: '9999994039'
-                        email: logisticsapp@gmail.com
+                        email: logisticsapp@interface.com
                       person:
-                        name: Grievance Officer LNP
+                        name: Grievance Officer LSP
                 source_id: CUST1
                 complainant_id: NP2
                 respondent_ids:
@@ -6540,17 +6544,17 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              action: on_issue
               country: IND
-              city: std:080,
-              core_version: 1.2.0
-              bap_id: buyerNP.com
-              bap_uri: https://buyerNP.com/ondc
+              city: std:080
+              action: on_issue
+              core_version: 2.0.0
+              bap_id: buyerapp.com
+              bap_uri: https://buyerapp.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M12
-              timestamp: '2023-06-03T08:00:00.000Z'
+              message_id: M10
+              timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
               issue:
@@ -6569,7 +6573,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -6582,7 +6586,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING_NP
+                    type: INTERFACING-NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -6601,6 +6605,16 @@ x-flows:
                         email: respondentapp@respond.com
                       person:
                         name: Jane Doe
+                  - id: NP2-GRO
+                    type: COUNTERPARTY_NP_GRO
+                    info:
+                      org:
+                        name: sellersapp.com::ONDC:RET10
+                      contact:
+                        phone: '9999994039'
+                        email: sellerapp@interface.com
+                      person:
+                        name: Grievance Officer SNP
                 source_id: CUST1
                 complainant_id: NP1
                 respondent_ids:
@@ -6710,17 +6724,17 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              action: issue
               country: IND
-              city: std:080,
-              core_version: 1.2.0
-              bap_id: buyerNP.com
-              bap_uri: https://buyerNP.com/ondc
+              city: std:080
+              action: issue
+              core_version: 2.0.0
+              bap_id: buyerapp.com
+              bap_uri: https://buyerapp.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M13
-              timestamp: '2023-06-03T08:00:00.000Z'
+              message_id: M11
+              timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
               issue:
@@ -6739,7 +6753,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -6752,7 +6766,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING_NP
+                    type: INTERFACING-NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -6771,6 +6785,16 @@ x-flows:
                         email: respondentapp@respond.com
                       person:
                         name: Jane Doe
+                  - id: NP2-GRO
+                    type: COUNTERPARTY_NP_GRO
+                    info:
+                      org:
+                        name: sellerapp.com::ONDC:RET10
+                      contact:
+                        phone: '9999994039'
+                        email: sellerapp@interface.com
+                      person:
+                        name: Grievance Officer SNP
                 source_id: CUST1
                 complainant_id: NP1
                 respondent_ids:
@@ -6887,18 +6911,18 @@ x-flows:
         example:
           value:
             context:
-              domain: ONDC:RET10
-              action: issue
+              domain: nic2004:60232
               country: IND
-              city: std:080,
-              core_version: 1.2.0
-              bap_id: buyerNP.com
-              bap_uri: https://buyerNP.com/ondc
-              bpp_id: sellerapp.com
-              bpp_uri: https://sellerapp.com/ondc
-              transaction_id: T1
-              message_id: M14
-              timestamp: '2023-06-03T08:00:00.000Z'
+              city: std:080
+              action: issue
+              core_version: 2.0.0
+              bap_id: sellerapp.com
+              bap_uri: https://sellerapp.com/ondc
+              bpp_id: logisticsapp.com
+              bpp_uri: https://logisticsapp.com/ondc
+              transaction_id: T2
+              message_id: M12
+              timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
               issue:
@@ -6917,7 +6941,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -6930,7 +6954,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP2
-                    type: INTERFACING_NP
+                    type: INTERFACING-NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -6943,12 +6967,22 @@ x-flows:
                     type: COUNTERPARTY_NP
                     info:
                       org:
-                        name: logisticsapp.com::ONDC:RET10
+                        name: logisticsapp.com::nic2004:60232
                       contact:
                         phone: '9450394140'
                         email: respondentapp@respond.com
                       person:
                         name: Alice Jones
+                  - id: NP3-GRO
+                    type: COUNTERPARTY_NP_GRO
+                    info:
+                      org:
+                        name: logisticsapp.com::nic20004:60232
+                      contact:
+                        phone: '9999994039'
+                        email: logisticsapp@interface.com
+                      person:
+                        name: Grievance Officer LSP
                 source_id: CUST1
                 complainant_id: NP2
                 respondent_ids:
@@ -7064,18 +7098,18 @@ x-flows:
         example:
           value:
             context:
-              domain: ONDC:RET10
-              action: on_issue
+              domain: nic2004:60232
               country: IND
-              city: std:080,
-              core_version: 1.2.0
-              bap_id: buyerNP.com
-              bap_uri: https://buyerNP.com/ondc
-              bpp_id: sellerapp.com
-              bpp_uri: https://sellerapp.com/ondc
-              transaction_id: T1
-              message_id: M15
-              timestamp: '2023-06-03T08:00:00.000Z'
+              city: std:080
+              action: on_issue
+              core_version: 2.0.0
+              bap_id: sellerapp.com
+              bap_uri: https://sellerapp.com/ondc
+              bpp_id: logisticsapp.com
+              bpp_uri: https://logisticsapp.com/ondc
+              transaction_id: T2
+              message_id: M11
+              timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
               issue:
@@ -7094,7 +7128,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -7107,7 +7141,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP2
-                    type: INTERFACING_NP
+                    type: INTERFACING-NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -7120,12 +7154,22 @@ x-flows:
                     type: COUNTERPARTY_NP
                     info:
                       org:
-                        name: logisticsapp.com::ONDC:RET10
+                        name: logisticsapp.com::nic2004:60232
                       contact:
                         phone: '9450394140'
                         email: respondentapp@respond.com
                       person:
                         name: Alice Jones
+                  - id: NP3-GRO
+                    type: COUNTERPARTY_NP_GRO
+                    info:
+                      org:
+                        name: logisticsapp.com::nic20004:60232
+                      contact:
+                        phone: '9999994039'
+                        email: logisticsapp@interface.com
+                      person:
+                        name: Grievance Officer LSP
                 source_id: CUST1
                 complainant_id: NP2
                 respondent_ids:
@@ -7250,17 +7294,20 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
+              location:
+                country:
+                  code: IND
+                city:
+                  code: '*'
               action: on_issue
-              country: IND
-              city: std:080,
-              core_version: 1.2.0
-              bap_id: buyerNP.com
-              bap_uri: https://buyerNP.com/ondc
+              core_version: 2.0.0
+              bap_id: buyerapp.com
+              bap_uri: https://buyerapp.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M16
-              timestamp: '2023-06-03T08:00:00.000Z'
+              message_id: M12
+              timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
               issue:
@@ -7279,7 +7326,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -7292,7 +7339,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING_NP
+                    type: INTERFACING-NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -7311,6 +7358,16 @@ x-flows:
                         email: respondentapp@respond.com
                       person:
                         name: Jane Doe
+                  - id: NP2-GRO
+                    type: COUNTERPARTY_NP_GRO
+                    info:
+                      org:
+                        name: sellerapp.com::ONDC:RET10
+                      contact:
+                        phone: '9999994039'
+                        email: sellerapp@interface.com
+                      person:
+                        name: Grievance Officer SNP
                 source_id: CUST1
                 complainant_id: NP1
                 respondent_ids:
@@ -7435,17 +7492,17 @@ x-flows:
           value:
             context:
               domain: ONDC:RET10
-              action: issue
               country: IND
-              city: std:080,
-              core_version: 1.2.0
-              bap_id: buyerNP.com
-              bap_uri: https://buyerNP.com/ondc
+              city: std:080
+              action: issue
+              core_version: 2.0.0
+              bap_id: buyerapp.com
+              bap_uri: https://buyerapp.com/ondc
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M17
-              timestamp: '2023-06-03T08:00:00.000Z'
+              message_id: M13
+              timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
               issue:
@@ -7464,7 +7521,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -7477,7 +7534,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP1
-                    type: INTERFACING_NP
+                    type: INTERFACING-NP
                     info:
                       org:
                         name: buyerapp.com::ONDC:RET10
@@ -7496,6 +7553,16 @@ x-flows:
                         email: respondentapp@respond.com
                       person:
                         name: Jane Doe
+                  - id: NP2-GRO
+                    type: COUNTERPARTY_NP_GRO
+                    info:
+                      org:
+                        name: sellerapp.com::ONDC:RET10
+                      contact:
+                        phone: '9999994039'
+                        email: sellerapp@interface.com
+                      person:
+                        name: Grievance Officer SNP
                 source_id: CUST1
                 complainant_id: NP1
                 respondent_ids:
@@ -7596,9 +7663,16 @@ x-flows:
                   - id: AR11
                     descriptor:
                       code: CLOSED
-                      short_desc: THUMBS-UP
+                      short_desc: Complaint closed
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP1
+                    tags:
+                      - descriptor:
+                          code: CLOSURE_DETAILS
+                        list:
+                          - descriptor:
+                              code: RATING
+                            value: THUMBS_UP
                 resolutions:
                   - id: R1
                     descriptor:
@@ -7625,18 +7699,18 @@ x-flows:
         example:
           value:
             context:
-              domain: ONDC:RET10
-              action: issue
+              domain: nic2004:60232
               country: IND
-              city: std:080,
-              core_version: 1.2.0
-              bap_id: buyerNP.com
-              bap_uri: https://buyerNP.com/ondc
-              bpp_id: sellerapp.com
-              bpp_uri: https://sellerapp.com/ondc
-              transaction_id: T1
-              message_id: M18
-              timestamp: '2023-06-03T08:00:00.000Z'
+              city: std:080
+              action: on_issue
+              core_version: 2.0.0
+              bap_id: sellerapp.com
+              bap_uri: https://sellerapp.com/ondc
+              bpp_id: logisticsapp.com
+              bpp_uri: https://logisticsapp.com/ondc
+              transaction_id: T2
+              message_id: M14
+              timestamp: '2023-01-15T10:00:00.469Z'
               ttl: PT30S
             message:
               issue:
@@ -7655,7 +7729,7 @@ x-flows:
                   - ref_id: P1
                     ref_type: PROVIDER
                   - ref_id: F1
-                    ref_type: FULFILLMENT
+                    ref_type: FULFILMENT
                 actors:
                   - id: CUST1
                     type: CONSUMER
@@ -7668,7 +7742,7 @@ x-flows:
                         phone: '9879879870'
                         email: sam@yahoo.com
                   - id: NP2
-                    type: INTERFACING_NP
+                    type: INTERFACING-NP
                     info:
                       org:
                         name: sellerapp.com::ONDC:RET10
@@ -7681,12 +7755,22 @@ x-flows:
                     type: COUNTERPARTY_NP
                     info:
                       org:
-                        name: logisticsapp.com::ONDC:RET10
+                        name: logisticsapp.com::nic2004:60232
                       contact:
                         phone: '9450394140'
                         email: respondentapp@respond.com
                       person:
                         name: Alice Jones
+                  - id: NP3-GRO
+                    type: COUNTERPARTY_NP_GRO
+                    info:
+                      org:
+                        name: logisticsapp.com::nic20004:60232
+                      contact:
+                        phone: '9999994039'
+                        email: logisticsapp@interface.com
+                      person:
+                        name: Grievance Officer LSP
                 source_id: CUST1
                 complainant_id: NP2
                 respondent_ids:
@@ -7787,9 +7871,16 @@ x-flows:
                   - id: AL11
                     descriptor:
                       code: CLOSED
-                      short_desc: THUMBS-UP
+                      short_desc: Complaint closed
                     updated_at: '2023-01-15T10:00:00.469Z'
                     action_by: NP2
+                    tags:
+                      - descriptor:
+                          code: CLOSURE_DETAILS
+                        list:
+                          - descriptor:
+                              code: RATING
+                            value: THUMBS_UP
                 resolutions:
                   - id: R1
                     descriptor:

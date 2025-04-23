@@ -9,7 +9,7 @@ context:
     bpp_id: sellerapp.com
     bpp_uri: https://sellerapp.com/ondc
     transaction_id: T1
-    message_id: M7
+    message_id: M6
     timestamp: "2023-06-03T08:00:00.000Z"
     ttl: PT30S
 message:
