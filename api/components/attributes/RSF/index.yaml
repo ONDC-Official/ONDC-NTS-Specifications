@@ -122,47 +122,47 @@ settle_misc:
                 caller's operating account
         provider:
           id:
-            required: true
+            required: Conditional
             type: string
             owner: any
             usage: provider-id-789
-            description: Id of the provider
+            description: The provider ID must be provided if settlement is being made to the provider.
           name:
-            required: true
+            required: Conditional
             type: string
             owner: any
             usage: Kirana Pvt Ltd.
-            description: Name of the provider
+            description: The Name of the provider must be provided if settlement is being made to the provider
           bank_details:
             account_no:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: 1234567890
-              description: Account number of the provider
+              description: The Account number of the provider must be provided if settlement is being made to the provider
             ifsc_code:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: IFSC0001
-              description: IFSC code of the provider
+              description: IFSC code of the provider must be provided if settlement is being made to the provider
           amount:
             currency:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: INR
               description: >-
                 Currency of the amount that is to be transferred to the
-                provider's provided account
+                provider's provided account must be provided if settlement is being made to the provider
             value:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: '200.00'
               description: >-
                 Provider amount is the amount that is to be transferred to the
-                provider's provided account
+                provider's provided account must be provided if settlement is being made to the provider
 settle_np-np:
   context:
     domain:
@@ -299,47 +299,47 @@ settle_np-np:
                 caller's operating account
         provider:
           id:
-            required: true
+            required: Conditional
             type: string
             owner: any
             usage: prvdr-id-789
-            description: Id of the provider
+            description: The provider ID must be provided if settlement is being made to the provider
           name:
-            required: true
+            required: Conditional
             type: string
             owner: any
             usage: Kirana Pvt Ltd
-            description: Name of the provider
+            description: The Name of the provider must be provided if settlement is being made to the provider
           bank_details:
             account_no:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: '1234567890'
-              description: Account number of the provider
+              description: The Account number of the provider must be provided if settlement is being made to the provider
             ifsc_code:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: IFSC0001
-              description: IFSC code of the provider
+              description: IFSC code of the  must be provided if settlement is being made to the provider
           amount:
             currency:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: INR
               description: >-
                 Currency of the amount that is to be transferred to the
-                provider's provided account
+                provider's provided account must be provided if settlement is being made to the provider
             value:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: '800.00'
               description: >-
                 Provider amount is the amount that is to be transferred to the
-                provider's provided account
+                provider's provided account must be provided if settlement is being made to the provider
         id:
           required: true
           type: string
@@ -620,88 +620,88 @@ on_settle:
             type: string
             owner: any
             usage: '1238683618634'
-            description: Reference number of self fund settlement
+            description: Reference number of self fund settlement not required if settlement is not settled 
           error:
             code:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: '01'
-              description: Code of the error occurred at the time of settlement
+              description: Code of the error occurred at the time of settlement not required if settlement is not settled 
             message:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: Account inactive
-              description: Message of the error occurred at the time of settlement
+              description: Message of the error occurred at the time of settlement not required if settlement is not settled 
         provider:
           id:
-            required: true
+            required: Conditional
             type: string
             owner: any
             usage: prvdr-id-789
-            description: Id of the provider
+            description: The provider ID must be provided if settlement is being made to the provider
           name:
-            required: true
+            required: Conditional
             type: string
             owner: any
             usage: Kirana Pvt Ltd
-            description: Name of the provider
+            description: The Name of the provider must be provided if settlement is being made to the provider
           bank_details:
             account_no:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: '1234567890'
-              description: Account number of the provider
+              description: The Account number of the provider must be provided if settlement is being made to the provider
             ifsc_code:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: IFSC0001
-              description: IFSC code of the provider
+              description: IFSC code of the provider must be provided if settlement is being made to the provider
           amount:
             currency:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: INR
               description: >-
                 Currency of the amount that is to be transferred to the
-                provider's provided account
+                provider's provided account must be provided if settlement is being made to the provider
             value:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: '800.00'
               description: >-
                 Provider amount is the amount that is to be transferred to the
-                provider's provided account
+                provider's provided account must be provided if settlement is being made to the provider
           status:
-            required: true
+            required: Conditional
             type: string
             owner: any
             usage: NOT_SETTLED
-            description: Status of provider fund settlement
+            description: Status of provider fund settlement must be provided if settlement is being made to the provider
           reference_no:
-            required: true
+            required: Conditional
             type: string
             owner: any
             usage: '3718683618631'
-            description: Reference number of provider fund settlement
+            description: Reference number of provider fund settlement must be provided if settlement is SETTLED
           error:
             code:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: '01'
-              description: Code of the error occurred at the time of settlement
+              description: Code of the error occurred at the time of settlement if status is NOT_SETTLED
             message:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: Account inactive
-              description: Message of the error occurred at the time of settlement
+              description: Message of the error occurred at the time of settlement if status is NOT_SETTLED
         id:
           required: true
           type: string
@@ -733,24 +733,24 @@ on_settle:
             usage: SETTLED
             description: Status of interparticipant fund settlement
           reference_no:
-            required: true
+            required: Conditional
             type: string
             owner: any
             usage: '3718683618631'
-            description: Reference number of Interparticipant fund settlement
+            description: Reference number of Interparticipant fund settlement if status is NOT_SETTLED
           error:
             code:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: '01'
-              description: Code of the error occurred at the time of settlement
+              description: Code of the error occurred at the time of settlement not required if settlement is not settled 
             message:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: Account inactive
-              description: Message of the error occurred at the time of settlement
+              description: Message of the error occurred at the time of settlement not required if settlement is not settled 
         collector:
           amount:
             currency:
@@ -906,92 +906,92 @@ report:
             usage: NOT_SETTLED
             description: Status of self fund settlement
           reference_no:
-            required: true
+            required: Conditional
             type: string
             owner: any
             usage: '1238683618634'
-            description: Reference number of self fund settlement
+            description: Reference number of self fund settlement if status is NOT_SETTLED not required if settlement is not settled 
           error:
             code:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: '01'
-              description: Code of the error occurred at the time of settlement
+              description: Code of the error occurred at the time of settlement 
             message:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: Account inactive
               description: Message of the error occurred at the time of settlement
         provider:
           id:
-            required: true
+            required: Conditional
             type: string
             owner: any
             usage: prvdr-id-789
-            description: Id of Provider
+            description: The provider ID must be provided if settlement is being made to the provider
           name:
-            required: true
+            required: Conditional
             type: string
             owner: any
             usage: Kirana Pvt Ltd
-            description: Name of Provider
+            description: The Name of the provider must be provided if settlement is being made to the provider
           bank_details:
             account_no:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: '1234567890'
-              description: Account number of the provider
+              description: The Account number of the provider must be provided if settlement is being made to the provider
             ifsc_code:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: IFSC0001
-              description: IFSC code of the provider
+              description: IFSC code of the provider must be provided if settlement is being made to the provider
           amount:
             currency:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: INR
               description: >-
                 Currency of the amount that is to be transferred to the
-                provider's provided account
+                provider's provided account must be provided if settlement is being made to the provider
             value:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: '800.00'
               description: >-
                 Provider amount is the amount that is to be transferred to the
-                provider's provided account
+                provider's provided account must be provided if settlement is being made to the provider
           status:
-            required: true
+            required: Conditional
             type: string
             owner: any
             usage: NOT_SETTLED
-            description: Status of provider fund settlement
+            description: Status of provider fund settlement must be provided if settlement is being made to the provider
           reference_no:
-            required: true
+            required: Conditional
             type: string
             owner: any
             usage: '3718683618631'
-            description: Reference number of provider fund settlement
+            description: Reference number of provider fund settlement if amount is SETTLED
           error:
             code:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: '01'
-              description: Code of the error occurred at the time of settlement
+              description: Code of the error occurred at the time of settlement if settlement is not settled
             message:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: Account inactive
-              description: Message of the error occurred at the time of settlement
+              description: Message of the error occurred at the time of settlement if settlement is not settled
         id:
           required: true
           type: string
@@ -1023,20 +1023,20 @@ report:
             usage: SETTLED
             description: Status of interparticipant fund settlement
           reference_no:
-            required: true
+            required: Conditional
             type: string
             owner: any
             usage: '3718683618631'
-            description: Reference number of Interparticipant fund settlement
+            description: Reference number of Interparticipant fund settlement not required if settlement is not settled 
           error:
             code:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: '01'
               description: Code of the error occurred at the time of settlement
             message:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: Account inactive
@@ -1208,92 +1208,92 @@ on_report:
             usage: NOT_SETTLED
             description: Status of self fund settlement
           reference_no:
-            required: true
+            required: Conditional
             type: string
             owner: any
             usage: '3718683618631'
-            description: Reference number of self fund settlement
+            description: Reference number of self fund settlement not required if settlement is not settled 
           error:
             code:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: '01'
               description: Code of the error occurred at the time of settlement
             message:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: Account inactive
               description: Message of the error occurred at the time of settlement
         provider:
           id:
-            required: true
+            required: Conditional
             type: string
             owner: any
             usage: provider-id-789
-            description: Id of the provider
+            description: The provider ID must be provided if settlement is being made to the provider
           name:
-            required: true
+            required: Conditional
             type: string
             owner: any
             usage: Kirana Pvt Ltd
-            description: Name of the provider
+            description: The Name of the provider must be provided if settlement is being made to the provider
           bank_details:
             account_no:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: '1234567890'
-              description: Account number of the provider
+              description: The Account number of the provider must be provided if settlement is being made to the provider
             ifsc_code:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: IFSC0001
-              description: IFSC code of the provider
+              description: IFSC code of the provider must be provided if settlement is being made to the provider
           amount:
             currency:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: INR
               description: >-
                 Currency of the amount that is to be transferred to the
-                provider's provided account
+                provider's provided account must be provided if settlement is being made to the provider
             value:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: '800.00'
               description: >-
                 Provider amount is the amount that is to be transferred to the
-                provider's provided account
+                provider's provided account must be provided if settlement is being made to the provider
           status:
-            required: true
+            required: Conditional
             type: string
             owner: any
             usage: NOT_SETTLED
             description: Status of provider fund settlement
           reference_no:
-            required: true
+            required: Conditional
             type: string
             owner: any
             usage: '3718683618631'
-            description: Reference number of provider fund settlement
+            description: Reference number of provider fund settlement if settlement is Settled
           error:
             code:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: '01'
-              description: Code of the error occurred at the time of settlement
+              description: Code of the error occurred at the time of settlement if settlement is not Settled
             message:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: Account inactive
-              description: Message of the error occurred at the time of settlement
+              description: Message of the error occurred at the time of settlement if settlement is not Settled
         id:
           required: true
           type: string
@@ -1325,32 +1325,32 @@ on_report:
             usage: SETTLED
             description: Status of interparticipant fund settlement
           reference_no:
-            required: true
+            required: Conditional
             type: string
             owner: any
             usage: '3718683618631'
-            description: Reference number of Interparticipant fund settlement
+            description: Reference number of Interparticipant fund settlement not required if settlement is not settled 
           error:
             code:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: '01'
               description: Code of the error occurred at the time of settlement
             message:
-              required: true
+              required: Conditional
               type: string
               owner: any
               usage: Account inactive
               description: Message of the error occurred at the time of settlement
           currency:
-            required: true
+            required: Conditional
             type: string
             owner: any
             usage: INR
             description: Currency of the amount that is being settled
           value:
-            required: true
+            required: Conditional
             type: string
             owner: any
             usage: '1000.00'
@@ -1531,11 +1531,11 @@ recon:
           usage: pymnt-1
           description: Payment ID of the settlement
         settlement_ref_no:
-          required: false
+          required: Conditional
           type: string
           owner: any
           usage: utr-1234
-          description: 'Settlement Reference number of the settlement '
+          description: 'Settlement Reference number of the settlement is required if settlement is settled'
         status:
           required: true
           type: string
@@ -1755,11 +1755,11 @@ on_recon:
           usage: utr-1234
           description: Payment_Id of the settlement
         settlement_ref_no:
-          required: true
+          required: Conditional
           type: string
           owner: any
           usage: PENDING
-          description: 'Settlement Reference number of the settlement '
+          description: 'Settlement Reference number of the settlement is required if settlement is settled '
         due_date:
           required: false
           type: string
