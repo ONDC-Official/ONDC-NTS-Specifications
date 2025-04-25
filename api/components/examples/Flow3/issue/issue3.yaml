@@ -1,18 +1,17 @@
 context:
-    domain: ONDC:RET10
-    action: issue
-    country: IND
-    city: std:080,
-    core_version: 1.2.0
-    bap_id: buyerNP.com
-    bap_uri: https://buyerNP.com/ondc
-    bpp_id: sellerapp.com
-    bpp_uri: https://sellerapp.com/ondc
-    transaction_id: T1
-    message_id: M3
-    timestamp: '2023-06-03T08:00:00.000Z'
-    ttl: PT30S
-
+  domain: nic2004:60232
+  country: IND
+  city: std:080
+  action: issue
+  core_version: 2.0.0
+  bap_id: sellerapp.com
+  bap_uri: https://sellerapp.com/ondc
+  bpp_id: logisticsapp.com
+  bpp_uri: https://logisticsapp.com/ondc
+  transaction_id: T2
+  message_id: M3
+  timestamp: '2023-01-15T10:00:00.469Z'
+  ttl: PT30S
 message:
   issue:
     id: ISSUE-2
@@ -54,7 +53,7 @@ message:
             name: Jane Doe
     source_id: CUST1
     complainant_id: NP2
-    description:
+    descriptor:
       code: FLM005
       short_desc: Issue with packaging
       long_desc: Food has spilled in the package
@@ -66,7 +65,7 @@ message:
     last_action_id: AL1
     actions:
       - id: AL1
-        description:
+        descriptor:
           code: OPEN
           short_desc: Complaint created
         updated_at: '2023-01-15T10:00:00.469Z'

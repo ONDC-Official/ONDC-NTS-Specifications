@@ -51,7 +51,7 @@ message:
             name: John Doe
     source_id: SELLER1
     complainant_id: NP1
-    description:
+    descriptor:
       code: VIS001
       short_desc: Seller not visible on interface
       images:
@@ -60,7 +60,7 @@ message:
     last_action_id: A1
     actions:
       - id: A1
-        description:
+        descriptor:
           code: OPEN
           short_desc: Complaint created
         updated_at: '2023-01-15T10:00:00.469Z'

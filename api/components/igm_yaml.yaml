@@ -92,51 +92,6 @@ paths:
                     $ref: "#/components/schemas/Error"
                 required:
                   - message
-  /on_issue_status:
-    post:
-      tags:
-        - Complaint lifecycle management
-      description: Send the issue resolution details object
-      requestBody:
-        description: Seller confirms order
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                context:
-                  $ref: "#/components/schemas/Context"
-                message:
-                  type: object
-                  properties:
-                    issue:
-                      $ref: "#/components/schemas/Issue"
-                  required:
-                    - issue
-                error:
-                  $ref: "#/components/schemas/Error"
-              required:
-                - context
-                - message
-      responses:
-        "200":
-          description: Acknowledgement of message received
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: object
-                    properties:
-                      ack:
-                        $ref: "#/components/schemas/Ack"
-                    required:
-                      - ack
-                  error:
-                    $ref: "#/components/schemas/Error"
-                required:
-                  - message                           
   /issue_status:
     post:
       tags:
@@ -189,6 +144,51 @@ paths:
                     $ref: "#/components/schemas/Error"
                 required:
                   - message                 
+  /on_issue_status:
+    post:
+      tags:
+        - Complaint lifecycle management
+      description: Send the issue resolution details object
+      requestBody:
+        description: Seller confirms order
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                context:
+                  $ref: "#/components/schemas/Context"
+                message:
+                  type: object
+                  properties:
+                    issue:
+                      $ref: "#/components/schemas/Issue"
+                  required:
+                    - issue
+                error:
+                  $ref: "#/components/schemas/Error"
+              required:
+                - context
+                - message
+      responses:
+        "200":
+          description: Acknowledgement of message received
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: object
+                    properties:
+                      ack:
+                        $ref: "#/components/schemas/Ack"
+                    required:
+                      - ack
+                  error:
+                    $ref: "#/components/schemas/Error"
+                required:
+                  - message                           
  
  
 components:
@@ -288,10 +288,10 @@ components:
           type: array
           items:
             $ref:  "#/components/schemas/Action"       
-        # descriptor:
-        #   $ref: "#/components/schemas/Descriptor"
-        description:
-          $ref: "#/components/schemas/Descriptor"   
+        descriptor:
+          $ref: "#/components/schemas/Descriptor"
+        # description:
+        #   $ref: "#/components/schemas/Descriptor"   
         actors:
           description: state the description of the actor that are involve
           type: array
@@ -345,6 +345,7 @@ components:
                   - RESOLUTION_ACCEPTED
                   - RESOLUTION_REJECTED
                   - RESOLVED
+                  - ESCALATED
         updated_at:
           description: timestamp for the capturing the time an issue status was last updated
           type: string
@@ -361,29 +362,29 @@ components:
           properties:
             name:
               type: string
-        description:
-         allOf:
-          - $ref: "#/components/schemas/Descriptor"
-          - type: object
-            properties:
-              code:
-                type: string
-                enum:
-                  - OPEN
-                  - PROCESSING
-                  - CLOSED
-                  - CASCADED
-                  - INFO_REQUESTED
-                  - INFO_PROCESSING
-                  - INFO_PROVIDED
-                  - INFO_NOT_AVAILABLE
-                  - RESOLUTION_PROPOSED
-                  - RESOLUTION_FORWARDED
-                  - RESOLUTION_PROCESSING
-                  - RESOLUTION_ACCEPTED
-                  - RESOLUTION_REJECTED
-                  - RESOLVED
-                  - ESCALATED
+        # description:
+        #  allOf:
+        #   - $ref: "#/components/schemas/Descriptor"
+        #   - type: object
+        #     properties:
+        #       code:
+        #         type: string
+        #         enum:
+        #           - OPEN
+        #           - PROCESSING
+        #           - CLOSED
+        #           - CASCADED
+        #           - INFO_REQUESTED
+        #           - INFO_PROCESSING
+        #           - INFO_PROVIDED
+        #           - INFO_NOT_AVAILABLE
+        #           - RESOLUTION_PROPOSED
+        #           - RESOLUTION_FORWARDED
+        #           - RESOLUTION_PROCESSING
+        #           - RESOLUTION_ACCEPTED
+        #           - RESOLUTION_REJECTED
+        #           - RESOLVED
+        #           - ESCALATED
                
 
     Actor_info:

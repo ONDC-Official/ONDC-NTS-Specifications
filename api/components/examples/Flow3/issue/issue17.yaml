@@ -1,24 +1,24 @@
 context:
-    domain: ONDC:RET10
-    action: issue
-    country: IND
-    city: std:080,
-    core_version: 1.2.0
-    bap_id: buyerNP.com
-    bap_uri: https://buyerNP.com/ondc
-    bpp_id: sellerapp.com
-    bpp_uri: https://sellerapp.com/ondc
-    transaction_id: T1
-    message_id: M17
-    timestamp: '2023-06-03T08:00:00.000Z'
-    ttl: PT30S
+  domain: ONDC:RET10
+  country: IND
+  city: std:080
+  action: issue
+  core_version: 2.0.0
+  bap_id: buyerapp.com
+  bap_uri: https://buyerapp.com/ondc
+  bpp_id: sellerapp.com
+  bpp_uri: https://sellerapp.com/ondc
+  transaction_id: T1
+  message_id: M13
+  timestamp: '2023-01-15T10:00:00.469Z'
+  ttl: PT30S
 message:
   issue:
     id: ISSUE-1
     status: CLOSED
     level: ISSUE
-    created_at: "2023-01-15T10:00:00.469Z"
-    updated_at: "2023-01-15T10:00:00.469Z"
+    created_at: '2023-01-15T10:00:00.469Z'
+    updated_at: '2023-01-15T10:00:00.469Z'
     expected_response_time:
       duration: PT2H
     expected_resolution_time:
@@ -61,13 +61,23 @@ message:
             email: respondentapp@respond.com
           person:
             name: Jane Doe
+      - id: NP2-GRO
+        type: COUNTERPARTY_NP_GRO
+        info:
+          org:
+            name: sellerapp.com::ONDC:RET10
+          contact:
+            phone: "9999994039"
+            email: sellerapp@interface.com
+          person:
+            name: Grievance Officer SNP
     source_id: CUST1
     complainant_id: NP1
     respondent_ids:
       - NP2
     resolver_ids:
       - NP2
-    description:
+    descriptor:
       code: FLM005
       short_desc: Issue with packaging
       long_desc: Food has spilled in the package
@@ -79,36 +89,36 @@ message:
     last_action_id: AR11
     actions:
       - id: AR1
-        description:
+        descriptor:
           code: OPEN
           short_desc: Complaint created
-        updated_at: "2023-01-15T10:00:00.469Z"
+        updated_at: '2023-01-15T10:00:00.469Z'
         action_by: NP1
       - id: AR2
-        description:
+        descriptor:
           code: PROCESSING
           short_desc: Complaint is being processed
-        updated_at: "2023-01-15T10:00:00.469Z"
+        updated_at: '2023-01-15T10:00:00.469Z'
         action_by: NP2
         actor_details:
           name: Mark Anthony
       - id: AR3
-        description:
+        descriptor:
           name: INFO001
           code: INFO_REQUESTED
           short_desc: Please provide item images
-        updated_at: "2023-01-15T10:00:00.469Z"
+        updated_at: '2023-01-15T10:00:00.469Z'
         action_by: NP2
       - id: AR4
-        description:
+        descriptor:
           name: INFO002
           code: INFO_REQUESTED
           short_desc: Please provide package images
-        updated_at: "2023-01-15T10:00:00.469Z"
+        updated_at: '2023-01-15T10:00:00.469Z'
         action_by: NP2
       - id: AR5
         ref_id: AL3
-        description:
+        descriptor:
           name: INFO001
           code: INFO_PROVIDED
           images:
@@ -120,7 +130,7 @@ message:
         action_by: NP1
       - id: AR6
         ref_id: AL4
-        description:
+        descriptor:
           name: INFO002
           code: INFO_PROVIDED
           images:
@@ -131,39 +141,46 @@ message:
         updated_at: "2023-01-15T10:00:00.469Z"
         action_by: NP1
       - id: AR7
-        description:
+        descriptor:
           code: PROCESSING
           short_desc: Please wait. We are processing the request.
-        updated_at: "2023-01-15T10:00:00.469Z"
+        updated_at: '2023-01-15T10:00:00.469Z'
         action_by: NP2
       - id: AR8
         ref_id: R1
         ref_type: RESOLUTIONS
-        description:
+        descriptor:
           code: RESOLUTION_PROPOSED
-        updated_at: "2023-01-15T10:00:00.469Z"
+        updated_at: '2023-01-15T10:00:00.469Z'
         action_by: NP2
       - id: AR9
         ref_id: R1
         ref_type: RESOLUTIONS
-        description:
+        descriptor:
           name: REFUND
           code: RESOLUTION_ACCEPTED
-        updated_at: "2023-01-15T10:00:00.469Z"
+        updated_at: '2023-01-15T10:00:00.469Z'
         action_by: NP1
       - id: AR10
         ref_id: R1
         ref_type: RESOLUTIONS
-        description:
+        descriptor:
           code: RESOLVED
-        updated_at: "2023-01-15T10:00:00.469Z"
+        updated_at: '2023-01-15T10:00:00.469Z'
         action_by: NP2
       - id: AR11
-        description:
+        descriptor:
           code: CLOSED
-          short_desc: THUMBS-UP
-        updated_at: "2023-01-15T10:00:00.469Z"
+          short_desc: Complaint closed
+        updated_at: '2023-01-15T10:00:00.469Z'
         action_by: NP1
+        tags:
+          - descriptor:
+              code: CLOSURE_DETAILS
+            list:
+              - descriptor:
+                  code: RATING
+                value: THUMBS_UP
     resolutions:
       - id: R1
         descriptor:

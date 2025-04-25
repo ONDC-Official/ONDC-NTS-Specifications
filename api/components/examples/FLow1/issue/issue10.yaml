@@ -9,7 +9,7 @@
     bpp_id: sellerapp.com
     bpp_uri: https://sellerapp.com/ondc
     transaction_id: T1
-    message_id: M10
+    message_id: M8
     timestamp: "2023-06-03T08:00:00.000Z"
     ttl: PT30S
   message:
@@ -87,7 +87,7 @@
       complainant_id: NP1
       respondent_ids:
         - NP2
-      description:
+      descriptor:
         code: ITM004
         short_desc: Issue with product quality
         long_desc: product quality is not correct. facing issues while using the product
@@ -103,7 +103,7 @@
       last_action_id: A10
       actions:
         - id: A1
-          description:
+          descriptor:
             code: OPEN
             short_desc: Complaint created
           updated_at: "2023-01-15T10:00:00.469Z"
@@ -111,7 +111,7 @@
           actor_details:
             name: Sam Manuel
         - id: A2
-          description:
+          descriptor:
             code: PROCESSING
             short_desc: Complaint created
           updated_at: "2023-01-15T10:00:00.469Z"
@@ -119,7 +119,7 @@
           actor_details:
             name: Sam Manuel
         - id: A3_1
-          description:
+          descriptor:
             code: INFO_REQUESTED
             name: INFO001
             short_desc: Please provide product image
@@ -128,7 +128,7 @@
           actor_details:
             name: Sam Manuel
         - id: A3_2
-          description:
+          descriptor:
             code: INFO_REQUESTED
             name: INFO002
             short_desc: Please provide invoice
@@ -138,7 +138,7 @@
             name: Sam Manuel
         - id: A4
           ref_id: A3_1
-          description:
+          descriptor:
             code: INFO_PROVIDED
             short_desc: Responded with images
             images:
@@ -151,7 +151,7 @@
           actor_details:
             name: Sam Manuel
         - id: A5
-          description:
+          descriptor:
             code: PROCESSING
             short_desc: Complaint created
           updated_at: "2023-01-15T10:00:00.469Z"
@@ -160,7 +160,7 @@
             name: Sam Manuel
         - id: A6
           ref_id: A3_2
-          description:
+          descriptor:
             code: INFO_REQUESTED
             name: INFO002
             short_desc: Please provide invoice
@@ -170,7 +170,7 @@
             name: Sam Manuel
         - id: A7
           ref_id: A6
-          description:
+          descriptor:
             code: INFO_PROVIDED
             short_desc: Provided invoice
             media:
@@ -180,7 +180,7 @@
           actor_details:
             name: Sam Manuel
         - id: A8
-          description:
+          descriptor:
             code: PROCESSING
             short_desc: Processing the complaint information
           updated_at: "2023-01-15T10:00:00.469Z"
@@ -190,7 +190,7 @@
         - id: A9
           ref_id: R_PARENT
           ref_type: RESOLUTIONS
-          description:
+          descriptor:
             code: RESOLUTION_PROPOSED
           updated_at: "2023-01-15T10:00:00.469Z"
           action_by: NP2
@@ -199,7 +199,7 @@
         - id: A10
           ref_id: R2
           ref_type: RESOLUTIONS
-          description:
+          descriptor:
             code: RESOLUTION_ACCEPTED
           updated_at: "2023-01-15T10:00:00.469Z"
           action_by: NP1

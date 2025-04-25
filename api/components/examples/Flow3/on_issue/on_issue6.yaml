@@ -1,24 +1,24 @@
 context:
-    domain: ONDC:RET10
-    action: on_issue
-    country: IND
-    city: std:080,
-    core_version: 1.2.0
-    bap_id: buyerNP.com
-    bap_uri: https://buyerNP.com/ondc
-    bpp_id: sellerapp.com
-    bpp_uri: https://sellerapp.com/ondc
-    transaction_id: T1
-    message_id: M6
-    timestamp: '2023-06-03T08:00:00.000Z'
-    ttl: PT30S
+  domain: ONDC:RET10
+  country: IND
+  city: std:080
+  action: on_issue
+  core_version: 2.0.0
+  bap_id: buyerapp.com
+  bap_uri: https://buyerapp.com/ondc
+  bpp_id: sellerapp.com
+  bpp_uri: https://sellerapp.com/ondc
+  transaction_id: T1
+  message_id: M5
+  timestamp: '2023-01-15T10:00:00.469Z'
+  ttl: PT30S
 message:
   issue:
     id: ISSUE-1
     status: OPEN
     level: ISSUE
-    created_at: "2023-01-15T10:00:00.469Z"
-    updated_at: "2023-01-15T10:00:00.469Z"
+    created_at: '2023-01-15T10:00:00.469Z'
+    updated_at: '2023-01-15T10:00:00.469Z'
     expected_response_time:
       duration: PT2H
     expected_resolution_time:
@@ -65,9 +65,9 @@ message:
     complainant_id: NP1
     respondent_ids:
       - NP2
-    # resolver_ids:
-    #   - NP2
-    description:
+    resolver_ids:
+      - NP2
+    descriptor:
       code: FLM005
       short_desc: Issue with packaging
       long_desc: Food has spilled in the package
@@ -79,30 +79,30 @@ message:
     last_action_id: AR4
     actions:
       - id: AR1
-        description:
+        descriptor:
           code: OPEN
           short_desc: Complaint created
-        updated_at: "2023-01-15T10:00:00.469Z"
+        updated_at: '2023-01-15T10:00:00.469Z'
         action_by: NP1
       - id: AR2
-        description:
+        descriptor:
           code: PROCESSING
           short_desc: Complaint is being processed
-        updated_at: "2023-01-15T10:00:00.469Z"
+        updated_at: '2023-01-15T10:00:00.469Z'
         action_by: NP2
         actor_details:
           name: Mark Anthony
       - id: AR3
-        description:
+        descriptor:
           name: INFO001
           code: INFO_REQUESTED
           short_desc: Please provide item images
-        updated_at: "2023-01-15T10:00:00.469Z"
+        updated_at: '2023-01-15T10:00:00.469Z'
         action_by: NP3
       - id: AR4
-        description:
+        descriptor:
           name: INFO002
           code: INFO_REQUESTED
           short_desc: Please provide package images
-        updated_at: "2023-01-15T10:00:00.469Z"
+        updated_at: '2023-01-15T10:00:00.469Z'
         action_by: NP3
