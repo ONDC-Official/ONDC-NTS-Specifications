@@ -2703,7 +2703,7 @@ x-attributes:
                     The provider ID must be provided if settlement is being made
                     to the provider.
                 name:
-                  required: Conditional
+                  required: optional
                   type: string
                   owner: any
                   usage: Kirana Pvt Ltd.
@@ -2892,7 +2892,7 @@ x-attributes:
                     The provider ID must be provided if settlement is being made
                     to the provider
                 name:
-                  required: Conditional
+                  required: optional
                   type: string
                   owner: any
                   usage: Kirana Pvt Ltd
@@ -3231,16 +3231,16 @@ x-attributes:
                     owner: any
                     usage: '01'
                     description: >-
-                      Code of the error occurred at the time of settlement not
-                      required if settlement is not settled
+                      Code of the error occurred at the time of settlement if
+                      settlement is not done
                   message:
                     required: Conditional
                     type: string
                     owner: any
                     usage: Account inactive
                     description: >-
-                      Message of the error occurred at the time of settlement
-                      not required if settlement is not settled
+                      Message of the error occurred at the time of settlement if
+                      settlement is not done
               provider:
                 id:
                   required: Conditional
@@ -3251,7 +3251,7 @@ x-attributes:
                     The provider ID must be provided if settlement is being made
                     to the provider
                 name:
-                  required: Conditional
+                  required: optional
                   type: string
                   owner: any
                   usage: Kirana Pvt Ltd
@@ -3571,7 +3571,7 @@ x-attributes:
                     The provider ID must be provided if settlement is being made
                     to the provider
                 name:
-                  required: Conditional
+                  required: optional
                   type: string
                   owner: any
                   usage: Kirana Pvt Ltd
@@ -3899,7 +3899,7 @@ x-attributes:
                     The provider ID must be provided if settlement is being made
                     to the provider
                 name:
-                  required: Conditional
+                  required: optional
                   type: string
                   owner: any
                   usage: Kirana Pvt Ltd
