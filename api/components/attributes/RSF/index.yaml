@@ -128,7 +128,7 @@ settle_misc:
             usage: provider-id-789
             description: The provider ID must be provided if settlement is being made to the provider.
           name:
-            required: Conditional
+            required: optional
             type: string
             owner: any
             usage: Kirana Pvt Ltd.
@@ -305,7 +305,7 @@ settle_np-np:
             usage: prvdr-id-789
             description: The provider ID must be provided if settlement is being made to the provider
           name:
-            required: Conditional
+            required: optional
             type: string
             owner: any
             usage: Kirana Pvt Ltd
@@ -627,13 +627,13 @@ on_settle:
               type: string
               owner: any
               usage: '01'
-              description: Code of the error occurred at the time of settlement not required if settlement is not settled 
+              description:  Code of the error occurred at the time of settlement if settlement is not done
             message:
               required: Conditional
               type: string
               owner: any
               usage: Account inactive
-              description: Message of the error occurred at the time of settlement not required if settlement is not settled 
+              description: Message of the error occurred at the time of settlement if settlement is not done
         provider:
           id:
             required: Conditional
@@ -642,7 +642,7 @@ on_settle:
             usage: prvdr-id-789
             description: The provider ID must be provided if settlement is being made to the provider
           name:
-            required: Conditional
+            required: optional
             type: string
             owner: any
             usage: Kirana Pvt Ltd
@@ -932,7 +932,7 @@ report:
             usage: prvdr-id-789
             description: The provider ID must be provided if settlement is being made to the provider
           name:
-            required: Conditional
+            required: optional
             type: string
             owner: any
             usage: Kirana Pvt Ltd
@@ -1234,7 +1234,7 @@ on_report:
             usage: provider-id-789
             description: The provider ID must be provided if settlement is being made to the provider
           name:
-            required: Conditional
+            required: optional
             type: string
             owner: any
             usage: Kirana Pvt Ltd
