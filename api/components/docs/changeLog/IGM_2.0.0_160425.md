@@ -11,34 +11,42 @@
 <th>IGM_2.0.0_160425</th>
 </tr>
 
-**IGM-2.0.0**
+<tr class="odd">
+<th>Updates in API Specs on dev doc</th>
+<th>16th April 2025</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
 
-- Updated `images` structure with url & size_type
-  ```
-    "images": [
-      {
-        "url": "http://buyerapp.com/addtional-details/img1.png",
-        "size_type": "xs"
-      }
-    ]
-  ```
-- Added `message.issue.action.description.name` in attribute_ui.
-- Updated `media` structure with url
-  ```
-    "media": [
-      {
-        "url": "http://buyerapp.com/addtional-details/img1.png",
-      }
-    ]
-  ```
-- Updated enums from actor_info to actors
-- Synced enums for actions and actors.
-- Updated, `updated_target` to `update_target`.
-- Added type `COUNTERPARTY_NP_GRO` in issue/on_issue calls for Illustrative Flow 1.
+
+**IGM-2.0.0**
+  - Updated `images` structure with url & size_type
+      ```
+        "images": [
+          {
+            "url": "http://buyerapp.com/addtional-details/img1.png",
+            "size_type": "xs"
+          }
+        ]
+      ```
+  - Added `message.issue.action.description.name` in attribute_ui.
+  - Updated `media` structure with url
+      ```
+        "media": [
+          {
+            "url": "http://buyerapp.com/addtional-details/img1.png",
+          }
+        ]
+      ```
+  - Updated enums from actor_info to actors
+  - Synced enums for actions and actors.
+  - Updated, `updated_target` to `update_target`.
+  - Added type `COUNTERPARTY_NP_GRO` in issue/on_issue calls for Illustrative Flow 1.
 
   ****22nd April 2025****
+  - Changed description to descriptor in `actions` and `issues` to align with the core schema specification.
 
-- Changed description to descriptor in `actions` and `issues` to align with the core schema specification.
-
-  ****2nd May 2025****
+ ****2nd May 2025****
  - Added two new flows: `Illustrative Flow 4` & `Illustrative Flow 5 (TRV)`
