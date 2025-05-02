@@ -40,6 +40,5 @@
 
 - Changed description to descriptor in `actions` and `issues` to align with the core schema specification.
 
-  ****1st May 2025****
-
-- Added the new flow `Illustrative Flow 4 (TRV)`.
+  ****2nd May 2025****
+ - Added two new flows: `Illustrative Flow 4` & `Illustrative Flow 5 (TRV)`
