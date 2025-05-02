@@ -18,7 +18,7 @@ context:
 message:
   issue:
     id: ISSUE-1
-    status: OPEN
+    status: RESOLVED
     level: ISSUE
     created_at: '2025-04-03T10:00:00.000Z'
     updated_at: '2025-04-03T10:00:10.000Z'

@@ -2,3 +2,4 @@
 - $ref: "./Flow2/index.yaml"
 - $ref: "./Flow3/index.yaml"
 - $ref: "./Flow4/index.yaml"
+- $ref: "./Flow5/index.yaml"

@@ -797,6 +797,7 @@ components:
                     - PARENT
                     - NOW-VISIBLE
                     - END_ORDER
+                    - NO_ACTION
         updated_at:
           description: >-
             timestamp for the capturing the time an issue status was last
@@ -7899,7 +7900,989 @@ x-flows:
                           - descriptor:
                               code: REFUND_AMOUNT
                             value: '200'
-  - summary: Illustrative Flow 4 (TRV)
+  - summary: Illustrative Flow 4
+    details:
+      - description: >-
+          This flow provides an illustrative example workflow of the IGM
+          framework where an end consumer (complainant source) is raising a
+          complaint for multiple items that were going to be delivered together
+          and haven’t arrived even after promised delivery timelines. The seller
+          app processes the same and responds with respective resolutions for
+          respective items, where they provide a refund for one item and for the
+          other item they provide options for waiting for the delivery to
+          complete or refund. The buyer accepts the resolution for the first
+          item and accepts to wait for the delivery of the second item. The
+          seller resolves the complaint based on this and the buyer closes the
+          complaint.</br>
+
+          Features from the use case document covered in this flow - Use case 2,
+          3
+        mermaid: |-
+          sequenceDiagram
+            participant BuyerApp as Buyer App
+            participant SellerApp as Seller App
+            participant LSP as LSP (Logistics Service Provider)
+
+            BuyerApp->>SellerApp: Raise complaint for fulfillment category (/issue)
+            BuyerApp->>SellerApp: Create issue call (/issue)
+            SellerApp->>BuyerApp: Respond with processing action (on_issue)
+            SellerApp->>LSP: Create issue call (issue)
+            LSP->>SellerApp: Respond with processing action (on_issue)
+            LSP->>SellerApp: Needs more information to analyze (on_issue)
+            SellerApp->>BuyerApp: Cascades request for more information (on_issue)
+            BuyerApp->>SellerApp: Provides relevant information (issue)
+            SellerApp->>LSP: Cascades with relevant information (issue)
+            LSP->>SellerApp: Responds with processing action (on_issue)
+            SellerApp->>BuyerApp: Cascades above processing action (on_issue)
+            LSP->>SellerApp: Responds with proposed resolution (on_issue)
+            SellerApp->>BuyerApp: Analyzes and cascades proposed response (on_issue)
+            BuyerApp->>SellerApp: Accepts resolution provided by Seller App (issue)
+            SellerApp->>LSP: Accepts resolution provided by LSP (issue)
+            LSP->>SellerApp: Provides resolution object (on_issue)
+            SellerApp->>BuyerApp: Provides resolution object (on_issue)
+            BuyerApp->>SellerApp: Closes the complaint (issue)
+            SellerApp->>BuyerApp: Closes the issue
+    steps:
+      - summary: >-
+          Buyer raises a complaint for multiple items; buyer app creates the
+          issue call
+        api: issue
+        details:
+          - description: issue
+            mermaid: ''
+        example:
+          value:
+            context:
+              domain: ONDC:RET12
+              action: issue
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
+              bpp_id: sellerapp.com
+              bpp_uri: https://sellerapp.com/ondc
+              transaction_id: T1
+              message_id: M1
+              timestamp: '2025-05-05T10:00:00.100Z'
+              ttl: PT30S
+            message:
+              issue:
+                id: ISSUE-1
+                status: OPEN
+                level: ISSUE
+                created_at: '2025-05-05T10:00:00.000Z'
+                updated_at: '2025-05-05T10:00:00.000Z'
+                expected_response_time:
+                  duration: P1D
+                expected_resolution_time:
+                  duration: P2D
+                refs:
+                  - ref_id: O1
+                    ref_type: ORDER
+                  - ref_id: F1
+                    ref_type: FULFILLMENT
+                  - ref_id: I1
+                    ref_type: ITEM
+                  - ref_id: I2
+                    ref_type: ITEM
+                actors:
+                  - id: CUST1
+                    type: CONSUMER
+                    info:
+                      org:
+                        name: buyerapp.com::ONDC:RET12
+                      person:
+                        name: Sam Manuel
+                      contact:
+                        phone: '9879879870'
+                        email: sam@yahoo.com
+                  - id: NP1
+                    type: INTERFACING_NP
+                    info:
+                      org:
+                        name: buyerapp.com::ONDC:RET12
+                      contact:
+                        phone: '9450394039'
+                        email: buyerapp@interface.com
+                      person:
+                        name: John Doe
+                source_id: CUST1
+                complainant_id: NP1
+                descriptor:
+                  code: FLM002
+                  short_desc: Products not delivered yet
+                last_action_id: A1
+                actions:
+                  - id: A1
+                    descriptor:
+                      code: OPEN
+                      short_desc: Complaint created
+                    updated_at: '2025-05-05T10:00:00.469Z'
+                    action_by: NP1
+      - summary: Seller app responds with processing action
+        api: on_issue
+        details:
+          - description: on_issue
+            mermaid: ''
+        example:
+          value:
+            context:
+              domain: ONDC:RET12
+              action: on_issue
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
+              bpp_id: sellerapp.com
+              bpp_uri: https://sellerapp.com/ondc
+              transaction_id: T1
+              message_id: M1
+              timestamp: '2025-05-05T10:00:01.100Z'
+              ttl: PT30S
+            message:
+              issue:
+                id: ISSUE-1
+                status: PROCESSING
+                level: ISSUE
+                created_at: '2025-05-05T10:00:00.000Z'
+                updated_at: '2025-05-05T10:00:01.000Z'
+                expected_response_time:
+                  duration: P1D
+                expected_resolution_time:
+                  duration: P2D
+                refs:
+                  - ref_id: O1
+                    ref_type: ORDER
+                  - ref_id: F1
+                    ref_type: FULFILLMENT
+                  - ref_id: I1
+                    ref_type: ITEM
+                  - ref_id: I2
+                    ref_type: ITEM
+                actors:
+                  - id: CUST1
+                    type: CONSUMER
+                    info:
+                      org:
+                        name: buyerapp.com::ONDC:RET12
+                      person:
+                        name: Sam Manuel
+                      contact:
+                        phone: '9879879870'
+                        email: sam@yahoo.com
+                  - id: NP1
+                    type: INTERFACING_NP
+                    info:
+                      org:
+                        name: buyerapp.com::ONDC:RET12
+                      contact:
+                        phone: '9450394039'
+                        email: buyerapp@interface.com
+                      person:
+                        name: John Doe
+                  - id: NP2
+                    type: COUNTERPARTY_NP
+                    info:
+                      org:
+                        name: sellerapp.com::ONDC:RET10
+                      contact:
+                        phone: '9450394140'
+                        email: respondentapp@respond.com
+                      person:
+                        name: Jane Doe
+                source_id: CUST1
+                complainant_id: NP1
+                respondent_ids:
+                  - NP2
+                descriptor:
+                  code: FLM002
+                  short_desc: Products not delivered yet
+                last_action_id: A2
+                actions:
+                  - id: A1
+                    descriptor:
+                      code: OPEN
+                      short_desc: Complaint created
+                    updated_at: '2025-05-05T10:00:00.000Z'
+                    action_by: NP1
+                  - id: A2
+                    descriptor:
+                      code: PROCESSING
+                      short_desc: Processing the complaint
+                    updated_at: '2025-05-05T10:00:01.000Z'
+                    action_by: NP2
+                    actor_details:
+                      name: Sam Manuel
+      - summary: Seller app proposes potential resolution for respective items
+        api: on_issue
+        details:
+          - description: on_issue
+            mermaid: ''
+        example:
+          value:
+            context:
+              domain: ONDC:RET12
+              action: on_issue
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
+              bpp_id: sellerapp.com
+              bpp_uri: https://sellerapp.com/ondc
+              transaction_id: T1
+              message_id: M2
+              timestamp: '2025-05-05T10:00:02.100Z'
+              ttl: PT30S
+            message:
+              issue:
+                id: ISSUE-1
+                status: PROCESSING
+                level: ISSUE
+                created_at: '2025-05-05T10:00:00.000Z'
+                updated_at: '2025-05-05T10:00:02.000Z'
+                expected_response_time:
+                  duration: P1D
+                expected_resolution_time:
+                  duration: P2D
+                refs:
+                  - ref_id: O1
+                    ref_type: ORDER
+                  - ref_id: F1
+                    ref_type: FULFILLMENT
+                  - ref_id: I1
+                    ref_type: ITEM
+                  - ref_id: I2
+                    ref_type: ITEM
+                actors:
+                  - id: CUST1
+                    type: CONSUMER
+                    info:
+                      org:
+                        name: buyerapp.com::ONDC:RET12
+                      person:
+                        name: Sam Manuel
+                      contact:
+                        phone: '9879879870'
+                        email: sam@yahoo.com
+                  - id: NP1
+                    type: INTERFACING_NP
+                    info:
+                      org:
+                        name: buyerapp.com::ONDC:RET12
+                      contact:
+                        phone: '9450394039'
+                        email: buyerapp@interface.com
+                      person:
+                        name: John Doe
+                  - id: NP2
+                    type: COUNTERPARTY_NP
+                    info:
+                      org:
+                        name: sellerapp.com::ONDC:RET12
+                      contact:
+                        phone: '9450394140'
+                        email: respondentapp@respond.com
+                      person:
+                        name: Jane Doe
+                  - id: NP2_GRO
+                    type: COUNTERPARTY_NP_GRO
+                    info:
+                      org:
+                        name: sellerapp.com::ONDC:RET12
+                      contact:
+                        phone: '9999994039'
+                        email: sellerapp@interface.com
+                      person:
+                        name: Grievance Officer SNP
+                source_id: CUST1
+                complainant_id: NP1
+                respondent_ids:
+                  - NP2
+                descriptor:
+                  code: FLM002
+                  short_desc: Products not delivered yet
+                last_action_id: A3_2
+                actions:
+                  - id: A1
+                    descriptor:
+                      code: OPEN
+                      short_desc: Complaint created
+                    updated_at: '2025-05-05T10:00:00.000Z'
+                    action_by: NP1
+                  - id: A2
+                    descriptor:
+                      code: PROCESSING
+                      short_desc: Processing the complaint
+                    updated_at: '2025-05-05T10:00:01.000Z'
+                    action_by: NP2
+                  - id: A3_1
+                    ref_id: R_PARENT
+                    ref_type: RESOLUTIONS
+                    descriptor:
+                      code: RESOLUTION_PROPOSED
+                    updated_at: '2025-05-05T10:00:02.000Z'
+                    action_by: NP2
+                  - id: A3_2
+                    ref_id: R3
+                    ref_type: RESOLUTIONS
+                    descriptor:
+                      code: RESOLUTION_PROPOSED
+                    updated_at: '2025-05-05T10:00:02.000Z'
+                    action_by: NP2
+                resolutions:
+                  - id: R_PARENT_1
+                    descriptor:
+                      code: PARENT
+                      short_desc: Here are options for item 1
+                    updated_at: '2025-05-05T10:00:02.000Z'
+                    proposed_by: NP2
+                  - id: R1
+                    ref_id: R_PARENT
+                    ref_type: PARENT
+                    descriptor:
+                      code: REFUND
+                      short_desc: Refund for this item
+                    updated_at: '2025-05-05T10:00:02.000Z'
+                    proposed_by: NP2
+                    tags:
+                      - descriptor:
+                          code: RESOLUTION_DETAILS
+                        list:
+                          - descriptor:
+                              code: ITEM
+                            value: I1
+                          - descriptor:
+                              code: REFUND_AMOUNT
+                            value: '300'
+                  - id: R2
+                    ref_id: R_PARENT
+                    ref_type: PARENT
+                    descriptor:
+                      code: NO_ACTION
+                      short_desc: Item will be delivered in 4 days
+                    updated_at: '2025-05-05T10:00:02.000Z'
+                    proposed_by: NP2
+                    tags:
+                      - descriptor:
+                          code: RESOLUTION_DETAILS
+                        list:
+                          - descriptor:
+                              code: ITEM
+                            value: I1
+                  - id: R3
+                    descriptor:
+                      code: REFUND
+                      short_desc: Refund for this item
+                    updated_at: '2025-05-05T10:00:02.000Z'
+                    proposed_by: NP2
+                    tags:
+                      - descriptor:
+                          code: RESOLUTION_DETAILS
+                        list:
+                          - descriptor:
+                              code: ITEM
+                            value: I2
+                          - descriptor:
+                              code: REFUND_AMOUNT
+                            value: '500'
+      - summary: Buyer accepts the resolutions provided
+        api: issue
+        details:
+          - description: issue
+            mermaid: ''
+        example:
+          value:
+            context:
+              domain: ONDC:RET12
+              action: issue
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
+              bpp_id: sellerapp.com
+              bpp_uri: https://sellerapp.com/ondc
+              transaction_id: T1
+              message_id: M3
+              timestamp: '2025-05-05T10:00:03.100Z'
+              ttl: PT30S
+            message:
+              issue:
+                id: ISSUE-1
+                status: PROCESSING
+                level: ISSUE
+                created_at: '2025-05-05T10:00:00.000Z'
+                updated_at: '2025-05-05T10:00:03.000Z'
+                expected_response_time:
+                  duration: P1D
+                expected_resolution_time:
+                  duration: P2D
+                refs:
+                  - ref_id: O1
+                    ref_type: ORDER
+                  - ref_id: F1
+                    ref_type: FULFILLMENT
+                  - ref_id: I1
+                    ref_type: ITEM
+                  - ref_id: I2
+                    ref_type: ITEM
+                actors:
+                  - id: CUST1
+                    type: CONSUMER
+                    info:
+                      org:
+                        name: buyerapp.com::ONDC:RET12
+                      person:
+                        name: Sam Manuel
+                      contact:
+                        phone: '9879879870'
+                        email: sam@yahoo.com
+                  - id: NP1
+                    type: INTERFACING_NP
+                    info:
+                      org:
+                        name: buyerapp.com::ONDC:RET12
+                      contact:
+                        phone: '9450394039'
+                        email: buyerapp@interface.com
+                      person:
+                        name: John Doe
+                  - id: NP2
+                    type: COUNTERPARTY_NP
+                    info:
+                      org:
+                        name: sellerapp.com::ONDC:RET12
+                      contact:
+                        phone: '9450394140'
+                        email: respondentapp@respond.com
+                      person:
+                        name: Jane Doe
+                  - id: NP2_GRO
+                    type: COUNTERPARTY_NP_GRO
+                    info:
+                      org:
+                        name: sellerapp.com::ONDC:RET12
+                      contact:
+                        phone: '9999994039'
+                        email: sellerapp@interface.com
+                      person:
+                        name: Grievance Officer SNP
+                source_id: CUST1
+                complainant_id: NP1
+                respondent_ids:
+                  - NP2
+                descriptor:
+                  code: FLM002
+                  short_desc: Products not delivered yet
+                last_action_id: A4_2
+                actions:
+                  - id: A1
+                    descriptor:
+                      code: OPEN
+                      short_desc: Complaint created
+                    updated_at: '2025-05-05T10:00:00.000Z'
+                    action_by: NP1
+                  - id: A2
+                    descriptor:
+                      code: PROCESSING
+                      short_desc: Processing the complaint
+                    updated_at: '2025-05-05T10:00:01.000Z'
+                    action_by: NP2
+                  - id: A3_1
+                    ref_id: R_PARENT
+                    ref_type: RESOLUTIONS
+                    descriptor:
+                      code: RESOLUTION_PROPOSED
+                    updated_at: '2025-05-05T10:00:02.000Z'
+                    action_by: NP2
+                  - id: A3_2
+                    ref_id: R3
+                    ref_type: RESOLUTIONS
+                    descriptor:
+                      code: RESOLUTION_PROPOSED
+                    updated_at: '2025-05-05T10:00:02.000Z'
+                    action_by: NP2
+                  - id: A4_1
+                    ref_id: R2
+                    ref_type: RESOLUTIONS
+                    descriptor:
+                      code: RESOLUTION_ACCEPTED
+                    updated_at: '2025-05-05T10:00:03.000Z'
+                    action_by: NP1
+                  - id: A4_2
+                    ref_id: R3
+                    ref_type: RESOLUTIONS
+                    descriptor:
+                      code: RESOLUTION_ACCEPTED
+                    updated_at: '2025-05-05T10:00:03.000Z'
+                    action_by: NP1
+                resolutions:
+                  - id: R_PARENT_1
+                    descriptor:
+                      code: PARENT
+                      short_desc: Here are options for item 1
+                    updated_at: '2025-05-05T10:00:02.000Z'
+                    proposed_by: NP2
+                  - id: R1
+                    ref_id: R_PARENT
+                    ref_type: PARENT
+                    descriptor:
+                      code: REFUND
+                      short_desc: Refund for this item
+                    updated_at: '2025-05-05T10:00:02.000Z'
+                    proposed_by: NP2
+                    tags:
+                      - descriptor:
+                          code: RESOLUTION_DETAILS
+                        list:
+                          - descriptor:
+                              code: ITEM
+                            value: I1
+                          - descriptor:
+                              code: REFUND_AMOUNT
+                            value: '300'
+                  - id: R2
+                    ref_id: R_PARENT
+                    ref_type: PARENT
+                    descriptor:
+                      code: NO_ACTION
+                      short_desc: Item will be delievered in 4 days
+                    updated_at: '2025-05-05T10:00:02.000Z'
+                    proposed_by: NP2
+                    tags:
+                      - descriptor:
+                          code: RESOLUTION_DETAILS
+                        list:
+                          - descriptor:
+                              code: ITEM
+                            value: I1
+                  - id: R3
+                    descriptor:
+                      code: REFUND
+                      short_desc: Refund for this item
+                    updated_at: '2025-05-05T10:00:02.000Z'
+                    proposed_by: NP2
+                    tags:
+                      - descriptor:
+                          code: RESOLUTION_DETAILS
+                        list:
+                          - descriptor:
+                              code: ITEM
+                            value: I2
+                          - descriptor:
+                              code: REFUND_AMOUNT
+                            value: '500'
+      - summary: Seller app resolves the complaint
+        api: on_issue
+        details:
+          - description: on_issue
+            mermaid: ''
+        example:
+          value:
+            context:
+              domain: ONDC:RET12
+              action: on_issue
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
+              bpp_id: sellerapp.com
+              bpp_uri: https://sellerapp.com/ondc
+              transaction_id: T1
+              message_id: M3
+              timestamp: '2025-05-05T10:00:04.100Z'
+              ttl: PT30S
+            message:
+              issue:
+                id: ISSUE-1
+                status: RESOLVED
+                level: ISSUE
+                created_at: '2025-05-05T10:00:00.000Z'
+                updated_at: '2025-05-05T10:00:04.000Z'
+                expected_response_time:
+                  duration: P1D
+                expected_resolution_time:
+                  duration: P2D
+                refs:
+                  - ref_id: O1
+                    ref_type: ORDER
+                  - ref_id: F1
+                    ref_type: FULFILLMENT
+                  - ref_id: I1
+                    ref_type: ITEM
+                  - ref_id: I2
+                    ref_type: ITEM
+                actors:
+                  - id: CUST1
+                    type: CONSUMER
+                    info:
+                      org:
+                        name: buyerapp.com::ONDC:RET12
+                      person:
+                        name: Sam Manuel
+                      contact:
+                        phone: '9879879870'
+                        email: sam@yahoo.com
+                  - id: NP1
+                    type: INTERFACING_NP
+                    info:
+                      org:
+                        name: buyerapp.com::ONDC:RET12
+                      contact:
+                        phone: '9450394039'
+                        email: buyerapp@interface.com
+                      person:
+                        name: John Doe
+                  - id: NP2
+                    type: COUNTERPARTY_NP
+                    info:
+                      org:
+                        name: sellerapp.com::ONDC:RET12
+                      contact:
+                        phone: '9450394140'
+                        email: respondentapp@respond.com
+                      person:
+                        name: Jane Doe
+                  - id: NP2_GRO
+                    type: COUNTERPARTY_NP_GRO
+                    info:
+                      org:
+                        name: sellerapp.com::ONDC:RET12
+                      contact:
+                        phone: '9999994039'
+                        email: sellerapp@interface.com
+                      person:
+                        name: Grievance Officer SNP
+                source_id: CUST1
+                complainant_id: NP1
+                respondent_ids:
+                  - NP2
+                descriptor:
+                  code: FLM002
+                  short_desc: Products not delivered yet
+                last_action_id: A5_2
+                actions:
+                  - id: A1
+                    descriptor:
+                      code: OPEN
+                      short_desc: Complaint created
+                    updated_at: '2025-05-05T10:00:00.000Z'
+                    action_by: NP1
+                  - id: A2
+                    descriptor:
+                      code: PROCESSING
+                      short_desc: Processing the complaint
+                    updated_at: '2025-05-05T10:00:01.000Z'
+                    action_by: NP2
+                  - id: A3_1
+                    ref_id: R_PARENT
+                    ref_type: RESOLUTIONS
+                    descriptor:
+                      code: RESOLUTION_PROPOSED
+                    updated_at: '2025-05-05T10:00:02.000Z'
+                    action_by: NP2
+                  - id: A3_2
+                    ref_id: R3
+                    ref_type: RESOLUTIONS
+                    descriptor:
+                      code: RESOLUTION_PROPOSED
+                    updated_at: '2025-05-05T10:00:02.000Z'
+                    action_by: NP2
+                  - id: A4_1
+                    ref_id: R2
+                    ref_type: RESOLUTIONS
+                    descriptor:
+                      code: RESOLUTION_ACCEPTED
+                    updated_at: '2025-05-05T10:00:03.000Z'
+                    action_by: NP1
+                  - id: A4_2
+                    ref_id: R3
+                    ref_type: RESOLUTIONS
+                    descriptor:
+                      code: RESOLUTION_ACCEPTED
+                    updated_at: '2025-05-05T10:00:03.000Z'
+                    action_by: NP1
+                  - id: A5_1
+                    ref_id: R2
+                    ref_type: RESOLUTIONS
+                    descriptor:
+                      code: RESOLVED
+                    updated_at: '2025-05-05T10:00:04.000Z'
+                    action_by: NP2
+                  - id: A5_2
+                    ref_id: R3
+                    ref_type: RESOLUTIONS
+                    descriptor:
+                      code: RESOLVED
+                    updated_at: '2025-05-05T10:00:04.000Z'
+                    action_by: NP2
+                resolutions:
+                  - id: R_PARENT_1
+                    descriptor:
+                      code: PARENT
+                      short_desc: Here are options for item 1
+                    updated_at: '2025-05-05T10:00:02.000Z'
+                    proposed_by: NP2
+                  - id: R1
+                    ref_id: R_PARENT
+                    ref_type: PARENT
+                    descriptor:
+                      code: REFUND
+                      short_desc: Refund for this item
+                    updated_at: '2025-05-05T10:00:02.000Z'
+                    proposed_by: NP2
+                    tags:
+                      - descriptor:
+                          code: RESOLUTION_DETAILS
+                        list:
+                          - descriptor:
+                              code: ITEM
+                            value: I1
+                          - descriptor:
+                              code: REFUND_AMOUNT
+                            value: '300'
+                  - id: R2
+                    ref_id: R_PARENT
+                    ref_type: PARENT
+                    descriptor:
+                      code: NO_ACTION
+                      short_desc: Item will be delievered in 4 days
+                    updated_at: '2025-05-05T10:00:02.000Z'
+                    proposed_by: NP2
+                    tags:
+                      - descriptor:
+                          code: RESOLUTION_DETAILS
+                        list:
+                          - descriptor:
+                              code: ITEM
+                            value: I1
+                  - id: R3
+                    descriptor:
+                      code: REFUND
+                      short_desc: Refund for this item
+                    updated_at: '2025-05-05T10:00:02.000Z'
+                    proposed_by: NP2
+                    tags:
+                      - descriptor:
+                          code: RESOLUTION_DETAILS
+                        list:
+                          - descriptor:
+                              code: ITEM
+                            value: I2
+                          - descriptor:
+                              code: REFUND_AMOUNT
+                            value: '500'
+      - summary: Buyer closes the complaint
+        api: issue
+        details:
+          - description: issue
+            mermaid: ''
+        example:
+          value:
+            context:
+              domain: ONDC:RET12
+              action: issue
+              country: IND
+              city: std:080,
+              core_version: 1.2.0
+              bap_id: buyerNP.com
+              bap_uri: https://buyerNP.com/ondc
+              bpp_id: sellerapp.com
+              bpp_uri: https://sellerapp.com/ondc
+              transaction_id: T1
+              message_id: M4
+              timestamp: '2025-05-05T10:00:05.100Z'
+              ttl: PT30S
+            message:
+              issue:
+                id: ISSUE-1
+                status: CLOSED
+                level: ISSUE
+                created_at: '2025-05-05T10:00:00.000Z'
+                updated_at: '2025-05-05T10:00:05.000Z'
+                expected_response_time:
+                  duration: P1D
+                expected_resolution_time:
+                  duration: P2D
+                refs:
+                  - ref_id: O1
+                    ref_type: ORDER
+                  - ref_id: F1
+                    ref_type: FULFILLMENT
+                  - ref_id: I1
+                    ref_type: ITEM
+                  - ref_id: I2
+                    ref_type: ITEM
+                actors:
+                  - id: CUST1
+                    type: CONSUMER
+                    info:
+                      org:
+                        name: buyerapp.com::ONDC:RET12
+                      person:
+                        name: Sam Manuel
+                      contact:
+                        phone: '9879879870'
+                        email: sam@yahoo.com
+                  - id: NP1
+                    type: INTERFACING_NP
+                    info:
+                      org:
+                        name: buyerapp.com::ONDC:RET12
+                      contact:
+                        phone: '9450394039'
+                        email: buyerapp@interface.com
+                      person:
+                        name: John Doe
+                  - id: NP2
+                    type: COUNTERPARTY_NP
+                    info:
+                      org:
+                        name: sellerapp.com::ONDC:RET12
+                      contact:
+                        phone: '9450394140'
+                        email: respondentapp@respond.com
+                      person:
+                        name: Jane Doe
+                  - id: NP2_GRO
+                    type: COUNTERPARTY_NP_GRO
+                    info:
+                      org:
+                        name: sellerapp.com::ONDC:RET12
+                      contact:
+                        phone: '9999994039'
+                        email: sellerapp@interface.com
+                      person:
+                        name: Grievance Officer SNP
+                source_id: CUST1
+                complainant_id: NP1
+                respondent_ids:
+                  - NP2
+                descriptor:
+                  code: FLM002
+                  short_desc: Products not delivered yet
+                last_action_id: A5
+                actions:
+                  - id: A1
+                    descriptor:
+                      code: OPEN
+                      short_desc: Complaint created
+                    updated_at: '2025-05-05T10:00:00.000Z'
+                    action_by: NP1
+                  - id: A2
+                    descriptor:
+                      code: PROCESSING
+                      short_desc: Processing the complaint
+                    updated_at: '2025-05-05T10:00:01.000Z'
+                    action_by: NP2
+                  - id: A3_1
+                    ref_id: R_PARENT
+                    ref_type: RESOLUTIONS
+                    descriptor:
+                      code: RESOLUTION_PROPOSED
+                    updated_at: '2025-05-05T10:00:02.000Z'
+                    action_by: NP2
+                  - id: A3_2
+                    ref_id: R3
+                    ref_type: RESOLUTIONS
+                    descriptor:
+                      code: RESOLUTION_PROPOSED
+                    updated_at: '2025-05-05T10:00:02.000Z'
+                    action_by: NP2
+                  - id: A4_1
+                    ref_id: R2
+                    ref_type: RESOLUTIONS
+                    descriptor:
+                      code: RESOLUTION_ACCEPTED
+                    updated_at: '2025-05-05T10:00:03.000Z'
+                    action_by: NP1
+                  - id: A4_2
+                    ref_id: R3
+                    ref_type: RESOLUTIONS
+                    descriptor:
+                      code: RESOLUTION_ACCEPTED
+                    updated_at: '2025-05-05T10:00:03.000Z'
+                    action_by: NP1
+                  - id: A5_1
+                    ref_id: R2
+                    ref_type: RESOLUTIONS
+                    descriptor:
+                      code: RESOLVED
+                    updated_at: '2025-05-05T10:00:04.000Z'
+                    action_by: NP2
+                  - id: A5_2
+                    ref_id: R3
+                    ref_type: RESOLUTIONS
+                    descriptor:
+                      code: RESOLVED
+                    updated_at: '2025-05-05T10:00:04.000Z'
+                    action_by: NP2
+                  - id: A6
+                    descriptor:
+                      code: CLOSED
+                    updated_at: '2025-05-05T10:00:05.000Z'
+                    action_by: NP1
+                resolutions:
+                  - id: R_PARENT_1
+                    descriptor:
+                      code: PARENT
+                      short_desc: Here are options for item 1
+                    updated_at: '2025-05-05T10:00:02.000Z'
+                    proposed_by: NP2
+                  - id: R1
+                    ref_id: R_PARENT
+                    ref_type: PARENT
+                    descriptor:
+                      code: REFUND
+                      short_desc: Refund for this item
+                    updated_at: '2025-05-05T10:00:02.000Z'
+                    proposed_by: NP2
+                    tags:
+                      - descriptor:
+                          code: RESOLUTION_DETAILS
+                        list:
+                          - descriptor:
+                              code: ITEM
+                            value: I1
+                          - descriptor:
+                              code: REFUND_AMOUNT
+                            value: '300'
+                  - id: R2
+                    ref_id: R_PARENT
+                    ref_type: PARENT
+                    descriptor:
+                      code: NO_ACTION
+                      short_desc: Item will be delievered in 4 days
+                    updated_at: '2025-05-05T10:00:02.000Z'
+                    proposed_by: NP2
+                    tags:
+                      - descriptor:
+                          code: RESOLUTION_DETAILS
+                        list:
+                          - descriptor:
+                              code: ITEM
+                            value: I1
+                  - id: R3
+                    descriptor:
+                      code: REFUND
+                      short_desc: Refund for this item
+                    updated_at: '2025-05-05T10:00:02.000Z'
+                    proposed_by: NP2
+                    tags:
+                      - descriptor:
+                          code: RESOLUTION_DETAILS
+                        list:
+                          - descriptor:
+                              code: ITEM
+                            value: I2
+                          - descriptor:
+                              code: REFUND_AMOUNT
+                            value: '500'
+  - summary: Illustrative Flow 5 (TRV)
     details:
       - description: >-
           The flow below showcases a complaint flow in the TRV (TRV10) domain
@@ -8137,7 +9120,7 @@ x-flows:
             message:
               issue:
                 id: ISSUE-1
-                status: OPEN
+                status: PROCESSING
                 level: ISSUE
                 created_at: '2025-04-03T10:00:00.000Z'
                 updated_at: '2025-04-03T10:00:02.000Z'
@@ -8244,7 +9227,7 @@ x-flows:
             message:
               issue:
                 id: ISSUE-1
-                status: OPEN
+                status: PROCESSING
                 level: ISSUE
                 created_at: '2025-04-03T10:00:00.000Z'
                 updated_at: '2025-04-03T10:00:02.000Z'
@@ -8349,7 +9332,7 @@ x-flows:
             message:
               issue:
                 id: ISSUE-1
-                status: OPEN
+                status: PROCESSING
                 level: ISSUE
                 created_at: '2025-04-03T10:00:00.000Z'
                 updated_at: '2025-04-03T10:00:04.000Z'
@@ -8473,7 +9456,7 @@ x-flows:
             message:
               issue:
                 id: ISSUE-1
-                status: OPEN
+                status: PROCESSING
                 level: ISSUE
                 created_at: '2025-04-03T10:00:00.000Z'
                 updated_at: '2025-04-03T10:00:05.000Z'
@@ -8623,7 +9606,7 @@ x-flows:
             message:
               issue:
                 id: ISSUE-1
-                status: OPEN
+                status: PROCESSING
                 level: ISSUE
                 created_at: '2025-04-03T10:00:00.000Z'
                 updated_at: '2025-04-03T10:00:06.000Z'
@@ -8781,7 +9764,7 @@ x-flows:
             message:
               issue:
                 id: ISSUE-1
-                status: OPEN
+                status: PROCESSING
                 level: ISSUE
                 created_at: '2025-04-03T10:00:00.000Z'
                 updated_at: '2025-04-03T10:00:07.000Z'
@@ -8949,7 +9932,7 @@ x-flows:
             message:
               issue:
                 id: ISSUE-1
-                status: OPEN
+                status: PROCESSING
                 level: ISSUE
                 created_at: '2025-04-03T10:00:00.000Z'
                 updated_at: '2025-04-03T10:00:08.000Z'
@@ -9134,7 +10117,7 @@ x-flows:
             message:
               issue:
                 id: ISSUE-1
-                status: OPEN
+                status: PROCESSING
                 level: ISSUE
                 created_at: '2025-04-03T10:00:00.000Z'
                 updated_at: '2025-04-03T10:00:09.000Z'
@@ -9322,7 +10305,7 @@ x-flows:
             message:
               issue:
                 id: ISSUE-1
-                status: OPEN
+                status: RESOLVED
                 level: ISSUE
                 created_at: '2025-04-03T10:00:00.000Z'
                 updated_at: '2025-04-03T10:00:10.000Z'
@@ -9521,7 +10504,7 @@ x-flows:
             message:
               issue:
                 id: ISSUE-1
-                status: OPEN
+                status: CLOSED
                 level: ISSUE
                 created_at: '2025-04-03T10:00:00.000Z'
                 updated_at: '2025-04-03T10:00:11.000Z'

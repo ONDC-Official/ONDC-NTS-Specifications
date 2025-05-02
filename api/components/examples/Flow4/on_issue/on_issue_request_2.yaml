@@ -1,0 +1,166 @@
+context:
+  domain: ONDC:RET12
+  action: on_issue
+  country: IND
+  city: std:080,
+  core_version: 1.2.0
+  bap_id: buyerNP.com
+  bap_uri: https://buyerNP.com/ondc
+  bpp_id: sellerapp.com
+  bpp_uri: https://sellerapp.com/ondc
+  transaction_id: T1
+  message_id: M2
+  timestamp: '2025-05-05T10:00:02.100Z'
+  ttl: PT30S
+message:
+  issue:
+    id: ISSUE-1
+    status: PROCESSING
+    level: ISSUE
+    created_at: '2025-05-05T10:00:00.000Z'
+    updated_at: '2025-05-05T10:00:02.000Z'
+    expected_response_time:
+      duration: P1D
+    expected_resolution_time:
+      duration: P2D
+    refs:
+      - ref_id: O1
+        ref_type: ORDER
+      - ref_id: F1
+        ref_type: FULFILLMENT
+      - ref_id: I1
+        ref_type: ITEM
+      - ref_id: I2
+        ref_type: ITEM
+    actors:
+      - id: CUST1
+        type: CONSUMER
+        info:
+          org:
+            name: buyerapp.com::ONDC:RET12
+          person:
+            name: Sam Manuel
+          contact:
+            phone: "9879879870"
+            email: sam@yahoo.com
+      - id: NP1
+        type: INTERFACING_NP
+        info:
+          org:
+            name: buyerapp.com::ONDC:RET12
+          contact:
+            phone: "9450394039"
+            email: buyerapp@interface.com
+          person:
+            name: John Doe
+      - id: NP2
+        type: COUNTERPARTY_NP
+        info:
+          org:
+            name: sellerapp.com::ONDC:RET12
+          contact:
+            phone: "9450394140"
+            email: respondentapp@respond.com
+          person:
+            name: Jane Doe
+      - id: NP2_GRO
+        type: COUNTERPARTY_NP_GRO
+        info:
+          org:
+            name: sellerapp.com::ONDC:RET12
+          contact:
+            phone: "9999994039"
+            email: sellerapp@interface.com
+          person:
+            name: Grievance Officer SNP
+    source_id: CUST1
+    complainant_id: NP1
+    respondent_ids:
+      - NP2
+    descriptor:
+      code: FLM002
+      short_desc: Products not delivered yet
+    last_action_id: A3_2
+    actions:
+      - id: A1
+        descriptor:
+          code: OPEN
+          short_desc: Complaint created
+        updated_at: '2025-05-05T10:00:00.000Z'
+        action_by: NP1
+      - id: A2
+        descriptor:
+          code: PROCESSING
+          short_desc: Processing the complaint
+        updated_at: '2025-05-05T10:00:01.000Z'
+        action_by: NP2
+      - id: A3_1
+        ref_id: R_PARENT
+        ref_type: RESOLUTIONS
+        descriptor:
+          code: RESOLUTION_PROPOSED
+        updated_at: '2025-05-05T10:00:02.000Z'
+        action_by: NP2
+      - id: A3_2
+        ref_id: R3
+        ref_type: RESOLUTIONS
+        descriptor:
+          code: RESOLUTION_PROPOSED
+        updated_at: '2025-05-05T10:00:02.000Z'
+        action_by: NP2
+    resolutions:
+      - id: R_PARENT_1
+        descriptor:
+          code: PARENT
+          short_desc: Here are options for item 1
+        updated_at: '2025-05-05T10:00:02.000Z'
+        proposed_by: NP2
+      - id: R1
+        ref_id: R_PARENT
+        ref_type: PARENT
+        descriptor:
+          code: REFUND
+          short_desc: Refund for this item
+        updated_at: '2025-05-05T10:00:02.000Z'
+        proposed_by: NP2
+        tags:
+          - descriptor:
+              code: RESOLUTION_DETAILS
+            list:
+              - descriptor:
+                  code: ITEM
+                value: I1
+              - descriptor:
+                  code: REFUND_AMOUNT
+                value: "300"
+      - id: R2
+        ref_id: R_PARENT
+        ref_type: PARENT
+        descriptor:
+          code: NO_ACTION
+          short_desc: Item will be delivered in 4 days
+        updated_at: '2025-05-05T10:00:02.000Z'
+        proposed_by: NP2
+        tags:
+          - descriptor:
+              code: RESOLUTION_DETAILS
+            list:
+              - descriptor:
+                  code: ITEM
+                value: I1
+      - id: R3
+        descriptor:
+          code: REFUND
+          short_desc: Refund for this item
+        updated_at: '2025-05-05T10:00:02.000Z'
+        proposed_by: NP2
+        tags:
+          - descriptor:
+              code: RESOLUTION_DETAILS
+            list:
+              - descriptor:
+                  code: ITEM
+                value: I2
+              - descriptor:
+                  code: REFUND_AMOUNT
+                value: "500"
