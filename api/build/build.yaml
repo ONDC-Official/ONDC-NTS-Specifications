@@ -832,7 +832,6 @@ components:
             - PAYMENT
             - CONSUMER
             - AGENT
-            - FULFILMENT
             - TRANSACTION
         tags:
           description: tells abot ref details
