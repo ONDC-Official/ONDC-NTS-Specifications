@@ -1,0 +1,133 @@
+summary: Illustrative Flow 5 (TRV)
+details:
+ - description: >-
+      The flow below showcases a complaint flow in the TRV (TRV10) domain illustrating need more info and resolution rejection features. This flow provides an illustrative example workflow of the IGM framework where an end consumer (complainant source) is raising a complaint where their ride vehicle has broken down mid trip. The seller/ seller app (respondent) analyses the details shared and asks for additional information in the form of more images. The buyer provides the images. Once received, the seller provides a resolution proposal to the buyer and the buyer rejects the same. The seller processes the request and provides a new resolution. The new resolution proposed is accepted and the complaint is resolved and then closed.</br>
+      Features from the use case document covered in this flow - Use case 1, 2 </br>
+      Note- "context" object (including the transaction id, version attribute, location attribute...) remains the same as the transaction journey context object.
+
+   mermaid: >-
+    sequenceDiagram
+      participant BuyerApp as Buyer App
+      participant SellerApp as Seller App
+
+      BuyerApp->>SellerApp: Raise complaint for fulfillment category (/issue)
+      BuyerApp->>SellerApp: Create issue call (/issue)
+      SellerApp->>BuyerApp: Respond with processing action (on_issue)
+      SellerApp->>BuyerApp: Cascades request for more information (on_issue)
+      BuyerApp->>SellerApp: Provides relevant information (issue)
+      SellerApp->>BuyerApp: Cascades above processing action (on_issue)
+      SellerApp->>BuyerApp: Analyzes and cascades proposed response (on_issue)
+      BuyerApp->>SellerApp: Accepts resolution provided by Seller App (issue)
+      SellerApp->>BuyerApp: Provides resolution object (on_issue)
+      BuyerApp->>SellerApp: Closes the complaint (issue)
+      SellerApp->>BuyerApp: Closes the issue
+
+steps:
+  - summary: Buyer raises a complaint for item category; buyer app creates the issue call
+    api: issue
+    details:
+      - description: issue
+        mermaid: >-
+          
+    example:
+      value:
+        $ref: "../../examples/TRV/issue/issue_request_1.yaml"
+  - summary:  Seller app responds with processing action
+    api: on_issue
+    details:
+      - description: on_issue
+        mermaid: >-
+            
+    example:
+      value:
+        $ref: "../../examples/TRV/on_issue/on_issue_request_1.yaml"
+  - summary:  Seller app needs more information to analyse
+    api: on_issue
+    details:
+      - description: on_issue
+        mermaid: >-
+            
+    example:
+      value:
+        $ref: "../../examples/TRV/on_issue/on_issue_request_2.yaml"
+  - summary: Buyer app provides relevant information
+    api: issue
+    details:
+      - description: issue
+        mermaid: >-
+          
+    example:
+      value:
+        $ref: "../../examples/TRV/issue/issue_request_2.yaml"
+  - summary:  Seller app responds with processing action 
+    api: on_issue
+    details:
+      - description: on_issue
+        mermaid: >-
+            
+    example:
+      value:
+        $ref: "../../examples/TRV/on_issue/on_issue_request_3.yaml"
+  - summary:  Seller app proposes potential resolution
+    api: on_issue
+    details:
+      - description: on_issue
+        mermaid: >-
+            
+    example:
+      value:
+        $ref: "../../examples/TRV/on_issue/on_issue_request_4.yaml"
+  - summary: Buyer rejects the resolution proposed
+    api: issue
+    details:
+      - description: issue
+        mermaid: >-
+          
+    example:
+      value:
+        $ref: "../../examples/TRV/issue/issue_request_3.yaml"
+  - summary:  Seller app responds with processing action
+    api: on_issue
+    details:
+      - description: on_issue
+        mermaid: >-
+            
+    example:
+      value:
+        $ref: "../../examples/TRV/on_issue/on_issue_request_5.yaml"
+  - summary:  Seller app responds with a new proposed resolution
+    api: on_issue
+    details:
+      - description: on_issue
+        mermaid: >-
+            
+    example:
+      value:
+        $ref: "../../examples/TRV/on_issue/on_issue_request_6.yaml"
+  - summary: Buyer app accepts the resolution
+    api: issue
+    details:
+      - description: issue
+        mermaid: >-
+          
+    example:
+      value:
+        $ref: "../../examples/TRV/issue/issue_request_4.yaml"
+  - summary:  Seller app resolves the complaint with the resolution
+    api: on_issue
+    details:
+      - description: on_issue
+        mermaid: >-
+            
+    example:
+      value:
+        $ref: "../../examples/TRV/on_issue/on_issue_request_7.yaml" 
+  - summary: Buyer app closes the complaint
+    api: issue
+    details:
+      - description: issue
+        mermaid: >-
+          
+    example:
+      value:
+        $ref: "../../examples/TRV/issue/issue_request_5.yaml"                                                    

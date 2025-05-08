@@ -1,0 +1,161 @@
+context:
+  domain: ONDC:TRV10
+  action: on_issue
+  location:
+    country:
+      code: IND
+    city:
+      code: std:080
+  version: 2.1.0
+  bap_id: buyerapp.com
+  bap_uri: https://buyerapp.com/ondc
+  bpp_id: sellerapp.com
+  bpp_uri: https://sellerapp.com/ondc
+  transaction_id: T1
+  message_id: M5
+  timestamp: '2025-04-03T10:00:07.100Z'
+  ttl: PT30S
+message:
+  issue:
+    id: ISSUE-1
+    status: PROCESSING
+    level: ISSUE
+    created_at: '2025-04-03T10:00:00.000Z'
+    updated_at: '2025-04-03T10:00:07.000Z'
+    expected_response_time:
+      duration: PT30M
+    expected_resolution_time:
+      duration: PT12H
+    refs:
+      - ref_id: O1
+        ref_type: ORDER
+      - ref_id: F1
+        ref_type: FULFILLMENT
+      - ref_id: I1
+        ref_type: ITEM
+    actors:
+      - id: CUST1
+        type: CONSUMER
+        info:
+          org:
+            name: buyerapp.com::ONDC:TRV10
+          person:
+            name: Sam Manuel
+          contact:
+            phone: "9879879870"
+            email: sam@email.com
+      - id: NP1
+        type: INTERFACING_NP
+        info:
+          org:
+            name: buyerapp.com::ONDC:TRV10
+          person:
+            name: John Doe
+          contact:
+            phone: "9450394039"
+            email: buyerapp@interface.com
+      - id: NP2
+        type: COUNTERPARTY_NP
+        info:
+          org:
+            name: sellerapp.com::ONDC:TRV10
+          person:
+            name: John Doe
+          contact:
+            phone: "9450394039"
+            email: sellerrapp@seller.com
+      - id: NP2_GRO
+        type: COUNTERPARTY_NP_GRO
+        info:
+          org:
+            name: sellerapp.com::ONDC:TRV10
+          person:
+            name: Joseph
+          contact:
+            phone: "9988776655"
+            email: joseph@seller.com
+    source_id: CUST1
+    complainant_id: NP1
+    respondent_ids: 
+      - NP2
+    descriptor:
+      code: FLM115
+      short_desc: Vehicle has broken down mid trip
+    last_action_id: A8
+    actions:
+      - id: A1
+        descriptor:
+          code: OPEN
+          short_desc: Complaint created
+        updated_at: '2025-04-03T10:00:00.000Z'
+        action_by: NP1
+        actor_details:
+          name: John Doe
+      - id: A2
+        descriptor:
+          code: PROCESSING
+          short_desc: Complaint is being processed
+        updated_at: '2025-04-03T10:00:01.000Z'
+        action_by: NP2
+        actor_details:
+          name: Jane Doe
+      - id: A3
+        descriptor:
+          code: INFO_REQUESTED
+          name: INFO001
+          short_desc: Provide images of the car
+        updated_at: '2025-04-03T10:00:02.000Z'
+        action_by: NP2
+        actor_details:
+          name: Jane Doe
+      - id: A4
+        ref_id: A3
+        descriptor:
+          code: INFO_PROVIDED
+          images:
+            - url: http://buyerapp.com/addtional-details/img1.png
+            - url: http://buyerapp.com/addtional-details/img2.png
+        updated_at: '2025-04-03T10:00:03.000Z'
+        action_by: NP1
+      - id: A5
+        descriptor:
+          code: PROCESSING
+          short_desc: Information is being processed
+        updated_at: '2025-04-03T10:00:04.000Z'
+        action_by: NP2
+        actor_details:
+          name: Jane Doe
+      - id: A6
+        ref_id: R1
+        ref_type: RESOLUTIONS
+        descriptor:
+          code: RESOLUTION_PROPOSED
+        updated_at: '2025-04-03T10:00:05.000Z'
+        action_by: NP2
+        actor_details:
+          name: Jane Doe
+      - id: A7
+        ref_id: R1
+        ref_type: RESOLUTIONS
+        descriptor:
+          code: RESOLUTION_REJECTED
+          short_desc: Dont need a replacement, please cancel the ride
+        updated_at: '2025-04-03T10:00:06.000Z'
+        action_by: NP1
+        actor_details:
+          name: John Doe
+      - id: A8
+        descriptor:
+          code: PROCESSING
+          short_desc: Processing the request
+        updated_at: '2025-04-03T10:00:07.000Z'
+        action_by: NP2
+        actor_details:
+          name: Jane Doe
+    resolutions:
+      - id: R1
+        descriptor:
+          code: REPLACEMENT
+          short_desc: Another driver can be allocated
+        updated_at: '2025-04-03T10:00:05.000Z'
+        proposed_by: NP2

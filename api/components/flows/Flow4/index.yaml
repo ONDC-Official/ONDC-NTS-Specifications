@@ -1,0 +1,89 @@
+summary: Illustrative Flow 4
+details:
+ - description: >-
+      This flow provides an illustrative example workflow of the IGM framework where an end consumer (complainant source) is raising a complaint for multiple items that were going to be delivered together and haven’t arrived even after promised delivery timelines. The seller app processes the same and responds with respective resolutions for respective items, where they provide a refund for one item and for the other item they provide options for waiting for the delivery to complete or refund. The buyer accepts the resolution for the first item and accepts to wait for the delivery of the second item. The seller resolves the complaint based on this and the buyer closes the complaint.</br>
+
+      Features from the use case document covered in this flow - Use case 2, 3
+
+
+   mermaid: >-
+    sequenceDiagram
+      participant BuyerApp as Buyer App
+      participant SellerApp as Seller App
+      participant LSP as LSP (Logistics Service Provider)
+
+      BuyerApp->>SellerApp: Raise complaint for fulfillment category (/issue)
+      BuyerApp->>SellerApp: Create issue call (/issue)
+      SellerApp->>BuyerApp: Respond with processing action (on_issue)
+      SellerApp->>LSP: Create issue call (issue)
+      LSP->>SellerApp: Respond with processing action (on_issue)
+      LSP->>SellerApp: Needs more information to analyze (on_issue)
+      SellerApp->>BuyerApp: Cascades request for more information (on_issue)
+      BuyerApp->>SellerApp: Provides relevant information (issue)
+      SellerApp->>LSP: Cascades with relevant information (issue)
+      LSP->>SellerApp: Responds with processing action (on_issue)
+      SellerApp->>BuyerApp: Cascades above processing action (on_issue)
+      LSP->>SellerApp: Responds with proposed resolution (on_issue)
+      SellerApp->>BuyerApp: Analyzes and cascades proposed response (on_issue)
+      BuyerApp->>SellerApp: Accepts resolution provided by Seller App (issue)
+      SellerApp->>LSP: Accepts resolution provided by LSP (issue)
+      LSP->>SellerApp: Provides resolution object (on_issue)
+      SellerApp->>BuyerApp: Provides resolution object (on_issue)
+      BuyerApp->>SellerApp: Closes the complaint (issue)
+      SellerApp->>BuyerApp: Closes the issue
+
+steps:
+  - summary: Buyer raises a complaint for multiple items; buyer app creates the issue call
+    api: issue
+    details:
+      - description: issue
+        mermaid: >-
+          
+    example:
+      value:
+        $ref: "../../examples/Flow4/issue/issue_request_1.yaml"
+  - summary:  Seller app responds with processing action
+    api: on_issue
+    details:
+      - description: on_issue
+        mermaid: >-
+            
+    example:
+      value:
+        $ref: "../../examples/Flow4/on_issue/on_issue_request_1.yaml"
+  - summary: Seller app proposes potential resolution for respective items
+    api: on_issue
+    details:
+      - description: on_issue
+        mermaid: >-
+            
+    example:
+      value:
+        $ref: "../../examples/Flow4/on_issue/on_issue_request_2.yaml"
+  - summary: Buyer accepts the resolutions provided
+    api: issue
+    details:
+      - description: issue
+        mermaid: >-
+          
+    example:
+      value:
+        $ref: "../../examples/Flow4/issue/issue_request_2.yaml"
+  - summary: Seller app resolves the complaint 
+    api: on_issue
+    details:
+      - description: on_issue
+        mermaid: >-
+            
+    example:
+      value:
+        $ref: "../../examples/Flow4/on_issue/on_issue_request_3.yaml"
+  - summary: Buyer closes the complaint
+    api: issue
+    details:
+      - description: issue
+        mermaid: >-
+          
+    example:
+      value:
+        $ref: "../../examples/Flow4/issue/issue_request_3.yaml"                                                    

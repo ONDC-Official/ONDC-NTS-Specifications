@@ -1,0 +1,71 @@
+context:
+  domain: ONDC:TRV10
+  action: issue
+  location:
+    country:
+      code: IND
+    city:
+      code: std:080
+  version: 2.1.0
+  bap_id: buyerapp.com
+  bap_uri: https://buyerapp.com/ondc
+  bpp_id: sellerapp.com
+  bpp_uri: https://sellerapp.com/ondc
+  transaction_id: T1
+  message_id: M1
+  timestamp: '2025-04-03T10:00:00.100Z'
+  ttl: PT30S
+message:
+  issue:
+    id: ISSUE-1
+    status: OPEN
+    level: ISSUE
+    created_at: '2025-04-03T10:00:00.000Z'
+    updated_at: '2025-04-03T10:00:00.000Z'
+    expected_response_time:
+      duration: PT30M
+    expected_resolution_time:
+      duration: PT12H
+    refs:
+      - ref_id: O1
+        ref_type: ORDER
+      - ref_id: F1
+        ref_type: FULFILLMENT
+      - ref_id: I1
+        ref_type: ITEM
+    actors:
+      - id: CUST1
+        type: CONSUMER
+        info:
+          org:
+            name: buyerapp.com::ONDC:TRV10
+          person:
+            name: Sam Manuel
+          contact:
+            phone: "9879879870"
+            email: sam@email.com
+      - id: NP1
+        type: INTERFACING_NP
+        info:
+          org:
+            name: buyerapp.com::ONDC:TRV10
+          person:
+            name: John Doe
+          contact:
+            phone: "9450394039"
+            email: buyerapp@interface.com
+    source_id: CUST1
+    complainant_id: NP1
+    descriptor:
+      code: FLM115
+      short_desc: Vehicle has broken down mid trip
+    last_action_id: A1
+    actions:
+      - id: A1
+        descriptor:
+          code: OPEN
+          short_desc: Complaint created
+        updated_at: '2025-04-03T10:00:00.000Z'
+        action_by: NP1
+        actor_details:
+          name: John Doe

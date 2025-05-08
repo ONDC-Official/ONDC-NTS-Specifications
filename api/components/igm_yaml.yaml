@@ -747,6 +747,8 @@ components:
                   - ENACH_CANCEL
                   - PARENT
                   - NOW-VISIBLE
+                  - END_ORDER
+                  - NO_ACTION
                   
         updated_at:
           description: timestamp for the capturing the time an issue status was last updated
@@ -781,7 +783,7 @@ components:
             - PAYMENT
             - CONSUMER
             - AGENT
-            - FULFILMENT
+            # - FULFILMENT
             - TRANSACTION
         tags:
           description: tells abot ref details

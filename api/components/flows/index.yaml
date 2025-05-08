@@ -1,6 +1,5 @@
-# - $ref: "./Retail/index.yaml"
-# - $ref: "./Credit/index.yaml"
-# - $ref: "./Insurance/index.yaml"
 - $ref: "./Flow1/index.yaml"
 - $ref: "./Flow2/index.yaml"
 - $ref: "./Flow3/index.yaml"
+- $ref: "./Flow4/index.yaml"
+- $ref: "./Flow5/index.yaml"
