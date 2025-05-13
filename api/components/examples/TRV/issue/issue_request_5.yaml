@@ -80,6 +80,8 @@ message:
       code: FLM115
       short_desc: Vehicle has broken down mid trip
     last_action_id: A12
+    resolver_ids:
+      - NP2
     actions:
       - id: A1
         descriptor:

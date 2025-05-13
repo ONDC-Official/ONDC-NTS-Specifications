@@ -1689,8 +1689,6 @@ x-flows:
                 complainant_id: NP1
                 respondent_ids:
                   - NP2
-                resolver_ids:
-                  - NP2
                 descriptor:
                   code: ITM004
                   short_desc: Issue with product quality
@@ -2550,6 +2548,8 @@ x-flows:
                 complainant_id: NP1
                 respondent_ids:
                   - NP2
+                resolver_ids:
+                  - NP2
                 descriptor:
                   code: ITM004
                   short_desc: Issue with product quality
@@ -2795,6 +2795,8 @@ x-flows:
                 source_id: CUST1
                 complainant_id: NP1
                 respondent_ids:
+                  - NP2
+                resolver_ids:
                   - NP2
                 descriptor:
                   code: ITM004
@@ -8560,6 +8562,8 @@ x-flows:
                 complainant_id: NP1
                 respondent_ids:
                   - NP2
+                resolver_ids:
+                  - NP2
                 descriptor:
                   code: FLM002
                   short_desc: Products not delivered yet
@@ -8881,6 +8885,8 @@ x-flows:
                           - descriptor:
                               code: REFUND_AMOUNT
                             value: '500'
+                resolver_ids:
+                  - NP2
   - summary: Illustrative Flow 5 (TRV)
     details:
       - description: >-
@@ -10364,6 +10370,8 @@ x-flows:
                 complainant_id: NP1
                 respondent_ids:
                   - NP2
+                resolver_ids:
+                  - NP2
                 descriptor:
                   code: FLM115
                   short_desc: Vehicle has broken down mid trip
@@ -10565,6 +10573,8 @@ x-flows:
                   code: FLM115
                   short_desc: Vehicle has broken down mid trip
                 last_action_id: A12
+                resolver_ids:
+                  - NP2
                 actions:
                   - id: A1
                     descriptor:
