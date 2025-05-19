@@ -77,8 +77,8 @@ message:
     complainant_id: NP1
     respondent_ids:
       - NP2
-    resolver_ids:
-      - NP2
+    # resolver_ids:
+    #   - NP2
     descriptor:
       code: ITM004
       short_desc: Issue with product quality

@@ -78,6 +78,8 @@ message:
     complainant_id: NP1
     respondent_ids: 
       - NP2
+    resolver_ids:
+      - NP2  
     descriptor:
       code: FLM115
       short_desc: Vehicle has broken down mid trip

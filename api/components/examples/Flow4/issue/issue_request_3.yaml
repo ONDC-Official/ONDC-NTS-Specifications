@@ -197,3 +197,5 @@ message:
               - descriptor:
                   code: REFUND_AMOUNT
                 value: "500"
+    resolver_ids:
+      - NP2
