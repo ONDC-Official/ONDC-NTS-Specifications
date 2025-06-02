@@ -1,9 +1,9 @@
 const BRANCHES = [
   {
-    code: "draft-IGM-2.0.0",
+    code: "release-IGM-2.0.0",
     name: "IGM 2.0",
     short_desc: "Issue and Grievance Management Framework v2.0.0",
-    status: "DRAFT",
+    status: "RELEASED",
   },
   // {
   //   code: "draft-NTS12-Score",
