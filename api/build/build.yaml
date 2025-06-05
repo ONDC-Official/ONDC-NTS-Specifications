@@ -9214,7 +9214,7 @@ x-flows:
           value:
             context:
               domain: ONDC:TRV10
-              action: on_issue
+              action: issue
               location:
                 country:
                   code: IND
@@ -9226,8 +9226,8 @@ x-flows:
               bpp_id: sellerapp.com
               bpp_uri: https://sellerapp.com/ondc
               transaction_id: T1
-              message_id: M2
-              timestamp: '2025-04-03T10:00:02.100Z'
+              message_id: M3
+              timestamp: '2025-04-03T10:00:03.100Z'
               ttl: PT30S
             message:
               issue:
@@ -9283,7 +9283,7 @@ x-flows:
                 descriptor:
                   code: FLM115
                   short_desc: Vehicle has broken down mid trip
-                last_action_id: A3
+                last_action_id: A4
                 actions:
                   - id: A1
                     descriptor:
@@ -9310,6 +9310,15 @@ x-flows:
                     action_by: NP2
                     actor_details:
                       name: Jane Doe
+                  - id: A4
+                    ref_id: A3
+                    descriptor:
+                      code: INFO_PROVIDED
+                      images:
+                        - url: http://buyerapp.com/addtional-details/img1.png
+                        - url: http://buyerapp.com/addtional-details/img2.png
+                    updated_at: '2025-04-03T10:00:03.000Z'
+                    action_by: NP1
       - summary: Seller app responds with processing action
         api: on_issue
         details:
