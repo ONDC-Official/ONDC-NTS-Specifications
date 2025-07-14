@@ -4421,20 +4421,6 @@ let build_spec = {
                         "Message of the error occurred at the time of settlement",
                     },
                   },
-                  currency: {
-                    required: true,
-                    type: "string",
-                    owner: "any",
-                    usage: "INR",
-                    description: "Currency of the amount that is being settled",
-                  },
-                  value: {
-                    required: true,
-                    type: "string",
-                    owner: "any",
-                    usage: "1000.00",
-                    description: "Value of the amount that is being settled",
-                  },
                 },
                 collector: {
                   amount: {
