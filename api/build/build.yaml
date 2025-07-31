@@ -10927,7 +10927,10 @@ x-attributes:
                               type: string
                               owner: BAP
                               usage: 2
-                              description: Describes the selected quantity
+                              description: >-
+                                Used to specify the quantity of the item
+                                selected for the complaint. Example 2 out of 3
+                                quantity shirts have defect. 
             actors:
               id:
                 required: mandatory
@@ -11097,8 +11100,10 @@ x-attributes:
                     required: optional
                     type: string
                     owner: BAP
-                    usage: '--'
-                    description: Describes the tag as Rating
+                    usage: THUMBS-UP
+                    description: >-
+                      Refers to the rating provided by the buyer at the
+                      complaint closure
             resolutions:
               id:
                 required: mandatory
@@ -11164,13 +11169,18 @@ x-attributes:
                       type: string
                       owner: BAP
                       usage: I1
-                      description: Describes the item details for resolution details
+                      description: >-
+                        Refers to the item for which the resolution has been
+                        provided
                     REFUND_AMOUNT:
                       required: optional
                       type: string
                       owner: BAP
                       usage: 200
-                      description: Describes the refund amount for resolution details
+                      description: >-
+                        Refers to the amount being provided as refund.
+                        Applicable in case refund amount is to be provided
+                        resolutions such as REFUND or CANCEL
       on_issue:
         context:
           country:
@@ -11362,7 +11372,10 @@ x-attributes:
                               type: string
                               owner: BAP
                               usage: 2
-                              description: Describes the selected quantity
+                              description: >-
+                                Used to specify the quantity of the item
+                                selected for the complaint. Example 2 out of 3
+                                quantity shirts have defect. 
             actors:
               id:
                 required: mandatory
@@ -11585,13 +11598,18 @@ x-attributes:
                       type: string
                       owner: BAP
                       usage: I1
-                      description: Describes the item details for resolution details
+                      description: >-
+                        Refers to the item for which the resolution has been
+                        provided
                     REFUND_AMOUNT:
                       required: optional
                       type: string
                       owner: BAP
                       usage: 200
-                      description: Describes the refund amount for resolution details
+                      description: >-
+                        Refers to the amount being provided as refund.
+                        Applicable in case refund amount is to be provided
+                        resolutions such as REFUND or CANCEL
       issue_status:
         context:
           country:
@@ -11869,7 +11887,10 @@ x-attributes:
                               type: string
                               owner: BAP
                               usage: 2
-                              description: Describes the selected quantity
+                              description: >-
+                                Used to specify the quantity of the item
+                                selected for the complaint. Example 2 out of 3
+                                quantity shirts have defect. 
             actors:
               id:
                 required: mandatory
@@ -12027,6 +12048,21 @@ x-attributes:
                   owner: BAP
                   usage: Sam Manuel
                   description: Refers to a person from the actor taking the action
+              tags:
+                CLOSURE_DETAILS:
+                  required: optional
+                  type: string
+                  owner: BAP
+                  usage: '--'
+                  description: Describes the tag group as closure details
+                  RATING:
+                    required: optional
+                    type: string
+                    owner: BAP
+                    usage: THUMBS-UP
+                    description: >-
+                      Refers to the rating provided by the buyer at the
+                      complaint closure
             resolutions:
               id:
                 required: mandatory
@@ -12079,6 +12115,31 @@ x-attributes:
                 owner: BPP
                 usage: NP1
                 description: Refers to the actor id that is providing the resolution object
+              tags:
+                RESOLUTION_DETAILS:
+                  required: optional
+                  type: string
+                  owner: BAP
+                  usage: '--'
+                  description: Describes the resolution details
+                  list:
+                    ITEM:
+                      required: optional
+                      type: string
+                      owner: BAP
+                      usage: I1
+                      description: >-
+                        Refers to the item for which the resolution has been
+                        provided
+                    REFUND_AMOUNT:
+                      required: optional
+                      type: string
+                      owner: BAP
+                      usage: 200
+                      description: >-
+                        Refers to the amount being provided as refund.
+                        Applicable in case refund amount is to be provided
+                        resolutions such as REFUND or CANCEL
 x-errorcodes:
   code:
     - Event: All (nack)
