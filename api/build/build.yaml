@@ -1320,7 +1320,10 @@ x-flows:
           requested. <br> In both cases, if the response is correctly reconciled
           for the requisite orders, the settlement is initiated in the next
           settlement cycle. Otherwise, NPs are expected to raise an IGM for
-          resolving the differences.
+          resolving the differences.<br> Note: RSF Recon flow is a
+          bi-directional flow where either the collector or the receiver can
+          initiate the reconciliation flow. Flow below illustrates flows where
+          the receiver is initiating the flow.
         mermaid: |-
           sequenceDiagram
            participant Collector

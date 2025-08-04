@@ -4,7 +4,8 @@ details:
       The reconciliation process among the NPs are facilitated through the recon and on_recon APIs. In case settlement instructions are shared to the settlement agency and it fails for certain orders due an order mismatch or an order amount mismatch, NPs shall leverage the recon and on_recon API to communicate the mismatches. <br>
       In case an NP receives an order amount mismatch error code from the settlement agency, the receiver initiates the /recon request to the collector providing the breakup details for the respective order ID(s). The collector then reconciles and responds with the on_recon including the difference amount. <br> 
       In case an NP receives an order id mismatch error code (i.e. order ID not shared by the counterparty), the NP is expected to call the /recon API of the respective counterparty with the specific order ID(s) and its breakup details. The counterparty then reconciles and responds with details specific to the order id requested. <br>
-      In both cases, if the response is correctly reconciled for the requisite orders, the settlement is initiated in the next settlement cycle. Otherwise, NPs are expected to raise an IGM for resolving the differences.
+      In both cases, if the response is correctly reconciled for the requisite orders, the settlement is initiated in the next settlement cycle. Otherwise, NPs are expected to raise an IGM for resolving the differences.<br>
+      Note: RSF Recon flow is a bi-directional flow where either the collector or the receiver can initiate the reconciliation flow. Flow below illustrates flows where the receiver is initiating the flow.
     mermaid: >-
       sequenceDiagram
        participant Collector
