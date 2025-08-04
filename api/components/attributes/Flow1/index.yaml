@@ -1,9 +1,111 @@
 issue:
+  context:
+    country:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: IND
+      description: Describes country code as per ISO 3166-1 and ISO 3166-2 format
+    city:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: '*'
+      description: Describes the city code this location is, or is located within
+    domain:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: ONDC:RET10
+      description: Describes domain code that is relevant to this transaction context
+    timestamp:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: '2023-03-23T04:41:16Z'
+      description: Describes tme of request generation in RFC3339 format
+    bap_id:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: buyerNP.com
+      description: Describes subscriber ID of the BAP
+    transaction_id:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: 6743e9e2
+      description: >-
+        Describes a unique value which persists across all API calls. To be used
+        the same as the order transaction_id
+    message_id:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: 13ba8018f176
+      description: >-
+        Describes a unique value which persists during a request / callback
+        cycle.
+    core_version:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: 1.2.0
+      description: >-
+        Describes the version of transaction protocol being used by the sender.
+        Depends on the domain being used
+    action:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: issue
+      description: >-
+        Describes the protocol method being called by the sender and executed at
+        the receiver.
+    bap_uri:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: https://buyerNP.com/ondc
+      description: Describes subscriber URL of the BAP for accepting callbacks from BPPs.
+    ttl:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: PT30S
+      description: >-
+        Describes the duration in ISO8601 format after timestamp for which this
+        message holds valid
+    bpp_id:
+      required: mandatory
+      type: string
+      owner: BPP
+      usage: sellerapp.com
+      description: Describes subscriber ID of the BPP
+    bpp_uri:
+      required: mandatory
+      type: string
+      owner: BPP
+      usage: https://sellerapp.com/ondc
+      description: Describes subscriber URL of the BPP for accepting calls from BAPs.
   message:
+    update_target:
+      path:
+        required: mandatory
+        type: string
+        owner: BPP
+        usage: issue.actions
+        description: Describes the update tagret path
+      action:
+        required: mandatory
+        type: string
+        owner: BPP
+        usage: APPENDED
+        description: Describes the update tagret action
     issue:
       id:
         required: mandatory
-        type: String
+        type: string
         owner: BAP
         usage: ISSUE-1
         description: >-
@@ -11,7 +113,7 @@ issue:
           by the interfacing application at the source.
       status:
         required: mandatory
-        type: String
+        type: string
         owner: BAP
         usage: OPEN
         description: >-
@@ -19,26 +121,26 @@ issue:
           CLOSED
       level:
         required: mandatory
-        type: String
+        type: string
         owner: BAP
         usage: ISSUE
         description: Describes the level of the complaint - ISSUE, GRIEVANCE, DISPUTE
       created_at:
         required: mandatory
-        type: String
+        type: string
         owner: BAP
-        usage: '"2023-01-15T10:00:00.469Z"'
+        usage: '2023-01-15T10:00:00.469Z'
         description: Timestamp for the creation of the complaint
       updated_at:
         required: mandatory
-        type: String
+        type: string
         owner: BAP
-        usage: '"2023-01-15T10:00:00.469Z"'
+        usage: '2023-01-15T10:00:00.469Z'
         description: Timestamp for the capturing the time a complaint was last updated
       expected_response_time:
         duration:
           required: mandatory
-          type: String
+          type: string
           owner: BAP
           usage: PT2H
           description: >-
@@ -47,379 +149,1232 @@ issue:
       expected_resolution_time:
         duration:
           required: mandatory
-          type: String
+          type: string
           owner: BAP
           usage: P1D
-          description: Describes time for the respondent to provide a resolution
-      ref:
+          description: >-
+            Describes time for the respondent to provide a resolution (RESOLVED
+            action)
+      refs:
         ref_id:
           required: mandatory
-          type: String
+          type: string
           owner: BAP
           usage: O1
-          description: Reference to another object
+          description: Reference to another object id
         ref_type:
           required: mandatory
-          type: String
+          type: string
           owner: BAP
           usage: ORDER
-          description: Type of referenced object
-      actor_info:
+          description: >-
+            Type of referenced object (viz. order, item, fulfilment provider,
+            ...) 
+        tags:
+          message:
+            order:
+              items:
+                required: optional
+                type: string
+                owner: BAP
+                usage: '--'
+                description: Describes the tags group as order items
+                list:
+                  quantity:
+                    selected:
+                      count:
+                        required: optional
+                        type: string
+                        owner: BAP
+                        usage: 2
+                        description: >-
+                          Used to specify the quantity of the item selected for
+                          the complaint. Example 2 out of 3 quantity shirts have
+                          defect. 
+      actors:
         id:
           required: mandatory
-          type: String
-          owner: BAP
-          usage: P1
-          description: ID of the actor
+          type: string
+          owner: BAP / BPP
+          usage: CUST1
+          description: >-
+            Describes the actor id. To be used to identify actions have been
+            taken by which actor
         type:
           required: mandatory
-          type: String
-          owner: BAP
-          usage: PROVIDER
-          description: 'Type of the actor '
+          type: string
+          owner: BAP / BPP
+          usage: CONSUMER
+          description: Describes the actor type
         info:
           org:
             name:
               required: mandatory
-              type: String
-              owner: BAP
+              type: string
+              owner: BAP / BPP
               usage: buyerapp.com::ONDC:RET10
-              description: Organization name of the actor
+              description: Describes the entity (subscriber_id::domain_code)
           person:
             name:
               required: mandatory
-              type: String
-              owner: BAP
+              type: string
+              owner: BAP / BPP
               usage: Sam Manuel
-              description: Name of a repersentative of the  actor
+              description: Describes the person of the entity
           contact:
             phone:
               required: mandatory
-              type: String
-              owner: BAP
-              usage: '"9879879870"'
-              description: Phone no of the actor
+              type: string
+              owner: BAP / BPP
+              usage: 9879879870
+              description: Describes the contact phone
             email:
               required: mandatory
-              type: String
-              owner: BAP
+              type: string
+              owner: BAP / BPP
               usage: sam@yahoo.com
-              description: Email ID of the actor
+              description: Describes the contact email
       source_id:
         required: mandatory
-        type: String
+        type: string
         owner: BAP
         usage: CUST1
-        description: ID of the actor raising the complaint
+        description: Refers to the actor id of the entity reporting the complaint
       complainant_id:
         required: mandatory
-        type: String
+        type: string
         owner: BAP
         usage: NP1
-        description: ID of the Network participant where the complaint is raised
-      description:
+        description: Refers to the actor id of the NP where the complaint is created
+      descriptor:
         code:
           required: mandatory
-          type: String
+          type: string
           owner: BAP
           usage: ITM004
-          description: Category of the complaint
+          description: >-
+            Describes the sub category code for the respective complaint. Refer
+            category - sub category sheet
         short_desc:
           required: mandatory
-          type: String
+          type: string
           owner: BAP
           usage: Issue with product quality
-          description: Short description about the complainant
+          description: Provides a short description of the complaint
         long_desc:
-          required: mandatory
-          type: String
+          required: optional
+          type: string
           owner: BAP
-          usage: >-
-            Product quality is not correct. facing issues while using the
-            product
-          description: Long description about the complainant
+          usage: Issue with product quality
+          description: Provides a long description of the complaint
         additional_desc:
           url:
-            required: mandatory
-            type: String
-            owner: BAP
-            usage: https://buyerapp.com/additonal-details/desc.txt
-            description: Additional desc about complainant
-          content_type:
-            required: mandatory
-            type: String
-            owner: BAP
-            usage: text/plain
-            description: Type of url provided in the additional_desc
-        images:
-          required: mandatory
-          type: String
-          owner: BAP
-          usage: http://buyerapp.com/addtional-details/img1.png
-          description: Image(s) link
-      last_action_id:
-        required: mandatory
-        type: String
-        owner: BAP
-        usage: A1
-        description: ID of the action performed on the complaint
-      actions:
-        id:
-          required: mandatory
-          type: String
-          owner: BAP
-          usage: OPEN
-          description: ID of the action being performed
-        description:
-          code:
-            required: mandatory
-            type: String
-            owner: BAP
-            usage: Complaint created
-            description: Describes the action code (OPEN, PROCESSING, RESOLVED, CLOSED…)
-          short_desc:
-            required: mandatory
-            type: String
-            owner: BAP
-            usage: Complaint created
-            description: Short description of the action performed
-          name:
             required: optional
-            type: String
+            type: string
             owner: BAP
-            usage: INFO001
-            description: Used to provide details for the action taken, mandatory when action is INFO_REQUESTED  
-        'updated_at:':
-          required: mandatory
-          type: String
-          owner: BAP
-          usage: '2023-01-15T10:00:00.469Z'
-          description: Describes the update at timestamp of the action
-        action_by:
-          required: mandatory
-          type: String
-          owner: BAP
-          usage: NP1
-          description: 'Describes the actor (ID of the actor) performing the action '
-        actor_details:
-          name:
-            required: mandatory
-            type: String
-            owner: BAP
-            usage: Sam Manuel
-            description: Name of an agent of the actor
-      
-
-
-
-on_issue:
-  message:
-    issue:
-      id:
-        required: mandatory
-        type: String
-        owner: BPP
-        usage: ISSUE-1
-        description: >-
-          Network issue identifier is an unique number assigned to any complaint
-          by the interfacing application at the source.
-      status:
-        required: mandatory
-        type: String
-        owner: BPP
-        usage: OPEN
-        description: >-
-          Describes the status of the complaint - OPEN, PROCESSING, RESOLVED,
-          CLOSED
-      level:
-        required: mandatory
-        type: String
-        owner: BPP
-        usage: ISSUE
-        description: Describes the level of the complaint - ISSUE, GRIEVANCE, DISPUTE
-      created_at:
-        required: mandatory
-        type: String
-        owner: BPP
-        usage: '"2023-01-15T10:00:00.469Z"'
-        description: Timestamp for the creation of the complaint
-      updated_at:
-        required: mandatory
-        type: String
-        owner: BPP
-        usage: '"2023-01-15T10:00:00.469Z"'
-        description: Timestamp for the capturing the time a complaint was last updated
-      expected_response_time:
-        duration:
-          required: mandatory
-          type: String
-          owner: BPP
-          usage: PT2H
-          description: >-
-            Describes time for the respondent to provide a response (PROCESSING
-            action)
-      expected_resolution_time:
-        duration:
-          required: mandatory
-          type: String
-          owner: BPP
-          usage: P1D
-          description: Describes time for the respondent to provide a resolution
-      ref:
-        ref_id:
-          required: mandatory
-          type: String
-          owner: BPP
-          usage: O1
-          description: Reference to another object
-        ref_type:
-          required: mandatory
-          type: String
-          owner: BPP
-          usage: ORDER
-          description: Type of referenced object
-      actor_info:
-        id:
-          required: mandatory
-          type: String
-          owner: BPP
-          usage: P1
-          description: ID of the actor
-        type:
-          required: mandatory
-          type: String
-          owner: BPP
-          usage: PROVIDER
-          description: 'Type of the actor '
-        info:
-          org:
-            name:
-              required: mandatory
-              type: String
-              owner: BPP
-              usage: buyerapp.com::ONDC:RET10
-              description: Organization name of the actor
-          person:
-            name:
-              required: mandatory
-              type: String
-              owner: BPP
-              usage: Sam Manuel
-              description: Name of a repersentative of the  actor
-          contact:
-            phone:
-              required: mandatory
-              type: String
-              owner: BPP
-              usage: '"9879879870"'
-              description: Phone no of the actor
-            email:
-              required: mandatory
-              type: String
-              owner: BPP
-              usage: sam@yahoo.com
-              description: Email ID of the actor
-      source_id:
-        required: mandatory
-        type: String
-        owner: BPP
-        usage: CUST1
-        description: ID of the actor raising the complaint
-      complainant_id:
-        required: mandatory
-        type: String
-        owner: BPP
-        usage: NP1
-        description: ID of the Network participant where the complaint is raised
-      description:
-        code:
-          required: mandatory
-          type: String
-          owner: BPP
-          usage: ITM004
-          description: Category of the complaint
-        short_desc:
-          required: mandatory
-          type: String
-          owner: BPP
-          usage: Issue with product quality
-          description: Short description about the complainant
-        long_desc:
-          required: mandatory
-          type: String
-          owner: BPP
-          usage: >-
-            Product quality is not correct. facing issues while using the
-            product
-          description: Long description about the complainant
-        additional_desc:
-          url:
-            required: mandatory
-            type: String
-            owner: BPP
             usage: https://buyerapp.com/additonal-details/desc.txt
-            description: Additional desc about complainant
+            description: >-
+              Provides additional description of the complaint, like transcripts
+              of chats
           content_type:
-            required: mandatory
-            type: String
-            owner: BPP
+            required: optional
+            type: string
+            owner: BAP
             usage: text/plain
-            description: Type of url provided in the additional_desc
+            description: Describes the type of additional_desc being provided
         images:
-          required: mandatory
-          type: String
-          owner: BPP
-          usage: http://buyerapp.com/addtional-details/img1.png
-          description: Image(s) link
+          url:
+            required: optional
+            type: string
+            owner: BAP
+            usage: https://transitsolutions.in/logos/logo.icon
+            description: >-
+              Provides images associated to the complaint. Conditionally
+              mandatory depending on the subcategory of the complaint
+          size_type:
+            required: optional
+            type: string
+            owner: BAP
+            usage: xs
+            description: Provides the type of images provided
+        media:
+          url:
+            required: optional
+            type: string
+            owner: BAP
+            usage: https://transitsolutions.in/logos/logo.icon
+            description: Provides other forms of media associated to the complaint
       last_action_id:
         required: mandatory
-        type: String
-        owner: BPP
+        type: string
+        owner: BAP / BPP
         usage: A1
-        description: ID of the action performed on the complaint
+        description: Refers to the last action taken on the complaint
       actions:
         id:
           required: mandatory
-          type: String
-          owner: BPP
+          type: string
+          owner: BAP / BPP
           usage: A1
-          description: ID of the action being performed
-        description:
+          description: Identifies an action uniquely
+        descriptor:
           code:
             required: mandatory
-            type: String
-            owner: BPP
-            usage: PROCESSING
-            description: Describes the action code (OPEN, PROCESSING, RESOLVED, CLOSED…)
+            type: string
+            owner: BAP / BPP
+            usage: OPEN
+            description: Refers to the action being taken. Refer enums
           short_desc:
             required: mandatory
-            type: String
-            owner: BPP
-            usage: Complaint created
-            description: Short description of the action performed
-          name:
-            required: optional
-            type: String
-            owner: BPP
-            usage: INFO001
-            description: Used to provide details for the action taken, mandatory when action is INFO_REQUESTED  
+            type: string
+            owner: BAP / BPP
+            usage: Opening a complaint
+            description: Provides a short description of the action being taken
         updated_at:
           required: mandatory
-          type: String
-          owner: BPP
+          type: string
+          owner: BAP / BPP
           usage: '2023-01-15T10:00:00.469Z'
-          description: Describes the update at timestamp of the action
+          description: Provides the timestamp of the action being taken
         action_by:
           required: mandatory
-          type: String
+          type: string
+          owner: BAP / BPP
+          usage: NP1
+          description: Refers to the actors.id of the actor that is taking the action
+        actor_details:
+          name:
+            required: optional
+            type: string
+            owner: BAP / BPP
+            usage: Sam Manuel
+            description: Refers to a person from the actor taking the action
+        tags:
+          CLOSURE_DETAILS:
+            required: optional
+            type: string
+            owner: BAP
+            usage: '--'
+            description: Describes the tag group as closure details
+            RATING:
+              required: optional
+              type: string
+              owner: BAP
+              usage: THUMBS-UP
+              description: >-
+                Refers to the rating provided by the buyer at the complaint
+                closure
+      resolutions:
+        id:
+          required: mandatory
+          type: string
+          owner: BPP
+          usage: R1
+          description: >-
+            Identifies a resolution object uniquely, Used to refer in resolution
+            related actions in the action trail
+        ref_id:
+          required: optional
+          type: string
+          owner: BPP
+          usage: R_PARENT
+          description: Reference to another object id
+        ref_type:
+          required: optional
+          type: string
+          owner: BPP
+          usage: PARENT
+          description: >-
+            Type of referenced object (viz. PARENT). Typically used to link
+            multiple resolution 
+        descriptor:
+          code:
+            required: mandatory
+            type: string
+            owner: BPP
+            usage: REFUND
+            description: >-
+              Refers to the type of resolution being provided. Refer enums for
+              potential options
+          short_desc:
+            required: mandatory
+            type: string
+            owner: BPP
+            usage: Providing refund for this complaint
+            description: Provides a short description of the resolution
+        updated_at:
+          required: mandatory
+          type: string
+          owner: BPP
+          usage: '2023-01-15T10:00:00.469Z'
+          description: Timestamp for the capturing the time a resolution object was added
+        proposed_by:
+          required: mandatory
+          type: string
           owner: BPP
           usage: NP1
-          description: 'Describes the actor (ID of the actor) performing the action '
+          description: Refers to the actor id that is providing the resolution object
+        tags:
+          RESOLUTION_DETAILS:
+            required: optional
+            type: string
+            owner: BAP
+            usage: '--'
+            description: Describes the resolution details
+            list:
+              ITEM:
+                required: optional
+                type: string
+                owner: BAP
+                usage: I1
+                description: Refers to the item for which the resolution has been provided
+              REFUND_AMOUNT:
+                required: optional
+                type: string
+                owner: BAP
+                usage: 200
+                description: >-
+                  Refers to the amount being provided as refund. Applicable in
+                  case refund amount is to be provided resolutions such as
+                  REFUND or CANCEL
+on_issue:
+  context:
+    country:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: IND
+      description: Describes country code as per ISO 3166-1 and ISO 3166-2 format
+    city:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: '*'
+      description: Describes the city code this location is, or is located within
+    domain:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: ONDC:RET10
+      description: Describes domain code that is relevant to this transaction context
+    timestamp:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: '2023-03-23T04:41:16Z'
+      description: Describes tme of request generation in RFC3339 format
+    bap_id:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: buyerNP.com
+      description: Describes subscriber ID of the BAP
+    transaction_id:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: 6743e9e2
+      description: >-
+        Describes a unique value which persists across all API calls. To be used
+        the same as the order transaction_id
+    message_id:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: 13ba8018f176
+      description: >-
+        Describes a unique value which persists during a request / callback
+        cycle.
+    core_version:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: 1.2.0
+      description: >-
+        Describes the version of transaction protocol being used by the sender.
+        Depends on the domain being used
+    action:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: on_issue
+      description: >-
+        Describes the protocol method being called by the sender and executed at
+        the receiver.
+    bap_uri:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: https://buyerNP.com/ondc
+      description: Describes subscriber URL of the BAP for accepting callbacks from BPPs.
+    ttl:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: PT30S
+      description: >-
+        Describes the duration in ISO8601 format after timestamp for which this
+        message holds valid
+    bpp_id:
+      required: mandatory
+      type: string
+      owner: BPP
+      usage: sellerapp.com
+      description: Describes subscriber ID of the BPP
+    bpp_uri:
+      required: mandatory
+      type: string
+      owner: BPP
+      usage: https://sellerapp.com/ondc
+      description: Describes subscriber URL of the BPP for accepting calls from BAPs.
+  message:
+    update_target:
+      path:
+        required: mandatory
+        type: string
+        owner: BPP
+        usage: issue.actions
+        description: Describes the update tagret path
+      action:
+        required: mandatory
+        type: string
+        owner: BPP
+        usage: APPENDED
+        description: Describes the update tagret action
+    issue:
+      id:
+        required: mandatory
+        type: string
+        owner: BAP
+        usage: ISSUE-1
+        description: >-
+          Network issue identifier is an unique number assigned to any complaint
+          by the interfacing application at the source.
+      status:
+        required: mandatory
+        type: string
+        owner: BAP
+        usage: OPEN
+        description: >-
+          Describes the status of the complaint - OPEN, PROCESSING, RESOLVED,
+          CLOSED
+      level:
+        required: mandatory
+        type: string
+        owner: BAP
+        usage: ISSUE
+        description: Describes the level of the complaint - ISSUE, GRIEVANCE, DISPUTE
+      created_at:
+        required: mandatory
+        type: string
+        owner: BAP
+        usage: '2023-01-15T10:00:00.469Z'
+        description: Timestamp for the creation of the complaint
+      updated_at:
+        required: mandatory
+        type: string
+        owner: BAP
+        usage: '2023-01-15T10:00:00.469Z'
+        description: Timestamp for the capturing the time a complaint was last updated
+      expected_response_time:
+        duration:
+          required: mandatory
+          type: string
+          owner: BAP
+          usage: PT2H
+          description: >-
+            Describes time for the respondent to provide a response (PROCESSING
+            action)
+      expected_resolution_time:
+        duration:
+          required: mandatory
+          type: string
+          owner: BAP
+          usage: P1D
+          description: Describes time for the respondent to provide a resolution
+      refs:
+        ref_id:
+          required: mandatory
+          type: string
+          owner: BAP
+          usage: O1
+          description: Reference to another object id
+        ref_type:
+          required: mandatory
+          type: string
+          owner: BAP
+          usage: ORDER
+          description: >-
+            Type of referenced object (viz. order, item, fulfilment provider,
+            ...) 
+        tags:
+          message:
+            order:
+              items:
+                required: optional
+                type: string
+                owner: BAP
+                usage: '--'
+                description: Describes the tags group as order items
+                list:
+                  quantity:
+                    selected:
+                      count:
+                        required: optional
+                        type: string
+                        owner: BAP
+                        usage: 2
+                        description: >-
+                          Used to specify the quantity of the item selected for
+                          the complaint. Example 2 out of 3 quantity shirts have
+                          defect. 
+      actors:
+        id:
+          required: mandatory
+          type: string
+          owner: BAP
+          usage: CUST1
+          description: >-
+            Describes the actor id. To be used to identify actions have been
+            taken by which actor
+        type:
+          required: mandatory
+          type: string
+          owner: BAP
+          usage: CONSUMER
+          description: Describes the actor type
+        info:
+          org:
+            name:
+              required: mandatory
+              type: string
+              owner: BAP
+              usage: buyerapp.com::ONDC:RET10
+              description: Describes the entity (subscriber_id::domain_code)
+          person:
+            name:
+              required: mandatory
+              type: string
+              owner: BAP
+              usage: Sam Manuel
+              description: Describes the person of the entity
+          contact:
+            phone:
+              required: mandatory
+              type: string
+              owner: BAP
+              usage: 9879879870
+              description: Describes the contact phone
+            email:
+              required: mandatory
+              type: string
+              owner: BAP
+              usage: sam@yahoo.com
+              description: Describes the contact email
+      source_id:
+        required: mandatory
+        type: string
+        owner: BAP
+        usage: CUST1
+        description: Refers to the actor id of the entity reporting the complaint
+      complainant_id:
+        required: mandatory
+        type: string
+        owner: BAP
+        usage: NP1
+        description: Refers to the actor id of the NP where the complaint is created
+      respondent_ids:
+        required: mandatory
+        type: string
+        owner: BAP
+        usage: NP2
+        description: >-
+          Describes the sub category code for the respective complaint. Refer
+          category - sub category sheet
+      descriptor:
+        code:
+          required: mandatory
+          type: string
+          owner: BAP
+          usage: ITM004
+          description: Provides a short description of the complaint
+        short_desc:
+          required: mandatory
+          type: string
+          owner: BAP
+          usage: Issue with product quality
+          description: Provides a long description of the complaint
+        long_desc:
+          required: mandatory
+          type: string
+          owner: BAP
+          usage: Issue with product quality
+          description: >-
+            Provides additional description of the complaint, like transcripts
+            of chats
+        additional_desc:
+          url:
+            required: mandatory
+            type: string
+            owner: BAP
+            usage: https://buyerapp.com/additonal-details/desc.txt
+            description: Describes the type of additional_desc being provided
+          content_type:
+            required: mandatory
+            type: string
+            owner: BAP
+            usage: text/plain
+            description: >-
+              Provides images associated to the complaint. Conditionally
+              mandatory depending on the subcategory of the complaint
+        images:
+          url:
+            required: mandatory
+            type: string
+            owner: BAP
+            usage: https://transitsolutions.in/logos/logo.icon
+            description: Provides the type of images provided
+          size_type:
+            required: mandatory
+            type: string
+            owner: BAP
+            usage: xs
+            description: Provides other forms of media associated to the complaint
+      last_action_id:
+        required: mandatory
+        type: string
+        owner: BAP
+        usage: A2
+        description: Refers to the last action taken on the complaint
+      actions:
+        id:
+          required: mandatory
+          type: string
+          owner: BAP
+          usage: A1
+          description: Identifies an action uniquely
+        descriptor:
+          code:
+            required: mandatory
+            type: string
+            owner: BAP
+            usage: OPEN
+            description: Refers to the action being taken. Refer enums
+          short_desc:
+            required: mandatory
+            type: string
+            owner: BAP
+            usage: OPEN
+            description: Provides a short description of the action being taken
+        updated_at:
+          required: mandatory
+          type: string
+          owner: BAP
+          usage: '2023-01-15T10:00:00.469Z'
+          description: Provides the timestamp of the action being taken
+        action_by:
+          required: mandatory
+          type: string
+          owner: BAP
+          usage: NP1
+          description: Refers to the actors.id of the actor that is taking the action
         actor_details:
           name:
             required: mandatory
-            type: String
-            owner: BPP
+            type: string
+            owner: BAP
             usage: Sam Manuel
-            description: Name of an agent of the actor
-    
+            description: Refers to a person from the actor taking the action
+      resolutions:
+        id:
+          required: mandatory
+          type: string
+          owner: BPP
+          usage: R1
+          description: >-
+            Identifies a resolution object uniquely, Used to refer in resolution
+            related actions in the action trail
+        ref_id:
+          required: optional
+          type: string
+          owner: BPP
+          usage: R_PARENT
+          description: Reference to another object id
+        ref_type:
+          required: optional
+          type: string
+          owner: BPP
+          usage: PARENT
+          description: >-
+            Type of referenced object (viz. PARENT). Typically used to link
+            multiple resolution 
+        descriptor:
+          code:
+            required: mandatory
+            type: string
+            owner: BPP
+            usage: REFUND
+            description: >-
+              Refers to the type of resolution being provided. Refer enums for
+              potential options
+          short_desc:
+            required: mandatory
+            type: string
+            owner: BPP
+            usage: Providing refund for this complaint
+            description: Provides a short description of the resolution
+        updated_at:
+          required: mandatory
+          type: string
+          owner: BPP
+          usage: '2023-01-15T10:00:00.469Z'
+          description: Timestamp for the capturing the time a resolution object was added
+        proposed_by:
+          required: mandatory
+          type: string
+          owner: BPP
+          usage: NP1
+          description: Refers to the actor id that is providing the resolution object
+        tags:
+          RESOLUTION_DETAILS:
+            required: optional
+            type: string
+            owner: BAP
+            usage: '--'
+            description: Describes the resolution details
+            list:
+              ITEM:
+                required: optional
+                type: string
+                owner: BAP
+                usage: I1
+                description: Refers to the item for which the resolution has been provided
+              REFUND_AMOUNT:
+                required: optional
+                type: string
+                owner: BAP
+                usage: 200
+                description: >-
+                  Refers to the amount being provided as refund. Applicable in
+                  case refund amount is to be provided resolutions such as
+                  REFUND or CANCEL
+issue_status:
+  context:
+    country:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: IND
+      description: Describes country code as per ISO 3166-1 and ISO 3166-2 format
+    city:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: '*'
+      description: Describes the city code this location is, or is located within
+    domain:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: ONDC:RET10
+      description: Describes domain code that is relevant to this transaction context
+    timestamp:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: '2023-03-23T04:41:16Z'
+      description: Describes tme of request generation in RFC3339 format
+    bap_id:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: buyerNP.com
+      description: Describes subscriber ID of the BAP
+    transaction_id:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: 6743e9e2
+      description: >-
+        Describes a unique value which persists across all API calls. To be used
+        the same as the order transaction_id
+    message_id:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: 13ba8018f176
+      description: >-
+        Describes a unique value which persists during a request / callback
+        cycle.
+    core_version:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: 1.2.0
+      description: >-
+        Describes the version of transaction protocol being used by the sender.
+        Depends on the domain being used
+    action:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: issue_status
+      description: >-
+        Describes the protocol method being called by the sender and executed at
+        the receiver.
+    bap_uri:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: https://buyerNP.com/ondc
+      description: Describes subscriber URL of the BAP for accepting callbacks from BPPs.
+    ttl:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: PT30S
+      description: >-
+        Describes the duration in ISO8601 format after timestamp for which this
+        message holds valid
+    bpp_id:
+      required: mandatory
+      type: string
+      owner: BPP
+      usage: sellerapp.com
+      description: Describes subscriber ID of the BPP
+    bpp_uri:
+      required: mandatory
+      type: string
+      owner: BPP
+      usage: https://sellerapp.com/ondc
+      description: Describes subscriber URL of the BPP for accepting calls from BAPs.
+    message:
+      issue_id:
+        required: mandatory
+        type: string
+        owner: BPP
+        usage: I1
+        description: Refers to the complaint id for which status is requested
+on_issue_status:
+  context:
+    country:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: IND
+      description: Describes country code as per ISO 3166-1 and ISO 3166-2 format
+    city:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: '*'
+      description: Describes the city code this location is, or is located within
+    domain:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: ONDC:RET10
+      description: Describes domain code that is relevant to this transaction context
+    timestamp:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: '2023-03-23T04:41:16Z'
+      description: Describes tme of request generation in RFC3339 format
+    bap_id:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: buyerNP.com
+      description: Describes subscriber ID of the BAP
+    transaction_id:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: 6743e9e2
+      description: >-
+        Describes a unique value which persists across all API calls. To be used
+        the same as the order transaction_id
+    message_id:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: 13ba8018f176
+      description: >-
+        Describes a unique value which persists during a request / callback
+        cycle.
+    core_version:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: 1.2.0
+      description: >-
+        Describes the version of transaction protocol being used by the sender.
+        Depends on the domain being used
+    action:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: on_issue_status
+      description: >-
+        Describes the protocol method being called by the sender and executed at
+        the receiver.
+    bap_uri:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: https://buyerNP.com/ondc
+      description: Describes subscriber URL of the BAP for accepting callbacks from BPPs.
+    ttl:
+      required: mandatory
+      type: string
+      owner: BAP
+      usage: PT30S
+      description: >-
+        Describes the duration in ISO8601 format after timestamp for which this
+        message holds valid
+    bpp_id:
+      required: mandatory
+      type: string
+      owner: BPP
+      usage: sellerapp.com
+      description: Describes subscriber ID of the BPP
+    bpp_uri:
+      required: mandatory
+      type: string
+      owner: BPP
+      usage: https://sellerapp.com/ondc
+      description: Describes subscriber URL of the BPP for accepting calls from BAPs.
+  message:
+    issue:
+      id:
+        required: mandatory
+        type: string
+        owner: BAP
+        usage: ISSUE-1
+        description: >-
+          Network issue identifier is an unique number assigned to any complaint
+          by the interfacing application at the source.
+      status:
+        required: mandatory
+        type: string
+        owner: BAP
+        usage: OPEN
+        description: >-
+          Describes the status of the complaint - OPEN, PROCESSING, RESOLVED,
+          CLOSED
+      level:
+        required: mandatory
+        type: string
+        owner: BAP
+        usage: ISSUE
+        description: Describes the level of the complaint - ISSUE, GRIEVANCE, DISPUTE
+      created_at:
+        required: mandatory
+        type: string
+        owner: BAP
+        usage: '2023-01-15T10:00:00.469Z'
+        description: Timestamp for the creation of the complaint
+      updated_at:
+        required: mandatory
+        type: string
+        owner: BAP
+        usage: '2023-01-15T10:00:00.469Z'
+        description: Timestamp for the capturing the time a complaint was last updated
+      expected_response_time:
+        duration:
+          required: mandatory
+          type: string
+          owner: BAP
+          usage: PT2H
+          description: >-
+            Describes time for the respondent to provide a response (PROCESSING
+            action)
+      expected_resolution_time:
+        duration:
+          required: mandatory
+          type: string
+          owner: BAP
+          usage: P1D
+          description: Describes time for the respondent to provide a resolution
+      refs:
+        ref_id:
+          required: mandatory
+          type: string
+          owner: BAP
+          usage: O1
+          description: Reference to another object id
+        ref_type:
+          required: mandatory
+          type: string
+          owner: BAP
+          usage: ORDER
+          description: >-
+            Type of referenced object (viz. order, item, fulfilment provider,
+            ...) 
+        tags:
+          message:
+            order:
+              items:
+                required: optional
+                type: string
+                owner: BAP
+                usage: '--'
+                description: Describes the tags group as order items
+                list:
+                  quantity:
+                    selected:
+                      count:
+                        required: optional
+                        type: string
+                        owner: BAP
+                        usage: 2
+                        description: >-
+                          Used to specify the quantity of the item selected for
+                          the complaint. Example 2 out of 3 quantity shirts have
+                          defect. 
+      actors:
+        id:
+          required: mandatory
+          type: string
+          owner: BAP
+          usage: CUST1
+          description: >-
+            Describes the actor id. To be used to identify actions have been
+            taken by which actor
+        type:
+          required: mandatory
+          type: string
+          owner: BAP
+          usage: CONSUMER
+          description: Describes the actor type
+        info:
+          org:
+            name:
+              required: mandatory
+              type: string
+              owner: BAP
+              usage: buyerapp.com::ONDC:RET10
+              description: Describes the entity (subscriber_id::domain_code)
+          person:
+            name:
+              required: mandatory
+              type: string
+              owner: BAP
+              usage: Sam Manuel
+              description: Describes the person of the entity
+          contact:
+            phone:
+              required: mandatory
+              type: string
+              owner: BAP
+              usage: 9879879870
+              description: Describes the contact phone
+            email:
+              required: mandatory
+              type: string
+              owner: BAP
+              usage: sam@yahoo.com
+              description: Describes the contact email
+      source_id:
+        required: mandatory
+        type: string
+        owner: BAP
+        usage: CUST1
+        description: Refers to the actor id of the entity reporting the complaint
+      complainant_id:
+        required: mandatory
+        type: string
+        owner: BAP
+        usage: NP1
+        description: Refers to the actor id of the NP where the complaint is created
+      respondent_ids:
+        required: mandatory
+        type: string
+        owner: BAP
+        usage: NP2
+        description: >-
+          Describes the sub category code for the respective complaint. Refer
+          category - sub category sheet
+      descriptor:
+        code:
+          required: mandatory
+          type: string
+          owner: BAP
+          usage: ITM004
+          description: Provides a short description of the complaint
+        short_desc:
+          required: mandatory
+          type: string
+          owner: BAP
+          usage: Issue with product quality
+          description: Provides a long description of the complaint
+        long_desc:
+          required: mandatory
+          type: string
+          owner: BAP
+          usage: Issue with product quality
+          description: >-
+            Provides additional description of the complaint, like transcripts
+            of chats
+        additional_desc:
+          url:
+            required: mandatory
+            type: string
+            owner: BAP
+            usage: https://buyerapp.com/additonal-details/desc.txt
+            description: Describes the type of additional_desc being provided
+          content_type:
+            required: mandatory
+            type: string
+            owner: BAP
+            usage: text/plain
+            description: >-
+              Provides images associated to the complaint. Conditionally
+              mandatory depending on the subcategory of the complaint
+        images:
+          url:
+            required: mandatory
+            type: string
+            owner: BAP
+            usage: https://transitsolutions.in/logos/logo.icon
+            description: Provides the type of images provided
+          size_type:
+            required: mandatory
+            type: string
+            owner: BAP
+            usage: xs
+            description: Provides other forms of media associated to the complaint
+      last_action_id:
+        required: mandatory
+        type: string
+        owner: BAP
+        usage: A2
+        description: Refers to the last action taken on the complaint
+      actions:
+        id:
+          required: mandatory
+          type: string
+          owner: BAP
+          usage: A1
+          description: Identifies an action uniquely
+        descriptor:
+          code:
+            required: mandatory
+            type: string
+            owner: BAP
+            usage: OPEN
+            description: Refers to the action being taken. Refer enums
+          short_desc:
+            required: mandatory
+            type: string
+            owner: BAP
+            usage: OPEN
+            description: Provides a short description of the action being taken
+        updated_at:
+          required: mandatory
+          type: string
+          owner: BAP
+          usage: '2023-01-15T10:00:00.469Z'
+          description: Provides the timestamp of the action being taken
+        action_by:
+          required: mandatory
+          type: string
+          owner: BAP
+          usage: NP1
+          description: Refers to the actors.id of the actor that is taking the action
+        actor_details:
+          name:
+            required: mandatory
+            type: string
+            owner: BAP
+            usage: Sam Manuel
+            description: Refers to a person from the actor taking the action
+        tags:
+          CLOSURE_DETAILS:
+            required: optional
+            type: string
+            owner: BAP
+            usage: '--'
+            description: Describes the tag group as closure details
+            RATING:
+              required: optional
+              type: string
+              owner: BAP
+              usage: THUMBS-UP
+              description: >-
+                Refers to the rating provided by the buyer at the complaint
+                closure
+      resolutions:
+        id:
+          required: mandatory
+          type: string
+          owner: BPP
+          usage: R1
+          description: >-
+            Identifies a resolution object uniquely, Used to refer in resolution
+            related actions in the action trail
+        ref_id:
+          required: optional
+          type: string
+          owner: BPP
+          usage: R_PARENT
+          description: Reference to another object id
+        ref_type:
+          required: optional
+          type: string
+          owner: BPP
+          usage: PARENT
+          description: >-
+            Type of referenced object (viz. PARENT). Typically used to link
+            multiple resolution 
+        descriptor:
+          code:
+            required: mandatory
+            type: string
+            owner: BPP
+            usage: REFUND
+            description: >-
+              Refers to the type of resolution being provided. Refer enums for
+              potential options
+          short_desc:
+            required: mandatory
+            type: string
+            owner: BPP
+            usage: Providing refund for this complaint
+            description: Provides a short description of the resolution
+        updated_at:
+          required: mandatory
+          type: string
+          owner: BPP
+          usage: '2023-01-15T10:00:00.469Z'
+          description: Timestamp for the capturing the time a resolution object was added
+        proposed_by:
+          required: mandatory
+          type: string
+          owner: BPP
+          usage: NP1
+          description: Refers to the actor id that is providing the resolution object
+        tags:
+          RESOLUTION_DETAILS:
+            required: optional
+            type: string
+            owner: BAP
+            usage: '--'
+            description: Describes the resolution details
+            list:
+              ITEM:
+                required: optional
+                type: string
+                owner: BAP
+                usage: I1
+                description: Refers to the item for which the resolution has been provided
+              REFUND_AMOUNT:
+                required: optional
+                type: string
+                owner: BAP
+                usage: 200
+                description: >-
+                  Refers to the amount being provided as refund. Applicable in
+                  case refund amount is to be provided resolutions such as
+                  REFUND or CANCEL

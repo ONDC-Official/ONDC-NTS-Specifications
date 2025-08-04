@@ -30,7 +30,7 @@ message:
         ref_type: PROVIDER
     actors:
       - id: SELLER1
-        type: SELLER
+        type: PROVIDER
         info:
           org:
             name: sellerapp.com::ONDC:RET10

@@ -10,17 +10,18 @@ details:
       participant BuyerApp as Buyer App
       participant SellerApp as Seller App
 
-      BuyerApp->>SellerApp: Raise complaint for fulfillment category (/issue)
-      BuyerApp->>SellerApp: Create issue call (/issue)
+      BuyerApp->>SellerApp: Raise complaint for item category (/issue)
       SellerApp->>BuyerApp: Respond with processing action (on_issue)
       SellerApp->>BuyerApp: Cascades request for more information (on_issue)
       BuyerApp->>SellerApp: Provides relevant information (issue)
       SellerApp->>BuyerApp: Cascades above processing action (on_issue)
       SellerApp->>BuyerApp: Analyzes and cascades proposed response (on_issue)
-      BuyerApp->>SellerApp: Accepts resolution provided by Seller App (issue)
-      SellerApp->>BuyerApp: Provides resolution object (on_issue)
-      BuyerApp->>SellerApp: Closes the complaint (issue)
-      SellerApp->>BuyerApp: Closes the issue
+      BuyerApp->>SellerApp: Rejects resolution provided by Seller App (issue)
+      SellerApp->>BuyerApp: Responds with processing action (on_issue)
+      SellerApp->>BuyerApp: Responds with new proposed resolution (on_issue)
+      BuyerApp->>SellerApp: Accepts the resolution (issue)
+      SellerApp->>BuyerApp: Resolves the complainant with resolution (on_issue)
+      SellerApp->>BuyerApp: Closes the issue(issue)
 
 steps:
   - summary: Buyer raises a complaint for item category; buyer app creates the issue call

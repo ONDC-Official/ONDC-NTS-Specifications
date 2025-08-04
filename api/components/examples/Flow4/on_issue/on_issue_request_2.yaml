@@ -116,7 +116,7 @@ message:
         updated_at: '2025-05-05T10:00:02.000Z'
         proposed_by: NP2
       - id: R1
-        ref_id: R_PARENT
+        ref_id: R_PARENT_1
         ref_type: PARENT
         descriptor:
           code: REFUND
@@ -134,7 +134,7 @@ message:
                   code: REFUND_AMOUNT
                 value: "300"
       - id: R2
-        ref_id: R_PARENT
+        ref_id: R_PARENT_1
         ref_type: PARENT
         descriptor:
           code: NO_ACTION

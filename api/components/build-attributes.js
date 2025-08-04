@@ -4,7 +4,7 @@ const fs = require("fs");
 
 async function buildAttribiutes() {
   let attributes = {};
-  const workSheetsFromBuffer = xlsx.parse(`../../Attribute_IGM2.xlsx`);
+  const workSheetsFromBuffer = xlsx.parse(`../../IGM_attribute_2.0.0.xlsx`);
 
   for (let i = 0; i < workSheetsFromBuffer.length; i++) {
     const array = workSheetsFromBuffer[i];

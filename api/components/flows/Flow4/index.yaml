@@ -10,27 +10,13 @@ details:
     sequenceDiagram
       participant BuyerApp as Buyer App
       participant SellerApp as Seller App
-      participant LSP as LSP (Logistics Service Provider)
 
-      BuyerApp->>SellerApp: Raise complaint for fulfillment category (/issue)
-      BuyerApp->>SellerApp: Create issue call (/issue)
+      BuyerApp->>SellerApp: Raise complaint for multiple items (/issue)
       SellerApp->>BuyerApp: Respond with processing action (on_issue)
-      SellerApp->>LSP: Create issue call (issue)
-      LSP->>SellerApp: Respond with processing action (on_issue)
-      LSP->>SellerApp: Needs more information to analyze (on_issue)
-      SellerApp->>BuyerApp: Cascades request for more information (on_issue)
-      BuyerApp->>SellerApp: Provides relevant information (issue)
-      SellerApp->>LSP: Cascades with relevant information (issue)
-      LSP->>SellerApp: Responds with processing action (on_issue)
-      SellerApp->>BuyerApp: Cascades above processing action (on_issue)
-      LSP->>SellerApp: Responds with proposed resolution (on_issue)
-      SellerApp->>BuyerApp: Analyzes and cascades proposed response (on_issue)
-      BuyerApp->>SellerApp: Accepts resolution provided by Seller App (issue)
-      SellerApp->>LSP: Accepts resolution provided by LSP (issue)
-      LSP->>SellerApp: Provides resolution object (on_issue)
-      SellerApp->>BuyerApp: Provides resolution object (on_issue)
+      SellerApp->>BuyerApp: Proposes resolution for respective items (on_issue)
+      BuyerApp->>SellerApp: Accepts the resolutions provided (issue)
+      SellerApp->>BuyerApp: Resolves the complaint (on_issue)
       BuyerApp->>SellerApp: Closes the complaint (issue)
-      SellerApp->>BuyerApp: Closes the issue
 
 steps:
   - summary: Buyer raises a complaint for multiple items; buyer app creates the issue call

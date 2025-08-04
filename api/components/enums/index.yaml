@@ -55,8 +55,8 @@ issue:
           - code: PAYMENT
             description: The payment associated complaint, including discrepancies or failures.
             reference: <PR/Issue/Discussion Links md format text> 
-          - code: CUSTOMER
-            description: The customer involved in or affected by the issue.
+          - code: CONSUMER
+            description: The consumer involved in or affected by the issue.
             reference: <PR/Issue/Discussion Links md format text> 
           - code: AGENT
             description: The agent handling or associated with the issue.
@@ -79,8 +79,8 @@ issue:
           - code: AGENT
             description: The individual or team responsible for managing the issue.
             reference: <PR/Issue/Discussion Links md format text>  
-          - code: CUSTOMER
-            description: The customer who raised the issue or is affected by it.
+          - code: CONSUMER
+            description: The consumer who raised the issue or is affected by it.
             reference: <PR/Issue/Discussion Links md format text> 
           - code: INTERFACING_NP_GRO
             description: Grievance Redressal Office of interfacing entities related to the issue.
@@ -130,7 +130,10 @@ issue:
               reference: <PR/Issue/Discussion Links md format text> 
             - code: ESCALATED
               description: Complaint is escalated
-              reference: <PR/Issue/Discussion Links md format text>  
+              reference: <PR/Issue/Discussion Links md format text>
+            - code: CASCADED
+              description: Complaint is cascaded
+              reference: <PR/Issue/Discussion Links md format text>    
             
       resolutions:
         descriptor:
