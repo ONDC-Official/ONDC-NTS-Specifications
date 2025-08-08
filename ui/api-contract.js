@@ -30,7 +30,7 @@ async function readBuildFile(branchName) {
     // build_spec = JSON.parse(getStringAfterEquals(splitedText));
     // onFirstLoad(build_spec);
     
-    if(formattedResponse?.download_url){
+    if(formattedResponse?.git_url){
       // setTimeout(async ()=>{
       //   const rawResponse = await fetch(formattedResponse.download_url, {
       //     // headers: {
