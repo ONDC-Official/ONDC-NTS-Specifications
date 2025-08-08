@@ -1414,7 +1414,7 @@ x-flows:
                       updated_at: '2024-05-07T06:36:50.897Z'
                     - id: settlement-id-112
                       payment_id: pymnt-3
-                      status: TO-BE-INITIATED
+                      status: TO_BE_INITIATED
                       amount:
                         currency: INR
                         value: '100.00'
@@ -1519,7 +1519,7 @@ x-flows:
                       updated_at: '2024-05-07T06:36:51.897Z'
                     - id: settlement-id-112
                       payment_id: pymnt-3
-                      status: TO-BE-INITIATED
+                      status: TO_BE_INITIATED
                       amount:
                         currency: INR
                         value: '90.00'
@@ -1623,7 +1623,7 @@ x-flows:
                       updated_at: '2024-05-07T06:36:51.897Z'
                     - id: settlement-id-112
                       payment_id: pymnt-3
-                      status: TO-BE-INITIATED
+                      status: TO_BE_INITIATED
                       amount:
                         currency: INR
                         value: '90.00'
@@ -1724,7 +1724,7 @@ x-flows:
                       updated_at: '2024-05-07T06:36:51.897Z'
                     - id: settlement-id-112
                       payment_id: pymnt-3
-                      status: TO-BE-INITIATED
+                      status: TO_BE_INITIATED
                       due_date: '2024-05-08'
                       amount:
                         currency: INR
@@ -2160,7 +2160,7 @@ x-flows:
                       updated_at: '2024-05-07T06:36:50.897Z'
                     - id: settlement-id-112
                       payment_id: pymnt-2
-                      status: TO-BE-INITIATED
+                      status: TO_BE_INITIATED
                       amount:
                         currency: INR
                         value: '300.00'
@@ -2241,7 +2241,7 @@ x-flows:
                       updated_at: '2024-05-07T06:36:51.897Z'
                     - id: settlement-id-112
                       payment_id: pymnt-2
-                      status: TO-BE-INITIATED
+                      status: TO_BE_INITIATED
                       due_date: '2024-05-09'
                       amount:
                         currency: INR

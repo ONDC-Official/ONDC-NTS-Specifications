@@ -69,7 +69,7 @@ message:
           updated_at: "2024-05-07T06:36:51.897Z"
         - id: "settlement-id-112"
           payment_id: "pymnt-3"
-          status: "TO-BE-INITIATED"
+          status: "TO_BE_INITIATED"
           amount:
             currency: "INR"
             value: "90.00"
