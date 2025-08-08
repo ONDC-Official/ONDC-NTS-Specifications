@@ -1449,7 +1449,7 @@ let build_spec = {
                       {
                         id: "settlement-id-112",
                         payment_id: "pymnt-3",
-                        status: "TO-BE-INITIATED",
+                        status: "TO_BE_INITIATED",
                         amount: { currency: "INR", value: "100.00" },
                         commission: { currency: "INR", value: "10.00" },
                         withholding_amount: { currency: "INR", value: "10.00" },
@@ -1545,7 +1545,7 @@ let build_spec = {
                       {
                         id: "settlement-id-112",
                         payment_id: "pymnt-3",
-                        status: "TO-BE-INITIATED",
+                        status: "TO_BE_INITIATED",
                         amount: {
                           currency: "INR",
                           value: "90.00",
@@ -1640,7 +1640,7 @@ let build_spec = {
                       {
                         id: "settlement-id-112",
                         payment_id: "pymnt-3",
-                        status: "TO-BE-INITIATED",
+                        status: "TO_BE_INITIATED",
                         amount: { currency: "INR", value: "90.00" },
                         commission: { currency: "INR", value: "10.00" },
                         withholding_amount: { currency: "INR", value: "10.00" },
@@ -1717,7 +1717,7 @@ let build_spec = {
                       {
                         id: "settlement-id-112",
                         payment_id: "pymnt-3",
-                        status: "TO-BE-INITIATED",
+                        status: "TO_BE_INITIATED",
                         due_date: "2024-05-08",
                         amount: {
                           currency: "INR",
@@ -1907,7 +1907,7 @@ let build_spec = {
                       {
                         id: "settlement-id-112",
                         payment_id: "pymnt-3",
-                        status: "TO-BE-INITIATED",
+                        status: "TO_BE_INITIATED",
                         amount: { currency: "INR", value: "100.00" },
                         commission: { currency: "INR", value: "10.00" },
                         withholding_amount: { currency: "INR", value: "10.00" },
@@ -2540,7 +2540,7 @@ let build_spec = {
                         {
                           id: "settlement-id-112",
                           payment_id: "pymnt-3",
-                          status: "TO-BE-INITIATED",
+                          status: "TO_BE_INITIATED",
                           amount: { currency: "INR", value: "100.00" },
                           commission: { currency: "INR", value: "10.00" },
                           withholding_amount: {
@@ -2636,7 +2636,7 @@ let build_spec = {
                         {
                           id: "settlement-id-112",
                           payment_id: "pymnt-3",
-                          status: "TO-BE-INITIATED",
+                          status: "TO_BE_INITIATED",
                           amount: {
                             currency: "INR",
                             value: "90.00",
@@ -2745,7 +2745,7 @@ let build_spec = {
                         {
                           id: "settlement-id-112",
                           payment_id: "pymnt-3",
-                          status: "TO-BE-INITIATED",
+                          status: "TO_BE_INITIATED",
                           amount: {
                             currency: "INR",
                             value: "90.00",
