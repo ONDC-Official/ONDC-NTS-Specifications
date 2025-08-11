@@ -1,24 +1,25 @@
 Retail : 
  summary: IGM implementation
- description: IGM examples
+ description:  &commonDescription >- 
+  Please find the update documentation for IGM v1.0 MVP <a target="_blank" rel="noopener noreferrer" href="https://docs.google.com/document/d/1ZUS5hvS2M-TafyjAdcTY6X51VKbb9IO1fPaSquQfA0Y/edit?usp=sharing">here</a>
  example_set:
    $ref: "./Retail/index.yaml"
 
 Credit:
  summary: IGM implementation for fis 
- description: IGM examples for fis
+ description: *commonDescription
  example_set:
    $ref: "./Credit/index.yaml"
 
 Insurance:
   summary: IGM implementation for fis 
-  description: IGM examples for fis
+  description: *commonDescription
   example_set:
    $ref: "./Insurance/index.yaml"
 
 Mutual Funds:
   summary: IGM implementation for  Mutual Funds
-  description: IGM examples for Mutual Funds
+  description: *commonDescription
   example_set:
    $ref: "./Mutual_Funds/index.yaml"
 

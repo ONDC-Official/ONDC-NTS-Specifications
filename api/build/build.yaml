@@ -2872,7 +2872,10 @@ x-flows:
 x-examples:
   Retail:
     summary: IGM implementation
-    description: IGM examples
+    description: >-
+      Please find the update documentation for IGM v1.0 MVP <a target="_blank"
+      rel="noopener noreferrer"
+      href="https://docs.google.com/document/d/1ZUS5hvS2M-TafyjAdcTY6X51VKbb9IO1fPaSquQfA0Y/edit?usp=sharing">here</a>
     example_set:
       issue:
         examples:
@@ -2892,7 +2895,10 @@ x-examples:
             value: *ref_4
   Credit:
     summary: IGM implementation for fis
-    description: IGM examples for fis
+    description: >-
+      Please find the update documentation for IGM v1.0 MVP <a target="_blank"
+      rel="noopener noreferrer"
+      href="https://docs.google.com/document/d/1ZUS5hvS2M-TafyjAdcTY6X51VKbb9IO1fPaSquQfA0Y/edit?usp=sharing">here</a>
     example_set:
       issue:
         examples:
@@ -3096,7 +3102,10 @@ x-examples:
                     refund_amount: '100'
   Insurance:
     summary: IGM implementation for fis
-    description: IGM examples for fis
+    description: >-
+      Please find the update documentation for IGM v1.0 MVP <a target="_blank"
+      rel="noopener noreferrer"
+      href="https://docs.google.com/document/d/1ZUS5hvS2M-TafyjAdcTY6X51VKbb9IO1fPaSquQfA0Y/edit?usp=sharing">here</a>
     example_set:
       issue:
         examples:
@@ -3123,7 +3132,10 @@ x-examples:
             value: *ref_9
   Mutual Funds:
     summary: IGM implementation for  Mutual Funds
-    description: IGM examples for Mutual Funds
+    description: >-
+      Please find the update documentation for IGM v1.0 MVP <a target="_blank"
+      rel="noopener noreferrer"
+      href="https://docs.google.com/document/d/1ZUS5hvS2M-TafyjAdcTY6X51VKbb9IO1fPaSquQfA0Y/edit?usp=sharing">here</a>
     example_set:
       issue:
         examples:
