@@ -102,100 +102,101 @@ paths:
   #               required:
   #                 - message
 
-  /report:
-    post:
-      tags:
-        # - Collector
-        # - Receiver
-        - Settlement Agency
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                context:
-                  $ref: "#/components/schemas/Context"
-                message:
-                  type: object
-                  properties:
-                    ref_transaction_id:
-                      type: string
-                    ref_message_id:
-                      type: string
-                error:
-                  $ref: "#/components/schemas/Error"
-              required:
-                - context
-                - message
-      responses:
-        "200":
-          description: Acknowledgement of message received
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: object
-                    properties:
-                      ack:
-                        $ref: "#/components/schemas/Ack"
-                    required:
-                      - ack
-                  error:
-                    $ref: "#/components/schemas/Error"
-                required:
-                  - message
-  /on_report:
-    post:
-      tags:
-        - Collector
-        - Receiver
-      # - Settlement Agency
-      requestBody:
-        description: SA responds with /on_report
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                context:
-                  $ref: "#/components/schemas/Context"
-                message:
-                  type: object
-                  properties:
-                    collector_app_id:
-                      type: string
-                    receiver_app_id:
-                      type: string
-                    settlement:
-                      $ref: "#/components/schemas/Settlement"
-                  required:
-                    - settlement
-                error:
-                  $ref: "#/components/schemas/Error"
-              required:
-                - context
-      responses:
-        "200":
-          description: Acknowledgement of message received
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: object
-                    properties:
-                      ack:
-                        $ref: "#/components/schemas/Ack"
-                    required:
-                      - ack
-                  error:
-                    $ref: "#/components/schemas/Error"
-                required:
-                  - message
+  # /report:
+  #   post:
+  #     tags:
+  #       # - Collector
+  #       # - Receiver
+  #       - Settlement Agency
+  #     requestBody:
+  #       content:
+  #         application/json:
+  #           schema:
+  #             type: object
+  #             properties:
+  #               context:
+  #                 $ref: "#/components/schemas/Context"
+  #               message:
+  #                 type: object
+  #                 properties:
+  #                   ref_transaction_id:
+  #                     type: string
+  #                   ref_message_id:
+  #                     type: string
+  #               error:
+  #                 $ref: "#/components/schemas/Error"
+  #             required:
+  #               - context
+  #               - message
+  #     responses:
+  #       "200":
+  #         description: Acknowledgement of message received
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 message:
+  #                   type: object
+  #                   properties:
+  #                     ack:
+  #                       $ref: "#/components/schemas/Ack"
+  #                   required:
+  #                     - ack
+  #                 error:
+  #                   $ref: "#/components/schemas/Error"
+  #               required:
+  #                 - message
+  # /on_report:
+  #   post:
+  #     tags:
+  #       - Collector
+  #       - Receiver
+  #     # - Settlement Agency
+  #     requestBody:
+  #       description: SA responds with /on_report
+  #       content:
+  #         application/json:
+  #           schema:
+  #             type: object
+  #             properties:
+  #               context:
+  #                 $ref: "#/components/schemas/Context"
+  #               message:
+  #                 type: object
+  #                 properties:
+  #                   collector_app_id:
+  #                     type: string
+  #                   receiver_app_id:
+  #                     type: string
+  #                   settlement:
+  #                     $ref: "#/components/schemas/Settlement"
+  #                 required:
+  #                   - settlement
+  #               error:
+  #                 $ref: "#/components/schemas/Error"
+  #             required:
+  #               - context
+  #     responses:
+  #       "200":
+  #         description: Acknowledgement of message received
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 message:
+  #                   type: object
+  #                   properties:
+  #                     ack:
+  #                       $ref: "#/components/schemas/Ack"
+  #                   required:
+  #                     - ack
+  #                 error:
+  #                   $ref: "#/components/schemas/Error"
+  #               required:
+  #                 - message
+  
   /recon:
     post:
       tags:
