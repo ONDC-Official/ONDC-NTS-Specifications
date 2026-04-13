@@ -1,24 +1,6 @@
-RSF:
-  summary: RSF 2.0
+PPF:
+  summary: Payment Protection Framework (PPF)
   description: |
-    Reconciliation and Settlement Framework provides a comprehensive framework
-    to ensure accurate and timely settlements among participants in the network.
-    RSF 2.0 brings an enhanced workflow where the NPs share order-level the
-    settlement instructions to the Settlement Agency (SA) which matches the same
-    with the respective counterparty NP and then moves funds if the amounts have
-    matched successfully. 
-
-    Explainer & BRD is documented <a href = "https://docs.google.com/document/d/1IXZuqTCfEzBxdHJKzHVZ9kPm_lYk5DxjdaQ25--YH8M/edit#heading=h.7edkggo8m4oc">here</a>
-
-    Functional flows and use cases are documented <a href = "https://docs.google.com/document/d/1Pj7e1MuObQeLczx_palbcliUPTkMRYA76esjrfAMT14/edit?usp=sharing">here</a>
-
-    For development of funds settlement flow for integration with settlement agency, refer settle/on_settle and report/on_report API specs below
-
-    For development of reconciliation flow amongst network participants, refer recon/on_recon API specs below
-
-    The instructions to leverage the mock server along with logs requirements are available <a href = "https://docs.google.com/document/d/1rHmQ8joTsT2HDmZdXhPlUKy5QSrJiQuEkTAjLDcNVoA/edit?usp=sharing">here</a>
-
-    Frequently asked questions are available <a href = "https://docs.google.com/document/d/1fA9WkPjzldvJ_3qfltywzfBnadKsPWwbPF6C7ULfZk4/edit?usp=sharing">here</a>
-
+    Payment Protection Framework description available  <a href="https://ondc-ppf.readme.io/reference/ondc-payment-protection-framework" target="_blank" rel="noopener noreferrer">here</a>
   example_set:
     $ref: ./RSF/index.yaml

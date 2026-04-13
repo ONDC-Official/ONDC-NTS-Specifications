@@ -766,622 +766,623 @@
 #               usage: '50.00'
 #               description: Collector amount is what collector keeps for themselves
 
-report:
-  context:
-    domain:
-      required: true
-      type: string
-      owner: any
-      usage: ONDC:NTS10
-      description: Domain in which the settlement occurs
-    location:
-      country:
-        code:
-          required: true
-          type: string
-          owner: any
-          usage: IND
-          description: Describes country code as per ISO 3166-1 and ISO 3166-2 format
-      city:
-        code:
-          required: true
-          type: string
-          owner: any
-          usage: '*'
-          description: 'Describes city '
-    version:
-      required: true
-      type: string
-      owner: any
-      usage: 2.0.0
-      description: Describes the version of transaction protocol being used by the sender.
-    action:
-      required: true
-      type: string
-      owner: any
-      usage: report
-      description: >-
-        Describes the method being called by the sender and executed at the
-        receiver.
-    bap_id:
-      required: true
-      type: string
-      owner: any
-      usage: collectorapp.com
-      description: Describes the subscriber id of the BNP
-    bap_uri:
-      required: true
-      type: string
-      owner: any
-      usage: https://collectorapp.com/ondc/1.0/
-      description: Describes the subscriber uri of the BNP
-    bpp_id:
-      required: true
-      type: string
-      owner: any
-      usage: sa_nocs.nbbl.com
-      description: Describes the subscriber id of the SNP
-    bpp_uri:
-      required: true
-      type: string
-      owner: any
-      usage: https://sa_nocs.nbbl.com/nocs_test
-      description: Describes the subscriber uri of the SNP
-    transaction_id:
-      required: true
-      type: string
-      owner: any
-      usage: d73a366-aebb-4144-9314-808dda82c7e6
-      description: Describes  a unique value which persists across all API calls
-    message_id:
-      required: true
-      type: string
-      owner: any
-      usage: 841ef6d7-d74d-4411-ac06-a05469c0f9ac
-      description: >-
-        Describes a unique value which persists during a request / callback
-        cycle.
-    timestamp:
-      required: true
-      type: string
-      owner: any
-      usage: '2024-05-09T06:36:51.897Z'
-      description: Describes time of request generation in RFC3339 format
-    ttl:
-      required: true
-      type: string
-      owner: any
-      usage: P1D
-      description: >-
-        Describes the duration in ISO8601 format after timestamp for which this
-        message holds valid
-  message:
-    collector_app_id:
-      required: true
-      type: string
-      owner: any
-      usage: collectorapp.com
-      description: 'Subscriber Id of Collecter '
-    receiver_app_id:
-      required: true
-      type: string
-      owner: any
-      usage: receiverapp.com
-      description: Subscriber Id of Reciever
-    settlement:
-      type:
-        required: true
-        type: string
-        owner: any
-        usage: NP-NP
-        description: Type of Settlement
-      id:
-        required: true
-        type: string
-        owner: any
-        usage: settlement-id-abc
-        description: Id of Settlement
-      orders:
-        self:
-          amount:
-            currency:
-              required: true
-              type: string
-              owner: any
-              usage: INR
-              description: >-
-                Currency of the amount that is to be moved to the API caller's
-                operating account
-            value:
-              required: true
-              type: string
-              owner: any
-              usage: '200.00'
-              description: >-
-                Self amount is the amount that is to be moved to the API
-                caller's operating account
-          status:
-            required: true
-            type: string
-            owner: any
-            usage: NOT_SETTLED
-            description: Status of self fund settlement
-          reference_no:
-            required: Conditional
-            type: string
-            owner: any
-            usage: '1238683618634'
-            description: Reference number of self fund settlement if status is NOT_SETTLED not required if settlement is not settled 
-          error:
-            code:
-              required: Conditional
-              type: string
-              owner: any
-              usage: '01'
-              description: Code of the error occurred at the time of settlement 
-            message:
-              required: Conditional
-              type: string
-              owner: any
-              usage: Account inactive
-              description: Message of the error occurred at the time of settlement
-        provider:
-          id:
-            required: Conditional
-            type: string
-            owner: any
-            usage: prvdr-id-789
-            description: The provider ID must be provided if settlement is being made to the provider
-          name:
-            required: optional
-            type: string
-            owner: any
-            usage: Kirana Pvt Ltd
-            description: The Name of the provider must be provided if settlement is being made to the provider
-          bank_details:
-            account_no:
-              required: Conditional
-              type: string
-              owner: any
-              usage: '1234567890'
-              description: The Account number of the provider must be provided if settlement is being made to the provider
-            ifsc_code:
-              required: Conditional
-              type: string
-              owner: any
-              usage: IFSC0001
-              description: IFSC code of the provider must be provided if settlement is being made to the provider
-          amount:
-            currency:
-              required: Conditional
-              type: string
-              owner: any
-              usage: INR
-              description: >-
-                Currency of the amount that is to be transferred to the
-                provider's provided account must be provided if settlement is being made to the provider
-            value:
-              required: Conditional
-              type: string
-              owner: any
-              usage: '800.00'
-              description: >-
-                Provider amount is the amount that is to be transferred to the
-                provider's provided account must be provided if settlement is being made to the provider
-          status:
-            required: Conditional
-            type: string
-            owner: any
-            usage: NOT_SETTLED
-            description: Status of provider fund settlement must be provided if settlement is being made to the provider
-          reference_no:
-            required: Conditional
-            type: string
-            owner: any
-            usage: '3718683618631'
-            description: Reference number of provider fund settlement if amount is SETTLED
-          error:
-            code:
-              required: Conditional
-              type: string
-              owner: any
-              usage: '01'
-              description: Code of the error occurred at the time of settlement if settlement is not settled
-            message:
-              required: Conditional
-              type: string
-              owner: any
-              usage: Account inactive
-              description: Message of the error occurred at the time of settlement if settlement is not settled
-        id:
-          required: true
-          type: string
-          owner: any
-          usage: ordr-123456
-          description: Id of the order
-        inter_participant:
-          amount:
-            currency:
-              required: true
-              type: string
-              owner: any
-              usage: INR
-              description: >-
-                Currency of the amount that is to be settled from collector to
-                receiver
-            value:
-              required: true
-              type: string
-              owner: any
-              usage: '1000.00'
-              description: >-
-                Inter participant amount is what is to be settled from collector
-                to receiver
-          status:
-            required: true
-            type: string
-            owner: any
-            usage: SETTLED
-            description: Status of interparticipant fund settlement
-          reference_no:
-            required: Conditional
-            type: string
-            owner: any
-            usage: '3718683618631'
-            description: Reference number of Interparticipant fund settlement not required if settlement is not settled 
-          error:
-            code:
-              required: Conditional
-              type: string
-              owner: any
-              usage: '01'
-              description: Code of the error occurred at the time of settlement
-            message:
-              required: Conditional
-              type: string
-              owner: any
-              usage: Account inactive
-              description: Message of the error occurred at the time of settlement
-        collector:
-          amount:
-            currency:
-              required: true
-              type: string
-              owner: any
-              usage: INR
-              description: Currency of the amount that the collector keeps for themselves
-            value:
-              required: true
-              type: string
-              owner: any
-              usage: '50.00'
-              description: Collector amount is what collector keeps for themselves
-    ref_transaction_id:
-      required: true
-      type: string
-      owner: any
-      usage: bd73a366-aebb-4144-9314-808dda82c7e6
-      description: Reference transaction ID of the settlement instruction
-    ref_message_id:
-      required: true
-      type: string
-      owner: any
-      usage: 941ef6d7-d74d-4411-ac06-469c0f9ac
-      description: Reference message ID of the settlement instruction
-on_report:
-  context:
-    domain:
-      required: true
-      type: string
-      owner: any
-      usage: ONDC:NTS10
-      description: Domain in which the settlement occurs
-    location:
-      country:
-        code:
-          required: true
-          type: string
-          owner: any
-          usage: IND
-          description: Describes country code as per ISO 3166-1 and ISO 3166-2 format
-      city:
-        code:
-          required: true
-          type: string
-          owner: any
-          usage: '*'
-          description: 'Describes city '
-    version:
-      required: true
-      type: string
-      owner: any
-      usage: 2.0.0
-      description: Describes the version of transaction protocol being used by the sender.
-    action:
-      required: true
-      type: string
-      owner: any
-      usage: on_report
-      description: >-
-        Describes the method being called by the sender and executed at the
-        receiver.
-    bap_id:
-      required: true
-      type: string
-      owner: any
-      usage: collectorapp.com
-      description: Describes the subscriber id of the BNP
-    bap_uri:
-      required: true
-      type: string
-      owner: any
-      usage: https://collectorapp.com/ondc/1.0/
-      description: Describes the subscriber uri of the BNP
-    bpp_id:
-      required: true
-      type: string
-      owner: any
-      usage: sa_nocs.nbbl.com
-      description: Describes the subscriber id of the SNP
-    bpp_uri:
-      required: true
-      type: string
-      owner: any
-      usage: https://sa_nocs.nbbl.com/nocs_test
-      description: Describes the subscriber uri of the SNP
-    transaction_id:
-      required: true
-      type: string
-      owner: any
-      usage: cd73a366-aebb-4144-9314-808dda82c7e6
-      description: Describes  a unique value which persists across all API calls
-    message_id:
-      required: true
-      type: string
-      owner: any
-      usage: 841ef6d7-d74d-4411-ac06-a05469c0f9ac
-      description: >-
-        Describes a unique value which persists during a request / callback
-        cycle.
-    timestamp:
-      required: true
-      type: string
-      owner: any
-      usage: '2024-05-07T06:36:51.900Z'
-      description: Describes time of request generation in RFC3339 format
-    ttl:
-      required: true
-      type: string
-      owner: any
-      usage: P1D
-      description: >-
-        Describes the duration in ISO8601 format after timestamp for which this
-        message holds valid
-  message:
-    collector_app_id:
-      required: true
-      type: string
-      owner: any
-      usage: collectorapp.com
-      description: ID of the collector
-    receiver_app_id:
-      required: true
-      type: string
-      owner: any
-      usage: receiverapp.com
-      description: ID of the reciever
-    settlement:
-      type:
-        required: true
-        type: string
-        owner: any
-        usage: NP-NP
-        description: Type of Interparticipant Settlement
-      id:
-        required: true
-        type: string
-        owner: any
-        usage: settlement-id-123
-        description: Id of Interpartcipant settlement
-      orders:
-        self:
-          amount:
-            currency:
-              required: true
-              type: string
-              owner: any
-              usage: INR
-              description: >-
-                Currency of the amount that is to be moved to the API caller's
-                operating account
-            value:
-              required: true
-              type: string
-              owner: any
-              usage: '200.00'
-              description: >-
-                Self amount is the amount that is to be moved to the API
-                caller's operating account
-          status:
-            required: true
-            type: string
-            owner: any
-            usage: NOT_SETTLED
-            description: Status of self fund settlement
-          reference_no:
-            required: Conditional
-            type: string
-            owner: any
-            usage: '3718683618631'
-            description: Reference number of self fund settlement not required if settlement is not settled 
-          error:
-            code:
-              required: Conditional
-              type: string
-              owner: any
-              usage: '01'
-              description: Code of the error occurred at the time of settlement
-            message:
-              required: Conditional
-              type: string
-              owner: any
-              usage: Account inactive
-              description: Message of the error occurred at the time of settlement
-        provider:
-          id:
-            required: Conditional
-            type: string
-            owner: any
-            usage: provider-id-789
-            description: The provider ID must be provided if settlement is being made to the provider
-          name:
-            required: optional
-            type: string
-            owner: any
-            usage: Kirana Pvt Ltd
-            description: The Name of the provider must be provided if settlement is being made to the provider
-          bank_details:
-            account_no:
-              required: Conditional
-              type: string
-              owner: any
-              usage: '1234567890'
-              description: The Account number of the provider must be provided if settlement is being made to the provider
-            ifsc_code:
-              required: Conditional
-              type: string
-              owner: any
-              usage: IFSC0001
-              description: IFSC code of the provider must be provided if settlement is being made to the provider
-          amount:
-            currency:
-              required: Conditional
-              type: string
-              owner: any
-              usage: INR
-              description: >-
-                Currency of the amount that is to be transferred to the
-                provider's provided account must be provided if settlement is being made to the provider
-            value:
-              required: Conditional
-              type: string
-              owner: any
-              usage: '800.00'
-              description: >-
-                Provider amount is the amount that is to be transferred to the
-                provider's provided account must be provided if settlement is being made to the provider
-          status:
-            required: Conditional
-            type: string
-            owner: any
-            usage: NOT_SETTLED
-            description: Status of provider fund settlement
-          reference_no:
-            required: Conditional
-            type: string
-            owner: any
-            usage: '3718683618631'
-            description: Reference number of provider fund settlement if settlement is Settled
-          error:
-            code:
-              required: Conditional
-              type: string
-              owner: any
-              usage: '01'
-              description: Code of the error occurred at the time of settlement if settlement is not Settled
-            message:
-              required: Conditional
-              type: string
-              owner: any
-              usage: Account inactive
-              description: Message of the error occurred at the time of settlement if settlement is not Settled
-        id:
-          required: true
-          type: string
-          owner: any
-          usage: order-id-456
-          description: Id of the order
-        inter_participant:
-          amount:
-            currency:
-              required: true
-              type: string
-              owner: any
-              usage: INR
-              description: >-
-                Currency of the amount that is to be settled from collector to
-                receiver
-            value:
-              required: true
-              type: string
-              owner: any
-              usage: '1000.00'
-              description: >-
-                Inter participant amount is what is to be settled from collector
-                to receiver
-          status:
-            required: true
-            type: string
-            owner: any
-            usage: SETTLED
-            description: Status of interparticipant fund settlement
-          reference_no:
-            required: Conditional
-            type: string
-            owner: any
-            usage: '3718683618631'
-            description: Reference number of Interparticipant fund settlement not required if settlement is not settled 
-          error:
-            code:
-              required: Conditional
-              type: string
-              owner: any
-              usage: '01'
-              description: Code of the error occurred at the time of settlement
-            message:
-              required: Conditional
-              type: string
-              owner: any
-              usage: Account inactive
-              description: Message of the error occurred at the time of settlement
-          currency:
-            required: Conditional
-            type: string
-            owner: any
-            usage: INR
-            description: Currency of the amount that is being settled
-          value:
-            required: Conditional
-            type: string
-            owner: any
-            usage: '1000.00'
-            description: Value of the amount that is being settled
-        collector:
-          amount:
-            currency:
-              required: true
-              type: string
-              owner: any
-              usage: INR
-              description: Currency of the amount that the collector keeps for themselves
-            value:
-              required: true
-              type: string
-              owner: any
-              usage: '50.00'
-              description: Collector amount is what collector keeps for themselves
-    ref_transaction_id:
-      required: true
-      type: string
-      owner: any
-      usage: bd73a366-aebb-4144-9314-808dda82c7e6
-      description: Reference transaction ID of the settlement instruction
-    ref_message_id:
-      required: true
-      type: string
-      owner: any
-      usage: 941ef6d7-d74d-4411-ac06-469c0f9ac
-      description: Reference message ID of the settlement instruction
+# report:
+#   context:
+#     domain:
+#       required: true
+#       type: string
+#       owner: any
+#       usage: ONDC:NTS10
+#       description: Domain in which the settlement occurs
+#     location:
+#       country:
+#         code:
+#           required: true
+#           type: string
+#           owner: any
+#           usage: IND
+#           description: Describes country code as per ISO 3166-1 and ISO 3166-2 format
+#       city:
+#         code:
+#           required: true
+#           type: string
+#           owner: any
+#           usage: '*'
+#           description: 'Describes city '
+#     version:
+#       required: true
+#       type: string
+#       owner: any
+#       usage: 2.0.0
+#       description: Describes the version of transaction protocol being used by the sender.
+#     action:
+#       required: true
+#       type: string
+#       owner: any
+#       usage: report
+#       description: >-
+#         Describes the method being called by the sender and executed at the
+#         receiver.
+#     bap_id:
+#       required: true
+#       type: string
+#       owner: any
+#       usage: collectorapp.com
+#       description: Describes the subscriber id of the BNP
+#     bap_uri:
+#       required: true
+#       type: string
+#       owner: any
+#       usage: https://collectorapp.com/ondc/1.0/
+#       description: Describes the subscriber uri of the BNP
+#     bpp_id:
+#       required: true
+#       type: string
+#       owner: any
+#       usage: sa_nocs.nbbl.com
+#       description: Describes the subscriber id of the SNP
+#     bpp_uri:
+#       required: true
+#       type: string
+#       owner: any
+#       usage: https://sa_nocs.nbbl.com/nocs_test
+#       description: Describes the subscriber uri of the SNP
+#     transaction_id:
+#       required: true
+#       type: string
+#       owner: any
+#       usage: d73a366-aebb-4144-9314-808dda82c7e6
+#       description: Describes  a unique value which persists across all API calls
+#     message_id:
+#       required: true
+#       type: string
+#       owner: any
+#       usage: 841ef6d7-d74d-4411-ac06-a05469c0f9ac
+#       description: >-
+#         Describes a unique value which persists during a request / callback
+#         cycle.
+#     timestamp:
+#       required: true
+#       type: string
+#       owner: any
+#       usage: '2024-05-09T06:36:51.897Z'
+#       description: Describes time of request generation in RFC3339 format
+#     ttl:
+#       required: true
+#       type: string
+#       owner: any
+#       usage: P1D
+#       description: >-
+#         Describes the duration in ISO8601 format after timestamp for which this
+#         message holds valid
+#   message:
+#     collector_app_id:
+#       required: true
+#       type: string
+#       owner: any
+#       usage: collectorapp.com
+#       description: 'Subscriber Id of Collecter '
+#     receiver_app_id:
+#       required: true
+#       type: string
+#       owner: any
+#       usage: receiverapp.com
+#       description: Subscriber Id of Reciever
+#     settlement:
+#       type:
+#         required: true
+#         type: string
+#         owner: any
+#         usage: NP-NP
+#         description: Type of Settlement
+#       id:
+#         required: true
+#         type: string
+#         owner: any
+#         usage: settlement-id-abc
+#         description: Id of Settlement
+#       orders:
+#         self:
+#           amount:
+#             currency:
+#               required: true
+#               type: string
+#               owner: any
+#               usage: INR
+#               description: >-
+#                 Currency of the amount that is to be moved to the API caller's
+#                 operating account
+#             value:
+#               required: true
+#               type: string
+#               owner: any
+#               usage: '200.00'
+#               description: >-
+#                 Self amount is the amount that is to be moved to the API
+#                 caller's operating account
+#           status:
+#             required: true
+#             type: string
+#             owner: any
+#             usage: NOT_SETTLED
+#             description: Status of self fund settlement
+#           reference_no:
+#             required: Conditional
+#             type: string
+#             owner: any
+#             usage: '1238683618634'
+#             description: Reference number of self fund settlement if status is NOT_SETTLED not required if settlement is not settled 
+#           error:
+#             code:
+#               required: Conditional
+#               type: string
+#               owner: any
+#               usage: '01'
+#               description: Code of the error occurred at the time of settlement 
+#             message:
+#               required: Conditional
+#               type: string
+#               owner: any
+#               usage: Account inactive
+#               description: Message of the error occurred at the time of settlement
+#         provider:
+#           id:
+#             required: Conditional
+#             type: string
+#             owner: any
+#             usage: prvdr-id-789
+#             description: The provider ID must be provided if settlement is being made to the provider
+#           name:
+#             required: optional
+#             type: string
+#             owner: any
+#             usage: Kirana Pvt Ltd
+#             description: The Name of the provider must be provided if settlement is being made to the provider
+#           bank_details:
+#             account_no:
+#               required: Conditional
+#               type: string
+#               owner: any
+#               usage: '1234567890'
+#               description: The Account number of the provider must be provided if settlement is being made to the provider
+#             ifsc_code:
+#               required: Conditional
+#               type: string
+#               owner: any
+#               usage: IFSC0001
+#               description: IFSC code of the provider must be provided if settlement is being made to the provider
+#           amount:
+#             currency:
+#               required: Conditional
+#               type: string
+#               owner: any
+#               usage: INR
+#               description: >-
+#                 Currency of the amount that is to be transferred to the
+#                 provider's provided account must be provided if settlement is being made to the provider
+#             value:
+#               required: Conditional
+#               type: string
+#               owner: any
+#               usage: '800.00'
+#               description: >-
+#                 Provider amount is the amount that is to be transferred to the
+#                 provider's provided account must be provided if settlement is being made to the provider
+#           status:
+#             required: Conditional
+#             type: string
+#             owner: any
+#             usage: NOT_SETTLED
+#             description: Status of provider fund settlement must be provided if settlement is being made to the provider
+#           reference_no:
+#             required: Conditional
+#             type: string
+#             owner: any
+#             usage: '3718683618631'
+#             description: Reference number of provider fund settlement if amount is SETTLED
+#           error:
+#             code:
+#               required: Conditional
+#               type: string
+#               owner: any
+#               usage: '01'
+#               description: Code of the error occurred at the time of settlement if settlement is not settled
+#             message:
+#               required: Conditional
+#               type: string
+#               owner: any
+#               usage: Account inactive
+#               description: Message of the error occurred at the time of settlement if settlement is not settled
+#         id:
+#           required: true
+#           type: string
+#           owner: any
+#           usage: ordr-123456
+#           description: Id of the order
+#         inter_participant:
+#           amount:
+#             currency:
+#               required: true
+#               type: string
+#               owner: any
+#               usage: INR
+#               description: >-
+#                 Currency of the amount that is to be settled from collector to
+#                 receiver
+#             value:
+#               required: true
+#               type: string
+#               owner: any
+#               usage: '1000.00'
+#               description: >-
+#                 Inter participant amount is what is to be settled from collector
+#                 to receiver
+#           status:
+#             required: true
+#             type: string
+#             owner: any
+#             usage: SETTLED
+#             description: Status of interparticipant fund settlement
+#           reference_no:
+#             required: Conditional
+#             type: string
+#             owner: any
+#             usage: '3718683618631'
+#             description: Reference number of Interparticipant fund settlement not required if settlement is not settled 
+#           error:
+#             code:
+#               required: Conditional
+#               type: string
+#               owner: any
+#               usage: '01'
+#               description: Code of the error occurred at the time of settlement
+#             message:
+#               required: Conditional
+#               type: string
+#               owner: any
+#               usage: Account inactive
+#               description: Message of the error occurred at the time of settlement
+#         collector:
+#           amount:
+#             currency:
+#               required: true
+#               type: string
+#               owner: any
+#               usage: INR
+#               description: Currency of the amount that the collector keeps for themselves
+#             value:
+#               required: true
+#               type: string
+#               owner: any
+#               usage: '50.00'
+#               description: Collector amount is what collector keeps for themselves
+#     ref_transaction_id:
+#       required: true
+#       type: string
+#       owner: any
+#       usage: bd73a366-aebb-4144-9314-808dda82c7e6
+#       description: Reference transaction ID of the settlement instruction
+#     ref_message_id:
+#       required: true
+#       type: string
+#       owner: any
+#       usage: 941ef6d7-d74d-4411-ac06-469c0f9ac
+#       description: Reference message ID of the settlement instruction
+# on_report:
+#   context:
+#     domain:
+#       required: true
+#       type: string
+#       owner: any
+#       usage: ONDC:NTS10
+#       description: Domain in which the settlement occurs
+#     location:
+#       country:
+#         code:
+#           required: true
+#           type: string
+#           owner: any
+#           usage: IND
+#           description: Describes country code as per ISO 3166-1 and ISO 3166-2 format
+#       city:
+#         code:
+#           required: true
+#           type: string
+#           owner: any
+#           usage: '*'
+#           description: 'Describes city '
+#     version:
+#       required: true
+#       type: string
+#       owner: any
+#       usage: 2.0.0
+#       description: Describes the version of transaction protocol being used by the sender.
+#     action:
+#       required: true
+#       type: string
+#       owner: any
+#       usage: on_report
+#       description: >-
+#         Describes the method being called by the sender and executed at the
+#         receiver.
+#     bap_id:
+#       required: true
+#       type: string
+#       owner: any
+#       usage: collectorapp.com
+#       description: Describes the subscriber id of the BNP
+#     bap_uri:
+#       required: true
+#       type: string
+#       owner: any
+#       usage: https://collectorapp.com/ondc/1.0/
+#       description: Describes the subscriber uri of the BNP
+#     bpp_id:
+#       required: true
+#       type: string
+#       owner: any
+#       usage: sa_nocs.nbbl.com
+#       description: Describes the subscriber id of the SNP
+#     bpp_uri:
+#       required: true
+#       type: string
+#       owner: any
+#       usage: https://sa_nocs.nbbl.com/nocs_test
+#       description: Describes the subscriber uri of the SNP
+#     transaction_id:
+#       required: true
+#       type: string
+#       owner: any
+#       usage: cd73a366-aebb-4144-9314-808dda82c7e6
+#       description: Describes  a unique value which persists across all API calls
+#     message_id:
+#       required: true
+#       type: string
+#       owner: any
+#       usage: 841ef6d7-d74d-4411-ac06-a05469c0f9ac
+#       description: >-
+#         Describes a unique value which persists during a request / callback
+#         cycle.
+#     timestamp:
+#       required: true
+#       type: string
+#       owner: any
+#       usage: '2024-05-07T06:36:51.900Z'
+#       description: Describes time of request generation in RFC3339 format
+#     ttl:
+#       required: true
+#       type: string
+#       owner: any
+#       usage: P1D
+#       description: >-
+#         Describes the duration in ISO8601 format after timestamp for which this
+#         message holds valid
+#   message:
+#     collector_app_id:
+#       required: true
+#       type: string
+#       owner: any
+#       usage: collectorapp.com
+#       description: ID of the collector
+#     receiver_app_id:
+#       required: true
+#       type: string
+#       owner: any
+#       usage: receiverapp.com
+#       description: ID of the reciever
+#     settlement:
+#       type:
+#         required: true
+#         type: string
+#         owner: any
+#         usage: NP-NP
+#         description: Type of Interparticipant Settlement
+#       id:
+#         required: true
+#         type: string
+#         owner: any
+#         usage: settlement-id-123
+#         description: Id of Interpartcipant settlement
+#       orders:
+#         self:
+#           amount:
+#             currency:
+#               required: true
+#               type: string
+#               owner: any
+#               usage: INR
+#               description: >-
+#                 Currency of the amount that is to be moved to the API caller's
+#                 operating account
+#             value:
+#               required: true
+#               type: string
+#               owner: any
+#               usage: '200.00'
+#               description: >-
+#                 Self amount is the amount that is to be moved to the API
+#                 caller's operating account
+#           status:
+#             required: true
+#             type: string
+#             owner: any
+#             usage: NOT_SETTLED
+#             description: Status of self fund settlement
+#           reference_no:
+#             required: Conditional
+#             type: string
+#             owner: any
+#             usage: '3718683618631'
+#             description: Reference number of self fund settlement not required if settlement is not settled 
+#           error:
+#             code:
+#               required: Conditional
+#               type: string
+#               owner: any
+#               usage: '01'
+#               description: Code of the error occurred at the time of settlement
+#             message:
+#               required: Conditional
+#               type: string
+#               owner: any
+#               usage: Account inactive
+#               description: Message of the error occurred at the time of settlement
+#         provider:
+#           id:
+#             required: Conditional
+#             type: string
+#             owner: any
+#             usage: provider-id-789
+#             description: The provider ID must be provided if settlement is being made to the provider
+#           name:
+#             required: optional
+#             type: string
+#             owner: any
+#             usage: Kirana Pvt Ltd
+#             description: The Name of the provider must be provided if settlement is being made to the provider
+#           bank_details:
+#             account_no:
+#               required: Conditional
+#               type: string
+#               owner: any
+#               usage: '1234567890'
+#               description: The Account number of the provider must be provided if settlement is being made to the provider
+#             ifsc_code:
+#               required: Conditional
+#               type: string
+#               owner: any
+#               usage: IFSC0001
+#               description: IFSC code of the provider must be provided if settlement is being made to the provider
+#           amount:
+#             currency:
+#               required: Conditional
+#               type: string
+#               owner: any
+#               usage: INR
+#               description: >-
+#                 Currency of the amount that is to be transferred to the
+#                 provider's provided account must be provided if settlement is being made to the provider
+#             value:
+#               required: Conditional
+#               type: string
+#               owner: any
+#               usage: '800.00'
+#               description: >-
+#                 Provider amount is the amount that is to be transferred to the
+#                 provider's provided account must be provided if settlement is being made to the provider
+#           status:
+#             required: Conditional
+#             type: string
+#             owner: any
+#             usage: NOT_SETTLED
+#             description: Status of provider fund settlement
+#           reference_no:
+#             required: Conditional
+#             type: string
+#             owner: any
+#             usage: '3718683618631'
+#             description: Reference number of provider fund settlement if settlement is Settled
+#           error:
+#             code:
+#               required: Conditional
+#               type: string
+#               owner: any
+#               usage: '01'
+#               description: Code of the error occurred at the time of settlement if settlement is not Settled
+#             message:
+#               required: Conditional
+#               type: string
+#               owner: any
+#               usage: Account inactive
+#               description: Message of the error occurred at the time of settlement if settlement is not Settled
+#         id:
+#           required: true
+#           type: string
+#           owner: any
+#           usage: order-id-456
+#           description: Id of the order
+#         inter_participant:
+#           amount:
+#             currency:
+#               required: true
+#               type: string
+#               owner: any
+#               usage: INR
+#               description: >-
+#                 Currency of the amount that is to be settled from collector to
+#                 receiver
+#             value:
+#               required: true
+#               type: string
+#               owner: any
+#               usage: '1000.00'
+#               description: >-
+#                 Inter participant amount is what is to be settled from collector
+#                 to receiver
+#           status:
+#             required: true
+#             type: string
+#             owner: any
+#             usage: SETTLED
+#             description: Status of interparticipant fund settlement
+#           reference_no:
+#             required: Conditional
+#             type: string
+#             owner: any
+#             usage: '3718683618631'
+#             description: Reference number of Interparticipant fund settlement not required if settlement is not settled 
+#           error:
+#             code:
+#               required: Conditional
+#               type: string
+#               owner: any
+#               usage: '01'
+#               description: Code of the error occurred at the time of settlement
+#             message:
+#               required: Conditional
+#               type: string
+#               owner: any
+#               usage: Account inactive
+#               description: Message of the error occurred at the time of settlement
+#           currency:
+#             required: Conditional
+#             type: string
+#             owner: any
+#             usage: INR
+#             description: Currency of the amount that is being settled
+#           value:
+#             required: Conditional
+#             type: string
+#             owner: any
+#             usage: '1000.00'
+#             description: Value of the amount that is being settled
+#         collector:
+#           amount:
+#             currency:
+#               required: true
+#               type: string
+#               owner: any
+#               usage: INR
+#               description: Currency of the amount that the collector keeps for themselves
+#             value:
+#               required: true
+#               type: string
+#               owner: any
+#               usage: '50.00'
+#               description: Collector amount is what collector keeps for themselves
+#     ref_transaction_id:
+#       required: true
+#       type: string
+#       owner: any
+#       usage: bd73a366-aebb-4144-9314-808dda82c7e6
+#       description: Reference transaction ID of the settlement instruction
+#     ref_message_id:
+#       required: true
+#       type: string
+#       owner: any
+#       usage: 941ef6d7-d74d-4411-ac06-469c0f9ac
+#       description: Reference message ID of the settlement instruction
+
 recon:
   context:
     action:
