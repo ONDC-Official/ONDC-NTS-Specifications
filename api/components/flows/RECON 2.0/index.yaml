@@ -1,4 +1,4 @@
-summary: RECON
+summary: RECON 2.0
 details:
   - description: >-
       The reconciliation process among the NPs are facilitated through the recon and on_recon APIs. In case settlement instructions are shared to the settlement agency and it fails for certain orders due an order mismatch or an order amount mismatch, NPs shall leverage the recon and on_recon API to communicate the mismatches. <br>
@@ -29,7 +29,7 @@ steps:
     reference: if any
     example:
       value:
-        $ref: "../../examples/RSF/recon/recon.yaml"
+        $ref: "../../examples/RSF/recon/recon_2.0.yaml"
   - summary: ON_RECON
     api: on_recon
     details:
@@ -46,7 +46,7 @@ steps:
     reference: if any
     example:
       value:
-        $ref: "../../examples/RSF/on_recon/on_recon.yaml"
+        $ref: "../../examples/RSF/on_recon/on_recon_2.0.yaml"
   - summary: RECON
     api: recon
     details:
@@ -62,7 +62,7 @@ steps:
     reference: if any
     example:
       value:
-        $ref: "../../examples/RSF/recon/recon_accord_true.yaml"
+        $ref: "../../examples/RSF/recon/recon_2.0_accord_true.yaml"
   - summary: ON_RECON
     api: on_recon
     details:
@@ -79,4 +79,4 @@ steps:
     reference: if any
     example:
       value:
-        $ref: "../../examples/RSF/on_recon/on_recon_accord_true.yaml"
+        $ref: "../../examples/RSF/on_recon/on_recon_2.0_accord_true.yaml"
