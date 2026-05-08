@@ -1,8 +1,11 @@
 context:
   domain: "ONDC:NTS10"
-  country: "IND"
-  city: '*'
-  core_version: "2.0.0"
+  location:
+    country:
+      code: "IND"
+    city:
+      code: "*"
+  version: "2.0.0"
   action: "on_recon"
   bap_id: "collector-app.com"
   bap_uri: "https://collector-app.com/ondc/1.0/"
@@ -17,64 +20,19 @@ message:
     - id: "order-1234"
       status: "COMPLETED"
       quote:
+        breakup:
+          - price:
+             currency: INR
+             value: "30"
+            title: BASE_FARE
+          - price:
+              currency: INR
+              value: "116"
+            title: DISTANCE_FARE
         price:
           currency: INR
-          value: "300.00"
-        breakup:
-          - "@ondc/org/item_id": I1
-            "@ondc/org/item_quantity":
-              count: 1
-            title: Atta
-            "@ondc/org/title_type": item
-            price:
-              currency: INR
-              value: "206.00"
-            item:
-              quantity:
-                available:
-                  count: "99"
-                maximum:
-                  count: "99"
-              price:
-                currency: INR
-                value: "206.00"
-          - "@ondc/org/item_id": F1
-            title: Delivery charges
-            "@ondc/org/title_type": delivery
-            price:
-              currency: INR
-              value: "50.00"
-          - "@ondc/org/item_id": F1
-            title: Tax
-            "@ondc/org/title_type": tax
-            price:
-              currency: INR
-              value: "9.00"
-            item:
-              tags:
-                - code: quote
-                  list:
-                    - code: type
-                      value: fulfillment
-          - "@ondc/org/item_id": F1
-            title: Packing charges
-            "@ondc/org/title_type": packing
-            price:
-              currency: INR
-              value: "25.00"
-          - "@ondc/org/item_id": I1
-            title: Tax
-            "@ondc/org/title_type": tax
-            price:
-              currency: INR
-              value: "0.00"
-          - "@ondc/org/item_id": F1
-            title: Convenience Fee
-            "@ondc/org/title_type": misc
-            price:
-              currency: INR
-              value: "10.00"
-        ttl: P1D
+          value: "146"
+        ttl: PT30S
       recon_accord: true
       settlements:
         - id: "settlement-id-456"

@@ -1,107 +1,70 @@
 context:
   domain: "ONDC:NTS10"
-  country: "IND"
-  city: '*'
-  core_version: "2.0.0"
+  location:
+    country:
+      code: "IND"
+    city:
+      code: "*"
+  version: "2.0.0"
   action: "on_recon"
   bap_id: "collector-app.com"
   bap_uri: "https://collector-app.com/ondc/1.0/"
   bpp_id: "receiver-app.com"
   bpp_uri: "https://receiver-app.com/ondc/"
   transaction_id: "bd73a366-aebb-4144-9314-808dda82c7e6"
-  message_id: "990ef6d7-d74d-4411-ac06-a05469c0f9ac"
-  timestamp: "2024-05-07T06:36:53.897Z"
+  message_id: "941ef6d7-d74d-4411-ac06-a05469c0f9ac"
+  timestamp: "2024-05-07T06:36:51.897Z"
   ttl: "P1D"
 message:
   orders:
     - id: "order-1234"
       status: "COMPLETED"
       quote:
+        breakup:
+          - price:
+             currency: INR
+             value: "30"
+            title: BASE_FARE
+          - price:
+              currency: INR
+              value: "116"
+            title: DISTANCE_FARE
         price:
           currency: INR
-          value: "300.00"
-        breakup:
-          - "@ondc/org/item_id": I1
-            "@ondc/org/item_quantity":
-              count: 1
-            title: Atta
-            "@ondc/org/title_type": item
-            price:
-              currency: INR
-              value: "206.00"
-            item:
-              quantity:
-                available:
-                  count: "99"
-                maximum:
-                  count: "99"
-              price:
-                currency: INR
-                value: "206.00"
-          - "@ondc/org/item_id": F1
-            title: Delivery charges
-            "@ondc/org/title_type": delivery
-            price:
-              currency: INR
-              value: "50.00"
-          - "@ondc/org/item_id": F1
-            title: Tax
-            "@ondc/org/title_type": tax
-            price:
-              currency: INR
-              value: "9.00"
-            item:
-              tags:
-                - code: quote
-                  list:
-                    - code: type
-                      value: fulfillment
-          - "@ondc/org/item_id": F1
-            title: Packing charges
-            "@ondc/org/title_type": packing
-            price:
-              currency: INR
-              value: "25.00"
-          - "@ondc/org/item_id": I1
-            title: Tax
-            "@ondc/org/title_type": tax
-            price:
-              currency: INR
-              value: "0.00"
-          - "@ondc/org/item_id": F1
-            title: Convenience Fee
-            "@ondc/org/title_type": misc
-            price:
-              currency: INR
-              value: "10.00"
-        ttl: P1D
-      recon_accord: true
+          value: "146"
+        ttl: PT30S 
+      recon_accord: false
       settlements:
         - id: "settlement-id-456"
           counterparty_id: "receiver-app.com"
           payment_id: "pymnt-1"
           status: "PENDING"
-          due_date: "2024-05-08"
           type: ""
           amount:
             currency: "INR"
             value: "120.00"
+            diff_value: "20.00"
           commission:
             currency: "INR"
             value: "10.00"
+            diff_value: "0.00"
           withholding_amount:
             currency: "INR"
             value: "10.00"
+            diff_value: "0.00"
           tcs:
             currency: "INR"
             value: "10.00"
+            diff_value: "0.00"
           tds:
             currency: "INR"
             value: "10.00"
+            diff_value: "0.00"
           delay_amount:
             currency: "INR"
             value: "20.00"
-          updated_at: "2024-05-07T07:36:53.897Z"
+            diff_value: "20.00"
+          updated_at: "2024-05-07T07:36:51.897Z"
         - id: "settlement-id-789"
           counterparty_id: "receiver-app.com"
           payment_id: "pymnt-2"
@@ -127,9 +90,8 @@ message:
         - id: "settlement-id-112"
           counterparty_id: "receiver-app.com"
           payment_id: "pymnt-3"
-          type: ""
           status: "TO_BE_INITIATED"
-          due_date: "2024-05-08"
+          type: ""
           amount:
             currency: "INR"
             value: "90.00"
@@ -137,13 +99,17 @@ message:
           commission:
             currency: "INR"
             value: "10.00"
+            diff_value: "0.00"
           withholding_amount:
             currency: "INR"
             value: "10.00"
+            diff_value: "0.00"
           tds:
             currency: "INR"
             value: "10.00"
+            diff_value: "0.00"
           tcs:
             currency: "INR"
             value: "10.00"
-          updated_at: "2024-05-07T06:36:53.897Z"
+            diff_value: "0.00"
+          updated_at: "2024-05-07T06:36:51.897Z"

@@ -3,122 +3,122 @@ code:
     Description: Invalid Signature
     From: Any
     code: 70000
-  - Event: NACK
-    Description: Missing mandatory 'Authorization' header param
-    From: Any
-    code: 70001
-  - Event: NACK
-    Description: Invalid schema
-    From: Any
-    code: 70002
-  - Event: OnSettle
-    Description: Invalid bap id
-    From: Any
-    code: 70003
-  - Event: OnSettle
-    Description: Inactive bap id
-    From: Any
-    code: 70004
-  - Event: OnSettle
-    Description: Invalid bpp id
-    From: Any
-    code: 70005
-  - Event: OnSettle
-    Description: Duplicate transaction id
-    From: Any
-    code: 70006
-  - Event: OnSettle
-    Description: Duplicate message id
-    From: Any
-    code: 70007
-  - Event: OnSettle
-    Description: Duplicate settlement id
-    From: Any
-    code: 70008
-  - Event: OnSettle
-    Description: Bap id doesn't match collector app id or receiver app id
-    From: Any
-    code: 70009
-  - Event: OnSettle
-    Description: Collector account not available
-    From: Any
-    code: 70010
-  - Event: OnSettle
-    Description: Invalid collector app id
-    From: Any
-    code: 70011
-  - Event: OnSettle
-    Description: Inactive collector app id
-    From: Any
-    code: 70012
-  - Event: OnSettle
-    Description: Invalid receiver app id
-    From: Any
-    code: 70013
-  - Event: OnSettle
-    Description: Inactive receiver app id
-    From: Any
-    code: 70014
-  - Event: OnSettle
-    Description: Receiver app id same as Collector app id
-    From: Any
-    code: 70015
-  - Event: OnSettle
-    Description: Duplicate order id
-    From: Any
-    code: 70016
-  - Event: OnSettle
-    Description: Collector account inoperable
-    From: Any
-    code: 70017
-  - Event: OnSettle
-    Description: Receiver account inoperable
-    From: Any
-    code: 70018
-  - Event: OnSettle
-    Description: No response from bank for collector account
-    From: Any
-    code: 70019
-  - Event: OnSettle
-    Description: No response from bank for receiver account
-    From: Any
-    code: 70020
-  - Event: OnSettle
-    Description: No file shared by counterparty
-    From: Any
-    code: 70021
-  - Event: OnSettle
-    Description: Order id not shared by counterparty
-    From: Any
-    code: 70022
-  - Event: OnSettle
-    Description: Collector value mismatch
-    From: Any
-    code: 70023
-  - Event: OnSettle
-    Description: Interparticipant value mismatch
-    From: Any
-    code: 70024
-  - Event: OnSettle
-    Description: Insufficient balance in collector account
-    From: Any
-    code: 70025
-  - Event: OnSettle
-    Description: Collector NDC breach
-    From: Any
-    code: 70026
-  - Event: OnSettle
-    Description: Collector bank NDC breach
-    From: Any
-    code: 70027
-  - Event: on_report
-    Description: Invalid transaction_id
-    From: Any
-    code: 70028
-  - Event: on_report
-    Description: Invalid message_id
-    From: Any
-    code: 70029
+  # - Event: NACK
+  #   Description: Missing mandatory 'Authorization' header param
+  #   From: Any
+  #   code: 70001
+  # - Event: NACK
+  #   Description: Invalid schema
+  #   From: Any
+  #   code: 70002
+  # - Event: OnSettle
+  #   Description: Invalid bap id
+  #   From: Any
+  #   code: 70003
+  # - Event: OnSettle
+  #   Description: Inactive bap id
+  #   From: Any
+  #   code: 70004
+  # - Event: OnSettle
+  #   Description: Invalid bpp id
+  #   From: Any
+  #   code: 70005
+  # - Event: OnSettle
+  #   Description: Duplicate transaction id
+  #   From: Any
+  #   code: 70006
+  # - Event: OnSettle
+  #   Description: Duplicate message id
+  #   From: Any
+  #   code: 70007
+  # - Event: OnSettle
+  #   Description: Duplicate settlement id
+  #   From: Any
+  #   code: 70008
+  # - Event: OnSettle
+  #   Description: Bap id doesn't match collector app id or receiver app id
+  #   From: Any
+  #   code: 70009
+  # - Event: OnSettle
+  #   Description: Collector account not available
+  #   From: Any
+  #   code: 70010
+  # - Event: OnSettle
+  #   Description: Invalid collector app id
+  #   From: Any
+  #   code: 70011
+  # - Event: OnSettle
+  #   Description: Inactive collector app id
+  #   From: Any
+  #   code: 70012
+  # - Event: OnSettle
+  #   Description: Invalid receiver app id
+  #   From: Any
+  #   code: 70013
+  # - Event: OnSettle
+  #   Description: Inactive receiver app id
+  #   From: Any
+  #   code: 70014
+  # - Event: OnSettle
+  #   Description: Receiver app id same as Collector app id
+  #   From: Any
+  #   code: 70015
+  # - Event: OnSettle
+  #   Description: Duplicate order id
+  #   From: Any
+  #   code: 70016
+  # - Event: OnSettle
+  #   Description: Collector account inoperable
+  #   From: Any
+  #   code: 70017
+  # - Event: OnSettle
+  #   Description: Receiver account inoperable
+  #   From: Any
+  #   code: 70018
+  # - Event: OnSettle
+  #   Description: No response from bank for collector account
+  #   From: Any
+  #   code: 70019
+  # - Event: OnSettle
+  #   Description: No response from bank for receiver account
+  #   From: Any
+  #   code: 70020
+  # - Event: OnSettle
+  #   Description: No file shared by counterparty
+  #   From: Any
+  #   code: 70021
+  # - Event: OnSettle
+  #   Description: Order id not shared by counterparty
+  #   From: Any
+  #   code: 70022
+  # - Event: OnSettle
+  #   Description: Collector value mismatch
+  #   From: Any
+  #   code: 70023
+  # - Event: OnSettle
+  #   Description: Interparticipant value mismatch
+  #   From: Any
+  #   code: 70024
+  # - Event: OnSettle
+  #   Description: Insufficient balance in collector account
+  #   From: Any
+  #   code: 70025
+  # - Event: OnSettle
+  #   Description: Collector NDC breach
+  #   From: Any
+  #   code: 70026
+  # - Event: OnSettle
+  #   Description: Collector bank NDC breach
+  #   From: Any
+  #   code: 70027
+  # - Event: on_report
+  #   Description: Invalid transaction_id
+  #   From: Any
+  #   code: 70028
+  # - Event: on_report
+  #   Description: Invalid message_id
+  #   From: Any
+  #   code: 70029
   - Event: on_recon
     Description: Invalid Order id
     From: Any

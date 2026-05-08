@@ -52,6 +52,11 @@ recon:
   message: &a7
     orders:
       settlements:
+        type: 
+          - code: SETTLEMENT
+            description: Settlement
+          - code: CORRECTION
+            description: Correction
         status:
           - code: SETTLED
             description: Successfully settled
