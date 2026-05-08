@@ -1,11 +1,8 @@
 context:
   domain: "ONDC:NTS10"
-  location:
-    country:
-      code: "IND"
-    city:
-      code: "*"
-  version: "2.0.0"
+  country: "IND"
+  city: '*'
+  core_version: "2.0.0"
   action: "on_recon"
   bap_id: "collector-app.com"
   bap_uri: "https://collector-app.com/ondc/1.0/"

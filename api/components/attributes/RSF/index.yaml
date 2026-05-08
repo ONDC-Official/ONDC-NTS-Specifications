@@ -94,11 +94,17 @@ recon:
         Describes the duration in ISO8601 format after timestamp for which this
         message holds valid
     version:
-      required: true
+      required: false
       type: string
       owner: any
       usage: 2.0.0
       description: Describes the version of transaction protocol being used by the sender.
+    core_version:
+      required: false
+      type: string
+      owner: any
+      usage: 2.0.0
+      description: Describes the version of Beckn core API specification being used.
   message:
     orders:
       id:

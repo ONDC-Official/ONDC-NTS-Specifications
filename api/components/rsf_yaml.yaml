@@ -239,6 +239,9 @@ paths:
                                   description: "Describes the counterparty of the settlement. It should be the subscriber_id of the receiver of the payment."
                                 type: #to be defined
                                   type: string
+                                  enum:
+                                    - SETTLEMENT
+                                    - CORRECTION
                                   description: "Describes the type of settlement."
                                 payment_id:
                                   type: string
@@ -246,7 +249,7 @@ paths:
                                   type: string
                                 amount:
                                   $ref: "#/components/schemas/Amount"
-                                commision:
+                                commission:
                                   $ref: "#/components/schemas/Amount"
                                 withholding_amount:
                                   $ref: "#/components/schemas/Amount"
@@ -327,6 +330,9 @@ paths:
                                   description: "Describes the counterparty of the settlement. It should be the subscriber_id of the receiver of the payment."
                                 type: #to be defined
                                   type: string
+                                  enum:
+                                    - SETTLEMENT
+                                    - CORRECTION
                                   description: "Describes the type of settlement."
                                 payment_id:
                                   type: string
@@ -480,6 +486,9 @@ components:
           description: >-
             Defines the Beckn API call. Any actions other than the enumerated
             actions are not supported by Beckn Protocol
+        core_version:
+          type: string
+          description: Version of Beckn core API specification being used
         version:
           type: string
           description: Version of Beckn core API specification being used
@@ -527,7 +536,7 @@ components:
         - action
         # - country
         # - location
-        - version
+        # - version
         - transaction_id
         - message_id
         - bap_id
