@@ -1,4 +1,4 @@
-summary: Illustrative Flow 3
+summary: Flow 3- Complaint in a cascaded transaction taking place on the network(on network logistics)
 details:
  - description: >-
       This flow provides an illustrative example workflow for the IGM framework in the retail & logistics domain involving a retail seller app that is also an on-network logistics buyer app. Here an end consumer (complainant) raises a complaint with regards to their fulfilment experience for their retail order. The retail seller app analyses the complaint and feels the logistics seller app needs to be consulted for this complaint. The retail seller app creates a complaint to the logistics seller app with relevant information. </br>

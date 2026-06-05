@@ -1128,7 +1128,9 @@ x-tags:
   on_issue:
     message: *ref_1
 x-flows:
-  - summary: Illustrative Flow 1
+  - summary: >-
+      Flow 1- Customer complaint Resolution with Information Request and
+      Resolution Selection
     details:
       - description: >-
           This flow provides an illustrative example workflow of the IGM
@@ -3590,7 +3592,9 @@ x-flows:
                           - descriptor:
                               code: ITEM
                             value: I1
-  - summary: Illustrative Flow 2
+  - summary: >-
+      Flow 2- Handle complaints between network participants(Buyer Np to Seller
+      NP/Seller NP to Buyer NP-payment/technical/policy...)
     details:
       - description: >-
           This flow provides an illustrative example workflow for the IGM
@@ -5218,7 +5222,9 @@ x-flows:
                       short_desc: Error in interface, seller would now be visible.
                     updated_at: '2024-08-14T09:57:58.841Z'
                     proposed_by: NP2
-  - summary: Illustrative Flow 3
+  - summary: >-
+      Flow 3- Complaint in a cascaded transaction taking place on the network(on
+      network logistics)
     details:
       - description: >-
           This flow provides an illustrative example workflow for the IGM
@@ -7981,7 +7987,7 @@ x-flows:
                           - descriptor:
                               code: REFUND_AMOUNT
                             value: '200'
-  - summary: Illustrative Flow 4
+  - summary: Flow 4- Customer complaint Resolution for Multiple Items
     details:
       - description: >-
           This flow provides an illustrative example workflow of the IGM
@@ -8953,7 +8959,7 @@ x-flows:
                             value: '500'
                 resolver_ids:
                   - NP2
-  - summary: Illustrative Flow 5 (TRV)
+  - summary: Flow 5- Payload schema for other domains
     details:
       - description: >-
           The flow below showcases a complaint flow in the TRV (TRV10) domain

@@ -1,4 +1,4 @@
-summary: Illustrative Flow 4
+summary: Flow 4- Customer complaint Resolution for Multiple Items
 details:
  - description: >-
       This flow provides an illustrative example workflow of the IGM framework where an end consumer (complainant source) is raising a complaint for multiple items that were going to be delivered together and haven’t arrived even after promised delivery timelines. The seller app processes the same and responds with respective resolutions for respective items, where they provide a refund for one item and for the other item they provide options for waiting for the delivery to complete or refund. The buyer accepts the resolution for the first item and accepts to wait for the delivery of the second item. The seller resolves the complaint based on this and the buyer closes the complaint.</br>

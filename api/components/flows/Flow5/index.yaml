@@ -1,4 +1,4 @@
-summary: Illustrative Flow 5 (TRV)
+summary: Flow 5- Payload schema for other domains
 details:
  - description: >-
       The flow below showcases a complaint flow in the TRV (TRV10) domain illustrating need more info and resolution rejection features. This flow provides an illustrative example workflow of the IGM framework where an end consumer (complainant source) is raising a complaint where their ride vehicle has broken down mid trip. The seller/ seller app (respondent) analyses the details shared and asks for additional information in the form of more images. The buyer provides the images. Once received, the seller provides a resolution proposal to the buyer and the buyer rejects the same. The seller processes the request and provides a new resolution. The new resolution proposed is accepted and the complaint is resolved and then closed.</br>
