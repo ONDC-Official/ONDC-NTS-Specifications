@@ -5,7 +5,7 @@ context:
       code: IND
     city:
       code: '*'
-  version: 2.0.0
+  version: 2.1.0
   action: on_settle
   bap_id: collectorapp.com
   bap_uri: https://collectorapp.com/ondc/1.0/
@@ -22,30 +22,30 @@ message:
     type: NP-NP
     id: settlement-id-abc
     orders:
-      - id: ordr-123456
-        inter_participant:
-          settled_amount:
-            currency: INR
-            value: '1000.00'
-          amount:
-            currency: INR
-            value: '900.00'
-          status: SETTLED
-          reference_no: '3245683618631'
-        collector:
-          amount:
-            currency: INR
-            value: '50.00'
-        provider:
-          id: prvdr-id-789
-          name: provider-name
-          amount:
-            currency: INR
-            value: "800.00"
-          status: SETTLED
-        self:
-          amount:
-            currency: INR
-            value: '50.00'
-          status: SETTLED
-          reference_no: '1238683618634'
+    - id: ordr-123456
+      inter_participant:
+        settled_amount:
+          currency: INR
+          value: '1000.00'
+        amount:
+          currency: INR
+          value: '900.00'
+        status: SETTLED
+        reference_no: '3245683618631'
+      collector:
+        amount:
+          currency: INR
+          value: '50.00'
+      provider:
+        id: prvdr-id-789
+        name: provider-name
+        amount:
+          currency: INR
+          value: "800.00"
+        status: SETTLED
+      self:
+        amount:
+          currency: INR
+          value: '50.00'
+        status: SETTLED
+        reference_no: '1238683618634'
