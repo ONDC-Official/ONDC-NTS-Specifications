@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Reconciliation and Settlement Framework (RSF) for ONDC
   description: ONDC  Reconciliation and Settlement Framework API Specification
-  version: 2.0.0
+  version: 2.1.0
 security:
   - SubscriberAuth: []
 paths:
@@ -633,7 +633,7 @@ x-flows:
                   code: IND
                 city:
                   code: '*'
-              version: 2.0.0
+              version: 2.1.0
               action: recon
               bap_id: collector-app.com
               bap_uri: https://collector-app.com/ondc/1.0/
@@ -795,7 +795,7 @@ x-flows:
                   code: IND
                 city:
                   code: '*'
-              version: 2.0.0
+              version: 2.1.0
               action: on_recon
               bap_id: collector-app.com
               bap_uri: https://collector-app.com/ondc/1.0/
@@ -972,7 +972,7 @@ x-flows:
                   code: IND
                 city:
                   code: '*'
-              version: 2.0.0
+              version: 2.1.0
               action: recon
               bap_id: collector-app.com
               bap_uri: https://collector-app.com/ondc/1.0/
@@ -1137,7 +1137,7 @@ x-flows:
                   code: IND
                 city:
                   code: '*'
-              version: 2.0.0
+              version: 2.1.0
               action: on_recon
               bap_id: collector-app.com
               bap_uri: https://collector-app.com/ondc/1.0/
@@ -1348,7 +1348,7 @@ x-flows:
                   code: IND
                 city:
                   code: '*'
-              version: 2.0.0
+              version: 2.1.0
               action: on_recon
               bap_id: collector-app.com
               bap_uri: https://collector-app.com/ondc/1.0/
@@ -1362,12 +1362,8 @@ x-flows:
               code: '70030'
               message: Invalid Order Id
 x-examples:
-  PPF:
-    summary: Payment Protection Framework (PPF)
-    description: >
-      Payment Protection Framework description available  <a
-      href="https://ondc-ppf.readme.io/reference/ondc-payment-protection-framework"
-      target="_blank" rel="noopener noreferrer">here</a>
+  RSF 2.1.0:
+    summary: Reconciliation Settlement Framework (RSF 2.1.0)
     example_set:
       recon:
         examples:
@@ -1478,7 +1474,7 @@ x-attributes:
             required: true
             type: string
             owner: any
-            usage: 2.0.0
+            usage: 2.1.0
             description: >-
               Describes the version of transaction protocol being used by the
               sender.
@@ -1688,7 +1684,7 @@ x-attributes:
             required: true
             type: string
             owner: any
-            usage: 2.0.0
+            usage: 2.1.0
             description: >-
               Describes the version of transaction protocol being used by the
               sender.

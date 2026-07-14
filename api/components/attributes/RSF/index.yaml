@@ -25,7 +25,7 @@
 #       required: true
 #       type: string
 #       owner: any
-#       usage: 2.0.0
+#       usage: 2.1.0
 #       description: Describes the version of transaction protocol being used by the sender.
 #     action:
 #       required: true
@@ -190,7 +190,7 @@
 #       required: true
 #       type: string
 #       owner: any
-#       usage: 2.0.0
+#       usage: 2.1.0
 #       description: Describes the version of transaction protocol being used by the sender.
 #     action:
 #       required: true
@@ -405,7 +405,7 @@
 #       required: true
 #       type: string
 #       owner: any
-#       usage: 2.0.0
+#       usage: 2.1.0
 #       description: Describes the version of transaction protocol being used by the sender.
 #     action:
 #       required: true
@@ -502,7 +502,7 @@
 #       required: true
 #       type: string
 #       owner: any
-#       usage: 2.0.0
+#       usage: 2.1.0
 #       description: Describes the version of transaction protocol being used by the sender.
 #     action:
 #       required: true
@@ -793,7 +793,7 @@
 #       required: true
 #       type: string
 #       owner: any
-#       usage: 2.0.0
+#       usage: 2.1.0
 #       description: Describes the version of transaction protocol being used by the sender.
 #     action:
 #       required: true
@@ -1095,7 +1095,7 @@
 #       required: true
 #       type: string
 #       owner: any
-#       usage: 2.0.0
+#       usage: 2.1.0
 #       description: Describes the version of transaction protocol being used by the sender.
 #     action:
 #       required: true
@@ -1391,8 +1391,7 @@ recon:
       owner: any
       usage: recon
       description: >-
-        Describes the method being called by the sender and executed at the
-        receiver.
+        Describes the method being called by the sender and executed at the receiver.
     bap_id:
       required: true
       type: string
@@ -1444,8 +1443,7 @@ recon:
       owner: any
       usage: 841ef6d7-d74d-4411-ac06-a05469c0f9ac
       description: >-
-        Describes a unique value which persists during a request / callback
-        cycle.
+        Describes a unique value which persists during a request / callback cycle.
     timestamp:
       required: true
       type: string
@@ -1464,13 +1462,12 @@ recon:
       owner: any
       usage: P1D
       description: >-
-        Describes the duration in ISO8601 format after timestamp for which this
-        message holds valid
+        Describes the duration in ISO8601 format after timestamp for which this message holds valid
     version:
       required: true
       type: string
       owner: any
-      usage: 2.0.0
+      usage: 2.1.0
       description: Describes the version of transaction protocol being used by the sender.
   message:
     orders:
@@ -1597,8 +1594,7 @@ on_recon:
       owner: any
       usage: on_recon
       description: >-
-        Describes the method being called by the sender and executed at the
-        receiver.
+        Describes the method being called by the sender and executed at the receiver.
     bap_id:
       required: true
       type: string
@@ -1650,8 +1646,7 @@ on_recon:
       owner: any
       usage: 841ef6d7-d74d-4411-ac06-a05469c0f9ac
       description: >-
-        Describes a unique value which persists during a request / callback
-        cycle.
+        Describes a unique value which persists during a request / callback cycle.
     timestamp:
       required: true
       type: string
@@ -1670,13 +1665,12 @@ on_recon:
       owner: any
       usage: P1D
       description: >-
-        Describes the duration in ISO8601 format after timestamp for which this
-        message holds valid
+        Describes the duration in ISO8601 format after timestamp for which this message holds valid
     version:
       required: true
       type: string
       owner: any
-      usage: 2.0.0
+      usage: 2.1.0
       description: Describes the version of transaction protocol being used by the sender.
   message:
     orders:
@@ -1787,8 +1781,7 @@ on_recon:
             owner: any
             usage: '300.00'
             description: >-
-              Difference in the tax collected at the source incase recon_accord
-              is FALSE
+              Difference in the tax collected at the source incase recon_accord is FALSE
           value:
             required: true
             type: string
@@ -1808,8 +1801,7 @@ on_recon:
             owner: any
             usage: '300.00'
             description: >-
-              Difference in the tax deducted at the source incase recon_accord
-              is FALSE
+              Difference in the tax deducted at the source incase recon_accord is FALSE
           value:
             required: true
             type: string

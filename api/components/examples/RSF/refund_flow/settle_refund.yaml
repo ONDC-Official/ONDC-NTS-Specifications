@@ -5,7 +5,7 @@ context:
       code: IND
     city:
       code: '*'
-  version: 2.0.0
+  version: 2.1.0
   action: settle
   bap_id: receiverapp.com
   bap_uri: https://receiverapp.com/ondc/1.0/
@@ -22,16 +22,16 @@ message:
     type: NP-NP
     id: settlement-id-abde
     orders:
-      - id: ordr-123456
-        inter_participant:
-          amount:
-            currency: INR
-            value: '300.00'
-        collector:
-          amount:
-            currency: INR
-            value: '0.00'
-        self:
-          amount:
-            currency: INR
-            value: '0.00'
+    - id: ordr-123456
+      inter_participant:
+        amount:
+          currency: INR
+          value: '300.00'
+      collector:
+        amount:
+          currency: INR
+          value: '0.00'
+      self:
+        amount:
+          currency: INR
+          value: '0.00'
