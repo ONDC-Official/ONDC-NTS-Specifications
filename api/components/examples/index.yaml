@@ -5,6 +5,7 @@ Flow1:
     Use cases /Features available <a href = "https://docs.google.com/document/d/1CBTOuFP4o6KqwYVPlN6H9ArUvygMjFiII-gSv4WXk4s/edit?usp=sharing">here</a>. <br>
     Mock server steps for testing and log submission test case scenarios available <a href = "https://docs.google.com/document/d/1SGTCSzxNPtBvBpvtYf0I-MUxQCrYT_I-/edit?usp=sharing&ouid=100595989766867836454&rtpof=true&sd=true">here</a> </br>
     Frequently Asked Questions are available <a href = "https://docs.google.com/document/d/1-NULesI1Z6GQ9y4Z0loGEG5yfunX5u9woON-qxYH6w0/edit?tab=t.0#heading=h.xp3r32ko292b" target="_blank">here</a>. <br>
+    Category Subcategory listing available <a href= "https://docs.google.com/spreadsheets/d/1DJJPoaGt8pndjba95KC1QOYnrBokwe9CbBfgnCTehlk/edit?gid=510512866#gid=510512866" target="_blank">here</a>. <br>
 
   example_set:
    $ref: "./Flow1/index.yaml"
