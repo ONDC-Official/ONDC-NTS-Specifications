@@ -1,6 +1,7 @@
 RSF 2.1.0:
-  summary: Reconciliation Settlement Framework (RSF 2.1.0)
+  summary: Reconciliation Framework
   # description: |
   #   Reconciliation Settlement Framework description available  <a href="https://ondc-ppf.readme.io/reference/ondc-payment-protection-framework" target="_blank" rel="noopener noreferrer">here</a>
+  description: Use these APIs to reconcile with counter NP for orders executed over the network
   example_set:
     $ref: ./RSF/index.yaml
