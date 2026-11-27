@@ -65,6 +65,8 @@ recon:
               description: Adjustment against an order (ref_id is the order id)
             - code: SETTLEMENT
               description: Adjustment against a settlement (ref_id is the settlement id)
+            - code: PENALTY
+              description: Penalty applied to the settlement (ref_id is optional)
 
 on_recon:
   context: *a1

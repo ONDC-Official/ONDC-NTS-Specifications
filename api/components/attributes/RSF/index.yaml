@@ -1499,17 +1499,17 @@ recon:
             usage: INR
             description: 'Currency of the adjustment'
           ref_id:
-            required: true
+            required: Conditional
             type: string
             owner: any
             usage: order-1234
-            description: 'Id of the referenced order or settlement'
+            description: 'Id of the referenced order or settlement. Required when ref_type is ORDER or SETTLEMENT; optional when ref_type is PENALTY'
           ref_type:
             required: true
             type: string
             owner: any
             usage: ORDER
-            description: 'Type of the reference the adjustment relates to (ORDER / SETTLEMENT)'
+            description: 'Type of the reference the adjustment relates to (ORDER / SETTLEMENT / PENALTY)'
           value:
             required: true
             type: string
@@ -1752,17 +1752,17 @@ on_recon:
             usage: '10.00'
             description: 'Difference in the adjustment value as per the counterparty. Not sent when the settlement is SETTLED'
           ref_id:
-            required: true
+            required: Conditional
             type: string
             owner: any
             usage: order-1234
-            description: 'Id of the referenced order or settlement'
+            description: 'Id of the referenced order or settlement. Required when ref_type is ORDER or SETTLEMENT; optional when ref_type is PENALTY'
           ref_type:
             required: true
             type: string
             owner: any
             usage: ORDER
-            description: 'Type of the reference the adjustment relates to (ORDER / SETTLEMENT)'
+            description: 'Type of the reference the adjustment relates to (ORDER / SETTLEMENT / PENALTY)'
           value:
             required: true
             type: string

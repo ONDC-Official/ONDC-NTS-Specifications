@@ -263,7 +263,7 @@ paths:
                                   type: string
                                 adjustment_amount:
                                   type: array
-                                  description: "Adjustments applied to the settlement against an order or a settlement."
+                                  description: "Adjustments applied to the settlement against an order, a settlement or a penalty."
                                   items:
                                     $ref: "#/components/schemas/Adjustment"
               required:
@@ -392,7 +392,7 @@ paths:
                                   type: string
                                 adjustment_amount:
                                   type: array
-                                  description: "Adjustments applied to the settlement against an order or a settlement."
+                                  description: "Adjustments applied to the settlement against an order, a settlement or a penalty."
                                   items:
                                     allOf:
                                       - type: object
@@ -462,17 +462,16 @@ components:
       type: object
       description: Describes an adjustment applied to a settlement
       required:
-        - ref_id
         - ref_type
         - currency
         - value
       properties:
         ref_id:
           type: string
-          description: Id of the referenced entity (order id or settlement id)
+          description: Id of the referenced entity (order id or settlement id). Required when ref_type is ORDER or SETTLEMENT; optional when ref_type is PENALTY.
         ref_type:
           type: string
-          description: "Type of the reference the adjustment relates to. Allowed values: ORDER, SETTLEMENT."
+          description: "Type of the reference the adjustment relates to. Allowed values: ORDER, SETTLEMENT, PENALTY."
         currency:
           type: string
           example: "INR"

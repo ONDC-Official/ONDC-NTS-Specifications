@@ -79,7 +79,7 @@ paths:
                                   type: array
                                   description: >-
                                     Adjustments applied to the settlement
-                                    against an order or a settlement.
+                                    against an order, a settlement or a penalty.
                                   items:
                                     $ref: '#/components/schemas/Adjustment'
               required:
@@ -218,7 +218,7 @@ paths:
                                   type: array
                                   description: >-
                                     Adjustments applied to the settlement
-                                    against an order or a settlement.
+                                    against an order, a settlement or a penalty.
                                   items:
                                     allOf:
                                       - type: object
@@ -291,19 +291,21 @@ components:
       type: object
       description: Describes an adjustment applied to a settlement
       required:
-        - ref_id
         - ref_type
         - currency
         - value
       properties:
         ref_id:
           type: string
-          description: Id of the referenced entity (order id or settlement id)
+          description: >-
+            Id of the referenced entity (order id or settlement id). Required
+            when ref_type is ORDER or SETTLEMENT; optional when ref_type is
+            PENALTY.
         ref_type:
           type: string
           description: >-
             Type of the reference the adjustment relates to. Allowed values:
-            ORDER, SETTLEMENT.
+            ORDER, SETTLEMENT, PENALTY.
         currency:
           type: string
           example: INR
@@ -645,6 +647,8 @@ x-enum:
                 description: Adjustment against an order (ref_id is the order id)
               - code: SETTLEMENT
                 description: Adjustment against a settlement (ref_id is the settlement id)
+              - code: PENALTY
+                description: Penalty applied to the settlement (ref_id is optional)
   on_recon:
     context: *ref_0
     message:
@@ -1709,11 +1713,14 @@ x-attributes:
                   usage: INR
                   description: Currency of the adjustment
                 ref_id:
-                  required: true
+                  required: Conditional
                   type: string
                   owner: any
                   usage: order-1234
-                  description: Id of the referenced order or settlement
+                  description: >-
+                    Id of the referenced order or settlement. Required when
+                    ref_type is ORDER or SETTLEMENT; optional when ref_type is
+                    PENALTY
                 ref_type:
                   required: true
                   type: string
@@ -1721,7 +1728,7 @@ x-attributes:
                   usage: ORDER
                   description: >-
                     Type of the reference the adjustment relates to (ORDER /
-                    SETTLEMENT)
+                    SETTLEMENT / PENALTY)
                 value:
                   required: true
                   type: string
@@ -1975,11 +1982,14 @@ x-attributes:
                     Difference in the adjustment value as per the counterparty.
                     Not sent when the settlement is SETTLED
                 ref_id:
-                  required: true
+                  required: Conditional
                   type: string
                   owner: any
                   usage: order-1234
-                  description: Id of the referenced order or settlement
+                  description: >-
+                    Id of the referenced order or settlement. Required when
+                    ref_type is ORDER or SETTLEMENT; optional when ref_type is
+                    PENALTY
                 ref_type:
                   required: true
                   type: string
@@ -1987,7 +1997,7 @@ x-attributes:
                   usage: ORDER
                   description: >-
                     Type of the reference the adjustment relates to (ORDER /
-                    SETTLEMENT)
+                    SETTLEMENT / PENALTY)
                 value:
                   required: true
                   type: string
