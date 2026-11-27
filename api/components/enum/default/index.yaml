@@ -49,17 +49,29 @@ on_report:
       orders: *a6
 recon:
   context: *a1
-  message: &a7
+  message:
     orders:
       settlements:
-        status:
+        receiver_status: &a8
           - code: SETTLED
             description: Successfully settled
           - code: PENDING
-            description: Settlement awaited due to reconciliation difference between NPs 
+            description: Settlement awaited due to reconciliation difference between NPs
           - code: TO_BE_INITIATED
             description: Settlement to be initiated in a future settlement cycle
+        adjustment_amount:
+          ref_type: &a9
+            - code: ORDER
+              description: Adjustment against an order (ref_id is the order id)
+            - code: SETTLEMENT
+              description: Adjustment against a settlement (ref_id is the settlement id)
 
 on_recon:
   context: *a1
-  message: *a7
+  message:
+    orders:
+      settlements:
+        collector_status: *a8
+        receiver_status: *a8
+        adjustment_amount:
+          ref_type: *a9

@@ -237,13 +237,13 @@ paths:
                                 counterparty_id:
                                   type: string
                                   description: "Describes the counterparty of the settlement. It should be the subscriber_id of the receiver of the payment."
-                                type: #to be defined
-                                  type: string
-                                  description: "Describes the type of settlement."
                                 payment_id:
                                   type: string
-                                status:
+                                receiver_status:
                                   type: string
+                                  description: "Settlement status as per the receiver's books. Allowed values: SETTLED, PENDING, TO_BE_INITIATED."
+                                remarks:
+                                  $ref: "#/components/schemas/Descriptor"
                                 amount:
                                   $ref: "#/components/schemas/Amount"
                                 commision:
@@ -261,6 +261,11 @@ paths:
                                   format: date-time
                                 settlement_ref_no:
                                   type: string
+                                adjustment_amount:
+                                  type: array
+                                  description: "Adjustments applied to the settlement against an order or a settlement."
+                                  items:
+                                    $ref: "#/components/schemas/Adjustment"
               required:
                 - context
                 - message
@@ -325,13 +330,16 @@ paths:
                                 counterparty_id:
                                   type: string
                                   description: "Describes the counterparty of the settlement. It should be the subscriber_id of the receiver of the payment."
-                                type: #to be defined
-                                  type: string
-                                  description: "Describes the type of settlement."
                                 payment_id:
                                   type: string
-                                status:
+                                collector_status:
                                   type: string
+                                  description: "Settlement status as per the collector's books. Allowed values: SETTLED, PENDING, TO_BE_INITIATED."
+                                receiver_status:
+                                  type: string
+                                  description: "Settlement status as per the receiver's books. Allowed values: SETTLED, PENDING, TO_BE_INITIATED."
+                                remarks:
+                                  $ref: "#/components/schemas/Descriptor"
                                 due_date:
                                   type: string
                                   format: date
@@ -382,6 +390,17 @@ paths:
                                   format: date-time
                                 settlement_ref_no:
                                   type: string
+                                adjustment_amount:
+                                  type: array
+                                  description: "Adjustments applied to the settlement against an order or a settlement."
+                                  items:
+                                    allOf:
+                                      - type: object
+                                        properties:
+                                          diff_value:
+                                            type: string
+                                            description: Difference in the adjustment value as per the counterparty. Not sent when the settlement is SETTLED.
+                                      - $ref: "#/components/schemas/Adjustment"
                 error:
                   $ref: "#/components/schemas/Error"
               required:
@@ -439,6 +458,35 @@ components:
         value:
           type: string
           example: ""
+    Adjustment:
+      type: object
+      description: Describes an adjustment applied to a settlement
+      required:
+        - ref_id
+        - ref_type
+        - currency
+        - value
+      properties:
+        ref_id:
+          type: string
+          description: Id of the referenced entity (order id or settlement id)
+        ref_type:
+          type: string
+          description: "Type of the reference the adjustment relates to. Allowed values: ORDER, SETTLEMENT."
+        currency:
+          type: string
+          example: "INR"
+        value:
+          type: string
+          description: Value of the adjustment
+    Descriptor:
+      type: object
+      description: Describes remarks in short and long form
+      properties:
+        short_desc:
+          type: string
+        long_desc:
+          type: string
     BankDetails:
       type: object
       properties:

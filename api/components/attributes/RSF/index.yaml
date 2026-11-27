@@ -1491,6 +1491,50 @@ recon:
         usage: order-1234
         description: Id of the order
       settlements:
+        adjustment_amount:
+          currency:
+            required: true
+            type: string
+            owner: any
+            usage: INR
+            description: 'Currency of the adjustment'
+          ref_id:
+            required: true
+            type: string
+            owner: any
+            usage: order-1234
+            description: 'Id of the referenced order or settlement'
+          ref_type:
+            required: true
+            type: string
+            owner: any
+            usage: ORDER
+            description: 'Type of the reference the adjustment relates to (ORDER / SETTLEMENT)'
+          value:
+            required: true
+            type: string
+            owner: any
+            usage: '60.00'
+            description: 'Value of the adjustment'
+        receiver_status:
+          required: true
+          type: string
+          owner: any
+          usage: PENDING
+          description: 'Settlement status as per the receiver (SETTLED / PENDING / TO_BE_INITIATED)'
+        remarks:
+          long_desc:
+            required: false
+            type: string
+            owner: any
+            usage: INR 60.00 adjusted against order order-1234
+            description: 'Detailed remarks on the settlement'
+          short_desc:
+            required: false
+            type: string
+            owner: any
+            usage: Order adjustment
+            description: 'Short remarks on the settlement'
         amount:
           currency:
             required: true
@@ -1535,12 +1579,6 @@ recon:
           owner: any
           usage: utr-1234
           description: 'Settlement Reference number of the settlement is required if settlement is settled'
-        status:
-          required: true
-          type: string
-          owner: any
-          usage: PENDING
-          description: Status of the settlement
         tcs:
           currency:
             required: true
@@ -1700,6 +1738,62 @@ on_recon:
         usage: true
         description: Formal agreement of the settled amount
       settlements:
+        adjustment_amount:
+          currency:
+            required: true
+            type: string
+            owner: any
+            usage: INR
+            description: 'Currency of the adjustment'
+          diff_value:
+            required: Conditional
+            type: string
+            owner: any
+            usage: '10.00'
+            description: 'Difference in the adjustment value as per the counterparty. Not sent when the settlement is SETTLED'
+          ref_id:
+            required: true
+            type: string
+            owner: any
+            usage: order-1234
+            description: 'Id of the referenced order or settlement'
+          ref_type:
+            required: true
+            type: string
+            owner: any
+            usage: ORDER
+            description: 'Type of the reference the adjustment relates to (ORDER / SETTLEMENT)'
+          value:
+            required: true
+            type: string
+            owner: any
+            usage: '60.00'
+            description: 'Value of the adjustment'
+        collector_status:
+          required: true
+          type: string
+          owner: any
+          usage: PENDING
+          description: 'Settlement status as per the collector (SETTLED / PENDING / TO_BE_INITIATED)'
+        receiver_status:
+          required: true
+          type: string
+          owner: any
+          usage: PENDING
+          description: 'Settlement status as per the receiver (SETTLED / PENDING / TO_BE_INITIATED)'
+        remarks:
+          long_desc:
+            required: false
+            type: string
+            owner: any
+            usage: INR 60.00 adjusted against order order-1234
+            description: 'Detailed remarks on the settlement'
+          short_desc:
+            required: false
+            type: string
+            owner: any
+            usage: Order adjustment
+            description: 'Short remarks on the settlement'
         amount:
           currency:
             required: false
@@ -1762,12 +1856,6 @@ on_recon:
           owner: any
           usage: '2024-05-09'
           description: due date of settlement in case recon_accord is true
-        status:
-          required: true
-          type: string
-          owner: any
-          usage: INR
-          description: Status of the settlement
         tcs:
           currency:
             required: false

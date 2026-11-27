@@ -24,7 +24,10 @@ message:
     settlements:
     - id: "settlement-id-abc"
       payment_id: "pymnt-1"
-      status: "SETTLED"
+      receiver_status: "SETTLED"
+      remarks:
+        short_desc: "Settled with adjustment"
+        long_desc: "Settlement completed; INR 50.00 adjusted against order order-123456"
       amount:
         currency: "INR"
         value: "1000.00"
@@ -41,10 +44,18 @@ message:
         currency: "INR"
         value: "10.00"
       settlement_ref_no: "utr-1234"
+      adjustment_amount:
+      - ref_id: "order-123456"
+        ref_type: "ORDER"
+        currency: "INR"
+        value: "50.00"
       updated_at: "2024-05-07T06:36:50.897Z"
     - id: "settlement-id-112"
       payment_id: "pymnt-2"
-      status: "TO_BE_INITIATED"
+      receiver_status: "TO_BE_INITIATED"
+      remarks:
+        short_desc: "Settlement scheduled"
+        long_desc: "Settlement to be initiated on due date; INR 10.00 adjusted against settlement settlement-id-abc"
       amount:
         currency: "INR"
         value: "300.00"
@@ -60,4 +71,9 @@ message:
       tcs:
         currency: "INR"
         value: "0.00"
+      adjustment_amount:
+      - ref_id: "settlement-id-abc"
+        ref_type: "SETTLEMENT"
+        currency: "INR"
+        value: "10.00"
       updated_at: "2024-05-07T06:36:50.897Z"
