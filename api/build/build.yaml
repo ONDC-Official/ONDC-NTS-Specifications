@@ -48,13 +48,16 @@ paths:
                                     Describes the counterparty of the
                                     settlement. It should be the subscriber_id
                                     of the receiver of the payment.
-                                type:
-                                  type: string
-                                  description: Describes the type of settlement.
                                 payment_id:
                                   type: string
-                                status:
+                                receiver_status:
                                   type: string
+                                  description: >-
+                                    Settlement status as per the receiver's
+                                    books. Allowed values: SETTLED, PENDING,
+                                    TO_BE_INITIATED.
+                                remarks:
+                                  $ref: '#/components/schemas/Descriptor'
                                 amount:
                                   $ref: '#/components/schemas/Amount'
                                 commision:
@@ -72,6 +75,13 @@ paths:
                                   format: date-time
                                 settlement_ref_no:
                                   type: string
+                                adjustment_amount:
+                                  type: array
+                                  description: >-
+                                    Adjustments applied to the settlement
+                                    against an order, a settlement or a penalty.
+                                  items:
+                                    $ref: '#/components/schemas/Adjustment'
               required:
                 - context
                 - message
@@ -138,13 +148,22 @@ paths:
                                     Describes the counterparty of the
                                     settlement. It should be the subscriber_id
                                     of the receiver of the payment.
-                                type:
-                                  type: string
-                                  description: Describes the type of settlement.
                                 payment_id:
                                   type: string
-                                status:
+                                collector_status:
                                   type: string
+                                  description: >-
+                                    Settlement status as per the collector's
+                                    books. Allowed values: SETTLED, PENDING,
+                                    TO_BE_INITIATED.
+                                receiver_status:
+                                  type: string
+                                  description: >-
+                                    Settlement status as per the receiver's
+                                    books. Allowed values: SETTLED, PENDING,
+                                    TO_BE_INITIATED.
+                                remarks:
+                                  $ref: '#/components/schemas/Descriptor'
                                 due_date:
                                   type: string
                                   format: date
@@ -195,6 +214,22 @@ paths:
                                   format: date-time
                                 settlement_ref_no:
                                   type: string
+                                adjustment_amount:
+                                  type: array
+                                  description: >-
+                                    Adjustments applied to the settlement
+                                    against an order, a settlement or a penalty.
+                                  items:
+                                    allOf:
+                                      - type: object
+                                        properties:
+                                          diff_value:
+                                            type: string
+                                            description: >-
+                                              Difference in the adjustment value as
+                                              per the counterparty. Not sent when the
+                                              settlement is SETTLED.
+                                      - $ref: '#/components/schemas/Adjustment'
                 error:
                   $ref: '#/components/schemas/Error'
               required:
@@ -252,6 +287,39 @@ components:
         value:
           type: string
           example: ''
+    Adjustment:
+      type: object
+      description: Describes an adjustment applied to a settlement
+      required:
+        - ref_type
+        - currency
+        - value
+      properties:
+        ref_id:
+          type: string
+          description: >-
+            Id of the referenced entity (order id or settlement id). Required
+            when ref_type is ORDER or SETTLEMENT; optional when ref_type is
+            PENALTY.
+        ref_type:
+          type: string
+          description: >-
+            Type of the reference the adjustment relates to. Allowed values:
+            ORDER, SETTLEMENT, PENALTY.
+        currency:
+          type: string
+          example: INR
+        value:
+          type: string
+          description: Value of the adjustment
+    Descriptor:
+      type: object
+      description: Describes remarks in short and long form
+      properties:
+        short_desc:
+          type: string
+        long_desc:
+          type: string
     BankDetails:
       type: object
       properties:
@@ -563,19 +631,33 @@ x-enum:
         orders: *ref_5
   recon:
     context: *ref_0
-    message: &ref_6
+    message:
       orders:
         settlements:
-          status:
+          receiver_status: &ref_6
             - code: SETTLED
               description: Successfully settled
             - code: PENDING
               description: Settlement awaited due to reconciliation difference between NPs
             - code: TO_BE_INITIATED
               description: Settlement to be initiated in a future settlement cycle
+          adjustment_amount:
+            ref_type: &ref_7
+              - code: ORDER
+                description: Adjustment against an order (ref_id is the order id)
+              - code: SETTLEMENT
+                description: Adjustment against a settlement (ref_id is the settlement id)
+              - code: PENALTY
+                description: Penalty applied to the settlement (ref_id is optional)
   on_recon:
     context: *ref_0
-    message: *ref_6
+    message:
+      orders:
+        settlements:
+          collector_status: *ref_6
+          receiver_status: *ref_6
+          adjustment_amount:
+            ref_type: *ref_7
 x-flows:
   - summary: RECON
     details:
@@ -625,7 +707,7 @@ x-flows:
                Receiver ->> Collector: /on_recon API
         reference: if any
         example:
-          value: &ref_7
+          value: &ref_8
             context:
               domain: ONDC:NTS10
               location:
@@ -710,8 +792,10 @@ x-flows:
                     - id: settlement-id-456
                       counterparty_id: receiver-app.com
                       payment_id: pymnt-1
-                      status: PENDING
-                      type: ''
+                      receiver_status: PENDING
+                      remarks:
+                        short_desc: Order adjustment
+                        long_desc: INR 50.00 adjusted against order order-1234
                       amount:
                         currency: INR
                         value: '100.00'
@@ -727,12 +811,21 @@ x-flows:
                       tds:
                         currency: INR
                         value: '10.00'
+                      adjustment_amount:
+                        - ref_id: order-1234
+                          ref_type: ORDER
+                          currency: INR
+                          value: '50.00'
                       updated_at: '2024-05-07T07:36:50.897Z'
                     - id: settlement-id-789
                       counterparty_id: receiver-app.com
                       payment_id: pymnt-2
-                      status: SETTLED
-                      type: ''
+                      receiver_status: SETTLED
+                      remarks:
+                        short_desc: Settled with adjustment
+                        long_desc: >-
+                          Settlement completed; INR 10.00 adjusted against
+                          settlement settlement-id-456
                       amount:
                         currency: INR
                         value: '100.00'
@@ -749,12 +842,22 @@ x-flows:
                         currency: INR
                         value: '10.00'
                       settlement_ref_no: utr-1234
+                      adjustment_amount:
+                        - ref_id: settlement-id-456
+                          ref_type: SETTLEMENT
+                          currency: INR
+                          value: '10.00'
                       updated_at: '2024-05-07T06:36:50.897Z'
                     - id: settlement-id-112
                       counterparty_id: receiver-app.com
                       payment_id: pymnt-3
-                      status: TO_BE_INITIATED
-                      type: ''
+                      receiver_status: TO_BE_INITIATED
+                      remarks:
+                        short_desc: Settlement scheduled
+                        long_desc: >-
+                          Settlement to be initiated in the next settlement
+                          cycle after INR 5.00 adjustment against order
+                          order-1234
                       amount:
                         currency: INR
                         value: '100.00'
@@ -770,6 +873,11 @@ x-flows:
                       tcs:
                         currency: INR
                         value: '10.00'
+                      adjustment_amount:
+                        - ref_id: order-1234
+                          ref_type: ORDER
+                          currency: INR
+                          value: '5.00'
                       updated_at: '2024-05-07T06:36:50.897Z'
       - summary: ON_RECON
         api: on_recon
@@ -787,7 +895,7 @@ x-flows:
                Receiver ->> Collector: /on_recon API
         reference: if any
         example:
-          value: &ref_8
+          value: &ref_9
             context:
               domain: ONDC:NTS10
               location:
@@ -873,8 +981,13 @@ x-flows:
                     - id: settlement-id-456
                       counterparty_id: receiver-app.com
                       payment_id: pymnt-1
-                      status: PENDING
-                      type: ''
+                      collector_status: PENDING
+                      receiver_status: PENDING
+                      remarks:
+                        short_desc: Order adjustment mismatch
+                        long_desc: >-
+                          Order adjustment is INR 60.00 as per receiver books,
+                          INR 10.00 more than shared in recon
                       amount:
                         currency: INR
                         value: '120.00'
@@ -899,12 +1012,23 @@ x-flows:
                         currency: INR
                         value: '20.00'
                         diff_value: '20.00'
+                      adjustment_amount:
+                        - ref_id: order-1234
+                          ref_type: ORDER
+                          currency: INR
+                          value: '60.00'
+                          diff_value: '10.00'
                       updated_at: '2024-05-07T07:36:51.897Z'
                     - id: settlement-id-789
                       counterparty_id: receiver-app.com
                       payment_id: pymnt-2
-                      status: SETTLED
-                      type: ''
+                      collector_status: SETTLED
+                      receiver_status: SETTLED
+                      remarks:
+                        short_desc: Settled with adjustment
+                        long_desc: >-
+                          Settlement completed; INR 10.00 adjusted against
+                          settlement settlement-id-456
                       amount:
                         currency: INR
                         value: '100.00'
@@ -921,12 +1045,23 @@ x-flows:
                         currency: INR
                         value: '10.00'
                       settlement_ref_no: utr-1234
+                      adjustment_amount:
+                        - ref_id: settlement-id-456
+                          ref_type: SETTLEMENT
+                          currency: INR
+                          value: '10.00'
                       updated_at: '2024-05-07T06:36:51.897Z'
                     - id: settlement-id-112
                       counterparty_id: receiver-app.com
                       payment_id: pymnt-3
-                      status: TO_BE_INITIATED
-                      type: ''
+                      collector_status: TO_BE_INITIATED
+                      receiver_status: TO_BE_INITIATED
+                      remarks:
+                        short_desc: Settlement scheduled
+                        long_desc: >-
+                          Settlement to be initiated in the next settlement
+                          cycle after INR 5.00 adjustment against order
+                          order-1234
                       amount:
                         currency: INR
                         value: '90.00'
@@ -947,6 +1082,12 @@ x-flows:
                         currency: INR
                         value: '10.00'
                         diff_value: '0.00'
+                      adjustment_amount:
+                        - ref_id: order-1234
+                          ref_type: ORDER
+                          currency: INR
+                          value: '5.00'
+                          diff_value: '0.00'
                       updated_at: '2024-05-07T06:36:51.897Z'
       - summary: RECON
         api: recon
@@ -1049,8 +1190,12 @@ x-flows:
                     - id: settlement-id-456
                       counterparty_id: receiver-app.com
                       payment_id: pymnt-1
-                      status: PENDING
-                      type: ''
+                      receiver_status: PENDING
+                      remarks:
+                        short_desc: Order adjustment updated
+                        long_desc: >-
+                          Order adjustment updated to INR 60.00 as per
+                          counterparty on_recon
                       amount:
                         currency: INR
                         value: '120.00'
@@ -1069,12 +1214,21 @@ x-flows:
                       delay_amount:
                         currency: INR
                         value: '20.00'
+                      adjustment_amount:
+                        - ref_id: order-1234
+                          ref_type: ORDER
+                          currency: INR
+                          value: '60.00'
                       updated_at: '2024-05-07T07:36:51.897Z'
                     - id: settlement-id-789
                       counterparty_id: receiver-app.com
                       payment_id: pymnt-2
-                      status: SETTLED
-                      type: ''
+                      receiver_status: SETTLED
+                      remarks:
+                        short_desc: Settled with adjustment
+                        long_desc: >-
+                          Settlement completed; INR 10.00 adjusted against
+                          settlement settlement-id-456
                       amount:
                         currency: INR
                         value: '100.00'
@@ -1091,12 +1245,22 @@ x-flows:
                         currency: INR
                         value: '10.00'
                       settlement_ref_no: utr-1234
+                      adjustment_amount:
+                        - ref_id: settlement-id-456
+                          ref_type: SETTLEMENT
+                          currency: INR
+                          value: '10.00'
                       updated_at: '2024-05-07T06:36:51.897Z'
                     - id: settlement-id-112
                       counterparty_id: receiver-app.com
                       payment_id: pymnt-3
-                      status: TO_BE_INITIATED
-                      type: ''
+                      receiver_status: TO_BE_INITIATED
+                      remarks:
+                        short_desc: Settlement scheduled
+                        long_desc: >-
+                          Settlement to be initiated in the next settlement
+                          cycle after INR 5.00 adjustment against order
+                          order-1234
                       amount:
                         currency: INR
                         value: '90.00'
@@ -1112,6 +1276,11 @@ x-flows:
                       tcs:
                         currency: INR
                         value: '10.00'
+                      adjustment_amount:
+                        - ref_id: order-1234
+                          ref_type: ORDER
+                          currency: INR
+                          value: '5.00'
                       updated_at: '2024-05-07T06:36:51.897Z'
       - summary: ON_RECON
         api: on_recon
@@ -1129,7 +1298,7 @@ x-flows:
                Receiver ->> Collector: /on_recon API
         reference: if any
         example:
-          value: &ref_9
+          value: &ref_10
             context:
               domain: ONDC:NTS10
               location:
@@ -1215,9 +1384,14 @@ x-flows:
                     - id: settlement-id-456
                       counterparty_id: receiver-app.com
                       payment_id: pymnt-1
-                      status: PENDING
+                      collector_status: PENDING
+                      receiver_status: PENDING
+                      remarks:
+                        short_desc: Recon accord
+                        long_desc: >-
+                          Order adjustment matches receiver books; settlement to
+                          be initiated on due date
                       due_date: '2024-05-08'
-                      type: ''
                       amount:
                         currency: INR
                         value: '120.00'
@@ -1236,12 +1410,23 @@ x-flows:
                       delay_amount:
                         currency: INR
                         value: '20.00'
+                      adjustment_amount:
+                        - ref_id: order-1234
+                          ref_type: ORDER
+                          currency: INR
+                          value: '60.00'
+                          diff_value: '0.00'
                       updated_at: '2024-05-07T07:36:53.897Z'
                     - id: settlement-id-789
                       counterparty_id: receiver-app.com
                       payment_id: pymnt-2
-                      status: SETTLED
-                      type: ''
+                      collector_status: SETTLED
+                      receiver_status: SETTLED
+                      remarks:
+                        short_desc: Settled with adjustment
+                        long_desc: >-
+                          Settlement completed; INR 10.00 adjusted against
+                          settlement settlement-id-456
                       amount:
                         currency: INR
                         value: '100.00'
@@ -1258,12 +1443,23 @@ x-flows:
                         currency: INR
                         value: '10.00'
                       settlement_ref_no: utr-1234
+                      adjustment_amount:
+                        - ref_id: settlement-id-456
+                          ref_type: SETTLEMENT
+                          currency: INR
+                          value: '10.00'
                       updated_at: '2024-05-07T06:36:51.897Z'
                     - id: settlement-id-112
                       counterparty_id: receiver-app.com
                       payment_id: pymnt-3
-                      type: ''
-                      status: TO_BE_INITIATED
+                      collector_status: TO_BE_INITIATED
+                      receiver_status: TO_BE_INITIATED
+                      remarks:
+                        short_desc: Settlement scheduled
+                        long_desc: >-
+                          Settlement to be initiated in the next settlement
+                          cycle after INR 5.00 adjustment against order
+                          order-1234
                       due_date: '2024-05-08'
                       amount:
                         currency: INR
@@ -1281,6 +1477,12 @@ x-flows:
                       tcs:
                         currency: INR
                         value: '10.00'
+                      adjustment_amount:
+                        - ref_id: order-1234
+                          ref_type: ORDER
+                          currency: INR
+                          value: '5.00'
+                          diff_value: '0.00'
                       updated_at: '2024-05-07T06:36:53.897Z'
   - summary: ERROR (on_recon)
     details:
@@ -1325,7 +1527,7 @@ x-flows:
                Receiver ->> Collector: /on_recon API
         reference: if any
         example:
-          value: *ref_7
+          value: *ref_8
       - summary: ON_RECON
         api: on_recon
         details:
@@ -1374,19 +1576,19 @@ x-examples:
             description: >-
               reconciliation call to understand the discrepancy in the
               settlement instructions
-            value: *ref_7
+            value: *ref_8
       on_recon:
         examples:
           - summary: on_recon (recon_accord = false)
             description: >-
               response to the reconciliation call, expressing disagreement with
               the information provided in /recon
-            value: *ref_8
+            value: *ref_9
           - summary: on_recon (recon_accord = true)
             description: >-
               response to the reconciliation call,  agreeing with the
               information provided in /recon
-            value: *ref_9
+            value: *ref_10
 x-attributes:
   PPF:
     attribute_set:
@@ -1503,6 +1705,57 @@ x-attributes:
               usage: order-1234
               description: Id of the order
             settlements:
+              adjustment_amount:
+                currency:
+                  required: true
+                  type: string
+                  owner: any
+                  usage: INR
+                  description: Currency of the adjustment
+                ref_id:
+                  required: Conditional
+                  type: string
+                  owner: any
+                  usage: order-1234
+                  description: >-
+                    Id of the referenced order or settlement. Required when
+                    ref_type is ORDER or SETTLEMENT; optional when ref_type is
+                    PENALTY
+                ref_type:
+                  required: true
+                  type: string
+                  owner: any
+                  usage: ORDER
+                  description: >-
+                    Type of the reference the adjustment relates to (ORDER /
+                    SETTLEMENT / PENALTY)
+                value:
+                  required: true
+                  type: string
+                  owner: any
+                  usage: '60.00'
+                  description: Value of the adjustment
+              receiver_status:
+                required: true
+                type: string
+                owner: any
+                usage: PENDING
+                description: >-
+                  Settlement status as per the receiver (SETTLED / PENDING /
+                  TO_BE_INITIATED)
+              remarks:
+                long_desc:
+                  required: false
+                  type: string
+                  owner: any
+                  usage: INR 60.00 adjusted against order order-1234
+                  description: Detailed remarks on the settlement
+                short_desc:
+                  required: false
+                  type: string
+                  owner: any
+                  usage: Order adjustment
+                  description: Short remarks on the settlement
               amount:
                 currency:
                   required: true
@@ -1549,12 +1802,6 @@ x-attributes:
                 description: >-
                   Settlement Reference number of the settlement is required if
                   settlement is settled
-              status:
-                required: true
-                type: string
-                owner: any
-                usage: PENDING
-                description: Status of the settlement
               tcs:
                 currency:
                   required: true
@@ -1719,6 +1966,73 @@ x-attributes:
               usage: true
               description: Formal agreement of the settled amount
             settlements:
+              adjustment_amount:
+                currency:
+                  required: true
+                  type: string
+                  owner: any
+                  usage: INR
+                  description: Currency of the adjustment
+                diff_value:
+                  required: Conditional
+                  type: string
+                  owner: any
+                  usage: '10.00'
+                  description: >-
+                    Difference in the adjustment value as per the counterparty.
+                    Not sent when the settlement is SETTLED
+                ref_id:
+                  required: Conditional
+                  type: string
+                  owner: any
+                  usage: order-1234
+                  description: >-
+                    Id of the referenced order or settlement. Required when
+                    ref_type is ORDER or SETTLEMENT; optional when ref_type is
+                    PENALTY
+                ref_type:
+                  required: true
+                  type: string
+                  owner: any
+                  usage: ORDER
+                  description: >-
+                    Type of the reference the adjustment relates to (ORDER /
+                    SETTLEMENT / PENALTY)
+                value:
+                  required: true
+                  type: string
+                  owner: any
+                  usage: '60.00'
+                  description: Value of the adjustment
+              collector_status:
+                required: true
+                type: string
+                owner: any
+                usage: PENDING
+                description: >-
+                  Settlement status as per the collector (SETTLED / PENDING /
+                  TO_BE_INITIATED)
+              receiver_status:
+                required: true
+                type: string
+                owner: any
+                usage: PENDING
+                description: >-
+                  Settlement status as per the receiver (SETTLED / PENDING /
+                  TO_BE_INITIATED)
+              remarks:
+                long_desc:
+                  required: false
+                  type: string
+                  owner: any
+                  usage: INR 60.00 adjusted against order order-1234
+                  description: Detailed remarks on the settlement
+                short_desc:
+                  required: false
+                  type: string
+                  owner: any
+                  usage: Order adjustment
+                  description: Short remarks on the settlement
               amount:
                 currency:
                   required: false
@@ -1787,12 +2101,6 @@ x-attributes:
                 owner: any
                 usage: '2024-05-09'
                 description: due date of settlement in case recon_accord is true
-              status:
-                required: true
-                type: string
-                owner: any
-                usage: INR
-                description: Status of the settlement
               tcs:
                 currency:
                   required: false
